@@ -1,9 +1,12 @@
 (function () {
+  "use strict";
+
   var
     fm = new FocusManager(),
     am = new ActionManager(),
     todos = new Todos(),
-    actions = new Actions(am, fm, todos),
+    buffer = new Todos(),
+    actions = new Actions(am, fm, todos, buffer),
     out = document.getElementById('out'),
     focus = document.getElementById('focus')
   ;
