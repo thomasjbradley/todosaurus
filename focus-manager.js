@@ -25,11 +25,15 @@ var FocusManager = function () {
   };
 
   var set = function (f) {
+    focus = f;
+
     if (f > max) {
       focus = max;
     }
 
-    focus = f;
+    if (f < 0) {
+      focus = 0;
+    }
 
     inform();
 
