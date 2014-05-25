@@ -6,6 +6,17 @@
 </head>
 <body>
 
-  <script src="todos.js"></script>
+  <textarea id="out" style="width:800px;height:200px;"></textarea>
+
+  <script src="/bower_components/mousetrap/mousetrap.min.js"></script>
+  <script src="/todos.js"></script>
+  <script>
+    var todos = new Todos();
+    var out = document.getElementById('out');
+
+    todos.subscribe(function (items) {
+      out.value = items.join('\n');
+    });
+  </script>
 </body>
 </html>
