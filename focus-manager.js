@@ -10,14 +10,27 @@ var FocusManager = function () {
 
   var subscribe = function (callback) {
     subscriptions.push(callback);
-
-    return methods;
   };
 
   var inform = function () {
     subscriptions.forEach(function (callback) {
       callback(focus);
     });
+  };
+
+  var chainer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      return methods;
+    };
+  };
+
+  var informer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      inform();
+      return methods;
+    };
   };
 
   var get = function () {
@@ -34,16 +47,10 @@ var FocusManager = function () {
     if (f < 0) {
       focus = 0;
     }
-
-    inform();
-
-    return methods;
   };
 
   var setMax = function (m) {
     max = m;
-
-    return methods;
   };
 
   var next = function () {
@@ -52,10 +59,6 @@ var FocusManager = function () {
     if (focus > max) {
       focus--;
     }
-
-    inform();
-
-    return methods;
   };
 
   var prev = function () {
@@ -64,19 +67,15 @@ var FocusManager = function () {
     if (focus < 0) {
       focus = 0;
     }
-
-    inform();
-
-    return methods;
   };
 
   methods = {
-    subscribe: subscribe,
+    subscribe: chainer(subscribe),
     get: get,
-    set: set,
-    setMax: setMax,
-    next: next,
-    prev: prev
+    set: informer(set),
+    setMax: chainer(setMax),
+    next: informer(next),
+    prev: informer(prev)
   };
 
   return methods;

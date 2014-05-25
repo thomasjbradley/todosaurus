@@ -9,8 +9,6 @@ var Todos = function () {
 
   var subscribe = function (callback) {
     subscriptions.push(callback);
-
-    return methods;
   };
 
   var inform = function () {
@@ -19,12 +17,23 @@ var Todos = function () {
     });
   };
 
+  var chainer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      return methods;
+    };
+  };
+
+  var informer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      inform();
+      return methods;
+    };
+  };
+
   var populate = function (items) {
     todos = items;
-
-    inform();
-
-    return methods;
   };
 
   var addItemAt = function (item, index) {
@@ -45,10 +54,6 @@ var Todos = function () {
 
   var addAt = function (item, index) {
     addItemAt(item, index);
-
-    inform();
-
-    return methods;
   };
 
   var append = function (item) {
@@ -69,34 +74,18 @@ var Todos = function () {
 
   var updateAt = function (item, index) {
     todos[index] = item;
-
-    inform();
-
-    return methods;
   };
 
   var remove = function (index) {
     todos.splice(index, 1);
-
-    inform();
-
-    return methods;
   };
 
   var mark = function (index) {
     todos[index] = 'x ' + todos[index];
-
-    inform();
-
-    return methods;
   };
 
   var unmark = function (index) {
     todos[index] = todos[index].replace(/^x /, '');
-
-    inform();
-
-    return methods;
   };
 
   var toggle = function (index) {
@@ -105,10 +94,6 @@ var Todos = function () {
     } else {
       mark(index);
     }
-
-    inform();
-
-    return methods;
   };
 
   var filter = function (q) {
@@ -116,18 +101,18 @@ var Todos = function () {
   };
 
   methods =  {
-    subscribe: subscribe,
-    populate: populate,
-    addAt: addAt,
-    append: append,
-    prepend: prepend,
+    subscribe: chainer(subscribe),
+    populate: informer(populate),
+    addAt: informer(addAt),
+    append: informer(append),
+    prepend: informer(prepend),
     get: get,
     getAll: getAll,
-    updateAt: updateAt,
-    remove: remove,
-    mark: mark,
-    unmark: unmark,
-    toggle: toggle,
+    updateAt: informer(updateAt),
+    remove: informer(remove),
+    mark: informer(mark),
+    unmark: informer(unmark),
+    toggle: informer(toggle),
     filter: filter
   };
 
