@@ -18,7 +18,7 @@ All keyboard shortcuts are based on a focussed todo item.
 - `enter`, `i`, `I` — Edit focussed item, cursor at start
 - `a`, `A` — Edit focussed item, cursor at end
 - `C` — Edit focussed item, delete all current content
-- `d`, `d d` — Delete todo and move to buffer
+- `d d`, `mod+backspace`, `del` — Delete todo and move to buffer
 - `y`, `Y` — Duplicate todo item to buffer
 - `p` — Paste top buffer item below focussed item
 - `P` — Paste top buffer item above focussed item
