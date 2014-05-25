@@ -27,8 +27,9 @@ All keyboard shortcuts are based on a focussed todo item.
 - `d d p`, `mod+shift+up` — Move item down
 - `g g`, `mod+up` — Move focus to first item
 - `G`, `mod+down` — Move focus to last item
-- `3 g` — Move to todo index 3
 - `ctrl+d`, `pagedown` — Move focus down 5 items
 - `ctrl+u`, `pageup` — Move focus up 5 items
+- `3 g` — Move to todo with index 3
 - `/` — Search todo items
 - `mod+t` — Filter by project
+- `mod+1` — Display single project
