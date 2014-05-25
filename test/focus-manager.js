@@ -43,6 +43,12 @@ describe('FocusManager', function () {
     });
   });
 
+  describe('#getMax()', function () {
+    it('Should return the maximum focus point', function () {
+      expect(fm.getMax()).to.equal(5);
+    });
+  });
+
   describe('#next()', function () {
     it('Should increase focus point by 1', function () {
       fm.next();
