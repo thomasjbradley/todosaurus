@@ -9,30 +9,13 @@
   <ol id="out" start="0" style="float:left;width:50%;"></ol>
   <input id="focus" value="0">
 
+  <script src="/bower_components/underscore/underscore.js"></script>
   <script src="/bower_components/mousetrap/mousetrap.min.js"></script>
-  <script src="/app.js"></script>
   <script src="/focus-manager.js"></script>
+  <script src="/action-manager.js"></script>
   <script src="/todos.js"></script>
-  <script>
-    var
-      todos = new Todos(),
-      focusManager = new FocusManager(),
-      out = document.getElementById('out'),
-      focus = document.getElementById('focus')
-    ;
-
-    todos.subscribe(function (items) {
-      out.innerHTML = '<li>' + items.join('</li><li>') + '</li>';
-    });
-    todos.subscribe(function (items) {
-      focusManager.setMax(items.length - 1);
-    });
-    focusManager.subscribe(function (index) {
-      focus.value = index;
-    });
-
-    todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code']);
-  </script>
+  <script src="/actions.js"></script>
   <script src="/keybindings.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
