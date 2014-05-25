@@ -22,7 +22,7 @@
   });
 
   Mousetrap.bind(['G', 'mod+down'], function () {
-    focusManager.set(todos.getAll().length);
+    focusManager.set(todos.getAll().length - 1);
   });
 
 }(focusManager, todos));
