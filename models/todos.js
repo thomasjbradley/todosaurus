@@ -92,8 +92,12 @@ var Todos = function () {
     todos[index] = todos[index].replace(/^x /, '');
   };
 
+  var isMarked = function (index) {
+    return todos[index].substr(0, 2) === 'x ';
+  };
+
   var toggle = function (index) {
-    if (todos[index].match(/^x /)) {
+    if (isMarked(index)) {
       unmark(index);
     } else {
       mark(index);
@@ -117,6 +121,7 @@ var Todos = function () {
     remove: informer(remove),
     mark: informer(mark),
     unmark: informer(unmark),
+    isMarked: isMarked,
     toggle: informer(toggle),
     filter: filter
   };

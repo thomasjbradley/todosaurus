@@ -144,6 +144,19 @@ describe('Todos', function () {
     });
   });
 
+  describe('#isMarked()', function () {
+    beforeEach(function () {
+      todos.populate(getData());
+    });
+    it('Should return false when item is not marked', function () {
+      expect(todos.isMarked(0)).to.be.false;
+    });
+    it('Should return true when item is marked', function () {
+      todos.mark(0);
+      expect(todos.isMarked(0)).to.be.true;
+    });
+  });
+
   describe('#toggle()', function () {
     beforeEach(function () {
       todos.populate(getData());
