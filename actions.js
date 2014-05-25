@@ -54,26 +54,25 @@ var Actions = function (am, fm, todos, buffer) {
   });
 
   am.action('item:duplicate', function () {
-    buffer.prepend(todos.get(fm.get()));
-    todos.addAt(buffer.get(0), fm.get() + 1);
-    buffer.remove(0);
-    fm.set(fm.get() + 1);
+    am.trigger('item:copy');
+    am.trigger('item:paste:below');
   });
 
   am.action('item:move:up', function () {
-    buffer.prepend(todos.get(fm.get()));
-    todos.remove(fm.get());
-    todos.addAt(buffer.get(0), fm.get() - 1);
-    buffer.remove(0);
-    fm.set(fm.get() - 1);
+    var startFocus = fm.get();
+
+    am.trigger('item:remove');
+
+    if (startFocus <= fm.getMax()) {
+      am.trigger('focus:prev');
+    }
+
+    am.trigger('item:paste:above');
   });
 
   am.action('item:move:down', function () {
-    buffer.prepend(todos.get(fm.get()));
-    todos.remove(fm.get());
-    todos.addAt(buffer.get(0), fm.get() + 1);
-    buffer.remove(0);
-    fm.set(fm.get() + 1);
+    am.trigger('item:remove');
+    am.trigger('item:paste:below');
   });
 
 };

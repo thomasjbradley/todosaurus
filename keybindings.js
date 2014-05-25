@@ -10,7 +10,7 @@ var keys = {
   'item:copy': ['Y', 'mod+c'],
   'item:paste:below': ['p', 'mod+v'],
   'item:paste:above': ['P', 'mod+V'],
-  'item:duplicate': ['y p', 'mod+D'],
+  'item:duplicate': ['mod+d'],
   'item:move:up': ['mod+shift+up'],
   'item:move:down': ['mod+shift+down']
 };

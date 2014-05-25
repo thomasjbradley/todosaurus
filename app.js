@@ -12,7 +12,7 @@
     li = document.getElementsByTagName('li')
   ;
 
-  var focusify = function (index) {
+  var render = function (index) {
     _.each(li, function (elem, index) {
       elem.className = '';
     });
@@ -28,16 +28,13 @@
 
   todos.subscribe(function (items) {
     out.innerHTML = '<li>' + items.join('</li><li>') + '</li>';
-    focusify(fm.get());
-  });
-
-  todos.subscribe(function (items) {
     fm.setMax(items.length - 1);
+    render(fm.get());
   });
 
   fm.subscribe(function (index) {
     focus.value = index;
-    focusify(index);
+    render(index);
   });
 
   todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code', 'Listen to Music', 'Eat', 'Sleep']);
