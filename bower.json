@@ -2,6 +2,7 @@
   "name": "todotxt",
   "private": true,
   "dependencies": {
-    "mousetrap": "~1.4.6"
+    "mousetrap": "~1.4.6",
+    "underscore": "~1.6.0"
   }
 }
