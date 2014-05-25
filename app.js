@@ -40,5 +40,10 @@
     focusify(index);
   });
 
-  todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code']);
+  todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code', 'Listen to Music', 'Eat', 'Sleep']);
+
+  buffer.subscribe(function (items) {
+    console.log(items);
+  });
+
 }());

@@ -19,9 +19,9 @@ All keyboard shortcuts are based on a focussed todo item.
 - `a`, `A` — Edit focussed item, cursor at end
 - `C` — Edit focussed item, delete all current content
 - `d d`, `mod+backspace`, `del` — Delete todo and move to buffer
-- `y`, `Y` — Duplicate todo item to buffer
-- `p` — Paste top buffer item below focussed item
-- `P` — Paste top buffer item above focussed item
+- `Y`, `mod+c` — Copy todo item to buffer
+- `p`, `mod+v` — Paste top buffer item below focussed item
+- `P`, `mod+V` — Paste top buffer item above focussed item
 - `y p`, `mod+D` — Duplicate line, add afterwards
 - `d d k P`, `mod+shift+up` — Move item up
 - `d d p`, `mod+shift+up` — Move item down

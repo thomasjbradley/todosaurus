@@ -30,6 +30,7 @@ var Actions = function (am, fm, todos, buffer) {
   });
 
   am.action('item:remove', function () {
+    buffer.prepend(todos.get(fm.get()));
     todos.remove(fm.get());
   });
 
@@ -38,12 +39,17 @@ var Actions = function (am, fm, todos, buffer) {
   });
 
   am.action('item:paste:below', function () {
+    if (buffer.length() === 0) return;
+
     todos.addAt(buffer.get(0), fm.get() + 1);
     buffer.remove(0);
+    fm.set(fm.get() + 1);
   });
 
   am.action('item:paste:above', function () {
-    todos.addAt(buffer.get(0), fm.get() - 1);
+    if (buffer.length() === 0) return;
+
+    todos.addAt(buffer.get(0), fm.get());
     buffer.remove(0);
   });
 
@@ -51,6 +57,7 @@ var Actions = function (am, fm, todos, buffer) {
     buffer.prepend(todos.get(fm.get()));
     todos.addAt(buffer.get(0), fm.get() + 1);
     buffer.remove(0);
+    fm.set(fm.get() + 1);
   });
 
   am.action('item:move:up', function () {
@@ -58,6 +65,7 @@ var Actions = function (am, fm, todos, buffer) {
     todos.remove(fm.get());
     todos.addAt(buffer.get(0), fm.get() - 1);
     buffer.remove(0);
+    fm.set(fm.get() - 1);
   });
 
   am.action('item:move:down', function () {
@@ -65,6 +73,7 @@ var Actions = function (am, fm, todos, buffer) {
     todos.remove(fm.get());
     todos.addAt(buffer.get(0), fm.get() + 1);
     buffer.remove(0);
+    fm.set(fm.get() + 1);
   });
 
 };
