@@ -36,6 +36,10 @@ var Todos = function () {
     todos = items;
   };
 
+  var length = function () {
+    return todos.length;
+  };
+
   var addItemAt = function (item, index) {
     if (typeof(index) === 'undefined' || index === 0) {
       return todos.unshift(item);
@@ -103,6 +107,7 @@ var Todos = function () {
   methods =  {
     subscribe: chainer(subscribe),
     populate: informer(populate),
+    length: length,
     addAt: informer(addAt),
     append: informer(append),
     prepend: informer(prepend),

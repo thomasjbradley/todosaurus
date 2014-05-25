@@ -19,6 +19,16 @@ describe('Todos', function () {
     });
   });
 
+  describe('#length()', function () {
+    it('Should be 0 by default', function () {
+      expect(todos.length()).to.equal(0);
+    });
+    it('Should match length of items in collection', function () {
+      todos.populate(getData());
+      expect(todos.length()).to.equal(4);
+    });
+  });
+
   describe('#getAll()', function () {
     beforeEach(function () {
       todos.populate(getData());
