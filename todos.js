@@ -3,8 +3,8 @@ var Todos = function () {
 
   var
     methods = {},
-    todos = [],
-    subscriptions = []
+    subscriptions = [],
+    todos = []
   ;
 
   var subscribe = function (callback) {
@@ -99,6 +99,18 @@ var Todos = function () {
     return methods;
   };
 
+  var toggle = function (index) {
+    if (todos[index].match(/^x /)) {
+      unmark(index);
+    } else {
+      mark(index);
+    }
+
+    inform();
+
+    return methods;
+  };
+
   var filter = function (q) {
 
   };
@@ -115,6 +127,7 @@ var Todos = function () {
     remove: remove,
     mark: mark,
     unmark: unmark,
+    toggle: toggle,
     filter: filter
   };
 

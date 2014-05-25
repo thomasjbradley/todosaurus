@@ -134,6 +134,18 @@ describe('Todos', function () {
     });
   });
 
+  describe('#toggle()', function () {
+    beforeEach(function () {
+      todos.populate(getData());
+    });
+    it('Should mark item as complete then incomplete', function () {
+      todos.toggle(0);
+      expect(todos.get(0)).to.be.equal('x Watch TV');
+      todos.toggle(0);
+      expect(todos.get(0)).to.be.equal('Watch TV');
+    });
+  });
+
   describe('#filter()', function () {
     beforeEach(function () {
       todos.populate(getData());
