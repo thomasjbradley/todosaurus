@@ -41,6 +41,11 @@ describe('FocusManager', function () {
       fm.set(18);
       expect(fm.get()).to.equal(17);
     });
+    it('Should decrease current focus if less than current', function () {
+      fm.set(5)
+      fm.setMax(4);
+      expect(fm.get()).to.equal(4);
+    });
   });
 
   describe('#getMax()', function () {
