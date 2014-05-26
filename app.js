@@ -5,8 +5,9 @@
     fm = new FocusManager(),
     am = new ActionManager(),
     todos = new Todos(),
+    filterer = new Filterer(),
     buffer = new Todos(),
-    actions = new Actions(am, fm, todos, buffer),
+    actions = new Actions(am, fm, filterer, todos, buffer),
     out = document.getElementById('out'),
     focus = document.getElementById('focus'),
     li = document.getElementsByTagName('li')
@@ -27,6 +28,10 @@
   });
 
   todos.subscribe(function (items) {
+    filterer.filter(items)
+  });
+
+  filterer.subscribe(function (items) {
     var finalLis = [];
 
     _.each(items, function (elem) {
@@ -46,7 +51,13 @@
   todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code', 'Listen to Music', 'Eat', 'Sleep']);
 
   buffer.subscribe(function (items) {
-    console.log(items);
+    var tmp = [];
+
+    _.each(items, function (elem) {
+      tmp.push(elem.text());
+    });
+
+    console.log(tmp);
   });
 
 }());

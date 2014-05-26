@@ -1,5 +1,9 @@
-var Actions = function (am, fm, todos, buffer) {
+var Actions = function (am, fm, filterer, todos, buffer) {
   "use strict";
+
+  var id = function () {
+    return filterer.getByIndex(fm.get()).id();
+  };
 
   am.action('focus:next', function () {
     fm.next();
@@ -22,35 +26,35 @@ var Actions = function (am, fm, todos, buffer) {
   });
 
   am.action('focus:last', function () {
-    fm.set(todos.getAll().length - 1);
+    fm.set(filterer.length() - 1);
   });
 
   am.action('item:toggle', function () {
-    todos.toggle(fm.get());
+    todos.get(id()).toggle();
   });
 
   am.action('item:remove', function () {
-    buffer.prepend(todos.get(fm.get()));
-    todos.remove(fm.get());
+    buffer.prepend(todos.get(id()));
+    todos.remove(id());
   });
 
   am.action('item:copy', function () {
-    buffer.prepend(todos.get(fm.get()));
+    buffer.prepend(todos.get(id()));
   });
 
   am.action('item:paste:below', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.get(0), fm.get() + 1);
-    buffer.remove(0);
+    todos.addAt(buffer.getByIndex(0), fm.get() + 1);
+    // buffer.remove(0);
     fm.set(fm.get() + 1);
   });
 
   am.action('item:paste:above', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.get(0), fm.get());
-    buffer.remove(0);
+    todos.addAt(buffer.getByIndex(0), fm.get());
+    // buffer.remove(0);
   });
 
   am.action('item:duplicate', function () {
