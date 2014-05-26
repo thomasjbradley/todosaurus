@@ -42,7 +42,14 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     buffer.prepend(todos.get(id()));
   });
 
-  am.action('item:paste:below', function () {
+  am.action('item:paste:before', function () {
+    if (buffer.length() === 0) return;
+
+    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()));
+    // buffer.remove(0);
+  });
+
+  am.action('item:paste:after', function () {
     if (buffer.length() === 0) return;
 
     todos.addAt(buffer.getByIndex(0), todos.getIndex(id()) + 1);
@@ -50,16 +57,9 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     // buffer.remove(0);
   });
 
-  am.action('item:paste:above', function () {
-    if (buffer.length() === 0) return;
-
-    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()));
-    // buffer.remove(0);
-  });
-
   am.action('item:duplicate', function () {
     am.trigger('item:copy');
-    am.trigger('item:paste:below');
+    am.trigger('item:paste:after');
   });
 
   am.action('item:move:up', function () {
@@ -71,12 +71,12 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       am.trigger('item:focus:prev');
     }
 
-    am.trigger('item:paste:above');
+    am.trigger('item:paste:before');
   });
 
   am.action('item:move:down', function () {
     am.trigger('item:remove');
-    am.trigger('item:paste:below');
+    am.trigger('item:paste:after');
   });
 
   am.action('item:new:at-top', function () {

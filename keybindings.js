@@ -10,8 +10,8 @@ var keys = {
   'item:remove'          : ['d d', 'mod+backspace', 'del'],
 
   'item:copy'            : ['Y', 'mod+c'],
-  'item:paste:below'     : ['p', 'mod+v'],
-  'item:paste:above'     : ['P', 'mod+V'],
+  'item:paste:before'    : ['P', 'mod+V'],
+  'item:paste:after'     : ['p', 'mod+v'],
   'item:duplicate'       : ['mod+d'],
 
   'item:move:up'         : ['mod+shift+up'],
