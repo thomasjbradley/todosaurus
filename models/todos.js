@@ -71,7 +71,9 @@ var Todos = function () {
   };
 
   var get = function (id) {
-    return _.findWhere(todos, {id: id});
+    return _.find(todos, function (item) {
+      return item.id() == id;
+    });
   };
 
   var getByIndex = function (index) {
@@ -84,7 +86,7 @@ var Todos = function () {
 
   var remove = function (id) {
     var index = _.findIndex(todos, function (item) {
-      return item.id == id;
+      return item.id() == id;
     });
 
     removeByIndex(index);
