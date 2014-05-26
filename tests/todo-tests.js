@@ -65,9 +65,9 @@ describe('Todo', function () {
     });
     it('Should mark item as complete then incomplete', function () {
       todo.toggle();
-      expect(todo.text()).to.be.equal('x Watch TV');
+      expect(todo.text()).to.equal('x Watch TV');
       todo.toggle();
-      expect(todo.text()).to.be.equal('Watch TV');
+      expect(todo.text()).to.equal('Watch TV');
     });
   });
 
