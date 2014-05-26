@@ -97,6 +97,15 @@ describe('Todos', function () {
     });
   });
 
+  describe('#getIndex()', function () {
+    beforeEach(function () {
+      todos.populate(getRawData());
+    });
+    it('Should return the index when given an ID', function () {
+      expect(todos.getIndex(todos.getByIndex(0).id())).to.equal(0);
+    });
+  })
+
   describe('#getByIndex()', function () {
     beforeEach(function () {
       todos.populate(getRawData());

@@ -84,6 +84,14 @@ var Todos = function () {
     });
   };
 
+  var getIndex = function (id) {
+    var items = _.map(todos, function (item) {
+      return item.id();
+    });
+
+    return items.indexOf(id);
+  };
+
   var getByIndex = function (index) {
     return todos[index];
   };
@@ -112,6 +120,7 @@ var Todos = function () {
     append: informer(append),
     prepend: informer(prepend),
     get: get,
+    getIndex: getIndex,
     getByIndex: getByIndex,
     getAll: getAll,
     remove: informer(remove),
