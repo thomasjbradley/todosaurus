@@ -109,7 +109,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('app:search:clear', function () {
-    im.get('search').blur();
+    am.trigger('app:search:blur');
     im.get('search').value = '';
     filterer.filter(todos.getAll());
   });
