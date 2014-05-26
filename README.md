@@ -15,7 +15,8 @@ All keyboard shortcuts are based on a focussed todo item.
 - `o`, `mod+enter` — New todo after focussed item
 - `O`, `mod+shift+enter` — New todo before focussed item
 - `x`, `space` — Mark/unmark todo as being completed
-- `enter`, `i`, `I` — Edit focussed item, cursor at start
+- `enter` — Select all the text
+- `i`, `I` — Edit focussed item, cursor at start
 - `a`, `A` — Edit focussed item, cursor at end
 - `C` — Edit focussed item, delete all current content
 - `d d`, `mod+backspace`, `del` — Delete todo and move to buffer

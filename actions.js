@@ -79,6 +79,22 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('item:paste:after');
   });
 
+  am.action('item:edit', function () {
+
+  });
+
+  am.action('item:edit:start', function () {
+
+  });
+
+  am.action('item:edit:end', function () {
+
+  });
+
+  am.action('item:edit:clear', function () {
+
+  });
+
   am.action('item:new:at-top', function () {
 
   });

@@ -17,6 +17,11 @@ var keys = {
   'item:move:up'         : ['mod+shift+up'],
   'item:move:down'       : ['mod+shift+down'],
 
+  'item:edit'            : ['enter', 'return'],
+  'item:edit:start'      : ['i', 'I'],
+  'item:edit:end'        : ['a', 'A'],
+  'item:edit:clear'      : ['C'],
+
   'item:new:at-top'      : ['n', 'mod+n'],
   'item:new:at-bottom'   : ['N', 'mod+N'],
   'item:new:after'       : ['o', 'mod+enter'],
