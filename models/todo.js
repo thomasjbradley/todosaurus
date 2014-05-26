@@ -3,8 +3,34 @@ var Todo = function (text) {
 
   var
     methods = {},
+    subscriptions = [],
     id = md5(text + Date.now())
   ;
+
+  var subscribe = function (callback) {
+    subscriptions.push(callback);
+  };
+
+  var inform = function () {
+    subscriptions.forEach(function (callback) {
+      callback(methods);
+    });
+  };
+
+  var chainer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      return methods;
+    };
+  };
+
+  var informer = function (func) {
+    return function () {
+      func.apply(this, arguments);
+      inform();
+      return methods;
+    };
+  };
 
   var getId = function () {
     return id;
@@ -15,6 +41,8 @@ var Todo = function (text) {
       return text;
     } else {
       text = t;
+      inform();
+      return methods;
     }
   };
 
@@ -39,12 +67,13 @@ var Todo = function (text) {
   };
 
   methods = {
+    subscribe: chainer(subscribe),
     id: getId,
     text: manageText,
-    mark: mark,
-    unmark: unmark,
+    mark: informer(mark),
+    unmark: informer(unmark),
     isMarked: isMarked,
-    toggle: toggle
+    toggle: informer(toggle)
   };
 
   return methods;
