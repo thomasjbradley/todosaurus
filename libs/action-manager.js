@@ -11,7 +11,7 @@ var ActionManager = function () {
   };
 
   var trigger = function (action) {
-    actions[action]();
+    actions[action].apply(this, Array.prototype.slice.call(arguments, 1));
   };
 
   methods =  {

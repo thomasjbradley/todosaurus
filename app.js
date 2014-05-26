@@ -4,14 +4,17 @@
   var
     fm = new FocusManager(),
     am = new ActionManager(),
+    im = new InterfaceManager(),
     todos = new Todos(),
     filterer = new Filterer(),
     buffer = new Todos(),
-    actions = new Actions(am, fm, filterer, todos, buffer),
+    actions = new Actions(am, fm, im, filterer, todos, buffer),
     out = document.getElementById('out'),
     focus = document.getElementById('focus'),
     li = document.getElementsByTagName('li')
   ;
+
+  im.add('search', document.getElementById('search'));
 
   var render = function (index) {
     _.each(li, function (elem, index) {
@@ -22,8 +25,8 @@
   };
 
   _.each(keys, function (elem, index, list) {
-    Mousetrap.bind(elem, function () {
-      am.trigger(index);
+    Mousetrap.bind(elem, function (e) {
+      am.trigger(index, e);
     });
   });
 

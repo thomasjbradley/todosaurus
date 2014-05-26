@@ -1,10 +1,10 @@
 var keys = {
-  'focus:next': ['j', 'down'],
-  'focus:prev': ['k', 'up'],
-  'focus:next:jump': ['ctrl+d', 'pagedown'],
-  'focus:prev:jump': ['ctrl+u', 'pageup'],
-  'focus:first': ['g g', 'mod+up'],
-  'focus:last': ['G', 'mod+down'],
+  'item:focus:next': ['j', 'down'],
+  'item:focus:prev': ['k', 'up'],
+  'item:focus:next:jump': ['ctrl+d', 'pagedown'],
+  'item:focus:prev:jump': ['ctrl+u', 'pageup'],
+  'item:focus:first': ['g g', 'mod+up'],
+  'item:focus:last': ['G', 'mod+down'],
   'item:toggle': ['x', 'space'],
   'item:remove': ['d d', 'mod+backspace', 'del'],
   'item:copy': ['Y', 'mod+c'],
@@ -12,5 +12,6 @@ var keys = {
   'item:paste:above': ['P', 'mod+V'],
   'item:duplicate': ['mod+d'],
   'item:move:up': ['mod+shift+up'],
-  'item:move:down': ['mod+shift+down']
+  'item:move:down': ['mod+shift+down'],
+  'app:focus:search': ['/', 'mod+f']
 };

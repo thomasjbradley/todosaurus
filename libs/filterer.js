@@ -40,7 +40,7 @@ var Filterer = function () {
     return filtered[index];
   };
 
-  var filter = function (todos) {
+  var filter = function (todos, filter) {
     filtered = todos;
   };
 

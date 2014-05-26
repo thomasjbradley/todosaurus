@@ -1,31 +1,31 @@
-var Actions = function (am, fm, filterer, todos, buffer) {
+var Actions = function (am, fm, im, filterer, todos, buffer) {
   "use strict";
 
   var id = function () {
     return filterer.getByIndex(fm.get()).id();
   };
 
-  am.action('focus:next', function () {
+  am.action('item:focus:next', function () {
     fm.next();
   });
 
-  am.action('focus:prev', function () {
+  am.action('item:focus:prev', function () {
     fm.prev();
   });
 
-  am.action('focus:next:jump', function () {
+  am.action('item:focus:next:jump', function () {
     fm.set(fm.get() + 5);
   });
 
-  am.action('focus:prev:jump', function () {
+  am.action('item:focus:prev:jump', function () {
     fm.set(fm.get() - 5);
   });
 
-  am.action('focus:first', function () {
+  am.action('item:focus:first', function () {
     fm.set(0);
   });
 
-  am.action('focus:last', function () {
+  am.action('item:focus:last', function () {
     fm.set(filterer.length() - 1);
   });
 
@@ -68,7 +68,7 @@ var Actions = function (am, fm, filterer, todos, buffer) {
     am.trigger('item:remove');
 
     if (startFocus <= fm.getMax()) {
-      am.trigger('focus:prev');
+      am.trigger('item:focus:prev');
     }
 
     am.trigger('item:paste:above');
@@ -77,6 +77,11 @@ var Actions = function (am, fm, filterer, todos, buffer) {
   am.action('item:move:down', function () {
     am.trigger('item:remove');
     am.trigger('item:paste:below');
+  });
+
+  am.action('app:focus:search', function (e) {
+    e.preventDefault();
+    im.focus('search');
   });
 
 };
