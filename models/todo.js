@@ -36,22 +36,26 @@ var Todo = function (text) {
     return id;
   };
 
+  var setText = function (t) {
+    text = t;
+  }
+
   var manageText = function (t) {
-    if (typeof(t) === 'undefined') {
+    if (_.isUndefined(t)) {
       return text;
     } else {
-      text = t;
+      setText(t);
       inform();
       return methods;
     }
   };
 
   var mark = function () {
-    text = 'x ' + text;
+    setText('x ' + text);
   };
 
   var unmark = function () {
-    text = text.replace(/^x /, '');
+    setText(text.replace(/^x /, ''));
   };
 
   var isMarked = function () {

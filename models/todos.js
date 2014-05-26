@@ -49,9 +49,9 @@ var Todos = function () {
   };
 
   var addItemAt = function (item, index) {
-    var todo = (typeof(item) === 'string') ? createNewItem(item) : createNewItem(item.text());
+    var todo = (_.isString(item)) ? createNewItem(item) : createNewItem(item.text());
 
-    if (typeof(index) === 'undefined' || index === 0) {
+    if (_.isUndefined(index) || index === 0) {
       return todos.unshift(todo);
     }
 

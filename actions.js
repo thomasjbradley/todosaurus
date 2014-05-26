@@ -79,9 +79,23 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('item:paste:below');
   });
 
-  am.action('app:focus:search', function (e) {
-    e.preventDefault();
-    im.focus('search');
+  am.action('app:search:focus', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('search').focus();
+    im.get('search').select();
+  });
+
+  am.action('app:search:blur', function () {
+    im.get('search').blur();
+  });
+
+  am.action('app:search:clear', function () {
+    im.get('search').blur();
+    im.get('search').value = '';
+    filterer.filter(todos.getAll());
   });
 
 };

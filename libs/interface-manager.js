@@ -6,7 +6,14 @@ var InterfaceManager = function () {
     elements = {}
   ;
 
-  var add = function (name, elem) {
+  var addEvents = function (elem, events) {
+    _.each(events, function (callback, ev) {
+      elem.addEventListener(ev, callback, false);
+    });
+  };
+
+  var add = function (name, elem, events) {
+    addEvents(elem, events);
     elements[name] = elem;
   };
 
@@ -14,19 +21,9 @@ var InterfaceManager = function () {
     return elements[name];
   };
 
-  var focus = function (name) {
-    elements[name].focus();
-  };
-
-  var blur = function (name) {
-    elements[name].blur();
-  };
-
   methods =  {
     add: add,
-    get: get,
-    focus: focus,
-    blur: blur
+    get: get
   };
 
   return methods;

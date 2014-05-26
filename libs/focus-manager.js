@@ -55,6 +55,10 @@ var FocusManager = function () {
     if (focus > max) {
       focus = max;
     }
+
+    if (max < 0) {
+      focus = max = 0;
+    }
   };
 
   var getMax = function () {
@@ -65,7 +69,7 @@ var FocusManager = function () {
     focus++;
 
     if (focus > max) {
-      focus--;
+      focus = max;
     }
   };
 

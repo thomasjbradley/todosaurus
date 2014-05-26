@@ -46,6 +46,11 @@ describe('FocusManager', function () {
       fm.setMax(4);
       expect(fm.get()).to.equal(4);
     });
+    it('Should set max and focus to zero for any negative number', function () {
+      fm.setMax(-1);
+      expect(fm.getMax()).to.equal(0);
+      expect(fm.get()).to.equal(0);
+    });
   });
 
   describe('#getMax()', function () {
