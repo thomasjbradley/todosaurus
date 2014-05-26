@@ -32,9 +32,15 @@ var Todos = function () {
     };
   };
 
+  var createNewItem = function (text) {
+    var todo = new Todo(text);
+    todo.subscribe(inform);
+    return todo;
+  };
+
   var populate = function (items) {
     _.each(items, function (elem) {
-      todos.push(new Todo(elem));
+      todos.push(createNewItem(elem));
     });
   };
 
@@ -43,19 +49,21 @@ var Todos = function () {
   };
 
   var addItemAt = function (item, index) {
+    var todo = (typeof(item) === 'string') ? createNewItem(item) : createNewItem(item.text());
+
     if (typeof(index) === 'undefined' || index === 0) {
-      return todos.unshift(new Todo(item));
+      return todos.unshift(todo);
     }
 
     if (index >= todos.length || index === -1) {
-      return todos.push(new Todo(item));
+      return todos.push(todo);
     }
 
     if (index < -1) {
       throw new Error('Index argument must be greater than or equal to -1.');
     }
 
-    return todos.splice(index, 0, new Todo(item));
+    return todos.splice(index, 0, todo);
   };
 
   var addAt = function (item, index) {

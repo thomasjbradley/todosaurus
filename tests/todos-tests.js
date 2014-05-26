@@ -57,9 +57,13 @@ describe('Todos', function () {
       todos.addAt('Inside 1', 2);
       todos.addAt('Inside 2', 4);
       expect(todos.getAll()).to.have.length(7);
-      expect(todos.getByIndex(0).text()).to.be.equal('Inside 0');
-      expect(todos.getByIndex(2).text()).to.be.equal('Inside 1');
-      expect(todos.getByIndex(4).text()).to.be.equal('Inside 2');
+      expect(todos.getByIndex(0).text()).to.equal('Inside 0');
+      expect(todos.getByIndex(2).text()).to.equal('Inside 1');
+      expect(todos.getByIndex(4).text()).to.equal('Inside 2');
+    });
+    it('Should accept a Todo object instead of a string', function () {
+      todos.addAt(todos.getByIndex(2));
+      expect(todos.getByIndex(0).text()).to.equal('Code');
     });
   });
 
