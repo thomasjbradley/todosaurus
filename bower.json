@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "mousetrap": "~1.4.6",
-    "underscore": "~1.6.0"
+    "blueimp-md5": "~1.1.0",
+    "lodash": "~2.4.1"
   }
 }

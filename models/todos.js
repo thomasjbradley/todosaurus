@@ -33,7 +33,9 @@ var Todos = function () {
   };
 
   var populate = function (items) {
-    todos = items;
+    _.each(items, function (elem) {
+      todos.push(new Todo(elem));
+    });
   };
 
   var length = function () {
@@ -42,18 +44,18 @@ var Todos = function () {
 
   var addItemAt = function (item, index) {
     if (typeof(index) === 'undefined' || index === 0) {
-      return todos.unshift(item);
+      return todos.unshift(new Todo(item));
     }
 
     if (index >= todos.length || index === -1) {
-      return todos.push(item);
+      return todos.push(new Todo(item));
     }
 
     if (index < -1) {
       throw new Error('Index argument must be greater than or equal to -1.');
     }
 
-    return todos.splice(index, 0, item);
+    return todos.splice(index, 0, new Todo(item));
   };
 
   var addAt = function (item, index) {
@@ -68,7 +70,11 @@ var Todos = function () {
     return addAt(item, 0);
   };
 
-  var get = function (index) {
+  var get = function (id) {
+    return _.findWhere(todos, {id: id});
+  };
+
+  var getByIndex = function (index) {
     return todos[index];
   };
 
@@ -76,36 +82,16 @@ var Todos = function () {
     return todos;
   };
 
-  var updateAt = function (item, index) {
-    todos[index] = item;
+  var remove = function (id) {
+    var index = _.findIndex(todos, function (item) {
+      return item.id == id;
+    });
+
+    removeByIndex(index);
   };
 
-  var remove = function (index) {
+  var removeByIndex = function (index) {
     todos.splice(index, 1);
-  };
-
-  var mark = function (index) {
-    todos[index] = 'x ' + todos[index];
-  };
-
-  var unmark = function (index) {
-    todos[index] = todos[index].replace(/^x /, '');
-  };
-
-  var isMarked = function (index) {
-    return todos[index].substr(0, 2) === 'x ';
-  };
-
-  var toggle = function (index) {
-    if (isMarked(index)) {
-      unmark(index);
-    } else {
-      mark(index);
-    }
-  };
-
-  var filter = function (q) {
-
   };
 
   methods =  {
@@ -116,14 +102,10 @@ var Todos = function () {
     append: informer(append),
     prepend: informer(prepend),
     get: get,
+    getByIndex: getByIndex,
     getAll: getAll,
-    updateAt: informer(updateAt),
     remove: informer(remove),
-    mark: informer(mark),
-    unmark: informer(unmark),
-    isMarked: isMarked,
-    toggle: informer(toggle),
-    filter: filter
+    removeByIndex: informer(removeByIndex)
   };
 
   return methods;

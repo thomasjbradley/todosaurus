@@ -27,7 +27,13 @@
   });
 
   todos.subscribe(function (items) {
-    out.innerHTML = '<li>' + items.join('</li><li>') + '</li>';
+    var finalLis = [];
+
+    _.each(items, function (elem) {
+      finalLis.push(elem.text());
+    });
+
+    out.innerHTML = '<li>' + finalLis.join('</li><li>') + '</li>';
     fm.setMax(items.length - 1);
     render(fm.get());
   });
