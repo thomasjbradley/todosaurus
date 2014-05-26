@@ -79,6 +79,22 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('item:paste:below');
   });
 
+  am.action('item:new:at-top', function () {
+
+  });
+
+  am.action('item:new:at-bottom', function () {
+
+  });
+
+  am.action('item:new:after', function () {
+
+  });
+
+  am.action('item:new:before', function () {
+
+  });
+
   am.action('app:search:focus', function (e) {
     if (!_.isUndefined(e)) {
       e.preventDefault();
