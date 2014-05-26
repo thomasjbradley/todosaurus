@@ -45,15 +45,15 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('item:paste:below', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.getByIndex(0), fm.get() + 1);
+    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()) + 1);
+    fm.next();
     // buffer.remove(0);
-    fm.set(fm.get() + 1);
   });
 
   am.action('item:paste:above', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.getByIndex(0), fm.get());
+    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()));
     // buffer.remove(0);
   });
 
