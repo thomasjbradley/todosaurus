@@ -225,8 +225,33 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    im.get('search').focus();
-    im.get('search').select();
+    im.get('search').focus().select();
+  });
+
+  am.action('app:search:projects', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('search')
+      .focus()
+      .value('+')
+      .setCaretPosition(1000)
+    ;
+    am.trigger('app:search:trigger');
+  });
+
+  am.action('app:search:contexts', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('search')
+      .focus()
+      .value('@')
+      .setCaretPosition(1000)
+    ;
+    am.trigger('app:search:trigger');
   });
 
   am.action('app:search:blur', function () {

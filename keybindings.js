@@ -28,5 +28,7 @@ var keys = {
   'item:new:before'      : ['O', 'mod+shift+enter'],
 
   'app:search:focus'     : ['/', 'mod+f'],
-  'app:search:clear'     : ['command+l', 'ctrl+l']
+  'app:search:clear'     : ['command+l', 'ctrl+l'],
+  'app:search:projects'  : ['mod+p', '=', '+', 'mod+='],
+  'app:search:contexts'  : ['mod+t', '@']
 };
