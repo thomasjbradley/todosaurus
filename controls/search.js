@@ -1,80 +1,37 @@
-var SearchControl = function (id) {
+var SearchControl = function (elem) {
   "use strict";
 
-  var
-    methods = {},
-    actionManager,
-    elem = document.getElementById(id)
-  ;
+  var that = InputControl(elem);
 
-  var chainer = function (func) {
-    return function () {
-      func.apply(this, arguments);
-      return methods;
-    };
-  };
-
-  var bindEvents = function () {
-    bindKeyUpEvents();
-    bindKeyDownEvents();
-  };
-
-  var bindKeyUpEvents = function () {
-    elem.addEventListener('keyup', function (e) {
-      actionManager.trigger('app:search:trigger');
-    }, false);
-  };
-
-  var bindKeyDownEvents = function () {
-    elem.addEventListener('keydown', function (e) {
+  that.bindEvents({
+    keyup : function (e) {
+      that.getActionManager().trigger('app:search:trigger');
+    },
+    keydown: function (e) {
       switch (e.keyCode) {
         case 13: // Enter
         case 9: // Tab
           e.preventDefault();
-          actionManager.trigger('app:search:blur');
+          that.getActionManager().trigger('app:search:blur');
           break;
         case 27: // Esc
           e.preventDefault();
-          actionManager.trigger('app:search:clear');
+          that.getActionManager().trigger('app:search:clear');
           break;
       }
-    }, false);
-  }
-
-  var bindActionManager = function (am) {
-    actionManager = am;
-  };
-
-  var value = function (val) {
-    if (_.isUndefined(val)) {
-      return elem.value;
-    } else {
-      elem.value = val.trim();
-      return methods;
     }
-  };
+  });
 
-  var select = function () {
-    elem.select();
-  };
+  return that;
 
-  var focus = function () {
-    elem.focus();
-  };
+  // return new InputControl(elem, {
+  //   keybindings: [
+  //     {
+  //       keys: [],
+  //       callback: function (e) {
 
-  var blur = function () {
-    elem.blur();
-  };
-
-  methods = {
-    bindActionManager: chainer(bindActionManager),
-    value: value,
-    select: chainer(select),
-    focus: chainer(focus),
-    blur: chainer(blur)
-  };
-
-  bindEvents();
-
-  return methods;
+  //       }
+  //     }
+  //   ]
+  // });
 };
