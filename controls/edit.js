@@ -18,11 +18,12 @@ var EditControl = function (id) {
     elem.addEventListener('keydown', function (e) {
       switch (e.keyCode) {
         case 13:
-          actionManager.trigger('item:update', value());
-          actionManager.trigger('app:edit:hide');
+          if (isCommittable()) {
+            commit();
+          }
           break;
         case 27:
-          actionManager.trigger('app:edit:hide');
+          discard();
           break;
       }
     }, false);
@@ -30,6 +31,19 @@ var EditControl = function (id) {
 
   var bindActionManager = function (am) {
     actionManager = am;
+  };
+
+  var isCommittable = function () {
+    return value();
+  };
+
+  var commit = function () {
+    actionManager.trigger('item:update', value());
+    actionManager.trigger('app:edit:hide');
+  };
+
+  var discard = function () {
+    actionManager.trigger('app:edit:hide');
   };
 
   var value = function (val) {
