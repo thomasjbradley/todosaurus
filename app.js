@@ -19,6 +19,7 @@
 
   im.add('search', new SearchControl('search'));
   im.add('edit', new EditControl('edit'));
+  im.add('new', new NewControl('new'));
 
   var render = function (index) {
     _.each(li, function (elem, index) {

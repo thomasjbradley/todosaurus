@@ -77,12 +77,16 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('item:paste:after');
   });
 
-  am.action('item:edit', function (e) {
-    if (!_.isUndefined(e)) {
+  am.action('item:edit', function (e, input) {
+    if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
 
-    im.get('edit')
+    if (_.isUndefined(input)) {
+      input = 'edit';
+    }
+
+    im.get(input)
       .value(todos.get(id()).text())
       .show()
       .focus()
@@ -90,36 +94,48 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     ;
   });
 
-  am.action('item:edit:start', function (e) {
-    if (!_.isUndefined(e)) {
+  am.action('item:edit:start', function (e, input) {
+    if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
 
-    im.get('edit')
+    if (_.isUndefined(input)) {
+      input = 'edit';
+    }
+
+    im.get(input)
       .value(todos.get(id()).text())
       .show()
       .setCaretPosition(0)
     ;
   });
 
-  am.action('item:edit:end', function (e) {
-    if (!_.isUndefined(e)) {
+  am.action('item:edit:end', function (e, input) {
+    if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
 
-    im.get('edit')
+    if (_.isUndefined(input)) {
+      input = 'edit';
+    }
+
+    im.get(input)
       .value(todos.get(id()).text())
       .show()
       .setCaretPosition(1000)
     ;
   });
 
-  am.action('item:edit:clear', function (e) {
-    if (!_.isUndefined(e)) {
+  am.action('item:edit:clear', function (e, input) {
+    if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
 
-    im.get('edit')
+    if (_.isUndefined(input)) {
+      input = 'edit';
+    }
+
+    im.get(input)
       .value('')
       .show()
       .focus()
@@ -133,7 +149,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     todos.prepend('');
     fm.set(0);
-    am.trigger('item:edit');
+    am.trigger('item:edit', false, 'new');
   });
 
   am.action('item:new:at-bottom', function (e) {
@@ -143,7 +159,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     todos.append('');
     fm.set(fm.getMax());
-    am.trigger('item:edit');
+    am.trigger('item:edit', false, 'new');
   });
 
   am.action('item:new:after', function (e) {
@@ -153,7 +169,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     buffer.push('');
     am.trigger('item:paste:after');
-    am.trigger('item:edit');
+    am.trigger('item:edit', false, 'new');
   });
 
   am.action('item:new:before', function (e) {
@@ -163,7 +179,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     buffer.push('');
     am.trigger('item:paste:before');
-    am.trigger('item:edit');
+    am.trigger('item:edit', false, 'new');
   });
 
   am.action('item:update', function (text) {
@@ -202,6 +218,12 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('app:edit:hide', function () {
     im.get('edit').value('');
     im.get('edit').hide();
+    am.trigger('item:remove-if-empty');
+  });
+
+  am.action('app:new:hide', function () {
+    im.get('new').value('');
+    im.get('new').hide();
     am.trigger('item:remove-if-empty');
   });
 

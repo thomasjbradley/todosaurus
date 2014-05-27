@@ -11,9 +11,16 @@
   .focus {
     background-color: #e2e2e2;
   }
-  #edit {
+  #edit,
+  #new {
     display: none;
     font-size: 16px;
+  }
+  #new {
+    border: 2px solid green;
+  }
+  #edit {
+    border: 2px solid blue;
   }
   </style>
 </head>
@@ -22,6 +29,7 @@
   <input id="search">
   <ol id="out" start="0"></ol>
   <input id="edit">
+  <input id="new">
 
   <script src="/bower_components/lodash/dist/lodash.min.js"></script>
   <script src="/bower_components/blueimp-md5/js/md5.min.js"></script>
@@ -32,6 +40,7 @@
   <script src="/controls/input.js"></script>
   <script src="/controls/search.js"></script>
   <script src="/controls/edit.js"></script>
+  <script src="/controls/new.js"></script>
   <script src="/libs/filterer.js"></script>
   <script src="/models/todo.js"></script>
   <script src="/models/todos.js"></script>
