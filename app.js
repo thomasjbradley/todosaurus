@@ -10,7 +10,6 @@
     buffer = new Todos(),
     actions = new Actions(am, fm, im, filterer, todos, buffer),
     out = document.getElementById('out'),
-    focus = document.getElementById('focus'),
     li = document.getElementsByTagName('li')
   ;
 
@@ -48,7 +47,6 @@
   });
 
   fm.subscribe(function (index) {
-    focus.value = index;
     render(index);
   });
 
