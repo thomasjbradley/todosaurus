@@ -51,7 +51,7 @@ var Filterer = function (Filter) {
   };
 
   var filter = function (todos, data) {
-    if (_.isUndefined(data) || data == '') {
+    if (_.isUndefined(data) || _.isEmpty(data)) {
       filtered = todos;
     } else {
       filtered = getFilteredItems(todos, data);
