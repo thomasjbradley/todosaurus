@@ -26,7 +26,7 @@ var SearchControl = function (elem, actionManager) {
       }
     },
     {
-      keys: ['esc'],
+      keys: ['esc', 'mod+l'],
       callback: function (e) {
         e.preventDefault();
         that.getActionManager().trigger('app:search:clear');
