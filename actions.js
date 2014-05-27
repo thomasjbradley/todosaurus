@@ -128,19 +128,23 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('item:new:at-top', function () {
-
+    todos.prepend('');
+    fm.set(0);
   });
 
   am.action('item:new:at-bottom', function () {
-
+    todos.append('');
+    fm.set(fm.getMax());
   });
 
   am.action('item:new:after', function () {
-
+    buffer.prepend('');
+    am.trigger('item:paste:after');
   });
 
   am.action('item:new:before', function () {
-
+    buffer.prepend('');
+    am.trigger('item:paste:before');
   });
 
   am.action('item:update', function (text) {
