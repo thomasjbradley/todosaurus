@@ -2,9 +2,11 @@
   "use strict";
 
   var
+    todoskey = 'todos.txt',
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
+    storage = new Storage(),
     todos = new Todos(),
     filterer = new Filterer(),
     buffer = new Todos(),
@@ -12,6 +14,8 @@
     out = document.getElementById('out'),
     li = document.getElementsByTagName('li')
   ;
+
+  storage.set(new LocalStorageHelper());
 
   im.add('search', new SearchControl('search'));
   im.add('edit', new EditControl('edit'));
@@ -32,6 +36,7 @@
 
   todos.subscribe(function (items) {
     filterer.filter(items, im.get('search').value());
+    storage.save(todoskey, todos.getString());
   });
 
   filterer.subscribe(function (items) {
@@ -50,7 +55,8 @@
     render(index);
   });
 
-  todos.populate(['Watch TV', 'Cook', 'Walk', 'Read', 'Code', 'Listen to Music', 'Eat', 'Sleep']);
+  // todos.populate(['Watch TV', 'x Cook +life', 'Walk', 'Read', 'Code +todo', 'x Listen to Music', 'Eat +life', 'Sleep']);
+  todos.populate(storage.read(todoskey));
 
   buffer.subscribe(function (items) {
     var tmp = [];

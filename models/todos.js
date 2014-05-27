@@ -112,6 +112,12 @@ var Todos = function () {
     todos.splice(index, 1);
   };
 
+  var getString = function () {
+    return _.map(todos, function (item) {
+      return item.text();
+    });
+  };
+
   methods =  {
     subscribe: chainer(subscribe),
     populate: informer(populate),
@@ -124,7 +130,8 @@ var Todos = function () {
     getByIndex: getByIndex,
     getAll: getAll,
     remove: informer(remove),
-    removeByIndex: informer(removeByIndex)
+    removeByIndex: informer(removeByIndex),
+    getString: getString
   };
 
   return methods;
