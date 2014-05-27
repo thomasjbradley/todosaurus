@@ -1,37 +1,30 @@
-var SearchControl = function (elem) {
+var SearchControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem);
+  var that = InputControl(elem, actionManager);
 
   that.bindEvents({
     keyup : function (e) {
       that.getActionManager().trigger('app:search:trigger');
-    },
-    keydown: function (e) {
-      switch (e.keyCode) {
-        case 13: // Enter
-        case 9: // Tab
-          e.preventDefault();
-          that.getActionManager().trigger('app:search:blur');
-          break;
-        case 27: // Esc
-          e.preventDefault();
-          that.getActionManager().trigger('app:search:clear');
-          break;
-      }
     }
   });
 
+  that.bindKeyEvents([
+    {
+      keys: ['enter', 'return', 'tab', 'shift+tab'],
+      callback: function (e) {
+        e.preventDefault();
+        that.getActionManager().trigger('app:search:blur');
+      }
+    },
+    {
+      keys: ['esc'],
+      callback: function (e) {
+        e.preventDefault();
+        that.getActionManager().trigger('app:search:clear');
+      }
+    }
+  ]);
+
   return that;
-
-  // return new InputControl(elem, {
-  //   keybindings: [
-  //     {
-  //       keys: [],
-  //       callback: function (e) {
-
-  //       }
-  //     }
-  //   ]
-  // });
 };

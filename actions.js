@@ -142,6 +142,34 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     ;
   });
 
+  am.action('item:edit:after', function (e) {
+    var prevFocus = fm.get();
+
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    fm.next();
+
+    if (fm.get() !== prevFocus) {
+      am.trigger('item:edit');
+    }
+  });
+
+  am.action('item:edit:before', function (e) {
+    var prevFocus = fm.get();
+
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    fm.prev();
+
+    if (fm.get() !== prevFocus) {
+      am.trigger('item:edit');
+    }
+  });
+
   am.action('item:new:at-top', function (e) {
     if (!_.isUndefined(e)) {
       e.preventDefault();
@@ -225,6 +253,14 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     im.get('new').value('');
     im.get('new').hide();
     am.trigger('item:remove-if-empty');
+  });
+
+  am.action('app:context:default', function () {
+    im.reset().bindDefaultKeyActions();
+  });
+
+  am.action('app:context:switch', function (contextKeys) {
+    im.reset().bindKeyEvents(contextKeys);
   });
 
 };

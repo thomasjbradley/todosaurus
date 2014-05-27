@@ -1,9 +1,9 @@
-var InputControl = function (elem) {
+var InputControl = function (elem, actionManager) {
   "use strict";
 
   var
     methods = {},
-    actionManager
+    keyEvents = []
   ;
 
   var chainer = function (func) {
@@ -11,10 +11,6 @@ var InputControl = function (elem) {
       func.apply(this, arguments);
       return methods;
     };
-  };
-
-  var bindActionManager = function (am) {
-    actionManager = am;
   };
 
   var getActionManager = function () {
@@ -25,6 +21,10 @@ var InputControl = function (elem) {
     _.each(events, function (callback, key) {
       elem.addEventListener(key, callback, false);
     });
+  };
+
+  var bindKeyEvents = function (events) {
+    keyEvents = events;
   };
 
   var value = function (val) {
@@ -54,10 +54,12 @@ var InputControl = function (elem) {
   };
 
   var show = function () {
+    actionManager.trigger('app:context:switch', keyEvents);
     elem.style.display = 'inline-block';
   };
 
   var hide = function () {
+    actionManager.trigger('app:context:default');
     elem.style.display = 'none';
   };
 
@@ -67,16 +69,18 @@ var InputControl = function (elem) {
 
   var focus = function () {
     elem.focus();
+    actionManager.trigger('app:context:switch', keyEvents);
   };
 
   var blur = function () {
     elem.blur();
+    actionManager.trigger('app:context:default');
   };
 
   methods = {
-    bindActionManager: chainer(bindActionManager),
     getActionManager: getActionManager,
     bindEvents: chainer(bindEvents),
+    bindKeyEvents: chainer(bindKeyEvents),
     value: value,
     setCaretPosition: chainer(setCaretPosition),
     show: chainer(show),

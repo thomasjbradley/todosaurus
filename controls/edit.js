@@ -1,7 +1,7 @@
-var EditControl = function (elem) {
+var EditControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem);
+  var that = InputControl(elem, actionManager);
 
   var isCommittable = function () {
     return that.value();
@@ -16,23 +16,56 @@ var EditControl = function (elem) {
     that.getActionManager().trigger('app:edit:hide');
   };
 
-  that.bindEvents({
-    keydown: function (e) {
-      switch (e.keyCode) {
-        case 13: // Enter
-          e.preventDefault();
-          if (isCommittable()) {
-            commit();
-          }
-          break;
-        case 27: // Esc
-        case 9: // Tab
-          e.preventDefault();
-          discard();
-          break;
-      }
+  var commitOrDiscard = function (isCommittable) {
+    if (isCommittable) {
+      commit();
+    } else {
+      discard();
     }
-  });
+  };
+
+  that.bindKeyEvents([
+    {
+      keys: ['enter', 'return'],
+      callback: function (e) {
+        e.preventDefault();
+        if (isCommittable()) {
+          commit();
+        }
+      }
+    },
+    {
+      keys: ['esc'],
+      callback: function (e) {
+        e.preventDefault();
+        discard();
+      }
+    },
+    {
+      keys: ['tab'],
+      callback: function (e) {
+        e.preventDefault();
+        commitOrDiscard(isCommittable());
+        that.getActionManager().trigger('item:edit:after');
+      }
+    },
+    {
+      keys: ['shift+tab'],
+      callback: function (e) {
+        e.preventDefault();
+        commitOrDiscard(isCommittable());
+        that.getActionManager().trigger('item:edit:before');
+      }
+    },
+    {
+      keys: ['mod+del', 'mod+backspace'],
+      callback: function (e) {
+        e.preventDefault();
+        discard();
+        that.getActionManager().trigger('item:remove');
+      }
+    },
+  ]);
 
   return that;
 };

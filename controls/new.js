@@ -1,7 +1,7 @@
-var NewControl = function (elem) {
+var NewControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem);
+  var that = InputControl(elem, actionManager);
 
   var isCommittable = function () {
     return that.value();
@@ -10,30 +10,50 @@ var NewControl = function (elem) {
   var commit = function () {
     that.getActionManager().trigger('item:update', that.value());
     that.getActionManager().trigger('app:new:hide');
-    console.log('here');
   };
 
   var discard = function () {
     that.getActionManager().trigger('app:new:hide');
   };
 
-  that.bindEvents({
-    keydown: function (e) {
-      switch (e.keyCode) {
-        case 13: // Enter
-          e.preventDefault();
-          if (isCommittable()) {
-            commit();
-          }
-          break;
-        case 27: // Esc
-        case 9: // Tab
-          e.preventDefault();
-          discard();
-          break;
+  that.bindKeyEvents([
+    {
+      keys: ['mod+enter', 'mod+return'],
+      callback: function (e) {
+        e.preventDefault();
+        if (isCommittable()) {
+          commit();
+        }
+      }
+    },
+    {
+      keys: ['enter', 'return', 'tab'],
+      callback: function (e) {
+        e.preventDefault();
+        if (isCommittable()) {
+          commit();
+          that.getActionManager().trigger('item:new:after');
+        }
+      }
+    },
+    {
+      keys: ['shift+tab', 'shift+enter', 'shift+return'],
+      callback: function (e) {
+        e.preventDefault();
+        if (isCommittable()) {
+          commit();
+          that.getActionManager().trigger('item:new:before');
+        }
+      }
+    },
+    {
+      keys: ['esc', 'mod+del', 'mod+backspace'],
+      callback: function (e) {
+        e.preventDefault();
+        discard();
       }
     }
-  });
+  ]);
 
   return that;
 };

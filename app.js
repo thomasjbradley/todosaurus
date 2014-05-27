@@ -17,9 +17,10 @@
 
   storage.set(new LocalStorageHelper());
 
-  im.add('search', new SearchControl('search'));
-  im.add('edit', new EditControl('edit'));
-  im.add('new', new NewControl('new'));
+  im.bindDefaultKeyActions(keys);
+  im.add('search', new SearchControl('search', am));
+  im.add('edit', new EditControl('edit', am));
+  im.add('new', new NewControl('new', am));
 
   var render = function (index) {
     _.each(li, function (elem, index) {
@@ -28,12 +29,6 @@
 
     li[index].className = 'focus'
   };
-
-  _.each(keys, function (elem, index, list) {
-    Mousetrap.bind(elem, function (e) {
-      am.trigger(index, e);
-    });
-  });
 
   todos.subscribe(function (items) {
     filterer.filter(items, im.get('search').value());
