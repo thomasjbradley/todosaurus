@@ -28,10 +28,13 @@ var SearchControl = function (id) {
   var bindKeyDownEvents = function () {
     elem.addEventListener('keydown', function (e) {
       switch (e.keyCode) {
-        case 13:
+        case 13: // Enter
+        case 9: // Tab
+          e.preventDefault();
           actionManager.trigger('app:search:blur');
           break;
-        case 27:
+        case 27: // Esc
+          e.preventDefault();
           actionManager.trigger('app:search:clear');
           break;
       }

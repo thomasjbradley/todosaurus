@@ -17,12 +17,15 @@ var EditControl = function (id) {
   var bindEvents = function () {
     elem.addEventListener('keydown', function (e) {
       switch (e.keyCode) {
-        case 13:
+        case 13: // Enter
+          e.preventDefault();
           if (isCommittable()) {
             commit();
           }
           break;
-        case 27:
+        case 27: // Esc
+        case 9: // Tab
+          e.preventDefault();
           discard();
           break;
       }
