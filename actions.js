@@ -87,6 +87,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     im.get('edit')
       .value(todos.get(id()).text())
       .show()
+      .focus()
       .select()
     ;
   });
@@ -127,28 +128,54 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     ;
   });
 
-  am.action('item:new:at-top', function () {
+  am.action('item:new:at-top', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
     todos.prepend('');
     fm.set(0);
+    am.trigger('item:edit');
   });
 
-  am.action('item:new:at-bottom', function () {
+  am.action('item:new:at-bottom', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
     todos.append('');
     fm.set(fm.getMax());
+    am.trigger('item:edit');
   });
 
-  am.action('item:new:after', function () {
+  am.action('item:new:after', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
     buffer.prepend('');
     am.trigger('item:paste:after');
+    am.trigger('item:edit');
   });
 
-  am.action('item:new:before', function () {
+  am.action('item:new:before', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
     buffer.prepend('');
     am.trigger('item:paste:before');
+    am.trigger('item:edit');
   });
 
   am.action('item:update', function (text) {
     todos.get(id()).text(text);
+  });
+
+  am.action('item:remove-if-empty', function () {
+    if (_.isEmpty(todos.get(id()).text())) {
+      todos.remove(id());
+    }
   });
 
   am.action('app:search:focus', function (e) {
@@ -177,6 +204,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('app:edit:hide', function () {
     im.get('edit').value('');
     im.get('edit').hide();
+    am.trigger('item:remove-if-empty');
   });
 
 };
