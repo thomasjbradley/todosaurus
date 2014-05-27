@@ -14,22 +14,7 @@
     li = document.getElementsByTagName('li')
   ;
 
-  im.add('search', document.getElementById('search'), {
-    keyup: function (e) {
-      filterer.filter(todos.getAll(), this.value);
-    },
-    keydown: function (e) {
-      switch (e.keyCode) {
-        case 13:
-          am.trigger('app:search:blur');
-          break;
-        case 27:
-          am.trigger('app:search:clear');
-          break;
-      }
-    }
-  });
-
+  im.add('search', new SearchControl('search'));
   im.add('edit', new EditControl('edit'));
 
   var render = function (index) {
@@ -47,7 +32,7 @@
   });
 
   todos.subscribe(function (items) {
-    filterer.filter(items, im.get('search').value);
+    filterer.filter(items, im.get('search').value());
   });
 
   filterer.subscribe(function (items) {

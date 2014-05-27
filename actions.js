@@ -162,8 +162,12 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
   am.action('app:search:clear', function () {
     am.trigger('app:search:blur');
-    im.get('search').value = '';
+    im.get('search').value('');
     filterer.filter(todos.getAll());
+  });
+
+  am.action('app:search:trigger', function () {
+    filterer.filter(todos.getAll(), im.get('search').value());
   });
 
   am.action('app:edit:hide', function () {
