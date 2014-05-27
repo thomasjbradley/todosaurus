@@ -244,14 +244,12 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('app:edit:hide', function () {
-    im.get('edit').value('');
-    im.get('edit').hide();
+    im.get('edit').value('').hide();
     am.trigger('item:remove-if-empty');
   });
 
   am.action('app:new:hide', function () {
-    im.get('new').value('');
-    im.get('new').hide();
+    im.get('new').value('').hide();
     am.trigger('item:remove-if-empty');
   });
 
