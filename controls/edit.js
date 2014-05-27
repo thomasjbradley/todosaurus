@@ -74,6 +74,10 @@ var EditControl = function (id) {
     elem.focus();
   };
 
+  var blur = function () {
+    elem.blur();
+  };
+
   methods = {
     bindActionManager: chainer(bindActionManager),
     value: value,
@@ -81,7 +85,8 @@ var EditControl = function (id) {
     show: chainer(show),
     hide: chainer(hide),
     select: chainer(select),
-    focus: chainer(focus)
+    focus: chainer(focus),
+    blur: chainer(blur)
   };
 
   bindEvents();
