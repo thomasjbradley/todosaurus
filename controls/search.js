@@ -4,8 +4,16 @@ var SearchControl = function (elem, actionManager) {
   var that = InputControl(elem, actionManager);
 
   that.bindEvents({
-    keyup : function (e) {
+    keyup: function (e) {
       that.getActionManager().trigger('app:search:trigger');
+    },
+    focus: function (e) {
+      e.preventDefault();
+      that.getActionManager().trigger('app:search:focus');
+    },
+    blur: function (e) {
+      e.preventDefault();
+      that.getActionManager().trigger('app:search:blur');
     }
   });
 

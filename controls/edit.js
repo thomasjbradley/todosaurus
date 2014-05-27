@@ -24,6 +24,13 @@ var EditControl = function (elem, actionManager) {
     }
   };
 
+  that.bindEvents({
+    blur: function (e) {
+      e.preventDefault();
+      commitOrDiscard(isCommittable());
+    }
+  });
+
   that.bindKeyEvents([
     {
       keys: ['enter', 'return'],

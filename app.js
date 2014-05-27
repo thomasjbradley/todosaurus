@@ -21,6 +21,7 @@
   im.add('search', new SearchControl('search', am));
   im.add('edit', new EditControl('edit', am));
   im.add('new', new NewControl('new', am));
+  document.addEventListener('click', im.handleMouseEvents, false);
 
   var render = function (index) {
     _.each(li, function (elem, index) {

@@ -44,6 +44,13 @@ var InterfaceManager = function (focusManager, actionManager) {
     bindKeyActions(defaultKeys);
   };
 
+  var handleMouseEvents = function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    return false;
+  };
+
   var add = function (name, elem, events) {
     elements[name] = elem;
   };
@@ -58,6 +65,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     bindKeyEvents: chainer(bindKeyEvents),
     bindKeyActions: chainer(bindKeyActions),
     bindDefaultKeyActions: chainer(bindDefaultKeyActions),
+    handleMouseEvents: handleMouseEvents,
     add: chainer(add),
     get: get
   };

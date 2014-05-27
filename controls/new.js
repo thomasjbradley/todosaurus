@@ -16,6 +16,21 @@ var NewControl = function (elem, actionManager) {
     that.getActionManager().trigger('app:new:hide');
   };
 
+  var commitOrDiscard = function (isCommittable) {
+    if (isCommittable) {
+      commit();
+    } else {
+      discard();
+    }
+  };
+
+  that.bindEvents({
+    blur: function (e) {
+      e.preventDefault();
+      commitOrDiscard(isCommittable());
+    }
+  });
+
   that.bindKeyEvents([
     {
       keys: ['mod+enter', 'mod+return'],
