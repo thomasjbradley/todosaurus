@@ -3,40 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>Todo.txt</title>
-  <style>
-  html, body {
-    /*pointer-events: none;*/
-  }
-  ol {
-    float: left;
-    width: 50%;
-  }
-  .focus {
-    background-color: #e2e2e2;
-  }
-  #jump {
-    display: none;
-  }
-  #edit,
-  #new {
-    display: none;
-    font-size: 16px;
-  }
-  #new {
-    border: 2px solid green;
-  }
-  #edit {
-    border: 2px solid blue;
-  }
-  </style>
+  <link href="/bower_components/normalize-css/normalize.css" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
 
-  <input id="search" class="mousetrap">
-  <input id="jump" class="mousetrap">
-  <ol id="out"></ol>
-  <input id="edit" class="mousetrap">
-  <input id="new" class="mousetrap">
+  <header class="toolbar">
+    <div class="input">
+      <input class="mousetrap" id="search">
+    </div>
+    <div class="input input--jump" data-state="hidden">
+      <span class="input__label"></span>
+      <input class="input--hidden mousetrap" id="jump">
+    </div>
+  </header>
+
+  <main class="main">
+    <ol class="todos" id="out"></ol>
+  </main>
+
+  <div class="input" data-state="hidden">
+    <input class="input--hidden mousetrap" data-state="hidden" id="edit">
+  </div>
+
+  <div class="input" data-state="hidden">
+    <input class="input--hidden mousetrap" data-state="hidden" id="new">
+  </div>
 
   <script src="/bower_components/lodash/dist/lodash.min.js"></script>
   <script src="/bower_components/blueimp-md5/js/md5.min.js"></script>

@@ -55,12 +55,12 @@ var InputControl = function (elem, actionManager) {
 
   var show = function () {
     actionManager.trigger('app:context:switch', keyEvents);
-    elem.style.display = 'inline-block';
+    elem.parentNode.setAttribute('data-state', 'visible');
   };
 
   var hide = function () {
     actionManager.trigger('app:context:default');
-    elem.style.display = 'none';
+    elem.parentNode.setAttribute('data-state', 'hidden');
   };
 
   var select = function () {

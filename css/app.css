@@ -1,0 +1,57 @@
+html {
+  margin: 0;
+  padding: 0;
+
+  background-color: #fff;
+
+  font: normal 100%/1.5 Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+}
+
+.tools {
+  margin: 0;
+  padding: 0;
+}
+
+.input {
+
+}
+
+.input > input {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  border: 2px solid #ccc;
+  outline: 0;
+
+  font: normal 100%/1.5 Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+}
+
+.input > input:focus {
+  outline: 0;
+}
+
+.input--jump {
+
+}
+
+.input__label {
+
+}
+
+[data-state="hidden"] {
+  display: none;
+}
+
+[data-state="visible"] {
+  display: block;
+}
+
+[data-state="is-focused"] {
+  border-color: #33f;
+}
+
+.focus {
+  background-color: #ccc;
+}

@@ -36,6 +36,7 @@ var EditControl = function (elem, actionManager) {
       keys: ['enter', 'return'],
       callback: function (e) {
         e.preventDefault();
+
         if (isCommittable()) {
           commit();
         }
