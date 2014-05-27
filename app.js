@@ -9,7 +9,7 @@
     storage = new Storage(),
     todos = new Todos(),
     filterer = new Filterer(),
-    buffer = new Todos(),
+    buffer = new Buffer(),
     actions = new Actions(am, fm, im, filterer, todos, buffer),
     out = document.getElementById('out'),
     li = document.getElementsByTagName('li')
@@ -58,14 +58,8 @@
   // todos.populate(['Watch TV', 'x Cook +life', 'Walk', 'Read', 'Code +todo', 'x Listen to Music', 'Eat +life', 'Sleep']);
   todos.populate(storage.read(todoskey));
 
-  buffer.subscribe(function (items) {
-    var tmp = [];
-
-    _.each(items, function (elem) {
-      tmp.push(elem.text());
-    });
-
-    console.log(tmp);
-  });
+  // buffer.subscribe(function (buffer) {
+  //   console.log(buffer.length(), buffer);
+  // });
 
 }());

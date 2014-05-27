@@ -34,27 +34,25 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('item:remove', function () {
-    buffer.prepend(todos.get(id()));
+    buffer.push(todos.get(id()).text());
     todos.remove(id());
   });
 
   am.action('item:copy', function () {
-    buffer.prepend(todos.get(id()));
+    buffer.push(todos.get(id()).text());
   });
 
   am.action('item:paste:before', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()));
-    // buffer.remove(0);
+    todos.addAt(buffer.pull(), todos.getIndex(id()));
   });
 
   am.action('item:paste:after', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.getByIndex(0), todos.getIndex(id()) + 1);
+    todos.addAt(buffer.pull(), todos.getIndex(id()) + 1);
     fm.next();
-    // buffer.remove(0);
   });
 
   am.action('item:duplicate', function () {
@@ -153,7 +151,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.prepend('');
+    buffer.push('');
     am.trigger('item:paste:after');
     am.trigger('item:edit');
   });
@@ -163,7 +161,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.prepend('');
+    buffer.push('');
     am.trigger('item:paste:before');
     am.trigger('item:edit');
   });
