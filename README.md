@@ -19,7 +19,7 @@ All keyboard shortcuts are based on a focussed todo item.
 - `i`, `I` — Edit focussed item, cursor at start
 - `a`, `A` — Edit focussed item, cursor at end
 - `C` — Edit focussed item, delete all current content
-- `d d`, `mod+backspace`, `del` — Delete todo and move to buffer
+- `d d`, `mod+backspace`, `del`, `mod+x` — Delete todo and move to buffer
 - `Y`, `mod+c` — Copy todo item to buffer
 - `p`, `mod+v` — Paste top buffer item below focussed item
 - `P`, `mod+V` — Paste top buffer item above focussed item
@@ -31,7 +31,8 @@ All keyboard shortcuts are based on a focussed todo item.
 - `ctrl+d`, `pagedown` — Move focus down 5 items
 - `ctrl+u`, `pageup` — Move focus up 5 items
 - `/`, `mod+f` — Search todo items
+- `mod+p`, `=`, `+`, `mod+=` — Filter by project
+- `mod+t`, `@` — Filter by context
 - `command+l`, `ctrl+l` — Clear search terms
 - `3 g` — Move to todo with index 3
-- `mod+t` — Filter by project
 - `mod+1` — Display single project

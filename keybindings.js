@@ -7,7 +7,7 @@ var keys = {
   'item:focus:last'      : ['G', 'mod+down'],
 
   'item:toggle'          : ['x', 'space'],
-  'item:remove'          : ['d d', 'mod+backspace', 'del'],
+  'item:remove'          : ['d d', 'mod+backspace', 'del', 'mod+x'],
 
   'item:copy'            : ['Y', 'mod+c'],
   'item:paste:before'    : ['P', 'mod+V'],
