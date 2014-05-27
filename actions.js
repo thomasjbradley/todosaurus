@@ -268,6 +268,33 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     filterer.filter(todos.getAll(), im.get('search').value());
   });
 
+  am.action('app:jump:show', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('jump')
+      .show()
+      .focus()
+      .value('#')
+      .setCaretPosition(1000)
+    ;
+  });
+
+  am.action('app:jump:hide', function () {
+    im.get('jump').value('').hide();
+  });
+
+  am.action('app:jump:trigger', function () {
+    var line = parseInt(im.get('jump').value().replace(/[^\d]/g, ''), 10);
+
+    if (!_.isNumber(line) || _.isNaN(line)) {
+      line = 0;
+    }
+
+    fm.set(line - 1);
+  });
+
   am.action('app:edit:hide', function () {
     im.get('edit').value('').hide();
     am.trigger('item:remove-if-empty');

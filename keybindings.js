@@ -30,5 +30,6 @@ var keys = {
   'app:search:focus'     : ['/', 'mod+f'],
   'app:search:clear'     : ['command+l', 'ctrl+l'],
   'app:search:projects'  : ['mod+p', '=', '+', 'mod+='],
-  'app:search:contexts'  : ['mod+t', '@']
+  'app:search:contexts'  : ['mod+t', '@'],
+  'app:jump:show'       : ['#']
 };
