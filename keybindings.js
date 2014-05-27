@@ -17,7 +17,7 @@ var keys = {
   'item:move:up'         : ['mod+shift+up'],
   'item:move:down'       : ['mod+shift+down'],
 
-  'item:edit'            : ['enter', 'return'],
+  'item:edit'            : ['e', 'enter', 'return'],
   'item:edit:start'      : ['i', 'I'],
   'item:edit:end'        : ['a', 'A'],
   'item:edit:clear'      : ['C'],

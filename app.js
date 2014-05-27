@@ -4,7 +4,7 @@
   var
     fm = new FocusManager(),
     am = new ActionManager(),
-    im = new InterfaceManager(),
+    im = new InterfaceManager(fm, am),
     todos = new Todos(),
     filterer = new Filterer(),
     buffer = new Todos(),
@@ -29,6 +29,8 @@
       }
     }
   });
+
+  im.add('edit', new EditControl('edit'));
 
   var render = function (index) {
     _.each(li, function (elem, index) {

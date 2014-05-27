@@ -79,20 +79,52 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('item:paste:after');
   });
 
-  am.action('item:edit', function () {
+  am.action('item:edit', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
 
+    im.get('edit')
+      .value(todos.get(id()).text())
+      .show()
+      .select()
+    ;
   });
 
-  am.action('item:edit:start', function () {
+  am.action('item:edit:start', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
 
+    im.get('edit')
+      .value(todos.get(id()).text())
+      .show()
+      .setCaretPosition(0)
+    ;
   });
 
-  am.action('item:edit:end', function () {
+  am.action('item:edit:end', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
 
+    im.get('edit')
+      .value(todos.get(id()).text())
+      .show()
+      .setCaretPosition(1000)
+    ;
   });
 
-  am.action('item:edit:clear', function () {
+  am.action('item:edit:clear', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
 
+    im.get('edit')
+      .value('')
+      .show()
+      .focus()
+    ;
   });
 
   am.action('item:new:at-top', function () {
@@ -109,6 +141,10 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
   am.action('item:new:before', function () {
 
+  });
+
+  am.action('item:update', function (text) {
+    todos.get(id()).text(text);
   });
 
   am.action('app:search:focus', function (e) {
@@ -128,6 +164,11 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     am.trigger('app:search:blur');
     im.get('search').value = '';
     filterer.filter(todos.getAll());
+  });
+
+  am.action('app:edit:hide', function () {
+    im.get('edit').value('');
+    im.get('edit').hide();
   });
 
 };
