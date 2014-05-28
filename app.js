@@ -29,7 +29,9 @@
       elem.setAttribute('data-focused', 'false');
     });
 
-    li[index].setAttribute('data-focused', 'true');
+    if (li && li.length > 0) {
+      li[index].setAttribute('data-focused', 'true');
+    }
   };
 
   todos.subscribe(function (items) {
