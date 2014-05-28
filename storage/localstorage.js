@@ -10,7 +10,11 @@ var LocalStorageHelper = function () {
   };
 
   var read = function (key) {
-    return _.compact(localStorage.getItem(key).split('\n'));
+    var items = _.map(localStorage.getItem(key).split('\n'), function (item) {
+      return item.trim();
+    });
+
+    return _.compact(items);
   };
 
   methods =  {
