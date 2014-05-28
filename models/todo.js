@@ -37,7 +37,7 @@ var Todo = function (text) {
   };
 
   var setText = function (t) {
-    text = t;
+    text = t.trim();
   }
 
   var manageText = function (t) {
