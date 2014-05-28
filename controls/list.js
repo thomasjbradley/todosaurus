@@ -31,11 +31,28 @@ var ListControl = function (elem, actionManager) {
     }).join('');
   };
 
+  var removeMetaData = function (text, tags) {
+    var allMeta = _.flatten(_.map(tags, function (tag) {
+      return findMetadata(text, tag);
+    }));
+
+    // Will strip out all metadata that's in the middle of the text
+    _.each(allMeta, function (tag) {
+      text = text.replace(tag, '');
+    });
+
+    return text;
+  };
+
   var formatText = function (text) {
     var
       projects = findMetadata(text, '+'),
       contexts = findMetadata(text, '@'),
-      textElem = '<div class="item__text">' + text + '</div>',
+      textElem = [
+        '<div class="item__text">',
+         removeMetaData(text, ['+', '@']),
+         '</div>'
+      ].join(''),
       meta = [
         '<ul class="item__metadata">',
         formatMetadata(projects, 'project'),
