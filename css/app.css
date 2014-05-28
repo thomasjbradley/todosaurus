@@ -90,7 +90,7 @@ body {
   text-align: right;
 }
 
-.input__label__text {
+.pill {
   padding: 3px 6px 2px;
 
   background-color: #cdc0db;
@@ -147,6 +147,16 @@ body {
   list-style-type: none;
 }
 
+.todos [data-focused="true"] {
+  background-color: #f2f2f2;
+  border-top-color: #f2f2f2;
+}
+
+.todos[data-focused="true"] [data-focused="true"] {
+  border-color: #927ba9;
+  border-radius: 3px;
+}
+
 .item {
   padding: 4px 4px 4px 28px;
   position: relative;
@@ -175,12 +185,36 @@ body {
   text-align: right;
 }
 
-.todos [data-focused="true"] {
-  background-color: #f2f2f2;
-  border-top-color: #f2f2f2;
+.item__text {
 }
 
-.todos[data-focused="true"] [data-focused="true"] {
-  border-color: #927ba9;
-  border-radius: 3px;
+.item__metadata {
+  margin: 4px 0 0;
+  padding: 0;
+  position: absolute;
+  right: 4px;
+  top: 0;
+
+  opacity: 0.5;
+  list-style-type: none;
+}
+
+[data-focused="true"] > .item__metadata {
+  opacity: 1;
+}
+
+.item__metadata__single {
+  float: left;
+  margin-left: 2px;
+}
+
+.item__metadata__single--project {
+
+}
+
+.item__metadata__single--context {
+  background-color: #c0dbc9;
+  border-color: #a1c4ad;
+
+  color: #2c663f;
 }

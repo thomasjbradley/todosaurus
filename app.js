@@ -11,7 +11,6 @@
     filterer = new Filterer(),
     buffer = new Buffer(),
     actions = new Actions(am, fm, im, filterer, todos, buffer),
-    li = document.getElementsByTagName('li'),
     main = document.getElementsByClassName('main')[0];
   ;
 
@@ -26,12 +25,14 @@
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
-    _.each(li, function (elem, index) {
+    var items = im.get('list').getAllItemElements();
+
+    _.each(items, function (elem, index) {
       elem.setAttribute('data-focused', 'false');
     });
 
-    if (li && li.length > 0) {
-      li[index].setAttribute('data-focused', 'true');
+    if (items && items.length > 0) {
+      items[index].setAttribute('data-focused', 'true');
     }
   };
 

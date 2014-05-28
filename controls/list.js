@@ -7,13 +7,53 @@ var ListControl = function (elem, actionManager) {
     return (item.isMarked()) ? ' item--complete' : '';
   };
 
+  var getClasses = function (item) {
+    return [
+      getMarkedClass(item)
+    ].join('');
+  };
+
+  var findMetadata = function (text, tag) {
+    var re = new RegExp('\\s\\' + tag + '[^\\s]+', 'ig');
+
+    return _.map(text.match(re), function (item) {
+      return item.trim();
+    });
+  };
+
+  var formatMetadata = function (metadata, cssClass) {
+    return _.map(metadata, function (item) {
+      return [
+        '<li class="item__metadata__single item__metadata__single--' + cssClass + ' pill">',
+        item,
+        '</li>'
+      ].join('');
+    }).join('');
+  };
+
+  var formatText = function (text) {
+    var
+      projects = findMetadata(text, '+'),
+      contexts = findMetadata(text, '@'),
+      textElem = '<div class="item__text">' + text + '</div>',
+      meta = [
+        '<ul class="item__metadata">',
+        formatMetadata(projects, 'project'),
+        formatMetadata(contexts, 'context'),
+        '</ul>'
+      ].join('')
+    ;
+
+    return textElem + meta;
+  };
+
   var render = function (items) {
     var output = _.map(items, function (item) {
       var pieces = [
         '<li class="item',
-        getMarkedClass(item),
+        getClasses(item),
         '">',
-        item.text(),
+        formatText(item.text()),
         '</li>'
       ];
 
@@ -31,14 +71,19 @@ var ListControl = function (elem, actionManager) {
     that.elem.setAttribute('data-focused', 'false');
   };
 
+  var getAllItemElements = function () {
+    return that.elem.querySelectorAll('.item');
+  };
+
   var getItemElement = function (index) {
-    return that.elem.getElementsByTagName('li')[index];
+    return that.elem.querySelectorAll('.item')[index];
   }
 
   that = _.extend(that, {
     render: that.chainer(render),
     focus: that.chainer(focus),
     blur: that.chainer(blur),
+    getAllItemElements: getAllItemElements,
     getItemElement: getItemElement
   });
 
