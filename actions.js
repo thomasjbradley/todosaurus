@@ -186,9 +186,9 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    todos.prepend('');
+    todos.prepend(' '); // This is a non-breaking space
     fm.set(0);
-    am.trigger('item:edit', false, 'new');
+    am.trigger('item:edit:clear', false, 'new');
   });
 
   am.action('item:new:at-bottom', function (e) {
@@ -196,7 +196,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    todos.append('');
+    todos.append(' '); // This is a non-breaking space
     fm.set(fm.getMax());
     am.trigger('item:edit', false, 'new');
   });
@@ -206,7 +206,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.push('');
+    buffer.push(' '); // This is a non-breaking space
     am.trigger('item:paste:after');
     am.trigger('item:edit', false, 'new');
   });
@@ -216,7 +216,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.push('');
+    buffer.push(' '); // This is a non-breaking space
     am.trigger('item:paste:before');
     am.trigger('item:edit', false, 'new');
   });
@@ -226,7 +226,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('item:remove-if-empty', function () {
-    if (_.isEmpty(todos.get(id()).text())) {
+    if (_.isEmpty(todos.get(id()).text().trim())) {
       todos.remove(id());
     }
   });
