@@ -325,7 +325,6 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
   am.action('app:edit:hide', function () {
     im.get('edit').value('').hide();
-    am.trigger('item:remove-if-empty');
   });
 
   am.action('app:new:hide', function () {
