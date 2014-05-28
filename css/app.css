@@ -218,3 +218,11 @@ body {
 
   color: #2c663f;
 }
+
+.item--complete .item__metadata__single--project,
+.item--complete .item__metadata__single--context {
+  background-color: #e2e2e2;
+  border-color: #bbb;
+
+  color: #888;
+}
