@@ -1,6 +1,10 @@
 var Actions = function (am, fm, im, filterer, todos, buffer) {
   "use strict";
 
+  // Used a reference for when creating a new item
+  // Will be used to compare new item to see if it matches the filter
+  var tmpId;
+
   var id = function () {
     return filterer.getByIndex(fm.get()).id();
   };
@@ -64,13 +68,13 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('item:paste:before', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.pull(), todos.getIndex(id()));
+    todos.addBeforeItem(buffer.pull(), id());
   });
 
   am.action('item:paste:after', function () {
     if (buffer.length() === 0) return;
 
-    todos.addAt(buffer.pull(), todos.getIndex(id()) + 1);
+    todos.addAfterItem(buffer.pull(), id());
     fm.next();
   });
 
@@ -232,6 +236,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('item:update', function (text) {
+    tmpId = id();
     todos.get(id()).text(text);
   });
 
@@ -280,9 +285,12 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('app:search:clear', function () {
+    var fullIndex = todos.getIndex(filterer.getByIndex(fm.get()).id());
+
     am.trigger('app:search:blur');
     im.get('search').value('');
     filterer.filter(todos.getAll());
+    fm.set(fullIndex);
   });
 
   am.action('app:search:trigger', function () {
@@ -296,9 +304,8 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     im.get('jump')
       .show()
-      .focus()
       .value('')
-      .setCaretPosition(1000)
+      .focus()
     ;
   });
 
@@ -324,6 +331,13 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('app:new:hide', function () {
     im.get('new').value('').hide();
     am.trigger('item:remove-if-empty');
+
+    if (tmpId && !filterer.matchesFilter(todos.get(tmpId).text(), im.get('search').value())) {
+      am.trigger('app:search:clear');
+      fm.set(filterer.getIndex(tmpId));
+    }
+
+    tmpId = null;
   });
 
   am.action('app:list:focus', function () {

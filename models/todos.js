@@ -70,6 +70,14 @@ var Todos = function () {
     addItemAt(item, index);
   };
 
+  var addBeforeItem = function (item, id) {
+    addItemAt(item, getIndex(id));
+  };
+
+  var addAfterItem = function (item, id) {
+    addItemAt(item, getIndex(id) + 1);
+  };
+
   var append = function (item) {
     return addAt(item, -1);
   };
@@ -123,6 +131,8 @@ var Todos = function () {
     populate: informer(populate),
     length: length,
     addAt: informer(addAt),
+    addBeforeItem: informer(addBeforeItem),
+    addAfterItem: informer(addAfterItem),
     append: informer(append),
     prepend: informer(prepend),
     get: get,

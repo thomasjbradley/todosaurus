@@ -40,7 +40,15 @@ var Filterer = function (Filter) {
     return filtered[index];
   };
 
-  var getFilteredItems = function (todos, data) {
+  var getIndex = function (id) {
+    var items = _.map(filtered, function (item) {
+      return item.id();
+    });
+
+    return _.indexOf(items, id);
+  };
+
+  var getFilter = function (data) {
     // Found: http://www.quora.com/Algorithms/How-is-the-fuzzy-search-algorithm-in-Sublime-Text-designed
     // Alternative: http://stackoverflow.com/questions/16907825/how-to-implement-sublime-text-like-fuzzy-search
     var r, re, specials = ['^', '$', '.', '|', '[', ']', '(', ')', '{', '}', ':', '*', '+', '?', '\\', '-'];
@@ -53,10 +61,16 @@ var Filterer = function (Filter) {
       }
     });
 
-    re = new RegExp(r.join('.*?'), 'i');
+    return new RegExp(r.join('.*?'), 'i');
+  };
 
+  var matchesFilter = function (text, data) {
+    return getFilter(data).test(text);
+  }
+
+  var getFilteredItems = function (todos, data) {
     return _.filter(todos, function (item) {
-      return re.test(item.text());
+      return matchesFilter(item.text(), data);
     });
   };
 
@@ -72,6 +86,8 @@ var Filterer = function (Filter) {
     subscribe: chainer(subscribe),
     length: length,
     getByIndex: getByIndex,
+    getIndex: getIndex,
+    matchesFilter: matchesFilter,
     filter: informer(filter)
   };
 
