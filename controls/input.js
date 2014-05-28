@@ -9,7 +9,6 @@ var InputControl = function (elem, actionManager) {
     while (current.className.indexOf('input-wrapper') < 0) {
       current = current.parentNode;
     }
-    console.log(current);
 
     return current;
   };
@@ -62,6 +61,10 @@ var InputControl = function (elem, actionManager) {
     actionManager.trigger('app:list:focus');
   };
 
+  var isVisible = function () {
+    return (findWrapper().getAttribute('data-state') === 'visible');
+  };
+
   var select = function () {
     that.elem.select();
   };
@@ -85,6 +88,7 @@ var InputControl = function (elem, actionManager) {
     setCaretPosition: that.chainer(setCaretPosition),
     show: that.chainer(show),
     hide: that.chainer(hide),
+    isVisible: isVisible,
     select: that.chainer(select),
     focus: that.chainer(focus),
     blur: that.chainer(blur)

@@ -5,7 +5,9 @@ var JumpControl = function (elem, actionManager) {
 
   that.bindEvents({
     keyup: function (e) {
-      that.getActionManager().trigger('app:jump:trigger');
+      if (that.isVisible()) {
+        that.getActionManager().trigger('app:jump:trigger');
+      }
     },
     blur: function (e) {
       e.preventDefault();
