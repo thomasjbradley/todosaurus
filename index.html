@@ -25,17 +25,21 @@
     </div>
   </header>
 
-  <main class="main">
-    <ol class="todos" data-focused="true" id="list"></ol>
+  <div class="main-wrapper">
 
-    <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-      <input class="input input--hidden mousetrap" data-state="hidden" id="edit" autocomplete="off" autocorrect="off">
-    </div>
+    <main class="main">
+      <ol class="todos" data-focused="true" id="list"></ol>
 
-    <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-      <input class="input input--hidden mousetrap" data-state="hidden" id="new" autocomplete="off" autocorrect="off">
-    </div>
-  </main>
+      <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
+        <input class="input input--hidden mousetrap" data-state="hidden" id="edit" autocomplete="off" autocorrect="off">
+      </div>
+
+      <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
+        <input class="input input--hidden mousetrap" data-state="hidden" id="new" autocomplete="off" autocorrect="off">
+      </div>
+    </main>
+
+  </div>
 
 
   <script src="/bower_components/lodash/dist/lodash.min.js"></script>
