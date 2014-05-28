@@ -44,22 +44,33 @@ var ListControl = function (elem, actionManager) {
     return text;
   };
 
-  var formatText = function (text) {
+  var removeCompletedMark = function (text) {
+    return text.replace(/^x /, '');
+  };
+
+  var formatText = function (item) {
     var
+      text = removeCompletedMark(item),
       projects = findMetadata(text, '+'),
       contexts = findMetadata(text, '@'),
-      textElem = [
-        '<div class="item__text">',
-         removeMetaData(text, ['+', '@']),
-         '</div>'
-      ].join(''),
-      meta = [
-        '<ul class="item__metadata">',
-        formatMetadata(projects, 'project'),
-        formatMetadata(contexts, 'context'),
-        '</ul>'
-      ].join('')
+      textElem,
+      meta
     ;
+
+    text = removeMetaData(text, ['+', '@']);
+
+    textElem = [
+      '<div class="item__text">',
+      text,
+      '</div>'
+    ].join('');
+
+    meta = [
+      '<ul class="item__metadata">',
+      formatMetadata(projects, 'project'),
+      formatMetadata(contexts, 'context'),
+      '</ul>'
+    ].join('');
 
     return textElem + meta;
   };

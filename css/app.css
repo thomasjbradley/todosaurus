@@ -166,11 +166,6 @@ body {
   border-radius: 3px;
 }
 
-.item--complete {
-  color: #aaa;
-  text-decoration: line-through;
-}
-
 .item::before {
   bottom: 7px;
   content: counter(todos);
@@ -184,12 +179,34 @@ body {
   line-height: 12px;
   text-align: right;
 }
+
 /*
 .todos[data-focused="true"] .item[data-focused="true"]::before {
   color: #666;
 }
 */
-.item__text {
+
+.item--complete {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.item--complete .item__text {
+  padding-left: 16px;
+  position: relative;
+}
+
+.item--complete .item__text::before {
+  content: "\2714";
+  left: 0;
+  margin-right: 3px;
+  position: absolute;
+  top: -2px;
+
+  color: #ccc;
+  font-size: 20px;
+  line-height: 20px;
+  text-decoration: none;
 }
 
 .item__metadata {
