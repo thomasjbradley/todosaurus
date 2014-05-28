@@ -29,10 +29,22 @@ var InputControl = function (elem, actionManager) {
     }
   };
 
-  var show = function () {
+  var setPosition = function (pos) {
+    if (_.isUndefined(pos)) {
+      return;
+    }
+
+    console.log(pos);
+
+    that.elem.parentNode.style.left = pos.left + 'px';
+    that.elem.parentNode.style.top = pos.top + 'px';
+  };
+
+  var show = function (pos) {
     actionManager.trigger('app:context:switch', that.keyEvents);
     that.elem.parentNode.setAttribute('data-state', 'visible');
     actionManager.trigger('app:list:blur');
+    setPosition(pos);
   };
 
   var hide = function () {

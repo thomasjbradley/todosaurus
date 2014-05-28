@@ -5,6 +5,15 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     return filterer.getByIndex(fm.get()).id();
   };
 
+  var getPosition = function () {
+    var elem  = im.get('list').getItemElement(fm.get());
+
+    return {
+      left: elem.offsetLeft,
+      top: elem.offsetTop
+    };
+  }
+
   am.action('item:focus:next', function () {
     fm.next();
   });
@@ -88,7 +97,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     im.get(input)
       .value(todos.get(id()).text())
-      .show()
+      .show(getPosition())
       .focus()
       .select()
     ;
@@ -105,7 +114,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     im.get(input)
       .value(todos.get(id()).text())
-      .show()
+      .show(getPosition())
       .focus()
       .setCaretPosition(0)
     ;
@@ -122,7 +131,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     im.get(input)
       .value(todos.get(id()).text())
-      .show()
+      .show(getPosition())
       .focus()
       .setCaretPosition(1000)
     ;
@@ -139,7 +148,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
     im.get(input)
       .value('')
-      .show()
+      .show(getPosition())
       .focus()
     ;
   });

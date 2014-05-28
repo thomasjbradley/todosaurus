@@ -15,10 +15,15 @@ var ListControl = function (elem, actionManager) {
     that.elem.setAttribute('data-focused', 'false');
   };
 
+  var getItemElement = function (index) {
+    return that.elem.getElementsByTagName('li')[index];
+  }
+
   that = _.extend(that, {
     render: that.chainer(render),
     focus: that.chainer(focus),
-    blur: that.chainer(blur)
+    blur: that.chainer(blur),
+    getItemElement: getItemElement
   });
 
   return that;

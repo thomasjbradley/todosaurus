@@ -13,7 +13,7 @@
     <div class="input">
       <input class="mousetrap" id="search">
     </div>
-    <div class="input input--jump" data-state="hidden">
+    <div class="input input--labelled" data-state="hidden">
       <span class="input__label"></span>
       <input class="input--hidden mousetrap" id="jump">
     </div>
@@ -21,15 +21,16 @@
 
   <main class="main">
     <ol class="todos" data-focused="true" id="list"></ol>
+
+    <div class="input input--cover" data-state="hidden" data-focused="false">
+      <input class="input--hidden mousetrap" data-state="hidden" id="edit">
+    </div>
+
+    <div class="input input--cover" data-state="hidden" data-focused="false">
+      <input class="input--hidden mousetrap" data-state="hidden" id="new">
+    </div>
   </main>
 
-  <div class="input" data-state="hidden" data-focused="false">
-    <input class="input--hidden mousetrap" data-state="hidden" id="edit">
-  </div>
-
-  <div class="input" data-state="hidden" data-focused="false">
-    <input class="input--hidden mousetrap" data-state="hidden" id="new">
-  </div>
 
   <script src="/bower_components/lodash/dist/lodash.min.js"></script>
   <script src="/bower_components/blueimp-md5/js/md5.min.js"></script>
