@@ -11,13 +11,13 @@
     filterer = new Filterer(),
     buffer = new Buffer(),
     actions = new Actions(am, fm, im, filterer, todos, buffer),
-    out = document.getElementById('out'),
     li = document.getElementsByTagName('li')
   ;
 
   storage.set(new LocalStorageHelper());
 
   im.bindDefaultKeyActions(keys);
+  im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));
   im.add('jump', new JumpControl('jump', am));
   im.add('edit', new EditControl('edit', am));
@@ -26,10 +26,10 @@
 
   var render = function (index) {
     _.each(li, function (elem, index) {
-      elem.className = '';
+      elem.setAttribute('data-focused', 'false');
     });
 
-    li[index].className = 'focus'
+    li[index].setAttribute('data-focused', 'true');
   };
 
   todos.subscribe(function (items) {
@@ -44,7 +44,7 @@
       finalLis.push(elem.text());
     });
 
-    out.innerHTML = '<li>' + finalLis.join('</li><li>') + '</li>';
+    im.get('list').render(finalLis);
     fm.setMax(items.length - 1);
     render(fm.get());
   });

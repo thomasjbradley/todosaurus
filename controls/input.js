@@ -1,106 +1,73 @@
 var InputControl = function (elem, actionManager) {
   "use strict";
 
-  var
-    methods = {},
-    keyEvents = []
-  ;
-
-  var chainer = function (func) {
-    return function () {
-      func.apply(this, arguments);
-      return methods;
-    };
-  };
-
-  var getActionManager = function () {
-    return actionManager;
-  };
-
-  var bindEvents = function (events) {
-    _.each(events, function (callback, key) {
-      elem.addEventListener(key, callback, false);
-    });
-  };
-
-  var bindKeyEvents = function (events) {
-    keyEvents = events;
-  };
+  var that = Control(elem, actionManager);
 
   var value = function (val) {
     if (_.isUndefined(val)) {
-      return elem.value;
+      return that.elem.value;
     } else {
-      elem.value = val.trim();
-      return methods;
+      that.elem.value = val.trim();
+      return that;
     }
   };
 
-  function setCaretPosition(caretPos) {
+  var setCaretPosition = function (caretPos) {
     var range;
 
-    if(elem.createTextRange) {
-      range = elem.createTextRange();
+    if(that.elem.createTextRange) {
+      range = that.elem.createTextRange();
       range.move('character', caretPos);
       range.select();
     } else {
-      if(elem.selectionStart) {
-        elem.focus();
-        elem.setSelectionRange(caretPos, caretPos);
+      if(that.elem.selectionStart) {
+        that.elem.focus();
+        that.elem.setSelectionRange(caretPos, caretPos);
       } else {
-        elem.focus();
+        that.elem.focus();
       }
     }
   };
 
   var show = function () {
-    actionManager.trigger('app:context:switch', keyEvents);
-    elem.parentNode.setAttribute('data-state', 'visible');
+    actionManager.trigger('app:context:switch', that.keyEvents);
+    that.elem.parentNode.setAttribute('data-state', 'visible');
+    actionManager.trigger('app:list:blur');
   };
 
   var hide = function () {
     actionManager.trigger('app:context:default');
-    elem.parentNode.setAttribute('data-state', 'hidden');
+    that.elem.parentNode.setAttribute('data-state', 'hidden');
+    actionManager.trigger('app:list:focus');
   };
 
   var select = function () {
-    elem.select();
+    that.elem.select();
   };
 
   var focus = function () {
-    elem.focus();
-    actionManager.trigger('app:context:switch', keyEvents);
+    that.elem.focus();
+    actionManager.trigger('app:context:switch', that.keyEvents);
+    that.elem.parentNode.setAttribute('data-focused', 'true');
+    actionManager.trigger('app:list:blur');
   };
 
   var blur = function () {
-    elem.blur();
+    that.elem.blur();
     actionManager.trigger('app:context:default');
+    that.elem.parentNode.setAttribute('data-focused', 'false');
+    actionManager.trigger('app:list:focus');
   };
 
-  methods = {
-    getActionManager: getActionManager,
-    bindEvents: chainer(bindEvents),
-    bindKeyEvents: chainer(bindKeyEvents),
+  that = _.extend(that, {
     value: value,
-    setCaretPosition: chainer(setCaretPosition),
-    show: chainer(show),
-    hide: chainer(hide),
-    select: chainer(select),
-    focus: chainer(focus),
-    blur: chainer(blur)
-  };
+    setCaretPosition: that.chainer(setCaretPosition),
+    show: that.chainer(show),
+    hide: that.chainer(hide),
+    select: that.chainer(select),
+    focus: that.chainer(focus),
+    blur: that.chainer(blur)
+  });
 
-  if (_.isString(elem)) {
-    elem = document.getElementById(elem);
-  };
-
-  // if (!_.isUndefined(obj)) {
-  //   _.extend(methods, obj);
-
-  //   if (!_.isUndefined(obj.events)) {
-  //     bindEvents(obj.events);
-  //   }
-  // }
-
-  return methods;
+  return that;
 };

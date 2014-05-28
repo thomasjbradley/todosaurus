@@ -106,6 +106,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     im.get(input)
       .value(todos.get(id()).text())
       .show()
+      .focus()
       .setCaretPosition(0)
     ;
   });
@@ -122,6 +123,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     im.get(input)
       .value(todos.get(id()).text())
       .show()
+      .focus()
       .setCaretPosition(1000)
     ;
   });
@@ -303,6 +305,14 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   am.action('app:new:hide', function () {
     im.get('new').value('').hide();
     am.trigger('item:remove-if-empty');
+  });
+
+  am.action('app:list:focus', function () {
+    im.get('list').focus();
+  });
+
+  am.action('app:list:blur', function () {
+    im.get('list').blur();
   });
 
   am.action('app:context:default', function () {

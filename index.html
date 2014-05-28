@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Todo.txt</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="/bower_components/normalize-css/normalize.css" rel="stylesheet">
   <link href="/css/app.css" rel="stylesheet">
 </head>
 <body>
 
-  <header class="toolbar">
+  <header class="tools">
     <div class="input">
       <input class="mousetrap" id="search">
     </div>
@@ -19,14 +20,14 @@
   </header>
 
   <main class="main">
-    <ol class="todos" id="out"></ol>
+    <ol class="todos" data-focused="true" id="list"></ol>
   </main>
 
-  <div class="input" data-state="hidden">
+  <div class="input" data-state="hidden" data-focused="false">
     <input class="input--hidden mousetrap" data-state="hidden" id="edit">
   </div>
 
-  <div class="input" data-state="hidden">
+  <div class="input" data-state="hidden" data-focused="false">
     <input class="input--hidden mousetrap" data-state="hidden" id="new">
   </div>
 
@@ -36,6 +37,8 @@
   <script src="/libs/focus-manager.js"></script>
   <script src="/libs/action-manager.js"></script>
   <script src="/libs/interface-manager.js"></script>
+  <script src="/controls/control.js"></script>
+  <script src="/controls/list.js"></script>
   <script src="/controls/input.js"></script>
   <script src="/controls/search.js"></script>
   <script src="/controls/jump.js"></script>

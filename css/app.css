@@ -1,19 +1,42 @@
+@-moz-viewport { width: device-width; scale: 1; }
+@-ms-viewport { width: device-width; scale: 1; }
+@-o-viewport { width: device-width; scale: 1; }
+@-webkit-viewport { width: device-width; scale: 1; }
+@viewport { width: device-width; scale: 1; }
+
+*,
+*::after,
+*::before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 html {
   margin: 0;
   padding: 0;
 
   background-color: #fff;
 
-  font: normal 100%/1.5 Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+  font: normal 14px/18px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+}
+
+body {
 }
 
 .tools {
   margin: 0;
-  padding: 0;
+  padding: 4px;
+
+  background-color: #e2e2e2;
 }
 
 .input {
+  padding: 4px;
 
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 .input > input {
@@ -22,10 +45,10 @@ html {
   padding: 0;
   width: 100%;
 
-  border: 2px solid #ccc;
+  border: 0;
   outline: 0;
 
-  font: normal 100%/1.5 Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+  font: normal 14px/18px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
 }
 
 .input > input:focus {
@@ -40,18 +63,38 @@ html {
 
 }
 
-[data-state="hidden"] {
+.input[data-state="hidden"] {
   display: none;
 }
 
-[data-state="visible"] {
+.input[data-state="visible"] {
   display: block;
 }
 
-[data-state="is-focused"] {
+.input[data-focused="true"] {
   border-color: #33f;
 }
 
-.focus {
-  background-color: #ccc;
+.todos {
+  margin: 4px;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+.todos > li {
+  padding: 3px 4px;
+
+  border: 1px solid #fff;
+  border-bottom-color: #f2f2f2;
+}
+
+.todos [data-focused="true"] {
+  background-color: #f2f2f2;
+  border-top-color: #f2f2f2;
+}
+
+.todos[data-focused="true"] [data-focused="true"] {
+  border-color: #927ba9;
+  border-radius: 3px;
 }
