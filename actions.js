@@ -5,6 +5,16 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     return filterer.getByIndex(fm.get()).id();
   };
 
+  var getNewText = function () {
+    return '%%NEW%%' + im.get('search').value();
+  };
+
+  var isFieldEmpty = function (id) {
+    var text = todos.get(id).text().replace(getNewText(), '').trim();
+
+    return _.isEmpty(text);
+  };
+
   var getPosition = function () {
     var elem  = im.get('list').getItemElement(fm.get());
 
@@ -186,7 +196,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    todos.prepend(' '); // This is a non-breaking space
+    todos.prepend(getNewText());
     fm.set(0);
     am.trigger('item:edit:clear', false, 'new');
   });
@@ -196,9 +206,9 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    todos.append(' '); // This is a non-breaking space
+    todos.append(getNewText());
     fm.set(fm.getMax());
-    am.trigger('item:edit', false, 'new');
+    am.trigger('item:edit:clear', false, 'new');
   });
 
   am.action('item:new:after', function (e) {
@@ -206,9 +216,9 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.push(' '); // This is a non-breaking space
+    buffer.push(getNewText());
     am.trigger('item:paste:after');
-    am.trigger('item:edit', false, 'new');
+    am.trigger('item:edit:clear', false, 'new');
   });
 
   am.action('item:new:before', function (e) {
@@ -216,9 +226,9 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
       e.preventDefault();
     }
 
-    buffer.push(' '); // This is a non-breaking space
+    buffer.push(getNewText());
     am.trigger('item:paste:before');
-    am.trigger('item:edit', false, 'new');
+    am.trigger('item:edit:clear', false, 'new');
   });
 
   am.action('item:update', function (text) {
@@ -226,7 +236,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
   });
 
   am.action('item:remove-if-empty', function () {
-    if (_.isEmpty(todos.get(id()).text().trim())) {
+    if (isFieldEmpty(id())) {
       todos.remove(id());
     }
   });
