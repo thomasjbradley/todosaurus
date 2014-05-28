@@ -287,7 +287,7 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
     im.get('jump')
       .show()
       .focus()
-      .value('#')
+      .value('')
       .setCaretPosition(1000)
     ;
   });

@@ -10,24 +10,30 @@
 <body>
 
   <header class="tools">
-    <div class="input">
-      <input class="mousetrap" id="search">
-    </div>
-    <div class="input input--labelled" data-state="hidden">
-      <span class="input__label"></span>
-      <input class="input--hidden mousetrap" id="jump">
+    <div class="tools__container">
+      <div class="input-wrapper">
+        <input class="input mousetrap" id="search">
+      </div>
+      <div class="input-wrapper input--labelled input--cover" data-state="hidden">
+        <div class="input__label">
+          <span class="input__label__text">Jump</span>
+        </div>
+        <div class="input__container">
+          <input class="input input--with-label input--hidden mousetrap" id="jump">
+        </div>
+      </div>
     </div>
   </header>
 
   <main class="main">
     <ol class="todos" data-focused="true" id="list"></ol>
 
-    <div class="input input--cover" data-state="hidden" data-focused="false">
-      <input class="input--hidden mousetrap" data-state="hidden" id="edit">
+    <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
+      <input class="input input--hidden mousetrap" data-state="hidden" id="edit">
     </div>
 
-    <div class="input input--cover" data-state="hidden" data-focused="false">
-      <input class="input--hidden mousetrap" data-state="hidden" id="new">
+    <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
+      <input class="input input--hidden mousetrap" data-state="hidden" id="new">
     </div>
   </main>
 

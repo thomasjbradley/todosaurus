@@ -31,7 +31,11 @@ body {
   background-color: #e2e2e2;
 }
 
-.input {
+.tools__container {
+  position: relative;
+}
+
+.input-wrapper {
   padding: 4px;
 
   background-color: #fff;
@@ -39,7 +43,7 @@ body {
   border-radius: 3px;
 }
 
-.input > input {
+.input {
   display: block;
   margin: 0;
   padding: 0;
@@ -51,33 +55,61 @@ body {
   font: normal 14px/19px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
 }
 
-.input > input:focus {
+.input:focus {
   outline: 0;
 }
 
+.input__container {
+  padding-left: 5em;
+}
+
 .input--labelled {
+  position: relative;
+}
+
+.input--with-label {
 
 }
 
 .input__label {
+  left: 0;
+  position: absolute;
+  top: 3px;
+  width: 4.8em;
 
+  text-align: right;
+}
+
+.input__label__text {
+  padding: 3px 6px;
+
+  background-color: #cdc0db;
+  border: 1px solid #b4a2c5;
+  border-radius: 6px;
+
+  color: #492c66;
+  font-size: 11px;
+  line-height: 11px;
+  text-transform: uppercase;
 }
 
 .input--cover {
+  left: 0;
   position: absolute;
+  top: 0;
   z-index: 1000;
   width: 100%;
 }
 
-.input[data-state="hidden"] {
+.input-wrapper[data-state="hidden"] {
   display: none;
 }
 
-.input[data-state="visible"] {
+.input-wrapper[data-state="visible"] {
   display: block;
 }
 
-.input[data-focused="true"] {
+.input-wrapper[data-focused="true"] {
   border-color: #927ba9;
 }
 

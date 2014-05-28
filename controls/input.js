@@ -3,6 +3,17 @@ var InputControl = function (elem, actionManager) {
 
   var that = Control(elem, actionManager);
 
+  var findWrapper = function () {
+    var current = that.elem.parentNode;
+
+    while (current.className.indexOf('input-wrapper') < 0) {
+      current = current.parentNode;
+    }
+    console.log(current);
+
+    return current;
+  };
+
   var value = function (val) {
     if (_.isUndefined(val)) {
       return that.elem.value;
@@ -34,22 +45,20 @@ var InputControl = function (elem, actionManager) {
       return;
     }
 
-    console.log(pos);
-
-    that.elem.parentNode.style.left = pos.left + 'px';
-    that.elem.parentNode.style.top = pos.top + 'px';
+    findWrapper().style.left = pos.left + 'px';
+    findWrapper().style.top = pos.top + 'px';
   };
 
   var show = function (pos) {
     actionManager.trigger('app:context:switch', that.keyEvents);
-    that.elem.parentNode.setAttribute('data-state', 'visible');
+    findWrapper().setAttribute('data-state', 'visible');
     actionManager.trigger('app:list:blur');
     setPosition(pos);
   };
 
   var hide = function () {
     actionManager.trigger('app:context:default');
-    that.elem.parentNode.setAttribute('data-state', 'hidden');
+    findWrapper().setAttribute('data-state', 'hidden');
     actionManager.trigger('app:list:focus');
   };
 
@@ -60,14 +69,14 @@ var InputControl = function (elem, actionManager) {
   var focus = function () {
     that.elem.focus();
     actionManager.trigger('app:context:switch', that.keyEvents);
-    that.elem.parentNode.setAttribute('data-focused', 'true');
+    findWrapper().setAttribute('data-focused', 'true');
     actionManager.trigger('app:list:blur');
   };
 
   var blur = function () {
     that.elem.blur();
     actionManager.trigger('app:context:default');
-    that.elem.parentNode.setAttribute('data-focused', 'false');
+    findWrapper().setAttribute('data-focused', 'false');
     actionManager.trigger('app:list:focus');
   };
 
