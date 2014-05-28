@@ -23,20 +23,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var setCaretPosition = function (caretPos) {
-    var range;
-
-    if(that.elem.createTextRange) {
-      range = that.elem.createTextRange();
-      range.move('character', caretPos);
-      range.select();
-    } else {
-      if(that.elem.selectionStart) {
-        that.elem.focus();
-        that.elem.setSelectionRange(caretPos, caretPos);
-      } else {
-        that.elem.focus();
-      }
-    }
+    that.elem.setSelectionRange(caretPos, caretPos);
   };
 
   var setPosition = function (pos) {
