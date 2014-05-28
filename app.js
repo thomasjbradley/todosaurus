@@ -11,7 +11,8 @@
     filterer = new Filterer(),
     buffer = new Buffer(),
     actions = new Actions(am, fm, im, filterer, todos, buffer),
-    li = document.getElementsByTagName('li')
+    li = document.getElementsByTagName('li'),
+    main = document.getElementsByClassName('main')[0];
   ;
 
   storage.set(new LocalStorageHelper());
@@ -24,13 +25,40 @@
   im.add('new', new NewControl('new', am));
   document.addEventListener('click', im.handleMouseEvents, false);
 
-  var render = function (index) {
+  var renderFocus = function (index) {
     _.each(li, function (elem, index) {
       elem.setAttribute('data-focused', 'false');
     });
 
     if (li && li.length > 0) {
       li[index].setAttribute('data-focused', 'true');
+    }
+  };
+
+  var getPosition = function () {
+    var elem  = im.get('list').getItemElement(fm.get());
+
+    return {
+      left: elem.offsetLeft,
+      top: elem.offsetTop,
+      height: elem.offsetHeight
+    };
+  }
+
+  var scrollList = function (index) {
+    var
+      pos = getPosition(),
+      newTop
+    ;
+
+   if (pos.top + pos.height > main.offsetHeight + main.scrollTop) {
+      newTop = (pos.top + pos.height) - main.offsetHeight;
+      main.scrollTop = newTop;
+    }
+
+    if (pos.top < main.scrollTop) {
+      newTop = pos.top;
+      main.scrollTop = newTop;
     }
   };
 
@@ -42,11 +70,12 @@
   filterer.subscribe(function (items) {
     im.get('list').render(items);
     fm.setMax(items.length - 1);
-    render(fm.get());
+    renderFocus(fm.get());
   });
 
   fm.subscribe(function (index) {
-    render(index);
+    renderFocus(index);
+    scrollList(index);
   });
 
   // todos.populate(['Watch TV', 'x Cook +life', 'Walk', 'Read', 'Code +todo', 'x Listen to Music', 'Eat +life', 'Sleep']);
