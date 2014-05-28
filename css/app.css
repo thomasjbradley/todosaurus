@@ -70,7 +70,7 @@ body {
 }
 
 .input__container {
-  padding-left: 5em;
+  padding-left: 3.6em;
 }
 
 .input--labelled {
@@ -85,7 +85,7 @@ body {
   left: 0;
   position: absolute;
   top: 3px;
-  width: 4.8em;
+  width: 3.4em;
 
   text-align: right;
 }
@@ -101,6 +101,13 @@ body {
   font-size: 11px;
   line-height: 11px;
   text-transform: uppercase;
+}
+
+.pill--dull {
+  background-color: #ccc;
+  border-color: #999;
+
+  color: #666;
 }
 
 .input--cover {
