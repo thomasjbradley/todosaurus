@@ -3,8 +3,24 @@ var ListControl = function (elem, actionManager) {
 
   var that = Control(elem, actionManager);
 
+  var getMarkedClass = function (item) {
+    return (item.isMarked()) ? ' item--complete' : '';
+  };
+
   var render = function (items) {
-    that.elem.innerHTML = '<li>' + items.join('</li><li>') + '</li>';
+    var output = _.map(items, function (item) {
+      var pieces = [
+        '<li class="item',
+        getMarkedClass(item),
+        '">',
+        item.text(),
+        '</li>'
+      ];
+
+      return pieces.join('');
+    });
+
+    that.elem.innerHTML = output.join('');
   };
 
   var focus = function () {

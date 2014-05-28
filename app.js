@@ -38,13 +38,7 @@
   });
 
   filterer.subscribe(function (items) {
-    var finalLis = [];
-
-    _.each(items, function (elem) {
-      finalLis.push(elem.text());
-    });
-
-    im.get('list').render(finalLis);
+    im.get('list').render(items);
     fm.setMax(items.length - 1);
     render(fm.get());
   });
@@ -59,5 +53,4 @@
   // buffer.subscribe(function (buffer) {
   //   console.log(buffer.length(), buffer);
   // });
-
 }());

@@ -127,7 +127,7 @@ body {
   list-style-type: none;
 }
 
-.todos > li {
+.item {
   padding: 4px 4px 4px 28px;
   position: relative;
 
@@ -136,7 +136,12 @@ body {
   counter-increment: todos;
 }
 
-.todos > li::before {
+.item--complete {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.item::before {
   bottom: 7px;
   content: counter(todos);
   left: 0;
