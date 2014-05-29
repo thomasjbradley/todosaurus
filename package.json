@@ -1,15 +1,18 @@
 {
   "name": "todotxt",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "A keyboard driven GUI app for the Todo.txt format.",
+  "keywords": [],
   "author": {
     "name": "Thomas J Bradley",
     "email": "hey@thomasjbradley.ca",
     "url": "http://thomasjbradley.ca"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "^2.4.1"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "chai": "^1.9.1",
@@ -19,7 +22,19 @@
     "type": "git",
     "url": "git@github.com:thomasjbradley/todotxt.git"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/thomasjbradley/todoifier/LICENSE"
+    }
+  ],
+  "main": "./index.html",
+  "window": {
+    "title": "ca.thomasjbradley.todoifer",
+    "icon": "",
+    "toolbar": false,
+    "width": 550,
+    "height": 600,
+    "resizable": true
   }
 }
