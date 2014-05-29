@@ -114,7 +114,7 @@ var Todos = function () {
     });
   };
 
-  var getAllMetadataItems = function (tag) {
+  var getAllTags = function (tag) {
     var
       re = new RegExp('\\s\\' + tag + '[^\\s]+', 'ig'),
       metas = [];
@@ -124,7 +124,7 @@ var Todos = function () {
       return _.unique(findMetadata(item.text(), re));
     });
 
-    return _.unique(_.flatten(metas));
+    return _.unique(_.flatten(metas)).sort();
   };
 
   var remove = function (id) {
@@ -158,7 +158,7 @@ var Todos = function () {
     getIndex: getIndex,
     getByIndex: getByIndex,
     getAll: getAll,
-    getAllMetadataItems: getAllMetadataItems,
+    getAllTags: getAllTags,
     remove: informer(remove),
     removeByIndex: informer(removeByIndex),
     getString: getString
