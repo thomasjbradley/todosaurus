@@ -41,7 +41,13 @@ module.exports = (grunt) ->
       css:
         files: ['css/*.css']
       js:
-        files: ['**/*.js']
+        files: [
+          'controls/*.js'
+          'libs/*.js'
+          'models/*.js'
+          'storage/*.js'
+          '*.js'
+        ]
       html:
         files: ['*.html']
 
