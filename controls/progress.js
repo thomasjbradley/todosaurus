@@ -4,7 +4,6 @@ var ProgressControl = function (elem, actionManager) {
   var that = Control(elem, actionManager);
 
   that.set = function (val, max) {
-    console.log(val, max);
     that.elem.value = Math.round(val / max * 100);
   };
 
