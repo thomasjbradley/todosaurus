@@ -108,6 +108,25 @@ var Todos = function () {
     return todos;
   };
 
+  var findMetadata = function (text, re) {
+    return _.map(text.match(re), function (item) {
+      return item.trim();
+    });
+  };
+
+  var getAllMetadataItems = function (tag) {
+    var
+      re = new RegExp('\\s\\' + tag + '[^\\s]+', 'ig'),
+      metas = [];
+    ;
+
+    metas = _.map(todos, function (item) {
+      return _.unique(findMetadata(item.text(), re));
+    });
+
+    return _.unique(_.flatten(metas));
+  };
+
   var remove = function (id) {
     var index = _.findIndex(todos, function (item) {
       return item.id() == id;
@@ -139,6 +158,7 @@ var Todos = function () {
     getIndex: getIndex,
     getByIndex: getByIndex,
     getAll: getAll,
+    getAllMetadataItems: getAllMetadataItems,
     remove: informer(remove),
     removeByIndex: informer(removeByIndex),
     getString: getString
