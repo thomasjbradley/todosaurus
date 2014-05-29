@@ -14,6 +14,7 @@
   "window": {
     "title": "ca.thomasjbradley.todoifer",
     "icon": "",
+    "show": false,
     "toolbar": false,
     "width": 550,
     "min_width": 420,

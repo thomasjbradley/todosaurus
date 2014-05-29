@@ -71,5 +71,17 @@
   <script src="actions.js"></script>
   <script src="keybindings.js"></script>
   <script src="app.js"></script>
+  <script>
+    var gui;
+
+    if (window.isNode) {
+      gui = require('nw.gui');
+
+      onload = function() {
+        gui.Window.get().show();
+        gui.Window.get().focus();
+      };
+    }
+  </script>
 </body>
 </html>
