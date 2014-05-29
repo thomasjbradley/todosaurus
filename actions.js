@@ -1,4 +1,4 @@
-var Actions = function (am, fm, im, storage, filterer, todos, buffer) {
+var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) {
   "use strict";
 
   // Used a reference for when creating a new item
@@ -10,7 +10,7 @@ var Actions = function (am, fm, im, storage, filterer, todos, buffer) {
   };
 
   var getNewText = function () {
-    return '%%NEW%%' + im.get('search').value();
+    return generics.new;
   };
 
   var isFieldEmpty = function (id) {

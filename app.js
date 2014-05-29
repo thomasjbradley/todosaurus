@@ -2,16 +2,19 @@
   "use strict";
 
   var
+    generics = {
+      new: '%%NEW%%'
+    },
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
     storage = new StorageManager(),
     todos = new Todos(),
     orderer = new Orderer(),
-    grouper = new Grouper(),
-    filterer = new Filterer(),
+    grouper = new Grouper(generics),
+    filterer = new Filterer(generics),
     buffer = new Buffer(),
-    actions = new Actions(am, fm, im, storage, filterer, todos, buffer),
+    actions = new Actions(generics, am, fm, im, storage, filterer, todos, buffer),
     main = document.getElementsByClassName('main')[0];
   ;
 

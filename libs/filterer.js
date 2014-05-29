@@ -1,4 +1,4 @@
-var Filterer = function () {
+var Filterer = function (generics) {
   "use strict";
 
   var
@@ -64,8 +64,18 @@ var Filterer = function () {
     return new RegExp(r.join('.*?'), 'i');
   };
 
+  var matchesGeneric = function (text) {
+    return _.every(generics, function (gen) {
+      return !!(text.indexOf(gen) > -1);
+    });
+  };
+
   var matchesFilter = function (text, data) {
-    return getFilter(data).test(text);
+    if (getFilter(data).test(text)) {
+      return true;
+    }
+
+    return matchesGeneric(text);
   }
 
   var getFilteredItems = function (todos, data) {

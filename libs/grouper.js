@@ -1,4 +1,4 @@
-var Grouper = function () {
+var Grouper = function (generics) {
   "use strict";
 
   var
@@ -36,8 +36,19 @@ var Grouper = function () {
     return grouped.length;
   };
 
+  var getFilter = function (data) {
+    return new RegExp('\\' + data, 'ig');
+  };
+
+  var matchesGroup = function (text, data) {
+    // return getFilter(data).test(text);
+    return true;
+  };
+
   var getGroupedItems = function (todos, data) {
-    return todos;
+    return _.filter(todos, function (item) {
+      return matchesGroup(item.text(), data);
+    });
   };
 
   var group = function (todos, data) {
