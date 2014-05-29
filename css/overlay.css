@@ -4,6 +4,7 @@
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 2000;
 
   background-color: rgba(41, 29, 52, 0.8);
 }
@@ -15,6 +16,7 @@
   position: absolute;
   top: 4em;
   width: 20em;
+  z-index: 2001;
 
   background-color: #fff;
   border: 1px solid #ccc;
@@ -86,6 +88,8 @@
   height: 39px;
   position: relative;
   width: 11em;
+
+  cursor: pointer;
 }
 
 .btn--file::before {
