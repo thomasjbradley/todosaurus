@@ -34,7 +34,9 @@
     "icon": "",
     "toolbar": false,
     "width": 550,
+    "min_width": 420,
     "height": 600,
+    "min_height": 500,
     "resizable": true
   }
 }
