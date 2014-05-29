@@ -28,7 +28,7 @@
       "url": "https://github.com/thomasjbradley/todoifier/LICENSE"
     }
   ],
-  "main": "./index.html",
+  "main": "index.html",
   "window": {
     "title": "ca.thomasjbradley.todoifer",
     "icon": "",
