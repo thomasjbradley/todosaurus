@@ -1,4 +1,4 @@
-var Filterer = function (Filter) {
+var Filterer = function () {
   "use strict";
 
   var

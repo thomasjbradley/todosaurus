@@ -7,6 +7,8 @@
     im = new InterfaceManager(fm, am),
     storage = new StorageManager(),
     todos = new Todos(),
+    orderer = new Orderer(),
+    grouper = new Grouper(),
     filterer = new Filterer(),
     buffer = new Buffer(),
     actions = new Actions(am, fm, im, storage, filterer, todos, buffer),
@@ -85,8 +87,16 @@
   };
 
   todos.subscribe(function (items) {
-    filterer.filter(items, im.get('search').value());
+    orderer.order(items);
     am.trigger('storage:save');
+  });
+
+  orderer.subscribe(function (items) {
+    grouper.group(items, '@group');
+  });
+
+  grouper.subscribe(function (items) {
+    filterer.filter(items, im.get('search').value());
   });
 
   filterer.subscribe(function (items) {
