@@ -22,9 +22,19 @@ var ListControl = function (elem, actionManager) {
   };
 
   var formatMetadata = function (metadata, cssClass) {
+    var pillCssClass = '';
+
+    if (cssClass == 'context') {
+      pillCssClass = ' pill--alt';
+    }
+
     return _.map(metadata, function (item) {
       return [
-        '<li class="item__metadata__single item__metadata__single--' + cssClass + ' pill">',
+        '<li class="item__metadata__single item__metadata__single--',
+        cssClass,
+        ' pill',
+        pillCssClass,
+        '">',
         item,
         '</li>'
       ].join('');
