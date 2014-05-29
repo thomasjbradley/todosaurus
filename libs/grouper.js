@@ -40,9 +40,18 @@ var Grouper = function (generics) {
     return new RegExp('\\' + data, 'ig');
   };
 
+  var matchesGeneric = function (text) {
+    return _.every(generics, function (gen) {
+      return !!(text.indexOf(gen) > -1);
+    });
+  };
+
   var matchesGroup = function (text, data) {
-    // return getFilter(data).test(text);
-    return true;
+    if (getFilter(data).test(text)) {
+      return true;
+    }
+
+    return matchesGeneric(text);
   };
 
   var getGroupedItems = function (todos, data) {
