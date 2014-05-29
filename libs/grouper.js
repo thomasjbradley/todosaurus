@@ -4,6 +4,7 @@ var Grouper = function (generics) {
   var
     methods = {},
     subscriptions = [],
+    groups = {},
     grouped
   ;
 
@@ -36,9 +37,13 @@ var Grouper = function (generics) {
     return grouped.length;
   };
 
-  var getFilter = function (data) {
-    return new RegExp('\\' + data, 'ig');
+  var setGroup = function (name, g) {
+    groups[name] = g;
   };
+
+  var getGroup = function (name) {
+    return groups[name];
+  }
 
   var matchesGeneric = function (text) {
     return _.every(generics, function (gen) {
@@ -46,31 +51,33 @@ var Grouper = function (generics) {
     });
   };
 
-  var matchesGroup = function (text, data) {
-    if (getFilter(data).test(text)) {
+  var matchesGroup = function (text, matcher) {
+    if (text.indexOf(matcher) > -1) {
       return true;
     }
 
     return matchesGeneric(text);
   };
 
-  var getGroupedItems = function (todos, data) {
+  var getGroupedItems = function (todos, tag) {
     return _.filter(todos, function (item) {
-      return matchesGroup(item.text(), data);
+      return matchesGroup(item.text(), groups[tag[0]][tag[1]]);
     });
   };
 
-  var group = function (todos, data) {
-    if (_.isUndefined(data) || _.isEmpty(data)) {
+  var group = function (todos, tag) {
+    if (_.isUndefined(tag) || _.isEmpty(tag) || !_.isArray(tag)) {
       grouped = todos;
     } else {
-      grouped = getGroupedItems(todos, data);
+      grouped = getGroupedItems(todos, tag);
     }
   };
 
   methods = {
     subscribe: chainer(subscribe),
     length: length,
+    getGroup: getGroup,
+    setGroup: chainer(setGroup),
     group: informer(group)
   };
 

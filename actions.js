@@ -1,4 +1,4 @@
-var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) {
+var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer) {
   "use strict";
 
   // Used a reference for when creating a new item
@@ -289,12 +289,14 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
 
     am.trigger('app:search:blur');
     im.get('search').value('');
-    filterer.filter(todos.getAll());
+    im.get('filters').filter = null;
+    am.trigger('app:list:render');
     fm.set(fullIndex);
   });
 
   am.action('app:search:trigger', function () {
-    filterer.filter(todos.getAll(), im.get('search').value());
+    im.get('filters').filter = im.get('search').value();
+    am.trigger('app:list:render');
   });
 
   am.action('app:jump:show', function (e) {
@@ -331,7 +333,7 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     im.get('new').value('').hide();
     am.trigger('item:remove-if-empty');
 
-    if (tmpId && !filterer.matchesFilter(todos.get(tmpId).text(), im.get('search').value())) {
+    if (tmpId && !filterer.matchesFilter(todos.get(tmpId).text())) {
       am.trigger('app:search:clear');
       fm.set(filterer.getIndex(tmpId));
     }
@@ -347,6 +349,10 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     im.get('list').blur();
   });
 
+  am.action('app:list:render', function () {
+    orderer.order(todos.getAll(), im.get('filters').order);
+  });
+
   am.action('app:context:default', function () {
     im.reset().bindDefaultKeyActions();
   });
@@ -355,8 +361,57 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     im.reset().bindKeyEvents(contextKeys);
   });
 
-  am.action('storage:default-data', function () {
+  am.action('app:tags:create', function () {
+    am.trigger('app:tags:create:projects');
+    am.trigger('app:tags:create:contexts');
+  });
 
+  am.action('app:tags:create:projects', function () {
+    var tags = todos.getAllTags('+');
+    // im.set('projects', tags);
+    grouper.setGroup('+', tags);
+    console.log('Projects', tags);
+  });
+
+  am.action('app:tags:create:contexts', function () {
+    var tags = todos.getAllTags('@');
+    // im.set('contexts', tags);
+    grouper.setGroup('@', tags);
+    console.log('Contexts', tags);
+  });
+
+  am.action('app:tags:show', function (tag, combo) {
+    var id = 0;
+
+    if (!_.isUndefined(combo)) {
+      id = parseInt(combo.replace(/[^\d]*/ig, ''), 10);
+    }
+
+    if (_.isNaN(id)) {
+      id = 0;
+    } else {
+      id--;
+    }
+
+    if (id > grouper.getGroup(tag).length - 1) {
+      am.trigger('app:tags:clear');
+    } else {
+      im.get('filters').group = [tag, id];
+      am.trigger('app:list:render');
+    }
+  });
+
+  am.action('app:tags:show:projects', function (e, combo) {
+    am.trigger('app:tags:show', '+', combo);
+  });
+
+  am.action('app:tags:show:contexts', function (e, combo) {
+    am.trigger('app:tags:show', '@', combo);
+  });
+
+  am.action('app:tags:clear', function () {
+    im.get('filters').group = null;
+    am.trigger('app:list:render');
   });
 
   am.action('storage:folder:switch', function () {

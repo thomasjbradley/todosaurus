@@ -5,6 +5,11 @@
     generics = {
       new: '%%NEW%%'
     },
+    filters = {
+      order: null,
+      group: null,
+      filter: null
+    },
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
@@ -14,7 +19,7 @@
     grouper = new Grouper(generics),
     filterer = new Filterer(generics),
     buffer = new Buffer(),
-    actions = new Actions(generics, am, fm, im, storage, filterer, todos, buffer),
+    actions = new Actions(generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer),
     main = document.getElementsByClassName('main')[0];
   ;
 
@@ -25,6 +30,7 @@
     storage.setFolder('LocalStorage');
   }
 
+  im.add('filters', filters);
   im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));
   im.add('progress', new ProgressControl('progress', am));
@@ -90,16 +96,17 @@
   };
 
   todos.subscribe(function (items) {
-    orderer.order(items);
+    orderer.order(items, im.get('filters').order);
     am.trigger('storage:save');
+    am.trigger('app:tags:create');
   });
 
   orderer.subscribe(function (items) {
-    grouper.group(items, '@group');
+    grouper.group(items, im.get('filters').group);
   });
 
   grouper.subscribe(function (items) {
-    filterer.filter(items, im.get('search').value());
+    filterer.filter(items, im.get('filters').filter);
   });
 
   filterer.subscribe(function (items) {
