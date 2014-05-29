@@ -206,7 +206,7 @@ body {
 }
 
 .item {
-  padding: 4px 4px 4px 28px;
+  padding: 4px 4px 4px 32px;
   position: relative;
 
   border: 1px solid #fff;
@@ -222,7 +222,7 @@ body {
 .item::before {
   bottom: 7px;
   content: counter(todos);
-  left: 0;
+  left: 4px;
   display: inline-block;
   position: absolute;
   width: 22px;
@@ -231,6 +231,17 @@ body {
   font-size: 12px;
   line-height: 12px;
   text-align: right;
+}
+
+.item::after {
+  content: " ";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 4px;
+
+  background-color: transparent;
 }
 
 /*
