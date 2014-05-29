@@ -184,7 +184,7 @@ body {
 .main {
   bottom: 0;
   left: 0;
-  margin: 4px;
+  margin: 7px 4px 4px;
   overflow: scroll;
   position: absolute;
   right: 0;

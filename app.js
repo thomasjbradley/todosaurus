@@ -22,6 +22,7 @@
 
   im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));
+  im.add('progress', new ProgressControl('progress', am));
   im.add('jump', new JumpControl('jump', am));
   im.add('edit', new EditControl('edit', am));
   im.add('new', new NewControl('new', am));
@@ -71,6 +72,18 @@
     }
   };
 
+  var getNumberCompleteItems = function (items) {
+    var sum = 0;
+
+    _.forEach(items, function(item) {
+      if (item.isMarked()) {
+        sum++;
+      }
+    });
+
+    return sum;
+  };
+
   todos.subscribe(function (items) {
     filterer.filter(items, im.get('search').value());
     am.trigger('storage:save');
@@ -79,6 +92,7 @@
   filterer.subscribe(function (items) {
     im.get('list').render(items);
     fm.setMax(items.length - 1);
+    im.get('progress').set(getNumberCompleteItems(items), items.length);
     renderFocus(fm.get());
   });
 

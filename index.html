@@ -7,6 +7,7 @@
   <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet">
   <link href="css/overlay.css" rel="stylesheet">
+  <link href="css/progress.css" rel="stylesheet">
 </head>
 <body>
 
@@ -28,6 +29,7 @@
   </header>
 
   <div class="main-wrapper">
+    <progress class="progress" id="progress" value="43" max="100"></progress>
 
     <main class="main">
       <ol class="todos" data-focused="true" id="list"></ol>
@@ -78,6 +80,7 @@
   <script src="controls/control.js"></script>
   <script src="controls/list.js"></script>
   <script src="controls/input.js"></script>
+  <script src="controls/progress.js"></script>
   <script src="controls/search.js"></script>
   <script src="controls/jump.js"></script>
   <script src="controls/edit.js"></script>
