@@ -13,4 +13,5 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
   background-color: #9fd1d5;
+  -webkit-transition: all linear 100ms;
 }
