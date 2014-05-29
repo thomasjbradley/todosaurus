@@ -45,10 +45,10 @@ var InterfaceManager = function (focusManager, actionManager) {
   };
 
   var handleMouseEvents = function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    return false;
+    // e.stopPropagation();
+    // e.preventDefault();
+    // e.stopImmediatePropagation();
+    // return false;
   };
 
   var add = function (name, elem, events) {

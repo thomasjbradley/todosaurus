@@ -32,7 +32,8 @@ module.exports = (grunt) ->
         app_name: 'Todoifier'
         # mac_icns: ''
       src: [
-        './**/*'
+        './**/*',
+        '!./.envrc'
       ]
 
     watch:

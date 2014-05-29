@@ -34,13 +34,21 @@ body {
   position: relative;
 }
 
+[data-state="hidden"] {
+  display: none;
+}
+
+[data-state="visible"] {
+  display: block;
+}
+
 .icon {
   display: inline-block;
   height: 18px;
   overflow: hidden;
   width: 18px;
 
-  background: transparent; none no-repeat center center;
+  background: transparent none no-repeat center center;
   background-size: contain;
 
   text-indent: 100%;
@@ -134,14 +142,6 @@ body {
   top: 0;
   z-index: 1000;
   width: 100%;
-}
-
-.input-wrapper[data-state="hidden"] {
-  display: none;
-}
-
-.input-wrapper[data-state="visible"] {
-  display: block;
 }
 
 .input-wrapper[data-focused="true"] {

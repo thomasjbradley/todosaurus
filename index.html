@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
   <link href="css/app.css" rel="stylesheet">
+  <link href="css/overlay.css" rel="stylesheet">
 </head>
 <body>
 
@@ -42,6 +43,31 @@
 
   </div>
 
+  <div class="overlay" id="folder-chooser" data-state="hidden">
+    <div class="window">
+      <img class="app-icon" src="img/icon.png">
+      <p class="window__text">Whoa! Looks like you’re a first timer.</p>
+      <p class="window__text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
+      <div class="window__btn">
+        <input class="btn--file" type="file" id="chosen-folder" nwdirectory>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="file-chooser" data-state="hidden">
+    <div class="window">
+      <img class="app-icon" src="img/icon.png">
+      <p class="window__text"><strong>Holy moly! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
+      <p class="window__text window__path"><img class="window__path__icon" src="img/icon-folder.svg" alt=""> <code class="filename window__path__filename" id="folder-path"></code></p>
+      <div class="window__btn">
+        <button class="btn btn--alt" type="file" id="new-file">Create New File</button>
+        <ul class="window__options">
+          <li><button class="btn btn--text" id="switch-folder">Switch Folder</button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
   <script>
     window.isNode = !!(typeof require !== 'undefined');
@@ -62,26 +88,38 @@
   <script src="controls/jump.js"></script>
   <script src="controls/edit.js"></script>
   <script src="controls/new.js"></script>
+  <script src="controls/folder-chooser.js"></script>
+  <script src="controls/file-chooser.js"></script>
   <script src="libs/filterer.js"></script>
   <script src="models/todo.js"></script>
   <script src="models/todos.js"></script>
   <script src="models/buffer.js"></script>
-  <script src="storage/storage.js"></script>
+  <script src="storage/storage-manager.js"></script>
   <script src="storage/localstorage.js"></script>
   <script src="storage/filesystem.js"></script>
   <script src="actions.js"></script>
   <script src="keybindings.js"></script>
   <script src="app.js"></script>
   <script>
-    var gui;
+    var gui, script, env;
 
     if (window.isNode) {
+      env = process.env.ENV || 'prod';
       gui = require('nw.gui');
 
-      onload = function() {
-        gui.Window.get().show();
-        gui.Window.get().focus();
-      };
+      if (env !== 'dev') {
+        onload = function() {
+          gui.Window.get().show();
+          gui.Window.get().focus();
+        };
+      }
+
+      if (env === 'dev') {
+        gui.Window.get().showDevTools();
+        script = document.createElement('script');
+        script.src = 'http://localhost:35729/livereload.js';
+        document.body.appendChild(script);
+      }
     }
   </script>
 </body>

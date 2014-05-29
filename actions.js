@@ -1,4 +1,4 @@
-var Actions = function (am, fm, im, filterer, todos, buffer) {
+var Actions = function (am, fm, im, storage, filterer, todos, buffer) {
   "use strict";
 
   // Used a reference for when creating a new item
@@ -353,6 +353,75 @@ var Actions = function (am, fm, im, filterer, todos, buffer) {
 
   am.action('app:context:switch', function (contextKeys) {
     im.reset().bindKeyEvents(contextKeys);
+  });
+
+  am.action('storage:default-data', function () {
+
+  });
+
+  am.action('storage:folder:switch', function () {
+    im.reset();
+    im.get('file-chooser').hide();
+    im.get('folder-chooser').show();
+  });
+
+  am.action('storage:folder:choose', function () {
+    var folder = im.get('folder-chooser').getFiles()[0];
+
+    storage.setFolder(folder.path);
+    am.trigger('storage:read-or-new');
+  });
+
+  am.action('storage:file:new', function () {
+    var startupData = [
+      'Welcome to Todoifer! +Todoifer',
+      'A graphical application the Todo.txt format. @todo.txt',
+      'Press “n” to create a new todo item.'
+    ];
+
+    im.get('folder-chooser').hide();
+    im.get('file-chooser').hide();
+    todos.populate(startupData);
+    im.bindDefaultKeyActions(keys);
+  });
+
+  am.action('storage:read', function () {
+    storage.read(function (err, data) {
+      if (err) {
+        if (err.message === storage.errors.NOT_FOUND) {
+          im.get('folder-chooser').hide();
+          im.get('file-chooser').show(storage.getFolder());
+          return;
+        }
+
+        im.get('folder-chooser').show();
+        return;
+      }
+
+      im.get('folder-chooser').hide();
+      im.get('file-chooser').hide();
+
+      todos.populate(data);
+      im.bindDefaultKeyActions(keys);
+    });
+  });
+
+  am.action('storage:read-or-new', function () {
+    im.get('folder-chooser').hide();
+    im.get('file-chooser').hide();
+
+    storage.read(function (err, data) {
+      if (err) {
+        am.trigger('storage:file:new');
+      } else {
+        todos.populate(data);
+        im.bindDefaultKeyActions(keys);
+      }
+    });
+  });
+
+  am.action('storage:save', function () {
+    storage.save(todos.getString());
   });
 
 };

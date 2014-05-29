@@ -13,7 +13,7 @@ var LocalStorageHelper = function () {
     var items = [];
 
     if (!localStorage.getItem(key)) {
-      return;
+      throw new Error('No found.');
     }
 
     items = _.map(localStorage.getItem(key).split('\n'), function (item) {

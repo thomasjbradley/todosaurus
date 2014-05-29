@@ -4,24 +4,23 @@ var FileSystemHelper = function () {
   var
     isNode = (typeof require !== 'undefined'),
     methods = {},
-    path = '/Users/thomasjbradley/Dropbox/Todoifer',
     fs
   ;
 
-  var save = function (key, data) {
-    fs.writeFile(path + '/' + key, data.join('\n'));
+  var save = function (path, data) {
+    fs.writeFile(path, data.join('\n'));
   };
 
-  var read = function (key) {
+  var read = function (path) {
     var
       items = [],
       data = ''
     ;
 
     try {
-      data = fs.readFileSync(path + '/' + key, 'utf-8');
+      data = fs.readFileSync(path, 'utf-8');
     } catch (e) {
-
+      throw new Error('Not found.');
     }
 
     items = _.map(data.split('\n'), function (item) {

@@ -2,16 +2,14 @@
   "use strict";
 
   var
-    todoskey = 'todo.txt',
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
-    storage = new Storage(),
-    startupData = [],
+    storage = new StorageManager(),
     todos = new Todos(),
     filterer = new Filterer(),
     buffer = new Buffer(),
-    actions = new Actions(am, fm, im, filterer, todos, buffer),
+    actions = new Actions(am, fm, im, storage, filterer, todos, buffer),
     main = document.getElementsByClassName('main')[0];
   ;
 
@@ -21,14 +19,13 @@
     storage.set(new LocalStorageHelper());
   }
 
-  startupData = storage.read(todoskey);
-
-  im.bindDefaultKeyActions(keys);
   im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));
   im.add('jump', new JumpControl('jump', am));
   im.add('edit', new EditControl('edit', am));
   im.add('new', new NewControl('new', am));
+  im.add('folder-chooser', new FolderChooserControl('folder-chooser', am));
+  im.add('file-chooser', new FileChooserControl('file-chooser', am));
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
@@ -75,7 +72,7 @@
 
   todos.subscribe(function (items) {
     filterer.filter(items, im.get('search').value());
-    storage.save(todoskey, todos.getString());
+    am.trigger('storage:save');
   });
 
   filterer.subscribe(function (items) {
@@ -89,15 +86,7 @@
     scrollList(index);
   });
 
-  if (!startupData || _.isEmpty(startupData)) {
-    startupData = [
-      'Welcome to Todoifer! +Todoifer',
-      'A graphical application the Todo.txt format. @todo.txt',
-      'Press “n” to create a new todo item.'
-    ];
-  }
-
-  todos.populate(startupData);
+  am.trigger('storage:read');
 
   // buffer.subscribe(function (buffer) {
   //   console.log(buffer.length(), buffer);
