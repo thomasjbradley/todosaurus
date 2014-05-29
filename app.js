@@ -17,6 +17,7 @@
     storage.set(new FileSystemHelper());
   } else {
     storage.set(new LocalStorageHelper());
+    storage.setFolder('LocalStorage');
   }
 
   im.add('list', new ListControl('list', am));
