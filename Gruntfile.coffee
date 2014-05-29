@@ -21,14 +21,14 @@ module.exports = (grunt) ->
         quitAfter: true
       compress:
         src: [
-          'img'
+          './img'
         ]
 
     nodewebkit:
       options:
-        build_dir: 'releases'
+        build_dir: './releases'
         win: false
-        credits: 'credits.html'
+        credits: './credits.html'
         app_name: 'Todoifier'
         # mac_icns: ''
       src: [
@@ -39,17 +39,17 @@ module.exports = (grunt) ->
       options:
         livereload: true
       css:
-        files: ['css/*.css']
+        files: ['./css/*.css']
       js:
         files: [
-          'controls/*.js'
-          'libs/*.js'
-          'models/*.js'
-          'storage/*.js'
-          '*.js'
+          './controls/*.js'
+          './libs/*.js'
+          './models/*.js'
+          './storage/*.js'
+          './*.js'
         ]
       html:
-        files: ['*.html']
+        files: ['./*.html']
 
   require('load-grunt-tasks')(grunt)
 
