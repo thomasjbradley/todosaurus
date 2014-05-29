@@ -34,6 +34,27 @@ body {
   position: relative;
 }
 
+.icon {
+  display: inline-block;
+  height: 18px;
+  overflow: hidden;
+  width: 18px;
+
+  background: transparent; none no-repeat center center;
+  background-size: contain;
+
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.i--search {
+  background-image: url("../images/icon-search.svg");
+}
+
+.i--jump {
+  background-image: url("../images/icon-jump.svg");
+}
+
 .tools {
   margin: 0;
   padding: 4px;
@@ -60,6 +81,7 @@ body {
   padding: 0;
   width: 100%;
 
+  background-color: white;
   border: 0;
   outline: 0;
 
@@ -70,15 +92,20 @@ body {
   outline: 0;
 }
 
+.input--with-label,
+.input--with-icon {
+  position: relative;
+}
+
 .input__container {
   padding-left: 3.6em;
 }
 
-.input--labelled {
-  position: relative;
+.input__container--has-icon {
+  padding-left: 22px;
 }
 
-.input--with-label {
+.input--has-label {
 
 }
 
@@ -89,6 +116,12 @@ body {
   width: 3.4em;
 
   text-align: right;
+}
+
+.input__icon {
+  left: 4px;
+  position: absolute;
+  top: 5px;
 }
 
 .input--tools {

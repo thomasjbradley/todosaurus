@@ -11,15 +11,16 @@
 
   <header class="tools">
     <div class="tools__container">
-      <div class="input-wrapper input--tools">
-        <input class="input mousetrap" id="search" autocomplete="off" autocorrect="off">
-      </div>
-      <div class="input-wrapper input--labelled input--tools input--cover" data-state="hidden">
-        <div class="input__label">
-          <span class="input__label__text pill pill--dull">Jump</span>
+      <div class="input-wrapper input--with-icon input--tools">
+        <label class="input__icon icon i--search" for="search">Search</label>
+        <div class="input__container input__container--has-icon">
+          <input class="input mousetrap" id="search" autocomplete="off" autocorrect="off">
         </div>
-        <div class="input__container">
-          <input class="input input--with-label input--hidden mousetrap" id="jump" autocomplete="off" autocorrect="off">
+      </div>
+      <div class="input-wrapper input--with-icon input--tools input--cover" data-state="hidden">
+        <label class="input__icon icon i--jump" for="search">Jump</label>
+        <div class="input__container input__container--has-icon">
+          <input class="input input--has-icon mousetrap" id="jump" autocomplete="off" autocorrect="off">
         </div>
       </div>
     </div>
