@@ -197,8 +197,8 @@ body {
 }
 
 .todos [data-focused="true"] {
-  background-color: #f2f2f2;
-  border-top-color: #f2f2f2;
+  background-color: #ececec;
+  border-top-color: #ececec;
 }
 
 .item {
@@ -223,7 +223,7 @@ body {
   position: absolute;
   width: 22px;
 
-  color: #bbb;
+  color: #999;
   font-size: 12px;
   line-height: 12px;
   text-align: right;
