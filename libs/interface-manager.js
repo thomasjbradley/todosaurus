@@ -30,8 +30,8 @@ var InterfaceManager = function (focusManager, actionManager) {
 
   var bindKeyActions = function (keys) {
     _.each(keys, function (elem, index) {
-      bindKeyEvent(elem, function (e) {
-        actionManager.trigger(index, e);
+      bindKeyEvent(elem, function (e, combo) {
+        actionManager.trigger(index, e, combo);
       });
     });
   };
