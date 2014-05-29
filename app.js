@@ -7,6 +7,7 @@
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
     storage = new Storage(),
+    startupData = [],
     todos = new Todos(),
     filterer = new Filterer(),
     buffer = new Buffer(),
@@ -15,6 +16,7 @@
   ;
 
   storage.set(new LocalStorageHelper());
+  startupData = storage.read(todoskey);
 
   im.bindDefaultKeyActions(keys);
   im.add('list', new ListControl('list', am));
@@ -80,7 +82,16 @@
   });
 
   // todos.populate(['Watch TV', 'x Cook +life', 'Walk', 'Read', 'Code +todo', 'x Listen to Music', 'Eat +life', 'Sleep']);
-  todos.populate(storage.read(todoskey));
+
+  if (!startupData) {
+    startupData = [
+      'Welcome to Todoifer! +Todoifer',
+      'A graphical application the Todo.txt format. @todo.txt',
+      'Press “n” to create a new todo item.'
+    ];
+  }
+
+  todos.populate(startupData);
 
   // buffer.subscribe(function (buffer) {
   //   console.log(buffer.length(), buffer);
