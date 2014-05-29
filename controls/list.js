@@ -103,6 +103,10 @@ var ListControl = function (elem, actionManager) {
     return that.elem.querySelectorAll('.item');
   };
 
+  var getAllItemElementsWith = function (sel) {
+    return that.elem.querySelectorAll('.item' + sel);
+  };
+
   var getItemElement = function (index) {
     return that.elem.querySelectorAll('.item')[index];
   }
@@ -112,6 +116,7 @@ var ListControl = function (elem, actionManager) {
     focus: that.chainer(focus),
     blur: that.chainer(blur),
     getAllItemElements: getAllItemElements,
+    getAllItemElementsWith: getAllItemElementsWith,
     getItemElement: getItemElement
   });
 

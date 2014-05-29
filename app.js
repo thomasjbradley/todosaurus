@@ -32,11 +32,14 @@
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
-    var items = im.get('list').getAllItemElements();
+    var
+      items = im.get('list').getAllItemElements(),
+      current = im.get('list').getAllItemElementsWith('[data-focused="true"]')
+    ;
 
-    _.each(items, function (elem, index) {
-      elem.setAttribute('data-focused', 'false');
-    });
+    if (current && current.length > 0) {
+      current[0].setAttribute('data-focused', 'false');
+    }
 
     if (items && items.length > 0) {
       items[index].setAttribute('data-focused', 'true');
