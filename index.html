@@ -69,15 +69,9 @@
   </div>
 
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
-  <script>
-    window.isNode = !!(typeof require !== 'undefined');
-
-    if (window.isNode) {
-      var _ = require('lodash');
-    }
-  </script>
   <script src="bower_components/blueimp-md5/js/md5.min.js"></script>
   <script src="bower_components/mousetrap/mousetrap.min.js"></script>
+  <script src="bootstrap.js"></script>
   <script src="libs/focus-manager.js"></script>
   <script src="libs/action-manager.js"></script>
   <script src="libs/interface-manager.js"></script>
@@ -100,27 +94,5 @@
   <script src="actions.js"></script>
   <script src="keybindings.js"></script>
   <script src="app.js"></script>
-  <script>
-    var gui, script, env;
-
-    if (window.isNode) {
-      env = process.env.ENV || 'prod';
-      gui = require('nw.gui');
-
-      if (env !== 'dev') {
-        onload = function() {
-          gui.Window.get().show();
-          gui.Window.get().focus();
-        };
-      }
-
-      if (env === 'dev') {
-        gui.Window.get().showDevTools();
-        script = document.createElement('script');
-        script.src = 'http://localhost:35729/livereload.js';
-        document.body.appendChild(script);
-      }
-    }
-  </script>
 </body>
 </html>

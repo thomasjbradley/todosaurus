@@ -67,8 +67,12 @@ body {
   margin: 0;
   padding: 4px;
 
-  background-color: #b2b2b2;
+  background-color: #e0e0e0;
   border-bottom: 1px solid #6c6c6c;
+}
+
+.window--has-focus .tools {
+  background-color: #b2b2b2
 }
 
 .tools__container {
