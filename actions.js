@@ -100,7 +100,7 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     am.trigger('item:paste:after');
   });
 
-  am.action('item:edit', function (e, input) {
+  am.action('item:edit', function (e, combo, input) {
     if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
@@ -117,7 +117,7 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     ;
   });
 
-  am.action('item:edit:start', function (e, input) {
+  am.action('item:edit:start', function (e, combo, input) {
     if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
@@ -134,7 +134,7 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     ;
   });
 
-  am.action('item:edit:end', function (e, input) {
+  am.action('item:edit:end', function (e, combo, input) {
     if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
@@ -151,7 +151,7 @@ var Actions = function (generics, am, fm, im, storage, filterer, todos, buffer) 
     ;
   });
 
-  am.action('item:edit:clear', function (e, input) {
+  am.action('item:edit:clear', function (e, combo, input) {
     if (!_.isUndefined(e) && !_.isEmpty(e)) {
       e.preventDefault();
     }
