@@ -38,7 +38,8 @@ body {
   margin: 0;
   padding: 4px;
 
-  background-color: #e2e2e2;
+  background-color: #b2b2b2;
+  border-bottom: 1px solid #6c6c6c;
 }
 
 .tools__container {
@@ -90,24 +91,8 @@ body {
   text-align: right;
 }
 
-.pill {
-  padding: 3px 6px 2px;
-
-  background-color: #cdc0db;
-  border: 1px solid #b4a2c5;
-  border-radius: 12px;
-
-  color: #492c66;
-  font-size: 11px;
-  line-height: 11px;
-  text-transform: uppercase;
-}
-
-.pill--dull {
-  background-color: #ccc;
-  border-color: #999;
-
-  color: #666;
+.input--tools {
+  border-color: #8c8c8c;
 }
 
 .input--cover {
@@ -128,6 +113,30 @@ body {
 
 .input-wrapper[data-focused="true"] {
   border-color: #927ba9;
+}
+
+.input--tools[data-focused="true"] {
+  border-color: #000;
+}
+
+.pill {
+  padding: 3px 6px 2px;
+
+  background-color: #cdc0db;
+  border: 1px solid #b4a2c5;
+  border-radius: 12px;
+
+  color: #492c66;
+  font-size: 11px;
+  line-height: 11px;
+  text-transform: uppercase;
+}
+
+.pill--dull {
+  background-color: #ccc;
+  border-color: #999;
+
+  color: #666;
 }
 
 .main-wrapper {

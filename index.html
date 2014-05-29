@@ -11,10 +11,10 @@
 
   <header class="tools">
     <div class="tools__container">
-      <div class="input-wrapper">
+      <div class="input-wrapper input--tools">
         <input class="input mousetrap" id="search" autocomplete="off" autocorrect="off">
       </div>
-      <div class="input-wrapper input--labelled input--cover" data-state="hidden">
+      <div class="input-wrapper input--labelled input--tools input--cover" data-state="hidden">
         <div class="input__label">
           <span class="input__label__text pill pill--dull">Jump</span>
         </div>
@@ -43,7 +43,9 @@
 
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
   <script>
-    if (typeof(process) !== 'undefined') {
+    window.isNode = !!(typeof require !== 'undefined');
+
+    if (window.isNode) {
       var _ = require('lodash');
     }
   </script>
@@ -65,6 +67,7 @@
   <script src="models/buffer.js"></script>
   <script src="storage/storage.js"></script>
   <script src="storage/localstorage.js"></script>
+  <script src="storage/filesystem.js"></script>
   <script src="actions.js"></script>
   <script src="keybindings.js"></script>
   <script src="app.js"></script>

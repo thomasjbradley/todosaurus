@@ -2,7 +2,7 @@
   "use strict";
 
   var
-    todoskey = 'todos.txt',
+    todoskey = 'todo.txt',
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
@@ -15,7 +15,12 @@
     main = document.getElementsByClassName('main')[0];
   ;
 
-  storage.set(new LocalStorageHelper());
+  if (!_.isUndefined(FileSystemHelper) && window.isNode) {
+    storage.set(new FileSystemHelper());
+  } else {
+    storage.set(new LocalStorageHelper());
+  }
+
   startupData = storage.read(todoskey);
 
   im.bindDefaultKeyActions(keys);
@@ -81,9 +86,7 @@
     scrollList(index);
   });
 
-  // todos.populate(['Watch TV', 'x Cook +life', 'Walk', 'Read', 'Code +todo', 'x Listen to Music', 'Eat +life', 'Sleep']);
-
-  if (!startupData) {
+  if (!startupData || _.isEmpty(startupData)) {
     startupData = [
       'Welcome to Todoifer! +Todoifer',
       'A graphical application the Todo.txt format. @todo.txt',
