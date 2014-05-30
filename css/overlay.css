@@ -1,3 +1,8 @@
+.app-icon {
+  margin-bottom: 18px;
+  width: 110px;
+}
+
 .overlay {
   bottom: 0;
   left: 0;
@@ -19,7 +24,6 @@
   z-index: 2001;
 
   background-color: #fff;
-  border: 1px solid #ccc;
   border-radius: 3px;
 
   text-align: center;

@@ -466,7 +466,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('storage:file:new', function () {
     var startupData = [
       'Welcome to Todoifer! +Todoifer',
-      'A graphical application the Todo.txt format. @todo.txt',
+      'A app for the Todo.txt format. @todotxt',
       'Press “n” to create a new todo item.'
     ];
 

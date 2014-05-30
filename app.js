@@ -28,6 +28,7 @@
   } else {
     storage.set(new LocalStorageHelper());
     storage.setFolder('LocalStorage');
+    document.getElementById('other-folder-options').style.display = 'none';
   }
 
   im.add('filters', filters);

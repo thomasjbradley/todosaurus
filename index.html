@@ -61,7 +61,7 @@
 
   <div class="overlay" id="folder-chooser" data-state="hidden">
     <div class="window">
-      <img class="app-icon" src="img/icon.png">
+      <img class="app-icon" src="img/todosaurus.png">
       <p class="window__text">Whoa! Looks like you’re a first timer.</p>
       <p class="window__text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
       <div class="window__btn">
@@ -72,12 +72,12 @@
 
   <div class="overlay" id="file-chooser" data-state="hidden">
     <div class="window">
-      <img class="app-icon" src="img/icon.png">
+      <img class="app-icon" src="img/todosaurus.png">
       <p class="window__text"><strong>Holy moly! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
       <p class="window__text window__path"><img class="window__path__icon" src="img/icon-folder.svg" alt=""> <code class="filename window__path__filename" id="folder-path"></code></p>
       <div class="window__btn">
         <button class="btn btn--alt" type="file" id="new-file">Create New File</button>
-        <ul class="window__options">
+        <ul class="window__options" id="other-folder-options">
           <li><button class="btn btn--text" id="switch-folder">Switch Folder</button></li>
         </ul>
       </div>
