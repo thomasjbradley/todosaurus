@@ -34,6 +34,10 @@ module.exports = (grunt) ->
       src: [
         './**/*',
         '!./.envrc'
+        '!./Gruntfile.coffee'
+        '!./README.md'
+        '!./tests/**/*'
+        '!./releases/**/*'
       ]
 
     watch:
