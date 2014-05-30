@@ -37,15 +37,40 @@
 }
 
 .tag {
+  padding-left: 19px;
   position: relative;
 }
 
 .tag::before {
   content: counter(tags);
-  display: inline-block;
+  display: none;
   margin-right: 4px;
 
   font-weight: bold;
+}
+
+.tags-list > li:nth-child(1) .tag,
+.tags-list > li:nth-child(2) .tag,
+.tags-list > li:nth-child(3) .tag,
+.tags-list > li:nth-child(4) .tag,
+.tags-list > li:nth-child(5) .tag,
+.tags-list > li:nth-child(6) .tag,
+.tags-list > li:nth-child(7) .tag,
+.tags-list > li:nth-child(8) .tag,
+.tags-list > li:nth-child(9) .tag {
+  padding-left: 8px; /* Default value for the pill */
+}
+
+.tags-list > li:nth-child(1) .tag::before,
+.tags-list > li:nth-child(2) .tag::before,
+.tags-list > li:nth-child(3) .tag::before,
+.tags-list > li:nth-child(4) .tag::before,
+.tags-list > li:nth-child(5) .tag::before,
+.tags-list > li:nth-child(6) .tag::before,
+.tags-list > li:nth-child(7) .tag::before,
+.tags-list > li:nth-child(8) .tag::before,
+.tags-list > li:nth-child(9) .tag::before {
+  display: inline-block;
 }
 
 [data-state="active"] .tag {
