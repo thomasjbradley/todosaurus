@@ -16,8 +16,8 @@
     "icon": "",
     "show": false,
     "toolbar": false,
-    "width": 550,
-    "min_width": 420,
+    "width": 750,
+    "min_width": 700,
     "height": 600,
     "min_height": 500,
     "resizable": true
