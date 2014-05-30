@@ -29,8 +29,8 @@ module.exports = (grunt) ->
         build_dir: './releases'
         win: false
         credits: './credits.html'
-        app_name: 'Todoifier'
-        # mac_icns: ''
+        app_name: 'Todosaurus'
+        mac_icns: './todosaurus.icns'
       src: [
         './**/*',
         '!./.envrc'

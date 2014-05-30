@@ -1,4 +1,4 @@
-# Todo.txt
+# Todosaurus
 
 A keyboard driven GUI app for the Todo.txt format.
 

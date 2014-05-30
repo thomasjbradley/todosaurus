@@ -1,5 +1,5 @@
 {
-  "name": "todotxt",
+  "name": "todosaurus",
   "private": true,
   "version": "0.7.0",
   "license": "MIT",
@@ -12,8 +12,8 @@
   },
   "main": "index.html",
   "window": {
-    "title": "ca.thomasjbradley.todoifer",
-    "icon": "",
+    "title": "ca.thomasjbradley.todosaurus",
+    "icon": "todosaurus.png",
     "show": false,
     "toolbar": false,
     "width": 750,
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:thomasjbradley/todotxt.git"
+    "url": "git@github.com:thomasjbradley/todosaurus.git"
   },
   "dependencies": {
     "lodash": "^2.4.1"

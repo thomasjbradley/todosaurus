@@ -1,5 +1,5 @@
 {
-  "name": "todotxt",
+  "name": "todosaurus",
   "private": true,
   "dependencies": {
     "mousetrap": "~1.4.6",
