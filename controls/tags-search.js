@@ -3,14 +3,26 @@ var TagsSearchControl = function (elem, actionManager) {
 
   var
     that = InputControl(elem, actionManager),
-    group = false
+    label = document.getElementById('tags-search-label'),
+    activeGroup = false
   ;
+
+  var changeLabel = function () {
+    if (activeGroup == '+') {
+      label.classList.add('i--project');
+      label.classList.remove('i--context');
+    } else {
+      label.classList.add('i--context');
+      label.classList.remove('i--project');
+    }
+  };
 
   var group = function (g) {
     if (_.isUndefined(g)) {
-      return group;
+      return activeGroup;
     } else {
-      group = g;
+      activeGroup = g;
+      changeLabel();
       return that;
     }
   };

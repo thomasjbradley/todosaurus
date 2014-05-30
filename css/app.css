@@ -61,6 +61,14 @@ body {
   background-image: url("../img/icon-jump.svg");
 }
 
+.i--project {
+  background-image: url("../img/icon-project.svg");
+}
+
+.i--context {
+  background-image: url("../img/icon-context.svg");
+}
+
 .tools {
   margin: 0;
   padding: 4px;
