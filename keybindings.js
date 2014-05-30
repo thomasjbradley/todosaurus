@@ -29,11 +29,11 @@ var keys = {
 
   'app:search:focus'       : ['/', 'mod+f'],
   'app:search:clear'       : ['command+l', 'ctrl+l'],
-  'app:search:projects'    : ['mod+p', '=', '+', 'mod+='],
-  'app:search:contexts'    : ['mod+t', '@'],
   'app:jump:show'          : ['#'],
 
-  'app:tags:show:projects' : ['mod+1', 'mod+2', 'mod+3', 'mod+4', 'mod+5', 'mod+6', 'mod+7', 'mod+8', 'mod+9'],
-  'app:tags:show:contexts' : ['alt+1', 'alt+2', 'alt+3', 'alt+4', 'alt+5', 'alt+6', 'alt+7', 'alt+8', 'alt+9'],
-  'app:tags:clear'         : ['mod+0', 'alt+0', 'shift+0']
+  'tags:show:projects'     : ['mod+1', 'mod+2', 'mod+3', 'mod+4', 'mod+5', 'mod+6', 'mod+7', 'mod+8', 'mod+9'],
+  'tags:show:contexts'     : ['alt+1', 'alt+2', 'alt+3', 'alt+4', 'alt+5', 'alt+6', 'alt+7', 'alt+8', 'alt+9'],
+  'tags:clear'             : ['mod+0', 'alt+0', 'shift+0'],
+  'tags:search:projects'   : ['mod+p', '=', '+', 'mod+='],
+  'tags:search:contexts'   : ['mod+t', '@']
 };

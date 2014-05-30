@@ -263,7 +263,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     if (theId && !matchesFilters(theId)) {
       am.trigger('app:search:clear');
-      am.trigger('app:tags:clear');
+      am.trigger('tags:clear');
       fm.set(filterer.getIndex(theId));
     }
 
@@ -282,32 +282,6 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
 
     im.get('search').focus().select();
-  });
-
-  am.action('app:search:projects', function (e) {
-    if (!_.isUndefined(e)) {
-      e.preventDefault();
-    }
-
-    im.get('search')
-      .focus()
-      .value('+')
-      .setCaretPosition(1000)
-    ;
-    am.trigger('app:search:trigger');
-  });
-
-  am.action('app:search:contexts', function (e) {
-    if (!_.isUndefined(e)) {
-      e.preventDefault();
-    }
-
-    im.get('search')
-      .focus()
-      .value('@')
-      .setCaretPosition(1000)
-    ;
-    am.trigger('app:search:trigger');
   });
 
   am.action('app:search:blur', function () {
@@ -390,52 +364,58 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.reset().bindKeyEvents(contextKeys);
   });
 
-  am.action('app:tags:create', function () {
-    am.trigger('app:tags:create:projects');
-    am.trigger('app:tags:create:contexts');
+  am.action('tags:create', function () {
+    am.trigger('tags:create:projects');
+    am.trigger('tags:create:contexts');
   });
 
-  am.action('app:tags:create:projects', function () {
+  am.action('tags:create:projects', function () {
     var tags = todos.getAllTags('+');
     grouper.setGroup('+', tags);
     im.get('tags-projects').render(tags);
   });
 
-  am.action('app:tags:create:contexts', function () {
+  am.action('tags:create:contexts', function () {
     var tags = todos.getAllTags('@');
     grouper.setGroup('@', tags);
     im.get('tags-contexts').render(tags);
   });
 
-  am.action('app:tags:show', function (tag, combo) {
-    var id = getNumberFromKeyCombo(combo);
+  am.action('tags:show', function (tag, combo) {
+    var id;
+
+    if (_.isArray(combo)) {
+      id = combo[1];
+    } else {
+      id = getNumberFromKeyCombo(combo);
+    }
 
     if (id > grouper.getGroup(tag).length - 1) {
-      am.trigger('app:tags:clear');
+      am.trigger('tags:clear');
     } else {
       im.get('filters').group = [tag, id];
       am.trigger('app:list:render');
-      am.trigger('app:tags:highlight-active', tag, getNumberFromKeyCombo(combo));
+      am.trigger('tags:highlight-active', tag, id);
     }
   });
 
-  am.action('app:tags:show:projects', function (e, combo) {
-    am.trigger('app:tags:clear-active');
-    am.trigger('app:tags:show', '+', combo);
+  am.action('tags:show:projects', function (e, combo) {
+    am.trigger('tags:clear-active');
+    am.trigger('tags:show', '+', combo);
   });
 
-  am.action('app:tags:show:contexts', function (e, combo) {
-    am.trigger('app:tags:clear-active');
-    am.trigger('app:tags:show', '@', combo);
+  am.action('tags:show:contexts', function (e, combo) {
+    am.trigger('tags:clear-active');
+    am.trigger('tags:show', '@', combo);
   });
 
-  am.action('app:tags:clear', function () {
+  am.action('tags:clear', function () {
     im.get('filters').group = false;
-    am.trigger('app:tags:clear-active');
+    am.trigger('tags:clear-active');
     am.trigger('app:list:render');
   });
 
-  am.action('app:tags:highlight-active', function (tag, index) {
+  am.action('tags:highlight-active', function (tag, index) {
     if (tag === '+') {
       im.get('tags-projects').activate(index);
     }
@@ -445,9 +425,55 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
   });
 
-  am.action('app:tags:clear-active', function () {
+  am.action('tags:clear-active', function () {
     im.get('tags-projects').deactivateAll();
     im.get('tags-contexts').deactivateAll();
+  });
+
+  am.action('tags:search:projects', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('tags-search')
+      .group('+')
+      .show()
+      .value('')
+      .focus()
+    ;
+  });
+
+  am.action('tags:search:contexts', function (e) {
+    if (!_.isUndefined(e)) {
+      e.preventDefault();
+    }
+
+    im.get('tags-search')
+      .group('@')
+      .show()
+      .value('')
+      .focus()
+    ;
+  });
+
+  am.action('tags:search:hide', function () {
+    im.get('tags-search').hide();
+  });
+
+  am.action('tags:search:trigger', function () {
+    var tag;
+
+    tag = grouper.findTagStartingWith(im.get('tags-search').value(), im.get('tags-search').group());
+
+    if (!tag) {
+      am.trigger('tags:clear-active');
+    } else {
+      if (tag[0] === '+') {
+        am.trigger('tags:show:projects', false, tag);
+      } else {
+        am.trigger('tags:show:contexts', false, tag);
+      }
+    }
   });
 
   am.action('storage:folder:switch', function () {

@@ -42,6 +42,7 @@
   im.add('file-chooser', new FileChooserControl('file-chooser', am));
   im.add('tags-projects', new TagsControl('tags-projects', am));
   im.add('tags-contexts', new TagsControl('tags-contexts', am, {pillClass: 'pill--alt'}));
+  im.add('tags-search', new TagsSearchControl('tags-search', am));
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
@@ -107,14 +108,14 @@
     var group = im.get('filters').group;
 
     grouper.group(items, im.get('filters').group);
-    am.trigger('app:tags:highlight-active', group[0], group[1]);
+    am.trigger('tags:highlight-active', group[0], group[1]);
   });
 
   grouper.subscribe(function (items) {
     if (_.isEmpty(items) && _.isArray(im.get('filters').group)) {
       im.get('filters').group = false;
-      am.trigger('app:tags:clear-active');
-      am.trigger('app:tags:clear');
+      am.trigger('tags:clear-active');
+      am.trigger('tags:clear');
     } else {
       filterer.filter(items, im.get('filters').filter);
     }
@@ -125,7 +126,7 @@
     fm.setMax(items.length - 1);
     im.get('progress').set(getNumberCompleteItems(items), items.length);
     renderFocus(fm.get());
-    am.trigger('app:tags:create');
+    am.trigger('tags:create');
   });
 
   fm.subscribe(function (index) {

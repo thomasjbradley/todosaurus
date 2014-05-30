@@ -4,6 +4,11 @@ var Grouper = function (generics) {
   var
     methods = {},
     subscriptions = [],
+    matchers = {
+      '+': '\\{{tag}}(?:$|\\s)',
+      '@': '\\{{tag}}(?:$|\\s)',
+      '!': '^(?: x)?\({{tag}}\)'
+    },
     groups = {},
     grouped
   ;
@@ -46,7 +51,8 @@ var Grouper = function (generics) {
   }
 
   var getFilter = function (tag) {
-    var re = new RegExp('\\' + groups[tag[0]][tag[1]] + '(?:$|\\s)', 'ig');
+    var re = new RegExp(matchers[tag[0]].replace('{{tag}}', groups[tag[0]][tag[1]]), 'ig');
+
     return re;
   }
 
@@ -70,6 +76,24 @@ var Grouper = function (generics) {
     return matchesGeneric(text);
   };
 
+  var findTagStartingWith = function (text, groupStart) {
+    var match;
+
+    if (!text) {
+      return false;
+    }
+
+    match = _.find(groups[groupStart], function (item) {
+      return FuzzyMatch.startsWith(item, text, groupStart);
+    });
+
+    if (!match) {
+      return false;
+    }
+
+    return [groupStart, _.indexOf(groups[groupStart], match)];
+  };
+
   var getGroupedItems = function (todos, tag) {
     return _.filter(todos, function (item) {
       return matchesGroup(item.text(), tag);
@@ -90,6 +114,7 @@ var Grouper = function (generics) {
     getGroup: getGroup,
     setGroup: chainer(setGroup),
     matchesGroup: matchesGroup,
+    findTagStartingWith: findTagStartingWith,
     group: informer(group)
   };
 
