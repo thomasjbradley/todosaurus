@@ -55,7 +55,7 @@ var Filterer = function (generics) {
   };
 
   var matchesFilter = function (text, data) {
-    if (!data || FuzzyMatch.test(text, data)) {
+    if (!data || FuzzyMatch.contains(text, data)) {
       return true;
     }
 
