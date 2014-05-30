@@ -3,7 +3,8 @@ var TagsControl = function (elem, actionManager, opts) {
 
   var
     that = Control(elem, actionManager),
-    ol = that.elem.querySelector('.tags'),
+    tags = that.elem.querySelector('.tags'),
+    noTags = that.elem.querySelector('.no-tags'),
     options = {
       pillClass: ''
     }
@@ -24,25 +25,27 @@ var TagsControl = function (elem, actionManager, opts) {
       return pieces.join('');
     });
 
-    ol.innerHTML = output.join('');
+    tags.innerHTML = output.join('');
   };
 
   var deactivateAll = function () {
-    _.each(ol.querySelectorAll('[data-state="active"]'), function (item) {
+    _.each(tags.querySelectorAll('[data-state="active"]'), function (item) {
       item.setAttribute('data-state', 'inactive');
     });
   }
 
   var activate = function (id) {
-    ol.querySelectorAll('li')[id].setAttribute('data-state', 'active');
+    tags.querySelectorAll('li')[id].setAttribute('data-state', 'active');
   };
 
   var show = function () {
-    that.elem.setAttribute('data-state', 'visible');
+    tags.setAttribute('data-state', 'visible');
+    noTags.setAttribute('data-state', 'hidden');
   };
 
   var hide = function () {
-    that.elem.setAttribute('data-state', 'hidden');
+    tags.setAttribute('data-state', 'hidden');
+    noTags.setAttribute('data-state', 'visible');
   };
 
   var render = function (items, active) {

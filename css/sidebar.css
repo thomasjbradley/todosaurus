@@ -38,7 +38,11 @@
   background-color: #e2e2e2;
 }
 
-.tags {
+.tags__intro {
+  color: #888;
+}
+
+.tags-list {
   margin: 0 0 24px;
   padding: 0;
 
@@ -47,7 +51,7 @@
   list-style-type: none;
 }
 
-.tags > li {
+.tags-list > li {
   margin-bottom: 4px;
 
   counter-increment: tags;
