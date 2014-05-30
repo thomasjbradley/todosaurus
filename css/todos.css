@@ -21,6 +21,10 @@
   counter-increment: todos;
 }
 
+.todos--has-priorities .item {
+  padding-left: 44px;
+}
+
 .todos[data-focused="true"] [data-focused="true"] {
   border-color: #927ba9;
   border-radius: 3px;
@@ -40,17 +44,63 @@
   text-align: right;
 }
 
+.todos--has-priorities .item::before {
+  left: 0;
+  width: 38px;
+}
+/*
 .item::after {
   content: " ";
-  height: 100%;
-  left: 0;
+  height: 16px;
+  padding-top: 2px;
   position: absolute;
-  top: 0;
-  width: 4px;
+  left: 2px;
+  top: 5px;
+  width: 16px;
 
   background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+
+  color: #fff;
+  font-size: 11px;
+  line-height: 11px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
+.item:nth-child(1)::after {
+  content: "A";
+  background-color: #fe2a8d;
+  border-color: #fe2a8d;
+}
+
+.item:nth-child(2)::after {
+  content: "B";
+  background-color: #fd68ae;
+  border-color: #fe2a8d;
+}
+
+.item:nth-child(4)::after {
+  content: "C";
+  background-color: #fea8d0;
+  border-color: #fe2a8d;
+}
+
+.item:nth-child(12)::after {
+  content: "D";
+  background-color: #fed3e7;
+  border-color: #fe2a8d;
+  color: #fe2a8d;
+}
+
+.item:nth-child(13)::after {
+  content: "E";
+  background-color: #fff;
+  border-color: #fe2a8d;
+  color: #fe2a8d;
+}
+*/
 /*
 .todos[data-focused="true"] .item[data-focused="true"]::before {
   color: #666;
