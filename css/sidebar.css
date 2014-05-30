@@ -5,7 +5,7 @@
   width: 180px;
 
   background-color: #e2e2e2;
-  border-right: 1px solid #ccc;
+  border-right: 1px solid #bbb;
 }
 
 .sidebar {
@@ -23,10 +23,19 @@
   margin: 9px 0 8px;
   padding: 0;
 
+  background-image: linear-gradient(to bottom, #e2e2e2 0%, #e2e2e2 47%, #bbb 46%, #bbb 54%, #e2e2e2 55%, #e2e2e2 100%);
+
   color: #777;
   font-size: 12px;
   line-height: 12px;
   text-transform: uppercase;
+}
+
+.tags-title__wrap {
+  display: inline-block;
+  padding-right: 6px;
+
+  background-color: #e2e2e2;
 }
 
 .tags {
