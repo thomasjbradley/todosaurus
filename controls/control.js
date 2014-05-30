@@ -3,6 +3,8 @@ var Control = function (elem, actionManager) {
 
   var
     that = {},
+    events = {},
+    eventsBound = false,
     keyEvents = []
   ;
 
@@ -17,14 +19,32 @@ var Control = function (elem, actionManager) {
     return actionManager;
   };
 
-  var bindEvents = function (events) {
+  var bindEvents = function (ev) {
+    if (eventsBound === true) {
+      return false;
+    }
+
+    if (!_.isUndefined(ev)) {
+      events = ev;
+    }
+
     _.each(events, function (callback, key) {
       that.elem.addEventListener(key, callback, false);
     });
+
+    eventsBound = true;
   };
 
   var bindKeyEvents = function (events) {
     that.keyEvents = events;
+  };
+
+  var killEvents = function () {
+    _.each(events, function (callback, key) {
+      that.elem.removeEventListener(key, callback);
+    });
+
+    eventsBound = false;
   };
 
   if (_.isString(elem)) {
@@ -35,7 +55,8 @@ var Control = function (elem, actionManager) {
     chainer: chainer,
     getActionManager: getActionManager,
     bindEvents: chainer(bindEvents),
-    bindKeyEvents: chainer(bindKeyEvents)
+    bindKeyEvents: chainer(bindKeyEvents),
+    killEvents: chainer(killEvents)
   });
 
   return that;

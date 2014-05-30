@@ -8,12 +8,13 @@ var NewControl = function (elem, actionManager) {
   };
 
   var commit = function () {
-    that.getActionManager().trigger('item:update', that.value());
     that.getActionManager().trigger('app:new:hide');
+    that.getActionManager().trigger('item:update', that.value());
   };
 
   var discard = function () {
     that.getActionManager().trigger('app:new:hide');
+    that.getActionManager().trigger('item:delete-if-empty');
   };
 
   var commitOrDiscard = function (isCommittable) {

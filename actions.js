@@ -1,10 +1,6 @@
 var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer) {
   "use strict";
 
-  // Used a reference for when creating a new item
-  // Will be used to compare new item to see if it matches the filter
-  var tmpId;
-
   var id = function () {
     return filterer.getByIndex(fm.get()).id();
   };
@@ -44,10 +40,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     return num;
   }
 
-  var matchesFilters = function () {
+  var matchesFilters = function (id) {
     return (
-      filterer.matchesFilter(todos.get(tmpId).text(), im.get('filters').filter)
-      && grouper.matchesGroup(todos.get(tmpId).text(), im.get('filters').group)
+      filterer.matchesFilter(todos.get(id).text(), im.get('filters').filter)
+      && grouper.matchesGroup(todos.get(id).text(), im.get('filters').group)
     );
   };
 
@@ -79,7 +75,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     todos.get(id()).toggle();
   });
 
-  am.action('item:remove', function () {
+  am.action('item:delete', function () {
+    todos.remove(id());
+  });
+
+  am.action('item:cut', function () {
     buffer.push(todos.get(id()).text());
     todos.remove(id());
   });
@@ -109,7 +109,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('item:move:up', function () {
     var startFocus = fm.get();
 
-    am.trigger('item:remove');
+    am.trigger('item:cut');
 
     if (startFocus <= fm.getMax()) {
       am.trigger('item:focus:prev');
@@ -119,7 +119,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:move:down', function () {
-    am.trigger('item:remove');
+    am.trigger('item:cut');
     am.trigger('item:paste:after');
   });
 
@@ -259,11 +259,18 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:update', function (text) {
-    tmpId = id();
-    todos.get(id()).text(text);
+    var theId = id();
+
+    if (theId && !matchesFilters(theId)) {
+      am.trigger('app:search:clear');
+      am.trigger('app:tags:clear');
+      fm.set(filterer.getIndex(theId));
+    }
+
+    todos.get(theId).text(text);
   });
 
-  am.action('item:remove-if-empty', function () {
+  am.action('item:delete-if-empty', function () {
     if (isFieldEmpty(id())) {
       todos.remove(id());
     }
@@ -308,7 +315,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:search:clear', function () {
-    var fullIndex = todos.getIndex(filterer.getByIndex(fm.get()).id());
+    var
+      item = filterer.getByIndex(fm.get()),
+      fullIndex = 0
+    ;
+
+    if (item) {
+      fullIndex = todos.getIndex(item.id());
+    }
 
     am.trigger('app:search:blur');
     im.get('search').value('');
@@ -335,7 +349,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:jump:hide', function () {
-    im.get('jump').value('').hide();
+    im.get('jump').hide();
   });
 
   am.action('app:jump:trigger', function () {
@@ -349,20 +363,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:edit:hide', function () {
-    im.get('edit').value('').hide();
+    im.get('edit').hide();
   });
 
   am.action('app:new:hide', function () {
-    im.get('new').value('').hide();
-    am.trigger('item:remove-if-empty');
-
-    if (tmpId && !matchesFilters()) {
-      am.trigger('app:search:clear');
-      am.trigger('app:tags:clear');
-      fm.set(filterer.getIndex(tmpId));
-    }
-
-    tmpId = null;
+    im.get('new').hide();
   });
 
   am.action('app:list:focus', function () {
@@ -426,8 +431,8 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('app:tags:clear', function () {
     im.get('filters').group = false;
+    am.trigger('app:tags:clear-active');
     am.trigger('app:list:render');
-    // am.trigger('app:tags:clear-active');
   });
 
   am.action('app:tags:highlight-active', function (tag, index) {

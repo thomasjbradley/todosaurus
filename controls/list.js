@@ -101,6 +101,10 @@ var ListControl = function (elem, actionManager) {
     that.elem.innerHTML = output.join('');
   };
 
+  var length = function () {
+    return that.elem.querySelectorAll('.item').length;
+  };
+
   var focus = function () {
     that.elem.setAttribute('data-focused', 'true');
   };
@@ -123,6 +127,7 @@ var ListControl = function (elem, actionManager) {
 
   that = _.extend(that, {
     render: that.chainer(render),
+    length: length,
     focus: that.chainer(focus),
     blur: that.chainer(blur),
     getAllItemElements: getAllItemElements,

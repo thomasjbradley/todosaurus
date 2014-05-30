@@ -74,7 +74,7 @@
       newTop
     ;
 
-   if (pos.top + pos.height > main.offsetHeight + main.scrollTop) {
+    if (pos.top + pos.height > main.offsetHeight + main.scrollTop) {
       newTop = (pos.top + pos.height) - main.offsetHeight;
       main.scrollTop = newTop;
     }
@@ -110,9 +110,10 @@
   });
 
   grouper.subscribe(function (items) {
-    if (_.isEmpty(items)) {
-      am.trigger('app:tags:clear');
+    if (_.isEmpty(items) && _.isArray(im.get('filters').group)) {
+      im.get('filters').group = false;
       am.trigger('app:tags:clear-active');
+      am.trigger('app:tags:clear');
     } else {
       filterer.filter(items, im.get('filters').filter);
     }
@@ -127,8 +128,10 @@
   });
 
   fm.subscribe(function (index) {
-    renderFocus(index);
-    scrollList(index);
+    if (im.get('list').length()) {
+      renderFocus(index);
+      scrollList(index);
+    }
   });
 
   am.trigger('storage:read');

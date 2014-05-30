@@ -36,6 +36,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var show = function (pos) {
+    that.bindEvents();
     actionManager.trigger('app:context:switch', that.keyEvents);
     findWrapper().setAttribute('data-state', 'visible');
     actionManager.trigger('app:list:blur');
@@ -43,6 +44,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var hide = function () {
+    that.killEvents();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-state', 'hidden');
     actionManager.trigger('app:list:focus');

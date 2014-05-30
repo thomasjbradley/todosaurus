@@ -8,8 +8,8 @@ var EditControl = function (elem, actionManager) {
   };
 
   var commit = function () {
-    that.getActionManager().trigger('item:update', that.value());
     that.getActionManager().trigger('app:edit:hide');
+    that.getActionManager().trigger('item:update', that.value());
   };
 
   var discard = function () {
@@ -70,7 +70,7 @@ var EditControl = function (elem, actionManager) {
       callback: function (e) {
         e.preventDefault();
         discard();
-        that.getActionManager().trigger('item:remove');
+        that.getActionManager().trigger('item:delete');
       }
     },
   ]);
