@@ -6,9 +6,9 @@
       new: '%%NEW%%'
     },
     filters = {
-      order: null,
-      group: null,
-      filter: null
+      order: false,
+      group: false,
+      filter: false
     },
     fm = new FocusManager(),
     am = new ActionManager(),
@@ -100,11 +100,13 @@
   todos.subscribe(function (items) {
     orderer.order(items, im.get('filters').order);
     am.trigger('storage:save');
-    am.trigger('app:tags:create');
   });
 
   orderer.subscribe(function (items) {
+    var group = im.get('filters').group;
+
     grouper.group(items, im.get('filters').group);
+    am.trigger('app:tags:highlight-active', group[0], group[1]);
   });
 
   grouper.subscribe(function (items) {
@@ -116,6 +118,7 @@
     fm.setMax(items.length - 1);
     im.get('progress').set(getNumberCompleteItems(items), items.length);
     renderFocus(fm.get());
+    am.trigger('app:tags:create');
   });
 
   fm.subscribe(function (index) {

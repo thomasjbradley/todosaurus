@@ -51,7 +51,15 @@ var Grouper = function (generics) {
     });
   };
 
-  var matchesGroup = function (text, matcher) {
+  var matchesGroup = function (text, tag) {
+    var matcher;
+
+    if (!tag || !_.isArray(tag)) {
+      return true;
+    }
+
+    matcher = groups[tag[0]][tag[1]];
+
     if (text.indexOf(matcher) > -1) {
       return true;
     }
@@ -61,7 +69,7 @@ var Grouper = function (generics) {
 
   var getGroupedItems = function (todos, tag) {
     return _.filter(todos, function (item) {
-      return matchesGroup(item.text(), groups[tag[0]][tag[1]]);
+      return matchesGroup(item.text(), tag);
     });
   };
 
@@ -78,6 +86,7 @@ var Grouper = function (generics) {
     length: length,
     getGroup: getGroup,
     setGroup: chainer(setGroup),
+    matchesGroup: matchesGroup,
     group: informer(group)
   };
 

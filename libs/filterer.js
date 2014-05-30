@@ -71,7 +71,7 @@ var Filterer = function (generics) {
   };
 
   var matchesFilter = function (text, data) {
-    if (getFilter(data).test(text)) {
+    if (!data || getFilter(data).test(text)) {
       return true;
     }
 
@@ -85,7 +85,7 @@ var Filterer = function (generics) {
   };
 
   var filter = function (todos, data) {
-    if (_.isUndefined(data) || _.isEmpty(data)) {
+    if (!data) {
       filtered = todos;
     } else {
       filtered = getFilteredItems(todos, data);

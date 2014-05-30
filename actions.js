@@ -44,6 +44,13 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     return num;
   }
 
+  var matchesFilters = function () {
+    return (
+      filterer.matchesFilter(todos.get(tmpId).text(), im.get('filters').filter)
+      && grouper.matchesGroup(todos.get(tmpId).text(), im.get('filters').group)
+    );
+  };
+
   am.action('item:focus:next', function () {
     fm.next();
   });
@@ -218,7 +225,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     todos.prepend(getNewText());
     fm.set(0);
-    am.trigger('item:edit:clear', false, 'new');
+    am.trigger('item:edit:clear', false, false, 'new');
   });
 
   am.action('item:new:at-bottom', function (e) {
@@ -228,7 +235,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     todos.append(getNewText());
     fm.set(fm.getMax());
-    am.trigger('item:edit:clear', false, 'new');
+    am.trigger('item:edit:clear', false, false, 'new');
   });
 
   am.action('item:new:after', function (e) {
@@ -238,7 +245,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     buffer.push(getNewText());
     am.trigger('item:paste:after');
-    am.trigger('item:edit:clear', false, 'new');
+    am.trigger('item:edit:clear', false, false, 'new');
   });
 
   am.action('item:new:before', function (e) {
@@ -248,7 +255,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     buffer.push(getNewText());
     am.trigger('item:paste:before');
-    am.trigger('item:edit:clear', false, 'new');
+    am.trigger('item:edit:clear', false, false, 'new');
   });
 
   am.action('item:update', function (text) {
@@ -305,7 +312,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     am.trigger('app:search:blur');
     im.get('search').value('');
-    im.get('filters').filter = null;
+    im.get('filters').filter = false;
     am.trigger('app:list:render');
     fm.set(fullIndex);
   });
@@ -349,8 +356,9 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('new').value('').hide();
     am.trigger('item:remove-if-empty');
 
-    if (tmpId && !filterer.matchesFilter(todos.get(tmpId).text())) {
+    if (tmpId && !matchesFilters()) {
       am.trigger('app:search:clear');
+      am.trigger('app:tags:clear');
       fm.set(filterer.getIndex(tmpId));
     }
 
@@ -417,7 +425,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:tags:clear', function () {
-    im.get('filters').group = null;
+    im.get('filters').group = false;
     am.trigger('app:list:render');
     am.trigger('app:tags:clear-active');
   });
