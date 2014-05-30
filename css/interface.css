@@ -1,0 +1,130 @@
+.tools {
+  margin: 0;
+  padding: 4px;
+
+  background-color: #e0e0e0;
+  border-bottom: 1px solid #6c6c6c;
+}
+
+.window--has-focus .tools {
+  background-color: #b2b2b2
+}
+
+.tools__container {
+  position: relative;
+}
+
+.input-wrapper {
+  padding: 4px;
+
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+
+  background-color: white;
+  border: 0;
+  outline: 0;
+
+  font: normal 14px/19px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+}
+
+.input:focus {
+  outline: 0;
+}
+
+.input--with-label,
+.input--with-icon {
+  position: relative;
+}
+
+.input__container {
+  padding-left: 3.6em;
+}
+
+.input__container--has-icon {
+  padding-left: 22px;
+}
+
+.input--has-label {
+
+}
+
+.input__label {
+  left: 0;
+  position: absolute;
+  top: 3px;
+  width: 3.4em;
+
+  text-align: right;
+}
+
+.input__icon {
+  left: 4px;
+  position: absolute;
+  top: 5px;
+}
+
+.input--tools {
+  border-color: #8c8c8c;
+}
+
+.input--cover {
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.input-wrapper[data-focused="true"] {
+  border-color: #927ba9;
+}
+
+.input--tools[data-focused="true"] {
+  border-color: #000;
+}
+
+.main-wrapper {
+  float: right;
+  height: calc(100% - 37px);
+  position: relative;
+  width: calc(100% - 180px); /* 150: size of sidebar */
+}
+
+.main {
+  bottom: 0;
+  left: 0;
+  margin: 7px 4px 4px;
+  overflow: scroll;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sidebar-wrapper {
+  float: left;
+  height: calc(100% - 37px);
+  position: relative;
+  width: 180px;
+
+  background-color: #e2e2e2;
+  border-right: 1px solid #bbb;
+}
+
+.sidebar {
+  bottom: 0;
+  left: 0;
+  margin: 7px 4px 4px;
+  overflow: scroll;
+  padding: 0 8px;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -48,66 +48,6 @@
   margin-top: 24px;
 }
 
-.btn,
-.btn:link,
-.btn:visited,
-.btn--file::before {
-  display: inline-block;
-  padding: 11px 16px 12px;
-
-  background-color: #492c66;
-  border: 1px solid #291d34;
-  border-radius: 4px;
-  cursor: pointer;
-
-  color: #fff;
-  text-align: center;
-}
-
-.btn:focus
-.btn--file:focus::before {
-  box-shadow: 0 0 3px #000;
-}
-
-.btn--alt,
-.btn--alt:link,
-.btn--alt:visited {
-  background-color: #629d77;
-  border-color: #2c663f;
-}
-
-.btn--text,
-.btn--text:link,
-.btn--text:visited {
-  padding: 0;
-
-  background-color: transparent;
-  border: 0;
-
-  color: #b4a2c5;
-  text-decoration: underline;
-}
-
-.btn--file {
-  height: 39px;
-  position: relative;
-  width: 11em;
-
-  cursor: pointer;
-}
-
-.btn--file::before {
-  content: "Choose Folder";
-  left: 50%;
-  margin-left: -5.5em;
-  position: absolute;
-  width: 11em;
-}
-
-.btn--file::-webkit-file-upload-button {
-  visibility: hidden;
-}
-
 .window__path {
   overflow: hidden;
 }

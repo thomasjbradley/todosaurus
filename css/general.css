@@ -1,0 +1,161 @@
+@-moz-viewport { width: device-width; scale: 1; }
+@-ms-viewport { width: device-width; scale: 1; }
+@-o-viewport { width: device-width; scale: 1; }
+@-webkit-viewport { width: device-width; scale: 1; }
+@viewport { width: device-width; scale: 1; }
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+
+  background-color: #fff;
+
+  font: normal 14px/19px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  min-height: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+[data-state="hidden"] {
+  display: none;
+}
+
+[data-state="visible"] {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+  height: 18px;
+  overflow: hidden;
+  width: 18px;
+
+  background: transparent none no-repeat center center;
+  background-size: contain;
+
+  text-indent: 100%;
+  white-space: nowrap;
+}
+
+.i--search {
+  background-image: url("../img/icon-search.svg");
+}
+
+.i--jump {
+  background-image: url("../img/icon-jump.svg");
+}
+
+.i--project {
+  background-image: url("../img/icon-project.svg");
+}
+
+.i--context {
+  background-image: url("../img/icon-context.svg");
+}
+
+.pill {
+  display: inline-block;
+  padding: 4px 8px 3px;
+
+  background-color: #cdc0db;
+  border: 1px solid #b4a2c5;
+  border-radius: 12px;
+
+  color: #492c66;
+  font-size: 11px;
+  line-height: 11px;
+  text-transform: uppercase;
+}
+
+.pill--alt {
+  background-color: #c0dbc9;
+  border-color: #a1c4ad;
+
+  color: #2c663f;
+}
+
+.pill--dull {
+  background-color: #ccc;
+  border-color: #999;
+
+  color: #666;
+}
+
+.btn,
+.btn:link,
+.btn:visited,
+.btn--file::before {
+  display: inline-block;
+  padding: 11px 16px 12px;
+
+  background-color: #492c66;
+  border: 1px solid #291d34;
+  border-radius: 4px;
+  cursor: pointer;
+
+  color: #fff;
+  text-align: center;
+}
+
+.btn:focus
+.btn--file:focus::before {
+  box-shadow: 0 0 3px #000;
+}
+
+.btn--alt,
+.btn--alt:link,
+.btn--alt:visited {
+  background-color: #629d77;
+  border-color: #2c663f;
+}
+
+.btn--text,
+.btn--text:link,
+.btn--text:visited {
+  padding: 0;
+
+  background-color: transparent;
+  border: 0;
+
+  color: #b4a2c5;
+  text-decoration: underline;
+}
+
+.btn--file {
+  height: 39px;
+  position: relative;
+  width: 11em;
+
+  cursor: pointer;
+}
+
+.btn--file::before {
+  content: "Choose Folder";
+  left: 50%;
+  margin-left: -5.5em;
+  position: absolute;
+  width: 11em;
+}
+
+.btn--file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+
+
