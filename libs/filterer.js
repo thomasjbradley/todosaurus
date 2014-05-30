@@ -48,22 +48,6 @@ var Filterer = function (generics) {
     return _.indexOf(items, id);
   };
 
-  var getFilter = function (data) {
-    // Found: http://www.quora.com/Algorithms/How-is-the-fuzzy-search-algorithm-in-Sublime-Text-designed
-    // Alternative: http://stackoverflow.com/questions/16907825/how-to-implement-sublime-text-like-fuzzy-search
-    var r, re, specials = ['^', '$', '.', '|', '[', ']', '(', ')', '{', '}', ':', '*', '+', '?', '\\', '-'];
-
-    r = _.map(data.split(''), function (item) {
-      if (_.indexOf(specials, item) > -1) {
-        return '\\' + item;
-      } else {
-        return item;
-      }
-    });
-
-    return new RegExp(r.join('.*?'), 'i');
-  };
-
   var matchesGeneric = function (text) {
     return _.every(generics, function (gen) {
       return !!(text.indexOf(gen) > -1);
@@ -71,7 +55,7 @@ var Filterer = function (generics) {
   };
 
   var matchesFilter = function (text, data) {
-    if (!data || getFilter(data).test(text)) {
+    if (!data || FuzzyMatch.test(text, data)) {
       return true;
     }
 
