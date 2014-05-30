@@ -45,6 +45,11 @@ var Grouper = function (generics) {
     return groups[name];
   }
 
+  var getFilter = function (tag) {
+    var re = new RegExp('\\' + groups[tag[0]][tag[1]] + '(?:$|\\s)', 'ig');
+    return re;
+  }
+
   var matchesGeneric = function (text) {
     return _.every(generics, function (gen) {
       return !!(text.indexOf(gen) > -1);
@@ -58,9 +63,7 @@ var Grouper = function (generics) {
       return true;
     }
 
-    matcher = groups[tag[0]][tag[1]];
-
-    if (text.indexOf(matcher) > -1) {
+    if (getFilter(tag).test(text)) {
       return true;
     }
 

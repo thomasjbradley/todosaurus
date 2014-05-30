@@ -110,7 +110,12 @@
   });
 
   grouper.subscribe(function (items) {
-    filterer.filter(items, im.get('filters').filter);
+    if (_.isEmpty(items)) {
+      am.trigger('app:tags:clear');
+      am.trigger('app:tags:clear-active');
+    } else {
+      filterer.filter(items, im.get('filters').filter);
+    }
   });
 
   filterer.subscribe(function (items) {

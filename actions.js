@@ -427,7 +427,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('app:tags:clear', function () {
     im.get('filters').group = false;
     am.trigger('app:list:render');
-    am.trigger('app:tags:clear-active');
+    // am.trigger('app:tags:clear-active');
   });
 
   am.action('app:tags:highlight-active', function (tag, index) {
