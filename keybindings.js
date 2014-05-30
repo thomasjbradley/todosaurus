@@ -35,5 +35,5 @@ var keys = {
 
   'app:tags:show:projects' : ['mod+1', 'mod+2', 'mod+3', 'mod+4', 'mod+5', 'mod+6', 'mod+7', 'mod+8', 'mod+9'],
   'app:tags:show:contexts' : ['alt+1', 'alt+2', 'alt+3', 'alt+4', 'alt+5', 'alt+6', 'alt+7', 'alt+8', 'alt+9'],
-  'app:tags:clear'         : ['mod+0', 'alt+0']
+  'app:tags:clear'         : ['mod+0', 'alt+0', 'shift+0']
 };
