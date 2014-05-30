@@ -28,6 +28,22 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     };
   }
 
+  var getNumberFromKeyCombo = function (combo) {
+    var num = 0;
+
+    if (!_.isUndefined(combo)) {
+      num = parseInt(combo.replace(/[^\d]*/ig, ''), 10);
+    }
+
+    if (_.isNaN(num)) {
+      num = 0;
+    } else {
+      num--;
+    }
+
+    return num;
+  }
+
   am.action('item:focus:next', function () {
     fm.next();
   });
@@ -368,50 +384,57 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('app:tags:create:projects', function () {
     var tags = todos.getAllTags('+');
-    // im.set('projects', tags);
     grouper.setGroup('+', tags);
-    console.log('Projects', tags);
+    im.get('tags-projects').render(tags);
   });
 
   am.action('app:tags:create:contexts', function () {
     var tags = todos.getAllTags('@');
-    // im.set('contexts', tags);
     grouper.setGroup('@', tags);
-    console.log('Contexts', tags);
+    im.get('tags-contexts').render(tags);
   });
 
   am.action('app:tags:show', function (tag, combo) {
-    var id = 0;
-
-    if (!_.isUndefined(combo)) {
-      id = parseInt(combo.replace(/[^\d]*/ig, ''), 10);
-    }
-
-    if (_.isNaN(id)) {
-      id = 0;
-    } else {
-      id--;
-    }
+    var id = getNumberFromKeyCombo(combo);
 
     if (id > grouper.getGroup(tag).length - 1) {
       am.trigger('app:tags:clear');
     } else {
       im.get('filters').group = [tag, id];
       am.trigger('app:list:render');
+      am.trigger('app:tags:highlight-active', tag, getNumberFromKeyCombo(combo));
     }
   });
 
   am.action('app:tags:show:projects', function (e, combo) {
+    am.trigger('app:tags:clear-active');
     am.trigger('app:tags:show', '+', combo);
   });
 
   am.action('app:tags:show:contexts', function (e, combo) {
+    am.trigger('app:tags:clear-active');
     am.trigger('app:tags:show', '@', combo);
   });
 
   am.action('app:tags:clear', function () {
     im.get('filters').group = null;
     am.trigger('app:list:render');
+    am.trigger('app:tags:clear-active');
+  });
+
+  am.action('app:tags:highlight-active', function (tag, index) {
+    if (tag === '+') {
+      im.get('tags-projects').activate(index);
+    }
+
+    if (tag === '@') {
+      im.get('tags-contexts').activate(index);
+    }
+  });
+
+  am.action('app:tags:clear-active', function () {
+    im.get('tags-projects').deactivateAll();
+    im.get('tags-contexts').deactivateAll();
   });
 
   am.action('storage:folder:switch', function () {

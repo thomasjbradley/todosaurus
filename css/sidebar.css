@@ -2,7 +2,7 @@
   float: left;
   height: calc(100% - 37px);
   position: relative;
-  width: 149px;
+  width: 180px;
 
   background-color: #e2e2e2;
   border-right: 1px solid #ccc;
@@ -33,9 +33,40 @@
   margin: 0 0 24px;
   padding: 0;
 
+  counter-reset: tags;
+
   list-style-type: none;
 }
 
 .tags > li {
   margin-bottom: 4px;
+
+  counter-increment: tags;
+}
+
+.tag {
+  position: relative;
+}
+
+.tag::before {
+  content: counter(tags);
+  display: inline-block;
+  margin-right: 4px;
+
+  font-weight: bold;
+}
+
+[data-state="active"] .tag {
+  display: block;
+}
+
+[data-state="active"] .tag::after {
+  content: "\25B6";
+  float: right;
+  right: -3px;
+  position: relative;
+  top: -2px;
+
+  opacity: 0.7;
+  transform: scale(0.9, 1.3);
 }

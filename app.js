@@ -39,6 +39,8 @@
   im.add('new', new NewControl('new', am));
   im.add('folder-chooser', new FolderChooserControl('folder-chooser', am));
   im.add('file-chooser', new FileChooserControl('file-chooser', am));
+  im.add('tags-projects', new TagsControl('tags-projects', am));
+  im.add('tags-contexts', new TagsControl('tags-contexts', am, {pillClass: 'pill--alt'}));
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
