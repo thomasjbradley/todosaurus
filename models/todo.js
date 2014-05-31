@@ -6,7 +6,7 @@ var Todo = function (text) {
     subscriptions = [],
     id = md5(text + Date.now()),
     priorities = ['A', 'B', 'C', 'D', 'E'],
-    priorityMatcher = /^( x)?\([a-z]\)\s/i
+    priorityMatcher = /^(x\s)?\([a-z]\)\s/i
   ;
 
   var subscribe = function (callback) {
@@ -81,8 +81,8 @@ var Todo = function (text) {
   };
 
   var getPriority = function () {
-    return text.match(priorityMatcher)[0].replace(/[^a-z]/ig, '');
-  }
+    return text.match(priorityMatcher)[0].replace(/x?\s?[^a-z]/ig, '');
+  };
 
   var addPriority = function (index) {
     var

@@ -7,9 +7,27 @@ var ListControl = function (elem, actionManager) {
     return (item.isMarked()) ? ' item--complete' : '';
   };
 
+  var hasPriorities = function () {
+    that.elem.classList.add('todos--has-priorities');
+  };
+
+  var getPriorityClass = function (item) {
+    if (item.hasPriority()) {
+      hasPriorities();
+      return ' item--has-priority priority--' + item.getPriority().toLowerCase();
+    } else {
+      return '';
+    }
+  };
+
+  var removePriority = function (item) {
+    return item.replace(/^(x\s)?\([a-z]\)\s/i, '$1');
+  };
+
   var getClasses = function (item) {
     return [
-      getMarkedClass(item)
+      getMarkedClass(item),
+      getPriorityClass(item)
     ].join('');
   };
 
@@ -60,7 +78,8 @@ var ListControl = function (elem, actionManager) {
 
   var formatText = function (item) {
     var
-      text = removeCompletedMark(item),
+      theText = removeCompletedMark(item),
+      text = removePriority(theText),
       projects = findMetadata(text, '+'),
       contexts = findMetadata(text, '@'),
       textElem,
@@ -86,7 +105,11 @@ var ListControl = function (elem, actionManager) {
   };
 
   var render = function (items) {
-    var output = _.map(items, function (item) {
+    var output;
+
+    that.elem.classList.remove('todos--has-priorities');
+
+    output = _.map(items, function (item) {
       var pieces = [
         '<li class="item',
         getClasses(item),
