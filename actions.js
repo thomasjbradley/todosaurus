@@ -124,7 +124,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit', function (e, combo, input) {
-    if (!_.isUndefined(e) && !_.isEmpty(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -141,7 +141,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:start', function (e, combo, input) {
-    if (!_.isUndefined(e) && !_.isEmpty(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -158,7 +158,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:end', function (e, combo, input) {
-    if (!_.isUndefined(e) && !_.isEmpty(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -175,7 +175,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:clear', function (e, combo, input) {
-    if (!_.isUndefined(e) && !_.isEmpty(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -193,7 +193,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('item:edit:after', function (e) {
     var prevFocus = fm.get();
 
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -207,7 +207,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('item:edit:before', function (e) {
     var prevFocus = fm.get();
 
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -219,7 +219,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:at-top', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -229,7 +229,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:at-bottom', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -239,7 +239,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:after', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -249,7 +249,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:before', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -282,7 +282,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:search:focus', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -316,7 +316,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:jump:show', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -462,7 +462,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:search:projects', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
@@ -475,7 +475,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:search:contexts', function (e) {
-    if (!_.isUndefined(e)) {
+    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
       e.preventDefault();
     }
 
