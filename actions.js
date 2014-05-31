@@ -80,12 +80,12 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:cut', function () {
-    buffer.push(todos.get(id()).text());
+    buffer.push(todos.get(id()).getFullText());
     todos.remove(id());
   });
 
   am.action('item:copy', function () {
-    buffer.push(todos.get(id()).text());
+    buffer.push(todos.get(id()).getFullText());
   });
 
   am.action('item:paste:before', function () {
