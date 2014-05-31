@@ -4,7 +4,9 @@ var Todo = function (text) {
   var
     methods = {},
     subscriptions = [],
-    id = md5(text + Date.now())
+    id = md5(text + Date.now()),
+    priorities = ['A', 'B', 'C', 'D', 'E'],
+    priorityMatcher = /^( x)?\([a-z]\)\s/i
   ;
 
   var subscribe = function (callback) {
@@ -70,6 +72,40 @@ var Todo = function (text) {
     }
   };
 
+  var hasPriority = function () {
+    return priorityMatcher.test(text);
+  };
+
+  var removePriority = function () {
+    setText(text.replace(priorityMatcher, '$1'));
+  };
+
+  var getPriority = function () {
+    return text.match(priorityMatcher)[0].replace(/[^a-z]/ig, '');
+  }
+
+  var addPriority = function (index) {
+    var
+      alreadyMarked = isMarked(),
+      previousPriority = false
+      ;
+
+    if (hasPriority()) {
+      previousPriority = getPriority();
+      removePriority();
+    }
+
+    if (previousPriority !== priorities[index]) {
+      unmark();
+
+      setText('(' + priorities[index] + ') ' + text);
+
+      if (alreadyMarked) {
+        mark();
+      }
+    }
+  };
+
   methods = {
     subscribe: chainer(subscribe),
     id: getId,
@@ -77,7 +113,11 @@ var Todo = function (text) {
     mark: informer(mark),
     unmark: informer(unmark),
     isMarked: isMarked,
-    toggle: informer(toggle)
+    toggle: informer(toggle),
+    hasPriority: hasPriority,
+    getPriority: getPriority,
+    removePriority: informer(removePriority),
+    addPriority: informer(addPriority)
   };
 
   return methods;

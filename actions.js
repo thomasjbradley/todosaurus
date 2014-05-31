@@ -276,6 +276,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
   });
 
+  am.action('item:add-priority', function (e, combo) {
+    var index = getNumberFromKeyCombo(combo);
+    todos.get(id()).addPriority(index);
+  });
+
   am.action('app:search:focus', function (e) {
     if (!_.isUndefined(e)) {
       e.preventDefault();
