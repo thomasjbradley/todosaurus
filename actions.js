@@ -276,9 +276,9 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
   });
 
-  am.action('item:add-priority', function (e, combo) {
+  am.action('item:priority-toggle', function (e, combo) {
     var index = getNumberFromKeyCombo(combo);
-    todos.get(id()).addPriority(index);
+    todos.get(id()).togglePriority(index);
   });
 
   am.action('app:search:focus', function (e) {
@@ -565,7 +565,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:save', function () {
-    storage.save(todos.getString());
+    storage.save(todos.getAllFullText());
   });
 
 };

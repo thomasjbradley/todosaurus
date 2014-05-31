@@ -1,10 +1,16 @@
-var Todo = function (text) {
+var Todo = function (fullText) {
   "use strict";
 
   var
     methods = {},
     subscriptions = [],
-    id = md5(text + Date.now()),
+    id = md5(fullText + Date.now()),
+    text = fullText,
+    data = {
+      created: (new Date()).toISOString().substr(0, 10),
+      completed: false,
+      priority: false
+    },
     priorities = ['A', 'B', 'C', 'D', 'E'],
     priorityMatcher = /^(x\s)?\([a-z]\)\s/i
   ;
@@ -34,13 +40,48 @@ var Todo = function (text) {
     };
   };
 
+  var parseFullText = function () {
+    var tmpText = fullText.trim();
+
+    if (fullText.substr(0, 2) === 'x ') {
+      mark(fullText.substr(2, 10));
+      tmpText = fullText.slice(12).trim();
+    }
+
+    if (tmpText.match(/^\([A-Z]\)\s/)) {
+      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/g, ''));
+      tmpText = tmpText.slice(3).trim();
+    }
+
+    if (tmpText.match(/^\d{4}-\d{2}-\d{2}/)) {
+      data.created = tmpText.slice(0, 10);
+      tmpText = tmpText.slice(11).trim();
+    }
+
+    setText(tmpText);
+  };
+
+  var getFullText = function () {
+    var finalText = data.created + ' ' + text;
+
+    if (hasPriority()) {
+      finalText = '(' + getPriority() + ') ' + finalText;
+    }
+
+    if (isMarked()) {
+      finalText = 'x ' + data.completed + ' ' + finalText;
+    }
+
+    return finalText;
+  };
+
   var getId = function () {
     return id;
   };
 
   var setText = function (t) {
     text = t.trim();
-  }
+  };
 
   var manageText = function (t) {
     if (_.isUndefined(t)) {
@@ -52,16 +93,23 @@ var Todo = function (text) {
     }
   };
 
-  var mark = function () {
-    setText('x ' + text);
+  var mark = function (date) {
+    if (!_.isUndefined(date)) {
+      data.completed = date;
+    } else {
+      data.completed = (new Date()).toISOString().substr(0, 10);
+    }
+
+    data.priority = false;
   };
 
   var unmark = function () {
-    setText(text.replace(/^x /, ''));
+    data.marked = false;
+    data.completed = false;
   };
 
   var isMarked = function () {
-    return text.substr(0, 2) === 'x ';
+    return !!data.completed;
   };
 
   var toggle = function () {
@@ -72,43 +120,59 @@ var Todo = function (text) {
     }
   };
 
+  var findPriority = function (pri) {
+    if (_.isNumber(pri)) {
+      if (pri > priorities.length - 1) {
+        return _.last(priorities);
+      } else {
+        return priorities[pri];
+      }
+    }
+
+    return pri;
+  };
+
   var hasPriority = function () {
-    return priorityMatcher.test(text);
+    return (data.priority !== false);
   };
 
   var removePriority = function () {
-    setText(text.replace(priorityMatcher, '$1'));
+    data.priority = false;
   };
 
   var getPriority = function () {
-    return text.match(priorityMatcher)[0].replace(/x?\s?[^a-z]/ig, '');
+    return data.priority;
   };
 
-  var addPriority = function (index) {
-    var
-      alreadyMarked = isMarked(),
-      previousPriority = false
-      ;
-
-    if (hasPriority()) {
-      previousPriority = getPriority();
-      removePriority();
+  var addPriority = function (pri) {
+    if (isMarked()) {
+      unmark();
     }
 
-    if (previousPriority !== priorities[index]) {
-      unmark();
+    data.priority = findPriority(pri);
+  };
 
-      setText('(' + priorities[index] + ') ' + text);
+  var togglePriority = function (pri) {
+    var priority;
 
-      if (alreadyMarked) {
-        mark();
-      }
+    if (!hasPriority()) {
+      addPriority(pri);
+      return;
+    }
+
+    priority = findPriority(pri);
+
+    if (priority === data.priority) {
+      removePriority();
+    } else {
+      data.priority = priority;
     }
   };
 
   methods = {
     subscribe: chainer(subscribe),
     id: getId,
+    getFullText: getFullText,
     text: manageText,
     mark: informer(mark),
     unmark: informer(unmark),
@@ -117,8 +181,11 @@ var Todo = function (text) {
     hasPriority: hasPriority,
     getPriority: getPriority,
     removePriority: informer(removePriority),
-    addPriority: informer(addPriority)
+    addPriority: informer(addPriority),
+    togglePriority: informer(togglePriority)
   };
+
+  parseFullText();
 
   return methods;
 

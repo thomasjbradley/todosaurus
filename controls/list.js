@@ -20,10 +20,6 @@ var ListControl = function (elem, actionManager) {
     }
   };
 
-  var removePriority = function (item) {
-    return item.replace(/^(x\s)?\([a-z]\)\s/i, '$1');
-  };
-
   var getClasses = function (item) {
     return [
       getMarkedClass(item),
@@ -72,21 +68,16 @@ var ListControl = function (elem, actionManager) {
     return text;
   };
 
-  var removeCompletedMark = function (text) {
-    return text.replace(/^x /, '');
-  };
-
   var formatText = function (item) {
     var
-      theText = removeCompletedMark(item),
-      text = removePriority(theText),
-      projects = findMetadata(text, '+'),
-      contexts = findMetadata(text, '@'),
+      text,
+      projects = findMetadata(item, '+'),
+      contexts = findMetadata(item, '@'),
       textElem,
       meta
     ;
 
-    text = removeMetaData(text, ['+', '@']);
+    text = removeMetaData(item, ['+', '@']);
 
     textElem = [
       '<div class="item__text">',

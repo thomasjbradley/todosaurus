@@ -113,6 +113,7 @@
 }
 
 .item--complete .item__text {
+  min-height: 19px;
   padding-left: 16px;
   position: relative;
 }

@@ -35,6 +35,7 @@ var Todos = function () {
   var createNewItem = function (text) {
     var todo = new Todo(text);
     todo.subscribe(inform);
+
     return todo;
   };
 
@@ -129,6 +130,12 @@ var Todos = function () {
     });
   };
 
+  var getAllFullText = function () {
+    return _.map(todos, function (item) {
+      return item.getFullText();
+    });
+  };
+
   var remove = function (id) {
     var index = _.findIndex(todos, function (item) {
       return item.id() == id;
@@ -139,12 +146,6 @@ var Todos = function () {
 
   var removeByIndex = function (index) {
     todos.splice(index, 1);
-  };
-
-  var getString = function () {
-    return _.map(todos, function (item) {
-      return item.text();
-    });
   };
 
   methods =  {
@@ -161,9 +162,9 @@ var Todos = function () {
     getByIndex: getByIndex,
     getAll: getAll,
     getAllTags: getAllTags,
+    getAllFullText: getAllFullText,
     remove: informer(remove),
-    removeByIndex: informer(removeByIndex),
-    getString: getString
+    removeByIndex: informer(removeByIndex)
   };
 
   return methods;

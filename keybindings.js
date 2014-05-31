@@ -27,7 +27,7 @@ var keys = {
   'item:new:after'       : ['o', 'mod+enter'],
   'item:new:before'      : ['O', 'mod+shift+enter'],
 
-  'item:add-priority'    : ['1', '2', '3', '4', '5'],
+  'item:priority-toggle'    : ['1', '2', '3', '4', '5'],
 
   'app:search:focus'     : ['/', 'mod+f'],
   'app:search:clear'     : ['command+l', 'ctrl+l'],
