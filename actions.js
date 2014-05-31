@@ -262,8 +262,8 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var theId = id();
 
     if (theId && !matchesFilters(theId)) {
+      im.get('filters').group = false; // tags:clear without double render
       am.trigger('app:search:clear');
-      am.trigger('tags:clear');
       fm.set(filterer.getIndex(theId));
     }
 
@@ -367,6 +367,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('app:context:switch', function (contextKeys) {
     im.reset().bindKeyEvents(contextKeys);
+  });
+
+  am.action('app:clear', function () {
+    im.get('filters').group = false; // tags:clear without double render
+    am.trigger('app:search:clear');
   });
 
   am.action('tags:create', function () {
