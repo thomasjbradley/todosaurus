@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en-ca">
+<head>
+  <meta charset="utf-8">
+  <title>Menu Designer</title>
+  <style>
+    textarea {
+      height: 400px;
+      width: 300px;
+
+      font: 400 14px / 19px 'Lucida Grande';
+      white-space: pre;
+    }
+    div {
+      float: left;
+    }
+  </style>
+</head>
+<body>
+
+<a href="http://jsfiddle.net/M6wt9/">http://jsfiddle.net/M6wt9/</a>
+<p><strong>Symbols: ⌘ ⌥ ⇧ ← → ↑ ↓ ↩ ↵ ⎋ ⌫ ⌦ ⌃ ⇥ ⇤</strong></p>
+<p><strong>Spaces:</strong> Hair Space: <input value=" "> Thin Space: <input value=" "></p>
+
+<div>
+<h1>File</h1>
+<textarea>
+New Item                                                                                       ⌘N
+New Item at Bottom                                       ⇧⌘N
+New Item Below                                                              ⌘↵
+New Item Above                                                     ⇧⌘↵
+Move Focus Up                                                                    ↑
+Move Focus Down                                                         ↓
+Focus First Item                                                              ⌘↑
+Focus Last Item                                                               ⌘↓
+Jump Focus Up                                                              ⌃U
+Jump Focus Down                                                   ⌃D
+Jump to Line                                                                           ⌘G
+Move Completed to Bottom                  ⌘`
+Move Prioritized to Top                         ⇧⌘`
+Archive All Completed                             ⌥⌘`
+Reveal in Finder                                                              ⌘R
+Switch Directory                                                             ⌘O
+</textarea>
+</div>
+
+<div>
+<h1>Edit</h1>
+<textarea>
+Undo                                                                                  ⌘Z
+Redo                                                                           ⇧⌘Z
+Cut                                                                                         ⌘X
+Copy                                                                                   ⌘C
+Paste                                                                                  ⌘V
+Paste Before                                               ⇧⌘V
+Delete                                                                                ⌫
+Duplicate                                                                  ⌘D
+Select All                                                                   ⌘A
+Update                                                            Return
+Insert at Start                                                      I
+Insert at End                                                         A
+Completely Change                              C
+Mark Complete               Space
+Mark Incomplete            Space
+Move Up                                                             ⇧⌘↑
+Move Down                                                  ⇧⌘↓
+</textarea>
+</div>
+
+<div>
+<h1>View</h1>
+<textarea>
+Find                                                               ⌘F
+Find By Project                      ⌘P
+Find By Context                  ⌘T
+Clear Search                               ⌘L
+Clear Group                         ⌥⌘L
+Clear All                                       ⇧⌘L
+Order In File                        ⌥⌘0
+Sort By Priority              ⌥⌘-
+Sort By Date                        ⌥⌘=
+</textarea>
+</div>
+
+<div>
+<h1>Assign Priority</h1>
+<textarea>
+A: Now                                 1
+B:  Today                          2
+C: Tomorrow          3
+D: This Week          4
+E:  Next Week         5
+</textarea>
+</div>
+
+</body>
+</html>

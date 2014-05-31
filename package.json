@@ -11,6 +11,7 @@
     "url": "http://thomasjbradley.ca"
   },
   "main": "index.html",
+  "no-edit-menu": true,
   "window": {
     "title": "ca.thomasjbradley.todosaurus",
     "icon": "./img/todosaurus.png",
