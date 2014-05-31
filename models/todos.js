@@ -124,7 +124,9 @@ var Todos = function () {
       return _.unique(findMetadata(item.text(), re));
     });
 
-    return _.unique(_.flatten(metas)).sort();
+    return _.unique(_.flatten(metas)).sort(function (a, b) {
+      return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
   };
 
   var remove = function (id) {
