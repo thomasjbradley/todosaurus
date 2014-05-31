@@ -1,93 +1,77 @@
 menu.file = new gui.MenuItem({ label: 'File' });
 
 menu['file:new'] = new gui.MenuItem({
-  label: 'New Item                                                                                       ⌘N',
-  action: ''
+  label: 'New Item                                                                                       ⌘N'
 });
 
 menu['file:new-bottom'] = new gui.MenuItem({
-  label: 'New Item at Bottom                                       ⇧⌘N',
-  action: ''
+  label: 'New Item at Bottom                                       ⇧⌘N'
 });
 
 menu['file:new-below'] = new gui.MenuItem({
-  label: 'New Item Below                                                              ⌘↵',
-  action: ''
+  label: 'New Item Below                                                              ⌘↵'
 });
 
 menu['file:new-above'] = new gui.MenuItem({
-  label: 'New Item Above                                                     ⇧⌘↵',
-  action: ''
+  label: 'New Item Above                                                     ⇧⌘↵'
 });
 
 menu['file:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:focus-up'] = new gui.MenuItem({
-  label: 'Move Focus Up                                                                    ↑',
-  action: ''
+  label: 'Move Focus Up                                                                    ↑'
 });
 
 menu['file:focus-down'] = new gui.MenuItem({
-  label: 'Move Focus Down                                                         ↓',
-  action: ''
+  label: 'Move Focus Down                                                         ↓'
 });
 
 menu['file:focus-first'] = new gui.MenuItem({
-  label: 'Focus First Item                                                              ⌘↑',
-  action: ''
+  label: 'Focus First Item                                                              ⌘↑'
 });
 
 menu['file:focus-last'] = new gui.MenuItem({
-  label: 'Focus Last Item                                                               ⌘↓',
-  action: ''
+  label: 'Focus Last Item                                                               ⌘↓'
 });
 
 menu['file:focus-jump-up'] = new gui.MenuItem({
-  label: 'Jump Focus Up                                                              ⌃U',
-  action: ''
+  label: 'Jump Focus Up                                                              ⌃U'
 });
 
 menu['file:focus-jump-down'] = new gui.MenuItem({
-  label: 'Jump Focus Down                                                   ⌃D',
-  action: ''
+  label: 'Jump Focus Down                                                   ⌃D'
 });
 
 menu['file:sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:jump'] = new gui.MenuItem({
-  label: 'Jump to Line                                                                           ⌘G',
-  action: ''
+  label: 'Jump to Line                                                                           ⌘G'
 });
 
 menu['file:sep-3'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:move-complete-bottom'] = new gui.MenuItem({
-  label: 'Move Completed to Bottom                  ⌘`',
-  action: ''
+  label: 'Move Completed to Bottom                  ⌘`'
 });
 
 menu['file:move-priority-top'] = new gui.MenuItem({
-  label: 'Move Prioritized to Top                         ⇧⌘`',
-  action: ''
+  label: 'Move Prioritized to Top                         ⇧⌘`'
 });
 
 menu['file:archive'] = new gui.MenuItem({
-  label: 'Archive All Completed                             ⌥⌘`',
-  action: ''
+  label: 'Archive All Completed                             ⌥⌘`'
 });
 
 menu['file:sep-4'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:reveal-in-finder'] = new gui.MenuItem({
-  label: 'Reveal in Finder                                                              ⌘R',
-  action: ''
+  label: 'Reveal in Finder                                                              ⌘R'
 });
 
 menu['file:sep-5'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:switch-directory'] = new gui.MenuItem({
-  label: 'Switch Directory                                                             ⌘O',
-  action: ''
+  label: 'Switch Directory                                                             ⌘O'
 });
 
 menu.file.submenu = new gui.Menu();
