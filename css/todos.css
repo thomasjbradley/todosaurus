@@ -133,22 +133,29 @@
 
 .item__metadata {
   margin: 4px 0 0;
-  padding: 0;
+  padding: 0 0 0 20px;
   position: absolute;
   right: 4px;
   top: -1px;
 
-  opacity: 0.5;
+  background-image: linear-gradient(to right, transparent 0%, #fff 15px, #fff 100%);
+
   list-style-type: none;
 }
 
-[data-focused="true"] > .item__metadata {
-  opacity: 1;
+.item[data-focused="true"] .item__metadata {
+  background-image: linear-gradient(to right, transparent 0%, #ececec 15px, #ececec 100%);
 }
 
 .item__metadata__single {
   float: left;
   margin-left: 2px;
+
+  opacity: 0.5;
+}
+
+.item[data-focused="true"] .item__metadata__single {
+  opacity: 1;
 }
 
 .item__metadata__single--project {
