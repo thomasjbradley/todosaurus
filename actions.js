@@ -372,6 +372,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('tags:create', function () {
     am.trigger('tags:create:projects');
     am.trigger('tags:create:contexts');
+    am.trigger('tags:create:priority');
   });
 
   am.action('tags:create:projects', function () {
@@ -384,6 +385,12 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var tags = todos.getAllTags('@');
     grouper.setGroup('@', tags);
     im.get('tags-contexts').render(tags);
+  });
+
+  am.action('tags:create:priority', function () {
+    var tags = generics.priorities;
+    grouper.setGroup('!', tags);
+    im.get('tags-priority').render(tags);
   });
 
   am.action('tags:show', function (tag, combo) {
@@ -414,6 +421,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('tags:show', '@', combo);
   });
 
+  am.action('tags:show:priority', function (e, combo) {
+    am.trigger('tags:clear-active');
+    am.trigger('tags:show', '!', combo);
+  });
+
   am.action('tags:clear', function () {
     im.get('filters').group = false;
     am.trigger('tags:clear-active');
@@ -428,11 +440,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     if (tag === '@') {
       im.get('tags-contexts').activate(index);
     }
+
+    if (tag === '!') {
+      im.get('tags-priority').activate(index);
+    }
   });
 
   am.action('tags:clear-active', function () {
     im.get('tags-projects').deactivateAll();
     im.get('tags-contexts').deactivateAll();
+    im.get('tags-priority').deactivateAll();
   });
 
   am.action('tags:search:projects', function (e) {

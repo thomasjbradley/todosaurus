@@ -3,7 +3,14 @@
 
   var
     generics = {
-      new: '%%NEW%%'
+      new: '%%NEW%%',
+      priorities: [
+        'A: Now',
+        'B: Today',
+        'C: Tomorrow',
+        'D: This Week',
+        'E: Next Week'
+      ]
     },
     filters = {
       order: false,
@@ -42,6 +49,7 @@
   im.add('file-chooser', new FileChooserControl('file-chooser', am));
   im.add('tags-projects', new TagsControl('tags-projects', am));
   im.add('tags-contexts', new TagsControl('tags-contexts', am, {pillClass: 'pill--alt'}));
+  im.add('tags-priority', new TagsControl('tags-priority', am, {pillClass: 'tag--priority'}));
   im.add('tags-search', new TagsSearchControl('tags-search', am));
   document.addEventListener('click', im.handleMouseEvents, false);
 
@@ -112,7 +120,7 @@
   });
 
   grouper.subscribe(function (items) {
-    if (_.isEmpty(items) && _.isArray(im.get('filters').group)) {
+    if (_.isEmpty(items) && _.isArray(im.get('filters').group) && im.get('filters').group[0] !== '!') {
       im.get('filters').group = false;
       am.trigger('tags:clear-active');
       am.trigger('tags:clear');

@@ -7,7 +7,7 @@ var Grouper = function (generics) {
     matchers = {
       '+': '\\{{tag}}(?:$|\\s)',
       '@': '\\{{tag}}(?:$|\\s)',
-      '!': '^(?: x)?\({{tag}}\)'
+      '!': '^(?:x\\s)?\\({{tag}}\\)'
     },
     groups = {},
     grouped
@@ -51,7 +51,11 @@ var Grouper = function (generics) {
   }
 
   var getFilter = function (tag) {
-    var re = new RegExp(matchers[tag[0]].replace('{{tag}}', groups[tag[0]][tag[1]]), 'ig');
+    var
+      rawTag = groups[tag[0]][tag[1]],
+      fullTag = (tag[0] == '!') ? rawTag.substr(0, 1) : rawTag,
+      re = new RegExp(matchers[tag[0]].replace('{{tag}}', fullTag), 'ig')
+    ;
 
     return re;
   }
@@ -63,8 +67,6 @@ var Grouper = function (generics) {
   };
 
   var matchesGroup = function (text, tag) {
-    var matcher;
-
     if (!tag || !_.isArray(tag)) {
       return true;
     }
