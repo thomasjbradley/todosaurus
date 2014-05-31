@@ -5,6 +5,7 @@
     "mousetrap": "~1.4.6",
     "blueimp-md5": "~1.1.0",
     "lodash": "~2.4.1",
-    "normalize-css": "~3.0.1"
+    "normalize-css": "~3.0.1",
+    "yepnope": "~1.5.4"
   }
 }
