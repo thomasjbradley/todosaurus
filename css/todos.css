@@ -52,7 +52,7 @@
 .item--has-priority::after {
   content: " ";
   height: 16px;
-  padding-top: 2px;
+  padding: 2px 0 0 1px;
   position: absolute;
   left: 2px;
   top: 5px;
