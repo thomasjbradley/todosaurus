@@ -97,6 +97,10 @@ body {
   color: #666;
 }
 
+.pill--clear {
+  background-color: transparent;
+}
+
 .btn,
 .btn:link,
 .btn:visited,

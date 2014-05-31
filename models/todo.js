@@ -112,6 +112,10 @@ var Todo = function (fullText) {
     return !!data.completed;
   };
 
+  var getCompletedDate = function () {
+    return data.completed;
+  };
+
   var toggle = function () {
     if (isMarked()) {
       unmark();
@@ -177,6 +181,7 @@ var Todo = function (fullText) {
     mark: informer(mark),
     unmark: informer(unmark),
     isMarked: isMarked,
+    getCompletedDate: getCompletedDate,
     toggle: informer(toggle),
     hasPriority: hasPriority,
     getPriority: getPriority,

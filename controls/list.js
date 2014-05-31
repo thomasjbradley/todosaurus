@@ -68,16 +68,24 @@ var ListControl = function (elem, actionManager) {
     return text;
   };
 
+  var getCompletedDate = function (item) {
+    if (item.isMarked()) {
+      return '<li class="item__metadata__single item__metadata__single--date pill pill--dull pill--clear">' + item.getCompletedDate() + '</li>';
+    }
+
+    return '';
+  };
+
   var formatText = function (item) {
     var
-      text,
-      projects = findMetadata(item, '+'),
-      contexts = findMetadata(item, '@'),
+      text = item.text(),
+      projects = findMetadata(text, '+'),
+      contexts = findMetadata(text, '@'),
       textElem,
       meta
     ;
 
-    text = removeMetaData(item, ['+', '@']);
+    text = removeMetaData(text, ['+', '@']);
 
     textElem = [
       '<div class="item__text">',
@@ -87,6 +95,7 @@ var ListControl = function (elem, actionManager) {
 
     meta = [
       '<ul class="item__metadata">',
+      getCompletedDate(item),
       formatMetadata(projects, 'project'),
       formatMetadata(contexts, 'context'),
       '</ul>'
@@ -105,7 +114,7 @@ var ListControl = function (elem, actionManager) {
         '<li class="item',
         getClasses(item),
         '">',
-        formatText(item.text()),
+        formatText(item),
         '</li>'
       ];
 
