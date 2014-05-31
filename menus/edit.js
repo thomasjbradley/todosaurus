@@ -1,7 +1,7 @@
 menu.edit = new gui.MenuItem({ label: 'Edit' });
 
 menu['edit:undo'] = new gui.MenuItem({
-  label: 'Undo                                                                                  ⌘',
+  label: 'Undo                                                                                  ⌘Z',
   action: ''
 });
 
