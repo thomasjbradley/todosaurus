@@ -37,7 +37,7 @@ var keys = {
   'tags:show:projects'   : ['mod+1', 'mod+2', 'mod+3', 'mod+4', 'mod+5', 'mod+6', 'mod+7', 'mod+8', 'mod+9'],
   'tags:show:contexts'   : ['alt+1', 'alt+2', 'alt+3', 'alt+4', 'alt+5', 'alt+6', 'alt+7', 'alt+8', 'alt+9'],
   'tags:show:priority'   : ['shift+1', 'shift+2', 'shift+3', 'shift+4', 'shift+5'],
-  'tags:clear'           : ['mod+0', 'alt+0', 'shift+0'],
+  'tags:clear'           : ['mod+0', 'alt+0', 'shift+0', 'mod+alt+l'],
   'tags:search:projects' : ['mod+p'],
   'tags:search:contexts' : ['mod+t']
 };
