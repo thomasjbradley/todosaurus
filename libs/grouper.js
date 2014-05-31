@@ -98,7 +98,7 @@ var Grouper = function (generics) {
 
   var getGroupedItems = function (todos, tag) {
     return _.filter(todos, function (item) {
-      return matchesGroup(item.text(), tag);
+      return matchesGroup(item.getFullText(), tag);
     });
   };
 
