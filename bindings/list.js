@@ -1,4 +1,4 @@
-var keys = {
+bindings.list = {
   'item:focus:next'      : ['j', 'down'],
   'item:focus:prev'      : ['k', 'up'],
   'item:focus:next:jump' : ['ctrl+d', 'pagedown'],

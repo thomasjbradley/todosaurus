@@ -1,7 +1,8 @@
 var
   gui,
   script,
-  env
+  env,
+  bindings = {},
   _ = window._ || require('lodash')
 ;
 

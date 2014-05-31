@@ -124,7 +124,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit', function (e, combo, input) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -141,7 +141,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:start', function (e, combo, input) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -158,7 +158,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:end', function (e, combo, input) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -175,7 +175,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:edit:clear', function (e, combo, input) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -193,7 +193,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('item:edit:after', function (e) {
     var prevFocus = fm.get();
 
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -207,7 +207,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('item:edit:before', function (e) {
     var prevFocus = fm.get();
 
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -219,7 +219,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:at-top', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -229,7 +229,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:at-bottom', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -239,7 +239,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:after', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -249,7 +249,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:before', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -282,7 +282,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:search:focus', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -316,7 +316,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:jump:show', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -462,7 +462,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:search:projects', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -475,7 +475,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:search:contexts', function (e) {
-    if (!_.isUndefined(e) && _.has(e, 'preventDefault')) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
@@ -531,7 +531,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('file-chooser').hide();
     am.trigger('app:set-title');
     todos.populate(startupData);
-    im.bindDefaultKeyActions(keys);
+    im.bindDefaultKeyActions(bindings.list);
   });
 
   am.action('storage:read', function () {
@@ -552,7 +552,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
       am.trigger('app:set-title');
       todos.populate(data);
-      im.bindDefaultKeyActions(keys);
+      im.bindDefaultKeyActions(bindings.list);
     });
   });
 
@@ -566,7 +566,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       } else {
         am.trigger('app:set-title');
         todos.populate(data);
-        im.bindDefaultKeyActions(keys);
+        im.bindDefaultKeyActions(bindings.list);
       }
     });
   });
