@@ -3,6 +3,8 @@ var
   script,
   env,
   bindings = {},
+  GuiMenu,
+  menu = {},
   _ = window._ || require('lodash')
 ;
 
@@ -24,11 +26,13 @@ if (window.isNode) {
     gui.Window.get().showDevTools();
   }
 
+  GuiMenu = new gui.Menu({ type: 'menubar' });
+  gui.Window.get().menu = GuiMenu;
+
   yepnope({
     test: (env === 'dev'),
     yep: 'http://localhost:35729/livereload.js',
     load: [
-      'menus/menu-manager.js',
       'menus/file.js',
       'menus/edit.js',
       'menus/edit-assign-project.js',
@@ -37,7 +41,8 @@ if (window.isNode) {
       'menus/view.js',
       'menus/view-show-project.js',
       'menus/view-show-context.js',
-      'menus/view-show-priority.js'
+      'menus/view-show-priority.js',
+      'menus/menu-manager.js'
     ]
   });
 

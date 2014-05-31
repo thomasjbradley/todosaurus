@@ -31,7 +31,7 @@ menu['edit:delete'] = new gui.MenuItem({
 });
 
 menu['edit:duplicate'] = new gui.MenuItem({
-  label: 'Duplicate                                                                  ⌘D'
+  label: 'Duplicate                                                          ⇧⌘D'
 });
 
 menu['edit:select-all'] = new gui.MenuItem({
@@ -52,15 +52,14 @@ menu['edit:insert-end'] = new gui.MenuItem({
   label: 'Insert at End                                                         A'
 });
 
-menu['edit:completely-change'] = new gui.MenuItem({
-  label: 'Completely Change                              C'
+menu['edit:change-clear'] = new gui.MenuItem({
+  label: 'Change & Clear                                     C'
 });
 
 menu['edit:new-sep-3'] = new gui.MenuItem({ type: 'separator' });
 
-menu['edit:mark'] = new gui.MenuItem({
-  label: 'Mark Complete               Space',
-  altLabel: 'Mark Incomplete            Space'
+menu['edit:toggle-complete'] = new gui.MenuItem({
+  label: 'Toggle Complete           Space',
 });
 
 menu['edit:new-sep-4'] = new gui.MenuItem({ type: 'separator' });

@@ -12,7 +12,7 @@ bindings.list = {
   'item:copy'            : ['Y', 'mod+c'],
   'item:paste:before'    : ['P', 'mod+V'],
   'item:paste:after'     : ['p', 'mod+v'],
-  'item:duplicate'       : ['mod+d'],
+  'item:duplicate'       : ['mod+D'],
 
   'item:move:up'         : ['mod+shift+up'],
   'item:move:down'       : ['mod+shift+down'],

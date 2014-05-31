@@ -1,6 +1,5 @@
-var
-  GuiMenu = new gui.Menu({ type: 'menubar' }),
-  menu = {}
-;
-
-gui.Window.get().menu = GuiMenu;
+_.each(bindings.menu, function (item, key) {
+  menu[key].click = function () {
+    Mousetrap.trigger(item);
+  };
+});
