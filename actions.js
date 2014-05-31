@@ -374,6 +374,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('app:search:clear');
   });
 
+  am.action('app:set-title', function () {
+    document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — ' + document.title;
+  });
+
   am.action('tags:create', function () {
     am.trigger('tags:create:projects');
     am.trigger('tags:create:contexts');
@@ -525,6 +529,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     im.get('folder-chooser').hide();
     im.get('file-chooser').hide();
+    am.trigger('app:set-title');
     todos.populate(startupData);
     im.bindDefaultKeyActions(keys);
   });
@@ -545,6 +550,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       im.get('folder-chooser').hide();
       im.get('file-chooser').hide();
 
+      am.trigger('app:set-title');
       todos.populate(data);
       im.bindDefaultKeyActions(keys);
     });
@@ -558,6 +564,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       if (err) {
         am.trigger('storage:file:new');
       } else {
+        am.trigger('app:set-title');
         todos.populate(data);
         im.bindDefaultKeyActions(keys);
       }
