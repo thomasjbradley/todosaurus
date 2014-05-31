@@ -1,7 +1,7 @@
 menu['view:show-priority'].submenu = new gui.Menu();
 
 menu['view:show-priority:a'] = new gui.MenuItem({
-  label: 'A: Now                                 1',
+  label: 'A: Now                                1',
   action: ''
 });
 
@@ -21,7 +21,7 @@ menu['view:show-priority:d'] = new gui.MenuItem({
 });
 
 menu['view:show-priority:e'] = new gui.MenuItem({
-  label: 'E:  Next Week         5',
+  label: 'E:  Next Week        5',
   action: ''
 });
 
