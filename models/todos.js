@@ -52,7 +52,7 @@ var Todos = function () {
   };
 
   var addItemAt = function (item, index) {
-    var todo = (_.isString(item)) ? createNewItem(item) : createNewItem(item.text());
+    var todo = (_.isString(item)) ? createNewItem(item) : item;
 
     if (_.isUndefined(index) || index === 0) {
       return todos.unshift(todo);
@@ -153,6 +153,7 @@ var Todos = function () {
   methods =  {
     subscribe: chainer(subscribe),
     populate: informer(populate),
+    createNewItem: createNewItem,
     length: length,
     addAt: informer(addAt),
     addBeforeItem: informer(addBeforeItem),

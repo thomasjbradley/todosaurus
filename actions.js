@@ -9,6 +9,25 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     return generics.new;
   };
 
+  var prepareNewTodo = function () {
+    var
+      text,
+      todo = todos.createNewItem(getNewText()),
+      group = im.get('filters').group
+    ;
+
+    if (group !== false) {
+      if (group[0] !== '!') {
+        todo.text(grouper.getGroup(group[0])[group[1]]);
+      } else {
+        todo.addPriority(group[1]);
+        todo.text('');
+      }
+    }
+
+    return todo;
+  };
+
   var isFieldEmpty = function (id) {
     var text = todos.get(id).text().replace(getNewText(), '').trim();
 
@@ -238,44 +257,60 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
   });
 
+  am.action('item:new:edit', function () {
+    if (im.get('filters').group !== false) {
+      am.trigger('item:edit:start', false, false, 'new');
+    } else {
+      am.trigger('item:edit:clear', false, false, 'new');
+    }
+  });
+
   am.action('item:new:at-top', function (e) {
+    var todo = prepareNewTodo();
+
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
-    todos.prepend(getNewText());
+    todos.prepend(todo);
     fm.set(0);
-    am.trigger('item:edit:clear', false, false, 'new');
+    am.trigger('item:new:edit');
   });
 
   am.action('item:new:at-bottom', function (e) {
+    var todo = prepareNewTodo();
+
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
-    todos.append(getNewText());
+    todos.append(todo);
     fm.set(fm.getMax());
-    am.trigger('item:edit:clear', false, false, 'new');
+    am.trigger('item:new:edit');
   });
 
   am.action('item:new:after', function (e) {
+    var todo = prepareNewTodo();
+
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
-    buffer.push(getNewText());
+    buffer.push(todo.getFullText());
     am.trigger('item:paste:after');
-    am.trigger('item:edit:clear', false, false, 'new');
+    am.trigger('item:new:edit');
   });
 
   am.action('item:new:before', function (e) {
+    var todo = prepareNewTodo();
+
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
-    buffer.push(getNewText());
+    buffer.push(todo.getFullText());
     am.trigger('item:paste:before');
-    am.trigger('item:edit:clear', false, false, 'new');
+    am.trigger('item:new:edit');
   });
 
   am.action('item:update', function (text) {
@@ -288,12 +323,6 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
 
     todos.get(theId).text(text);
-  });
-
-  am.action('item:delete-if-empty', function () {
-    if (isFieldEmpty(id())) {
-      todos.remove(id());
-    }
   });
 
   am.action('item:priority-toggle', function (e, combo) {

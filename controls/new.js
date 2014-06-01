@@ -14,7 +14,7 @@ var NewControl = function (elem, actionManager) {
 
   var discard = function () {
     that.getActionManager().trigger('app:new:hide');
-    that.getActionManager().trigger('item:delete-if-empty');
+    that.getActionManager().trigger('item:delete');
   };
 
   var commitOrDiscard = function (isCommittable) {
