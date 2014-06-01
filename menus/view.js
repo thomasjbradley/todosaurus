@@ -14,14 +14,6 @@ menu['view:find-context'] = new gui.MenuItem({
 
 menu['view:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
 
-menu['view:show-project'] = new gui.MenuItem({
-  label: 'Show Project'
-});
-
-menu['view:show-context'] = new gui.MenuItem({
-  label: 'Show Context'
-});
-
 menu['view:show-priority'] = new gui.MenuItem({
   label: 'Show Priority'
 });
@@ -32,6 +24,7 @@ menu['view:sort-file'] = new gui.MenuItem({
   label: 'Order In File                        ⌥⌘0',
   type: 'checkbox',
   checked: true,
+  enabled: false
 });
 
 menu['view:sort-priority'] = new gui.MenuItem({

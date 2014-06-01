@@ -65,18 +65,6 @@ menu['edit:toggle-complete'] = new gui.MenuItem({
   label: 'Toggle Complete           Space',
 });
 
-menu['edit:new-sep-4'] = new gui.MenuItem({ type: 'separator' });
-
-menu['edit:assign-project'] = new gui.MenuItem({
-  label: 'Assign Project',
-  enabled: false
-});
-
-menu['edit:assign-context'] = new gui.MenuItem({
-  label: 'Assign Context',
-  enabled: false
-});
-
 menu['edit:toggle-priority'] = new gui.MenuItem({
   label: 'Toggle Priority'
 });

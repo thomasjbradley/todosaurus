@@ -35,12 +35,8 @@ if (window.isNode) {
     load: [
       'menus/file.js',
       'menus/edit.js',
-      'menus/edit-assign-project.js',
-      'menus/edit-assign-context.js',
       'menus/edit-toggle-priority.js',
       'menus/view.js',
-      'menus/view-show-project.js',
-      'menus/view-show-context.js',
       'menus/view-show-priority.js',
       'menus/menu-manager.js'
     ]
