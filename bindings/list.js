@@ -28,7 +28,7 @@ bindings.list = {
   'item:new:before'      : ['shift+o', 'mod+shift+enter'],
 
   'item:priority-toggle' : ['1', '2', '3', '4', '5'],
-  'item:priority-clear'  : ['mod+0'],
+  'item:priority-remove' : ['0'],
 
   'app:search:focus'     : ['/', 'mod+f'],
   'app:search:clear'     : ['command+l', 'ctrl+l'],

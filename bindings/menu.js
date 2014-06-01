@@ -30,7 +30,7 @@ bindings.menu = {
   'edit:insert-end'           : 'a',
   'edit:update-clear'         : 'shift+c',
   'edit:toggle-complete'      : 'space',
-  'edit:clear-priority'       : 'mod+0',
+  'edit:remove-priority'      : '0',
   'edit:move-up'              : 'mod+shift+up',
   'edit:move-down'            : 'mod+shift+down',
 

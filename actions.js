@@ -301,6 +301,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     todos.get(id()).togglePriority(index);
   });
 
+  am.action('item:priority-remove', function (e, combo) {
+    todos.get(id()).removePriority();
+  });
+
   am.action('app:search:focus', function (e) {
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
@@ -456,15 +460,20 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('tags:clear-active');
     am.trigger('tags:show', '!', combo);
 
-    clearShowPriorityMenuChecks();
-    menu['view:show-priority:' + pri[getNumberFromKeyCombo(combo)]].checked = true;
+    if (window.isNode) {
+      clearShowPriorityMenuChecks();
+      menu['view:show-priority:' + pri[getNumberFromKeyCombo(combo)]].checked = true;
+    }
   });
 
   am.action('tags:clear', function () {
     im.get('filters').group = false;
-    clearShowPriorityMenuChecks();
     am.trigger('tags:clear-active');
     am.trigger('app:list:render');
+
+    if (window.isNode) {
+      clearShowPriorityMenuChecks();
+    }
   });
 
   am.action('tags:highlight-active', function (tag, index) {

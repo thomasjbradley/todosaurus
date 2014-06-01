@@ -69,8 +69,8 @@ menu['edit:toggle-priority'] = new gui.MenuItem({
   label: 'Toggle Priority'
 });
 
-menu['edit:clear-priority'] = new gui.MenuItem({
-  label: 'Clear Priority                     ⌘0'
+menu['edit:remove-priority'] = new gui.MenuItem({
+  label: 'Remove Priority                 ⌘0'
 });
 
 menu['edit:new-sep-5'] = new gui.MenuItem({ type: 'separator' });
