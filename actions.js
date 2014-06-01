@@ -62,7 +62,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   var matchesFilters = function (id) {
     return (
       filterer.matchesFilter(todos.get(id).text(), im.get('filters').filter)
-      && grouper.matchesGroup(todos.get(id).text(), im.get('filters').group)
+      && grouper.matchesGroup(todos.get(id).getFullText(), im.get('filters').group)
     );
   };
 
