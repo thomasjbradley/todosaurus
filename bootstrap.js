@@ -5,6 +5,7 @@ var
   bindings = {},
   GuiMenu,
   menu = {},
+  clipboard,
   _ = window._ || require('lodash')
 ;
 
@@ -28,6 +29,7 @@ if (window.isNode) {
 
   GuiMenu = new gui.Menu({ type: 'menubar' });
   gui.Window.get().menu = GuiMenu;
+  clipboard = gui.Clipboard.get();
 
   yepnope({
     test: (env === 'dev'),

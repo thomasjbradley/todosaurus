@@ -2,10 +2,11 @@ var Control = function (elem, actionManager) {
   "use strict";
 
   var
-    that = {},
+    that = {
+      keyEvents: []
+    },
     events = {},
-    eventsBound = false,
-    keyEvents = []
+    eventsBound = false
   ;
 
   var chainer = function (func) {
@@ -36,7 +37,7 @@ var Control = function (elem, actionManager) {
   };
 
   var bindKeyEvents = function (events) {
-    that.keyEvents = events;
+    that.keyEvents = that.keyEvents.concat(events);
   };
 
   var killEvents = function () {

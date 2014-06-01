@@ -88,12 +88,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:cut', function () {
-    buffer.push(todos.get(id()).getFullText());
+    var text = todos.get(id()).getFullText();
+    clipboard.set(text, 'text');
+    buffer.push(text);
     todos.remove(id());
   });
 
   am.action('item:copy', function () {
-    buffer.push(todos.get(id()).getFullText());
+    var text = todos.get(id()).getFullText();
+    clipboard.set(text, 'text');
+    buffer.push(text);
   });
 
   am.action('item:paste:before', function () {
