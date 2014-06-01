@@ -513,7 +513,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('tags:clear-active');
     am.trigger('app:list:render');
 
-    im.get('menu').clearShowPriorityMenuChecks();
+    im.get('menu').clearShowPriorityChecks();
   });
 
   am.action('tags:highlight-active', function (tag, index) {
