@@ -7,6 +7,10 @@ var FileSystemHelper = function () {
     fs
   ;
 
+  var append = function (path, data) {
+    fs.appendFile(path, data.join('\n'));
+  };
+
   var save = function (path, data) {
     fs.writeFile(path, data.join('\n'));
   };
@@ -31,6 +35,7 @@ var FileSystemHelper = function () {
   };
 
   methods =  {
+    append: append,
     save: save,
     read: read
   };

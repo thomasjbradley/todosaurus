@@ -679,7 +679,18 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:archive', function () {
+    var keep = [], done = [], all = _.cloneDeep(todos.getAll());
 
+    _.each(all, function (item) {
+      if (item.isMarked()) {
+        done.push(item.getFullText());
+      } else {
+        keep.push(item);
+      }
+    });
+
+    todos.populate(keep);
+    storage.saveArchive(done);
   });
 
   am.action('storage:reveal-finder', function () {

@@ -3,6 +3,7 @@ var StorageManager = function () {
 
   var
     todos = 'todo.txt',
+    done = 'done.txt',
     folder = '',
     methods = {},
     subscriptions = [],
@@ -16,6 +17,10 @@ var StorageManager = function () {
 
   var getPath = function () {
     return folder + '/' + todos;
+  };
+
+  var getArchivePath = function () {
+    return folder + '/' + done;
   };
 
   var subscribe = function (callback) {
@@ -71,6 +76,10 @@ var StorageManager = function () {
     storage.save(getPath(), data);
   };
 
+  var saveArchive = function (data) {
+    storage.append(getArchivePath(), data);
+  };
+
   var read = function (callback) {
     var data;
 
@@ -97,6 +106,7 @@ var StorageManager = function () {
     setFolder: chainer(setFolder),
     getPath: getPath,
     save: chainer(save),
+    saveArchive: chainer(saveArchive),
     read: read
   };
 

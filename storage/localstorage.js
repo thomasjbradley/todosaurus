@@ -5,6 +5,16 @@ var LocalStorageHelper = function () {
     methods = {}
   ;
 
+  var append = function (key, data) {
+    var old = localStorage.getItem(key);
+
+    if (_.isEmpty(old)) {
+      old = '';
+    }
+
+    localStorage.setItem(key, old + '\n' + data.join('\n'));
+  };
+
   var save = function (key, data) {
     localStorage.setItem(key, data.join('\n'));
   };
@@ -24,6 +34,7 @@ var LocalStorageHelper = function () {
   };
 
   methods =  {
+    append: append,
     save: save,
     read: read
   };
