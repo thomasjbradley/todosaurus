@@ -1,4 +1,4 @@
-bindings.list = {
+bindings.default = {
   'item:focus:next'      : ['j', 'down'],
   'item:focus:prev'      : ['k', 'up'],
   'item:focus:next:jump' : ['ctrl+d', 'pagedown'],

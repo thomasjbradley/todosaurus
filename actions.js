@@ -571,7 +571,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('file-chooser').hide();
     am.trigger('app:set-title');
     todos.populate(startupData);
-    im.bindDefaultKeyActions(bindings.list);
+    im.bindDefaultKeyActions(bindings.default);
   });
 
   am.action('storage:read', function () {
@@ -592,7 +592,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
       am.trigger('app:set-title');
       todos.populate(data);
-      im.bindDefaultKeyActions(bindings.list);
+      im.bindDefaultKeyActions(bindings.default);
     });
   });
 
@@ -606,7 +606,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       } else {
         am.trigger('app:set-title');
         todos.populate(data);
-        im.bindDefaultKeyActions(bindings.list);
+        im.bindDefaultKeyActions(bindings.default);
       }
     });
   });
