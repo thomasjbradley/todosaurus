@@ -47,6 +47,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     );
   };
 
+  var clearShowPriorityMenuChecks = function () {
+    menu['view:show-priority:a'].checked = false;
+    menu['view:show-priority:b'].checked = false;
+    menu['view:show-priority:c'].checked = false;
+    menu['view:show-priority:d'].checked = false;
+    menu['view:show-priority:e'].checked = false;
+  };
+
   am.action('item:focus:next', function () {
     fm.next();
   });
@@ -431,12 +439,18 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:show:priority', function (e, combo) {
+    var pri = ['a', 'b', 'c', 'd', 'e'];
+
     am.trigger('tags:clear-active');
     am.trigger('tags:show', '!', combo);
+
+    clearShowPriorityMenuChecks();
+    menu['view:show-priority:' + pri[getNumberFromKeyCombo(combo)]].checked = true;
   });
 
   am.action('tags:clear', function () {
     im.get('filters').group = false;
+    clearShowPriorityMenuChecks();
     am.trigger('tags:clear-active');
     am.trigger('app:list:render');
   });
