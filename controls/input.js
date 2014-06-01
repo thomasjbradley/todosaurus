@@ -82,7 +82,7 @@ var InputControl = function (elem, actionManager) {
 
   var show = function (pos) {
     that.bindEvents();
-    actionManager.trigger('app:context:switch', that.keyEvents);
+    actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-state', 'visible');
     actionManager.trigger('app:list:blur');
     setPosition(pos);
@@ -105,7 +105,7 @@ var InputControl = function (elem, actionManager) {
 
   var focus = function () {
     that.elem.focus();
-    actionManager.trigger('app:context:switch', that.keyEvents);
+    actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-focused', 'true');
     actionManager.trigger('app:list:blur');
   };

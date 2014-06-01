@@ -4,7 +4,7 @@ var InterfaceManager = function (focusManager, actionManager) {
   var
     methods = {},
     elements = {},
-    defaultKeys
+    contexts = {}
   ;
 
   var chainer = function (func) {
@@ -16,6 +16,13 @@ var InterfaceManager = function (focusManager, actionManager) {
 
   var reset = function () {
     Mousetrap.reset();
+  };
+
+  var handleMouseEvents = function (e) {
+    // e.stopPropagation();
+    // e.preventDefault();
+    // e.stopImmediatePropagation();
+    // return false;
   };
 
   var bindKeyEvent = function (keys, callback) {
@@ -36,19 +43,30 @@ var InterfaceManager = function (focusManager, actionManager) {
     });
   };
 
-  var bindDefaultKeyActions = function (keys) {
-    if (!_.isUndefined(keys)) {
-      defaultKeys = keys;
-    }
+  var toggleMenuStates = function (menuStates) {
+    _.each(menuStates.enabled, function (item) {
+      menu[item].enabled = true;
+    });
 
-    bindKeyActions(defaultKeys);
+    _.each(menuStates.disabled, function (item) {
+      menu[item].enabled = false;
+    });
   };
 
-  var handleMouseEvents = function (e) {
-    // e.stopPropagation();
-    // e.preventDefault();
-    // e.stopImmediatePropagation();
-    // return false;
+  var setContext = function (title, ka, ms) {
+    contexts[title] = {
+      keyActions: ka,
+      menuStates: ms
+    };
+  };
+
+  var switchContext = function (title) {
+    reset();
+    bindKeyActions(contexts[title].keyActions);
+
+    if (window.isNode) {
+      toggleMenuStates(contexts[title].menuStates);
+    }
   };
 
   var add = function (name, elem, events) {
@@ -61,11 +79,12 @@ var InterfaceManager = function (focusManager, actionManager) {
 
   methods =  {
     reset: chainer(reset),
+    handleMouseEvents: handleMouseEvents,
     bindKeyEvent: chainer(bindKeyEvent),
     bindKeyEvents: chainer(bindKeyEvents),
     bindKeyActions: chainer(bindKeyActions),
-    bindDefaultKeyActions: chainer(bindDefaultKeyActions),
-    handleMouseEvents: handleMouseEvents,
+    setContext: chainer(setContext),
+    switchContext: chainer(switchContext),
     add: chainer(add),
     get: get
   };

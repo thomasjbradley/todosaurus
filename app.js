@@ -38,6 +38,9 @@
     document.getElementById('other-folder-options').style.display = 'none';
   }
 
+  im.setContext('default', bindings.default, menuContexts.default);
+  im.setContext('input', bindings.input, menuContexts.input);
+
   im.add('filters', filters);
   im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));

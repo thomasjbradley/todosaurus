@@ -386,11 +386,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:context:default', function () {
-    im.reset().bindDefaultKeyActions();
+    im.switchContext('default');
   });
 
-  am.action('app:context:switch', function (contextKeys) {
-    im.reset().bindKeyEvents(contextKeys);
+  am.action('app:context:input', function (contextKeys) {
+    im.switchContext('input').bindKeyEvents(contextKeys);
   });
 
   am.action('app:clear', function () {
@@ -571,7 +571,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('file-chooser').hide();
     am.trigger('app:set-title');
     todos.populate(startupData);
-    im.bindDefaultKeyActions(bindings.default);
+    am.trigger('app:context:default');
   });
 
   am.action('storage:read', function () {
@@ -592,7 +592,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
       am.trigger('app:set-title');
       todos.populate(data);
-      im.bindDefaultKeyActions(bindings.default);
+      am.trigger('app:context:default');
     });
   });
 
@@ -606,7 +606,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       } else {
         am.trigger('app:set-title');
         todos.populate(data);
-        im.bindDefaultKeyActions(bindings.default);
+        am.trigger('app:context:default');
       }
     });
   });
