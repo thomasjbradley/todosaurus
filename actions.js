@@ -675,8 +675,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:sort-file', function () {
-    var items = orderer.getOrderedItems(todos.getAll());
-    todos.populate(items);
+    todos.populate(orderer.getOrderedItems(todos.getAll()));
   });
 
   am.action('storage:archive', function () {
