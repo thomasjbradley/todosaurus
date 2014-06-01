@@ -636,6 +636,25 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     });
   });
 
+  am.action('storage:read-if-changed', function () {
+    var stats, file, local;
+
+    if (window.isNode) {
+      try {
+        stats = require('fs').statSync(storage.getPath());
+        file = stats.mtime;
+      } catch (e) {
+        file = new Date();
+      }
+
+      local = new Date(localStorage.getItem('mtime'));
+
+      if (file > local) {
+        am.trigger('storage:read');
+      }
+    }
+  });
+
   am.action('storage:read-or-new', function () {
     im.get('folder-chooser').hide();
     im.get('file-chooser').hide();

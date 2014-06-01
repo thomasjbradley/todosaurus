@@ -1,14 +1,4 @@
 var
-  generics = {
-    new: '%%NEW%%',
-    priorities: [
-      'A: Now',
-      'B: Today',
-      'C: Tomorrow',
-      'D: This Week',
-      'E: Next Week'
-    ]
-  },
   filters = {
     order: false,
     group: false,
@@ -43,13 +33,5 @@ if (window.isNode) {
   GuiMenu = new gui.Menu({ type: 'menubar' });
   gui.Window.get().menu = GuiMenu;
   clipboard = gui.Clipboard.get();
-
-  gui.Window.get().on('focus', function () {
-    document.body.classList.add('window--has-focus');
-  });
-
-  gui.Window.get().on('blur', function () {
-    document.body.classList.remove('window--has-focus');
-  });
 }
 

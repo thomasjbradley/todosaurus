@@ -2,6 +2,16 @@
   "use strict";
 
   var
+    generics = {
+      new: '%%NEW%%',
+      priorities: [
+        'A: Now',
+        'B: Today',
+        'C: Tomorrow',
+        'D: This Week',
+        'E: Next Week'
+      ]
+    },
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
@@ -108,6 +118,7 @@
   todos.subscribe(function (items) {
     orderer.order(items, im.get('filters').order);
     am.trigger('storage:save');
+    localStorage.setItem('mtime', new Date());
   });
 
   orderer.subscribe(function (items) {
@@ -141,6 +152,17 @@
       scrollList(index);
     }
   });
+
+  if (window.isNode) {
+    gui.Window.get().on('focus', function () {
+      document.body.classList.add('window--has-focus');
+      am.trigger('storage:read-if-changed');
+    });
+
+    gui.Window.get().on('blur', function () {
+      document.body.classList.remove('window--has-focus');
+    });
+  }
 
   filters.order = localStorage.getItem('sort-order');
 
