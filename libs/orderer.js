@@ -48,14 +48,26 @@ var Orderer = function () {
         orderGroups.end.push(item);
         return;
       }
-
-      orderGroups.middle.push(item);
+      if (!item.isMarked() && !item.hasPriority()) {
+        orderGroups.middle.push(item);
+      }
     });
 
+    orderGroups.start = orderGroups.start.sort(function (a, b) {
+      if (a.getFullText() < b.getFullText()) {
+       return -1;
+      }
+
+      if (a.getFullText() > b.getFullText()) {
+        return 1;
+      }
+
+      return 0;
+    });
+    console.log(orderGroups.start);
+
     return [].concat(
-      orderGroups.start.sort(function (a, b) {
-        return a.getFullText() - b.getFullText();
-      }),
+      orderGroups.start,
       orderGroups.middle,
       orderGroups.end
     );
