@@ -1,11 +1,13 @@
 menu.edit = new gui.MenuItem({ label: 'Edit' });
 
 menu['edit:undo'] = new gui.MenuItem({
-  label: 'Undo                                                                                  ⌘Z'
+  label: 'Undo                                                                                  ⌘Z',
+  enabled: false
 });
 
 menu['edit:redo'] = new gui.MenuItem({
-  label: 'Redo                                                                           ⇧⌘Z'
+  label: 'Redo                                                                           ⇧⌘Z',
+  enabled: false
 });
 
 menu['edit:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
@@ -35,7 +37,8 @@ menu['edit:duplicate'] = new gui.MenuItem({
 });
 
 menu['edit:select-all'] = new gui.MenuItem({
-  label: 'Select All                                                                   ⌘A'
+  label: 'Select All                                                                   ⌘A',
+  enabled: false
 });
 
 menu['edit:new-sep-2'] = new gui.MenuItem({ type: 'separator' });

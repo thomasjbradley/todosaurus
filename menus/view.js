@@ -29,15 +29,21 @@ menu['view:show-priority'] = new gui.MenuItem({
 menu['view:new-sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['view:sort-file'] = new gui.MenuItem({
-  label: 'Order In File                        ⌥⌘0'
+  label: 'Order In File                        ⌥⌘0',
+  type: 'checkbox',
+  checked: true,
 });
 
 menu['view:sort-priority'] = new gui.MenuItem({
-  label: 'Sort By Priority              ⌥⌘-'
+  label: 'Sort By Priority              ⌥⌘-',
+  type: 'checkbox',
+  enabled: false
 });
 
 menu['view:sort-date'] = new gui.MenuItem({
-  label: 'Sort By Date                        ⌥⌘='
+  label: 'Sort By Date                        ⌥⌘=',
+  type: 'checkbox',
+  enabled: false
 });
 
 menu['view:new-sep-3'] = new gui.MenuItem({ type: 'separator' });

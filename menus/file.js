@@ -51,15 +51,18 @@ menu['file:jump'] = new gui.MenuItem({
 menu['file:sep-3'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:move-complete-bottom'] = new gui.MenuItem({
-  label: 'Move Completed to Bottom                  ⌘`'
+  label: 'Move Completed to Bottom                  ⌘`',
+  enabled: false
 });
 
 menu['file:move-priority-top'] = new gui.MenuItem({
-  label: 'Move Prioritized to Top                         ⇧⌘`'
+  label: 'Move Prioritized to Top                         ⇧⌘`',
+  enabled: false
 });
 
 menu['file:archive'] = new gui.MenuItem({
-  label: 'Archive All Completed                             ⌥⌘`'
+  label: 'Archive All Completed                             ⌥⌘`',
+  enabled: false
 });
 
 menu['file:sep-4'] = new gui.MenuItem({ type: 'separator' });
