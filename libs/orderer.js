@@ -64,7 +64,6 @@ var Orderer = function () {
 
       return 0;
     });
-    console.log(orderGroups.start);
 
     return [].concat(
       orderGroups.start,
