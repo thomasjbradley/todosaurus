@@ -37,7 +37,7 @@ if (window.isNode) {
       'menus/edit.js',
       'menus/edit-assign-project.js',
       'menus/edit-assign-context.js',
-      'menus/edit-assign-priority.js',
+      'menus/edit-toggle-priority.js',
       'menus/view.js',
       'menus/view-show-project.js',
       'menus/view-show-context.js',

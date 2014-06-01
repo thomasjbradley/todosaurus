@@ -33,11 +33,11 @@ bindings.menu = {
   'edit:move-up'              : 'mod+shift+up',
   'edit:move-down'            : 'mod+shift+down',
 
-  'edit:assign-priority:a'    : '1',
-  'edit:assign-priority:b'    : '2',
-  'edit:assign-priority:c'    : '3',
-  'edit:assign-priority:d'    : '4',
-  'edit:assign-priority:e'    : '5',
+  'edit:toggle-priority:a'    : '1',
+  'edit:toggle-priority:b'    : '2',
+  'edit:toggle-priority:c'    : '3',
+  'edit:toggle-priority:d'    : '4',
+  'edit:toggle-priority:e'    : '5',
 
   'view:find'                 : '/',
   'view:find-project'         : 'mod+p',

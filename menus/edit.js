@@ -77,8 +77,8 @@ menu['edit:assign-context'] = new gui.MenuItem({
   enabled: false
 });
 
-menu['edit:assign-priority'] = new gui.MenuItem({
-  label: 'Assign Priority'
+menu['edit:toggle-priority'] = new gui.MenuItem({
+  label: 'Toggle Priority'
 });
 
 menu['edit:new-sep-5'] = new gui.MenuItem({ type: 'separator' });
