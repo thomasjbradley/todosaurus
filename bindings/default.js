@@ -17,7 +17,7 @@ bindings.default = {
   'item:move:up'         : ['mod+shift+up'],
   'item:move:down'       : ['mod+shift+down'],
 
-  'item:edit'            : ['e', 'enter', 'return'],
+  'item:edit'            : ['e', 'enter'],
   'item:edit:start'      : ['i', 'shift+i'],
   'item:edit:end'        : ['a', 'shift+a'],
   'item:edit:clear'      : ['shift+c'],

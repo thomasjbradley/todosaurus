@@ -34,18 +34,20 @@ var NewControl = function (elem, actionManager) {
 
   that.bindKeyEvents([
     {
-      keys: ['mod+enter', 'mod+return'],
+      keys: ['mod+enter'],
       callback: function (e) {
         e.preventDefault();
+
         if (isCommittable()) {
           commit();
         }
       }
     },
     {
-      keys: ['enter', 'return', 'tab'],
+      keys: ['enter', 'tab'],
       callback: function (e) {
         e.preventDefault();
+
         if (isCommittable()) {
           commit();
           that.getActionManager().trigger('item:new:after');
@@ -53,9 +55,10 @@ var NewControl = function (elem, actionManager) {
       }
     },
     {
-      keys: ['shift+tab', 'shift+enter', 'shift+return'],
+      keys: ['shift+tab', 'shift+enter'],
       callback: function (e) {
         e.preventDefault();
+
         if (isCommittable()) {
           commit();
           that.getActionManager().trigger('item:new:before');

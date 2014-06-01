@@ -41,7 +41,7 @@ var TagsSearchControl = function (elem, actionManager) {
 
   that.bindKeyEvents([
     {
-      keys: ['enter', 'return', 'tab', 'shift+tab'],
+      keys: ['enter', 'tab', 'shift+tab'],
       callback: function (e) {
         e.preventDefault();
         that.getActionManager().trigger('tags:search:hide');

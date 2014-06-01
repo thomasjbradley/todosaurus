@@ -33,7 +33,7 @@ var EditControl = function (elem, actionManager) {
 
   that.bindKeyEvents([
     {
-      keys: ['enter', 'return'],
+      keys: ['enter'],
       callback: function (e) {
         e.preventDefault();
 
