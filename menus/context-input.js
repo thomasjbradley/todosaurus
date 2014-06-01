@@ -1,7 +1,5 @@
 menuContexts.input = {
   enabled: [
-    'file:new',
-    'file:new-bottom',
     'file:jump',
     'file:reload',
     'file:sort-file',
@@ -19,12 +17,12 @@ menuContexts.input = {
     'view:find-context',
     'view:sort-manually',
     'view:sort-priority',
-    'view:clear-search',
-    'view:clear-group',
     'view:clear-all'
   ],
 
   disabled: [
+    'file:new',
+    'file:new-bottom',
     'file:new-below',
     'file:new-above',
     'file:focus-up',
@@ -45,6 +43,8 @@ menuContexts.input = {
     'edit:remove-priority',
     'edit:move-up',
     'edit:move-down',
-    'view:show-priority'
+    'view:show-priority',
+    'view:clear-search',
+    'view:clear-group'
   ]
 };

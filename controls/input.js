@@ -84,7 +84,6 @@ var InputControl = function (elem, actionManager) {
     that.bindEvents();
     actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-state', 'visible');
-    actionManager.trigger('app:list:blur');
     setPosition(pos);
   };
 
@@ -92,7 +91,6 @@ var InputControl = function (elem, actionManager) {
     that.killEvents();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-state', 'hidden');
-    actionManager.trigger('app:list:focus');
   };
 
   var isVisible = function () {
@@ -107,14 +105,12 @@ var InputControl = function (elem, actionManager) {
     that.elem.focus();
     actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-focused', 'true');
-    actionManager.trigger('app:list:blur');
   };
 
   var blur = function () {
     that.elem.blur();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-focused', 'false');
-    actionManager.trigger('app:list:focus');
   };
 
   that = _.extend(that, {

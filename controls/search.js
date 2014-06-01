@@ -29,6 +29,7 @@ var SearchControl = function (elem, actionManager) {
       keys: ['esc', 'ctrl+l', 'command+l'],
       callback: function (e) {
         e.preventDefault();
+        that.getActionManager().trigger('app:search:blur');
         that.getActionManager().trigger('app:search:clear');
       }
     }

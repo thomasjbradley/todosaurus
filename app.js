@@ -38,7 +38,14 @@
     document.getElementById('other-folder-options').style.display = 'none';
   }
 
-  im.setContext('default', bindings.default, menuContexts.default);
+  im.setContext('default', bindings.default, menuContexts.default, function (isCurrent) {
+    if (isCurrent) {
+      am.trigger('app:list:focus');
+    } else {
+      am.trigger('app:list:blur');
+    }
+  });
+
   im.setContext('input', bindings.input, menuContexts.input);
 
   im.add('filters', filters);

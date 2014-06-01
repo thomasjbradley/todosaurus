@@ -327,7 +327,6 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       fullIndex = todos.getIndex(item.id());
     }
 
-    am.trigger('app:search:blur');
     im.get('search').value('');
     im.get('filters').filter = false;
     am.trigger('app:list:render');
@@ -394,8 +393,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:clear', function () {
+    var possibleInput = document.querySelector('input:focus');
+
     im.get('filters').group = false; // tags:clear without double render
     am.trigger('app:search:clear');
+
+    if (possibleInput) {
+      possibleInput.blur();
+    }
   });
 
   am.action('app:set-title', function () {

@@ -4,6 +4,7 @@ var InterfaceManager = function (focusManager, actionManager) {
   var
     methods = {},
     elements = {},
+    currentContext = false,
     contexts = {}
   ;
 
@@ -53,20 +54,41 @@ var InterfaceManager = function (focusManager, actionManager) {
     });
   };
 
-  var setContext = function (title, ka, ms) {
+  var setContext = function (title, ka, ms, cb) {
     contexts[title] = {
       keyActions: ka,
-      menuStates: ms
+      menuStates: ms,
+      callback: cb
     };
   };
 
-  var switchContext = function (title) {
-    reset();
-    bindKeyActions(contexts[title].keyActions);
+  var sentContextCallbacks = function (title) {
+    _.each(contexts, function (item, key) {
+      if (_.isUndefined(item.callback)) {
+        return;
+      }
 
-    if (window.isNode) {
-      toggleMenuStates(contexts[title].menuStates);
+      if (key === title) {
+        item.callback(true);
+      } else {
+        item.callback(false);
+      }
+    });
+  };
+
+  var switchContext = function (title) {
+    if (title !== currentContext) {
+      reset();
+      bindKeyActions(contexts[title].keyActions);
+
+      if (window.isNode) {
+        toggleMenuStates(contexts[title].menuStates);
+      }
+
+      sentContextCallbacks(title);
     }
+
+    currentContext = title;
   };
 
   var add = function (name, elem, events) {
