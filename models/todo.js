@@ -79,6 +79,10 @@ var Todo = function (fullText) {
     return id;
   };
 
+  var resetCreated = function () {
+    data.created = (new Date()).toISOString().substr(0, 10);
+  };
+
   var setText = function (t) {
     text = t.trim();
   };
@@ -176,6 +180,7 @@ var Todo = function (fullText) {
   methods = {
     subscribe: chainer(subscribe),
     id: getId,
+    resetCreated: chainer(resetCreated),
     getFullText: getFullText,
     text: manageText,
     mark: informer(mark),

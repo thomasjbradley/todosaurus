@@ -58,6 +58,10 @@ var InputControl = function (elem, actionManager) {
     return current;
   };
 
+  var setRawValue = function (val) {
+    that.elem.value = val;
+  };
+
   var value = function (val) {
     if (_.isUndefined(val)) {
       return that.elem.value;
@@ -114,6 +118,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   that = _.extend(that, {
+    setRawValue: that.chainer(setRawValue),
     value: value,
     setCaretPosition: that.chainer(setCaretPosition),
     show: that.chainer(show),

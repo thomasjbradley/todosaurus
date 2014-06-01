@@ -11,19 +11,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   var prepareNewTodo = function () {
     var
-      text,
-      todo = todos.createNewItem(getNewText()),
-      group = im.get('filters').group
+      todo = todos.createNewItem(todos.get(id()).getFullText())
     ;
 
-    if (group !== false) {
-      if (group[0] !== '!') {
-        todo.text(grouper.getGroup(group[0])[group[1]]);
-      } else {
-        todo.addPriority(group[1]);
-        todo.text('');
-      }
+    if (im.get('filters').order !== true) {
+      todo.removePriority();
     }
+
+    todo.resetCreated();
 
     return todo;
   };
@@ -209,7 +204,9 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     ;
   });
 
-  am.action('item:edit:clear', function (e, combo, input) {
+  am.action('item:edit:clear', function (e, combo, input, defaultText) {
+    var text = '';
+
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
@@ -218,10 +215,15 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       input = 'edit';
     }
 
+    if (!_.isUndefined(defaultText)) {
+      text = defaultText;
+    }
+
     im.get(input)
-      .value('')
+      .setRawValue(text)
       .show(getPosition())
       .focus()
+      .setCaretPosition(0)
     ;
   });
 
@@ -254,8 +256,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:new:edit', function () {
-    if (im.get('filters').group !== false) {
-      am.trigger('item:edit:start', false, false, 'new');
+    var group = im.get('filters').group;
+
+    if (group !== false) {
+      am.trigger('item:edit:clear', false, false, 'new', ' ' + grouper.getGroup(group[0])[group[1]]);
     } else {
       am.trigger('item:edit:clear', false, false, 'new');
     }
