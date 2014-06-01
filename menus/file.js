@@ -56,12 +56,12 @@ menu['file:reload'] = new gui.MenuItem({
 });
 
 menu['file:sort-file'] = new gui.MenuItem({
-  label: 'Sort File Contents                                ⌥⌘\\',
+  label: 'Sort File Contents                                ⌥⌘S',
   enabled: false
 });
 
 menu['file:archive'] = new gui.MenuItem({
-  label: 'Archive All Completed                                 ⌘\\',
+  label: 'Archive All Completed                                 ⌘S',
   enabled: false
 });
 

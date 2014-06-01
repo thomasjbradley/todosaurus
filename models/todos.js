@@ -42,8 +42,8 @@ var Todos = function () {
   var populate = function (items) {
     todos = [];
 
-    _.each(items, function (elem) {
-      todos.push(createNewItem(elem));
+    _.each(items, function (item) {
+      todos.push((_.isString(item)) ? createNewItem(item) : item);
     });
   };
 
