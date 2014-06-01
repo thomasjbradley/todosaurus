@@ -7,10 +7,10 @@ var FolderChooserControl = function (elem, actionManager) {
 
   var handleChangeOnInput = function (e) {
     that.getActionManager().trigger('storage:folder:choose');
-    that.input.value = '';
   };
 
   that.show = function () {
+    that.input.value = '';
     that.input.addEventListener('change', handleChangeOnInput, false);
     that.elem.setAttribute('data-state', 'visible');
     that.input.focus();
@@ -23,6 +23,11 @@ var FolderChooserControl = function (elem, actionManager) {
 
   that.getFiles = function () {
     return that.input.files;
+  };
+
+  that.showInvisible = function () {
+    that.input.value = '';
+    that.input.addEventListener('change', handleChangeOnInput, false);
   };
 
   return that;

@@ -28,6 +28,7 @@ bindings.list = {
   'item:new:before'      : ['shift+o', 'mod+shift+enter'],
 
   'item:priority-toggle' : ['1', '2', '3', '4', '5'],
+  'item:priority-clear'  : ['mod+0'],
 
   'app:search:focus'     : ['/', 'mod+f'],
   'app:search:clear'     : ['command+l', 'ctrl+l'],
@@ -41,6 +42,6 @@ bindings.list = {
   'tags:search:projects' : ['mod+p'],
   'tags:search:contexts' : ['mod+t'],
 
-  'storage:reveal-finder': ['mod+r'],
-  'storage:folder:switch': ['mod+o']
+  'storage:reveal-finder': ['mod+shift+r'],
+  'storage:folder:change': ['mod+o']
 };

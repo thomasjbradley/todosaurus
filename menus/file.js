@@ -50,25 +50,25 @@ menu['file:jump'] = new gui.MenuItem({
 
 menu['file:sep-3'] = new gui.MenuItem({ type: 'separator' });
 
-menu['file:move-complete-bottom'] = new gui.MenuItem({
-  label: 'Move Completed to Bottom                  ⌘`',
+menu['file:reload'] = new gui.MenuItem({
+  label: 'Reload File                                 ⌘R',
   enabled: false
 });
 
-menu['file:move-priority-top'] = new gui.MenuItem({
-  label: 'Move Prioritized to Top                         ⇧⌘`',
+menu['file:sort-file'] = new gui.MenuItem({
+  label: 'Sort File Contents                                ⌥⌘\\',
   enabled: false
 });
 
 menu['file:archive'] = new gui.MenuItem({
-  label: 'Archive All Completed                             ⌥⌘`',
+  label: 'Archive All Completed                                 ⌘\\',
   enabled: false
 });
 
 menu['file:sep-4'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:reveal-in-finder'] = new gui.MenuItem({
-  label: 'Reveal in Finder                                                              ⌘R'
+  label: 'Reveal in Finder                                                      ⇧⌘R'
 });
 
 menu['file:sep-5'] = new gui.MenuItem({ type: 'separator' });

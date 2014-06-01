@@ -55,8 +55,8 @@ menu['edit:insert-end'] = new gui.MenuItem({
   label: 'Insert at End                                                         A'
 });
 
-menu['edit:change-clear'] = new gui.MenuItem({
-  label: 'Change & Clear                                     C'
+menu['edit:update-clear'] = new gui.MenuItem({
+  label: 'Update & Clear                                       C'
 });
 
 menu['edit:new-sep-3'] = new gui.MenuItem({ type: 'separator' });
@@ -67,6 +67,10 @@ menu['edit:toggle-complete'] = new gui.MenuItem({
 
 menu['edit:toggle-priority'] = new gui.MenuItem({
   label: 'Toggle Priority'
+});
+
+menu['edit:clear-priority'] = new gui.MenuItem({
+  label: 'Clear Priority                     ⌘0'
 });
 
 menu['edit:new-sep-5'] = new gui.MenuItem({ type: 'separator' });

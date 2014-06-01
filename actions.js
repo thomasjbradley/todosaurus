@@ -531,6 +531,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('folder-chooser').show();
   });
 
+  am.action('storage:folder:change', function () {
+    im.get('folder-chooser').showInvisible();
+    im.get('folder-chooser').input.click();
+  });
+
   am.action('storage:folder:choose', function () {
     var folder = im.get('folder-chooser').getFiles()[0];
 
