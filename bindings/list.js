@@ -41,6 +41,6 @@ bindings.list = {
   'tags:search:projects' : ['mod+p'],
   'tags:search:contexts' : ['mod+t'],
 
-  'app:switch-directory' : ['mod+r'],
+  'storage:reveal-in-finder' : ['mod+r'],
   'storage:folder:switch': ['mod+o']
 };
