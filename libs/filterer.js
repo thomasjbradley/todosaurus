@@ -49,9 +49,15 @@ var Filterer = function (generics) {
   };
 
   var matchesGeneric = function (text) {
-    return _.every(generics, function (gen) {
-      return !!(text.indexOf(gen) > -1);
+    var match = false;
+
+    _.each(generics, function (gen) {
+      if (text.indexOf(gen) > -1) {
+        match = true;
+      }
     });
+
+    return match;
   };
 
   var matchesFilter = function (text, data) {
