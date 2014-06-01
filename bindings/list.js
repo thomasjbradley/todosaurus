@@ -4,28 +4,28 @@ bindings.list = {
   'item:focus:next:jump' : ['ctrl+d', 'pagedown'],
   'item:focus:prev:jump' : ['ctrl+u', 'pageup'],
   'item:focus:first'     : ['g g', 'mod+up'],
-  'item:focus:last'      : ['G', 'mod+down'],
+  'item:focus:last'      : ['shift+g', 'mod+down'],
 
   'item:toggle'          : ['x', 'space'],
 
   'item:cut'             : ['d d', 'mod+backspace', 'del', 'mod+x'],
-  'item:copy'            : ['Y', 'mod+c'],
-  'item:paste:before'    : ['P', 'mod+V'],
+  'item:copy'            : ['shift+y', 'mod+c'],
+  'item:paste:before'    : ['shift+p', 'mod+shift+v'],
   'item:paste:after'     : ['p', 'mod+v'],
-  'item:duplicate'       : ['mod+D'],
+  'item:duplicate'       : ['mod+shift+d'],
 
   'item:move:up'         : ['mod+shift+up'],
   'item:move:down'       : ['mod+shift+down'],
 
   'item:edit'            : ['e', 'enter', 'return'],
-  'item:edit:start'      : ['i', 'I'],
-  'item:edit:end'        : ['a', 'A'],
-  'item:edit:clear'      : ['C'],
+  'item:edit:start'      : ['i', 'shift+i'],
+  'item:edit:end'        : ['a', 'shift+a'],
+  'item:edit:clear'      : ['shift+c'],
 
   'item:new:at-top'      : ['n', 'mod+n'],
-  'item:new:at-bottom'   : ['N', 'mod+N'],
+  'item:new:at-bottom'   : ['shift+n', 'mod+shift+n'],
   'item:new:after'       : ['o', 'mod+enter'],
-  'item:new:before'      : ['O', 'mod+shift+enter'],
+  'item:new:before'      : ['shift+o', 'mod+shift+enter'],
 
   'item:priority-toggle'    : ['1', '2', '3', '4', '5'],
 
