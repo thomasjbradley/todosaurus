@@ -48,6 +48,9 @@
 
   im.setContext('input', bindings.input, menuContexts.input);
 
+  im.add('menu', new MenuManager());
+  im.get('menu').bindEvents(bindings.menu);
+
   im.add('filters', filters);
   im.add('list', new ListControl('list', am));
   im.add('search', new SearchControl('search', am));

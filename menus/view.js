@@ -21,14 +21,14 @@ menu['view:show-priority'] = new gui.MenuItem({
 menu['view:new-sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['view:sort-manually'] = new gui.MenuItem({
-  label: 'Sort Manually                   ⌥⌘-',
+  label: 'Sort Manually                   ⌥⌘,',
   type: 'checkbox',
   checked: true,
   enabled: false
 });
 
 menu['view:sort-priority'] = new gui.MenuItem({
-  label: 'Sort By Priority              ⌥⌘=',
+  label: 'Sort By Priority              ⌥⌘.',
   type: 'checkbox',
   enabled: false
 });

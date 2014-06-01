@@ -66,14 +66,6 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     );
   };
 
-  var clearShowPriorityMenuChecks = function () {
-    menu['view:show-priority:a'].checked = false;
-    menu['view:show-priority:b'].checked = false;
-    menu['view:show-priority:c'].checked = false;
-    menu['view:show-priority:d'].checked = false;
-    menu['view:show-priority:e'].checked = false;
-  };
-
   am.action('item:focus:next', function () {
     fm.next();
   });
@@ -146,20 +138,24 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('item:move:up', function () {
-    var startFocus = fm.get();
+    if (im.get('filters').order === false) {
+      var startFocus = fm.get();
 
-    am.trigger('item:cut');
+      am.trigger('item:cut');
 
-    if (startFocus <= fm.getMax()) {
-      am.trigger('item:focus:prev');
+      if (startFocus <= fm.getMax()) {
+        am.trigger('item:focus:prev');
+      }
+
+      am.trigger('item:paste:before');
     }
-
-    am.trigger('item:paste:before');
   });
 
   am.action('item:move:down', function () {
-    am.trigger('item:cut');
-    am.trigger('item:paste:after');
+    if (im.get('filters').order === false) {
+      am.trigger('item:cut');
+      am.trigger('item:paste:after');
+    }
   });
 
   am.action('item:edit', function (e, combo, input) {
@@ -436,6 +432,18 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — Todosaurus';
   });
 
+  am.action('app:sort:manually', function () {
+    im.get('filters').order = false;
+    am.trigger('app:list:render');
+    im.get('menu').triggerSort('manually');
+  });
+
+  am.action('app:sort:priority', function () {
+    im.get('filters').order = true;
+    am.trigger('app:list:render');
+    im.get('menu').triggerSort('priority');
+  });
+
   am.action('tags:create', function () {
     am.trigger('tags:create:projects');
     am.trigger('tags:create:contexts');
@@ -494,10 +502,8 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('tags:clear-active');
     am.trigger('tags:show', '!', combo);
 
-    if (window.isNode) {
-      clearShowPriorityMenuChecks();
-      menu['view:show-priority:' + pri[getNumberFromKeyCombo(combo)]].checked = true;
-    }
+    im.get('menu').clearShowPriorityChecks();
+    im.get('menu').checkShowPriority(pri[getNumberFromKeyCombo(combo)]);
   });
 
   am.action('tags:clear', function () {
@@ -505,9 +511,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('tags:clear-active');
     am.trigger('app:list:render');
 
-    if (window.isNode) {
-      clearShowPriorityMenuChecks();
-    }
+    im.get('menu').clearShowPriorityMenuChecks();
   });
 
   am.action('tags:highlight-active', function (tag, index) {
