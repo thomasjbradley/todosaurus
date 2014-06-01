@@ -14,7 +14,7 @@ bindings.menu = {
   'file:move-priority-top'    : 'mod+shift+`',
   'file:archive'              : 'mod+alt+`',
   'file:reveal-in-finder'     : 'mod+r',
-  'file:switch-directory'     : 'mod+0',
+  'file:switch-directory'     : 'mod+o',
 
   'edit:undo'                 : 'mod+z',
   'edit:redo'                 : 'mod+shift+z',
