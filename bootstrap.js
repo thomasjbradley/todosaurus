@@ -50,6 +50,7 @@ yepnope([
     'menus/edit-toggle-priority.js',
     'menus/view.js',
     'menus/view-show-priority.js',
+    'bindings/menu.js',
     'menus/menu-manager.js'
   ],
   load: [
@@ -81,7 +82,6 @@ yepnope([
     'actions.js',
     'bindings/default.js',
     'bindings/input.js',
-    'bindings/menu.js',
     'menus/context-default.js',
     'menus/context-input.js',
     'app.js'
