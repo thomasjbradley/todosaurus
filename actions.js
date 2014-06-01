@@ -575,7 +575,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     storage.save(todos.getAllFullText());
   });
 
-  am.action('storage:reveal-in-finder', function () {
+  am.action('storage:reveal-finder', function () {
     var exec = require('child_process').exec;
 
     exec('open ' + storage.getFolder(), function (error, stdout, stderr) { });

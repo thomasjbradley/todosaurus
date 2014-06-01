@@ -68,11 +68,13 @@ menu['edit:toggle-complete'] = new gui.MenuItem({
 menu['edit:new-sep-4'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:assign-project'] = new gui.MenuItem({
-  label: 'Assign Project'
+  label: 'Assign Project',
+  enabled: false
 });
 
 menu['edit:assign-context'] = new gui.MenuItem({
-  label: 'Assign Context'
+  label: 'Assign Context',
+  enabled: false
 });
 
 menu['edit:assign-priority'] = new gui.MenuItem({
