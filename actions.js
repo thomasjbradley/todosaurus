@@ -89,14 +89,22 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('item:cut', function () {
     var text = todos.get(id()).getFullText();
-    clipboard.set(text, 'text');
+
+    if (window.isNode) {
+      clipboard.set(text, 'text');
+    }
+
     buffer.push(text);
     todos.remove(id());
   });
 
   am.action('item:copy', function () {
     var text = todos.get(id()).getFullText();
-    clipboard.set(text, 'text');
+
+    if (window.isNode) {
+      clipboard.set(text, 'text');
+    }
+
     buffer.push(text);
   });
 

@@ -3,48 +3,50 @@ var InputControl = function (elem, actionManager) {
 
   var that = Control(elem, actionManager);
 
-  that.bindKeyEvents([
-    {
-      keys: ['mod+c'],
-      callback: function (e) {
-        clipboard.set(window.getSelection().toString(), 'text');
-      }
-    },
-    {
-      keys: ['mod+v'],
-      callback: function (e) {
-        var val = that.elem.value,
-          pos = that.elem.selectionStart,
-          start = val.slice(0, pos),
-          end = val.slice(that.elem.selectionEnd),
-          newText = clipboard.get('text')
-        ;
+  if (window.isNode) {
+    that.bindKeyEvents([
+      {
+        keys: ['mod+c'],
+        callback: function (e) {
+          clipboard.set(window.getSelection().toString(), 'text');
+        }
+      },
+      {
+        keys: ['mod+v'],
+        callback: function (e) {
+          var val = that.elem.value,
+            pos = that.elem.selectionStart,
+            start = val.slice(0, pos),
+            end = val.slice(that.elem.selectionEnd),
+            newText = clipboard.get('text')
+          ;
 
-        that.elem.value = start + newText + end;
-        setCaretPosition(pos + newText.length);
-      }
-    },
-    {
-      keys: ['mod+x'],
-      callback: function (e) {
-        var val = that.elem.value,
-          pos = that.elem.selectionStart,
-          start = val.slice(0, pos),
-          end = val.slice(that.elem.selectionEnd)
-        ;
+          that.elem.value = start + newText + end;
+          setCaretPosition(pos + newText.length);
+        }
+      },
+      {
+        keys: ['mod+x'],
+        callback: function (e) {
+          var val = that.elem.value,
+            pos = that.elem.selectionStart,
+            start = val.slice(0, pos),
+            end = val.slice(that.elem.selectionEnd)
+          ;
 
-        clipboard.set(window.getSelection().toString(), 'text');
-        that.elem.value = start + end;
-        setCaretPosition(pos);
+          clipboard.set(window.getSelection().toString(), 'text');
+          that.elem.value = start + end;
+          setCaretPosition(pos);
+        }
+      },
+      {
+        keys: ['mod+a'],
+        callback: function (e) {
+          that.elem.setSelectionRange(0, 10000)
+        }
       }
-    },
-    {
-      keys: ['mod+a'],
-      callback: function (e) {
-        that.elem.setSelectionRange(0, 10000)
-      }
-    }
-  ]);
+    ]);
+  }
 
   var findWrapper = function () {
     var current = that.elem.parentNode;
