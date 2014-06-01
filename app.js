@@ -2,21 +2,6 @@
   "use strict";
 
   var
-    generics = {
-      new: '%%NEW%%',
-      priorities: [
-        'A: Now',
-        'B: Today',
-        'C: Tomorrow',
-        'D: This Week',
-        'E: Next Week'
-      ]
-    },
-    filters = {
-      order: false,
-      group: false,
-      filter: false
-    },
     fm = new FocusManager(),
     am = new ActionManager(),
     im = new InterfaceManager(fm, am),
@@ -156,6 +141,16 @@
       scrollList(index);
     }
   });
+
+  filters.order = localStorage.getItem('sort-order');
+
+  if (filters.order === 'true') {
+    filters.order = true;
+    im.get('menu').triggerSort('priority');
+  } else {
+    filters.order = false;
+    im.get('menu').triggerSort('manually');
+  }
 
   am.trigger('storage:read');
 

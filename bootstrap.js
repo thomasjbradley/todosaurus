@@ -1,4 +1,19 @@
 var
+  generics = {
+    new: '%%NEW%%',
+    priorities: [
+      'A: Now',
+      'B: Today',
+      'C: Tomorrow',
+      'D: This Week',
+      'E: Next Week'
+    ]
+  },
+  filters = {
+    order: false,
+    group: false,
+    filter: false
+  },
   gui,
   script,
   env,

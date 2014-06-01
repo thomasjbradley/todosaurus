@@ -31,8 +31,6 @@ menuContexts.default = {
     'edit:toggle-complete',
     'edit:toggle-priority',
     'edit:remove-priority',
-    'edit:move-up',
-    'edit:move-down',
     'view:find',
     'view:find-project',
     'view:find-context',
@@ -46,5 +44,14 @@ menuContexts.default = {
 
   disabled: [
     'edit:select-all'
-  ]
+  ],
+
+  test: {
+    'edit:move-up': function () {
+      return !filters.order;
+    },
+    'edit:move-down': function () {
+      return !filters.order;
+    }
+  }
 };

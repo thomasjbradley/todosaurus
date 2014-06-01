@@ -52,6 +52,10 @@ var InterfaceManager = function (focusManager, actionManager) {
     _.each(menuStates.disabled, function (item) {
       menu[item].enabled = false;
     });
+
+    _.each(menuStates.test, function (item, key) {
+      menu[key].enabled = item()
+    });
   };
 
   var setContext = function (title, ka, ms, cb) {

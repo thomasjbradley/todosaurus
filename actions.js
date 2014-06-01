@@ -436,12 +436,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('filters').order = false;
     am.trigger('app:list:render');
     im.get('menu').triggerSort('manually');
+    localStorage.setItem('sort-order', 'false');
   });
 
   am.action('app:sort:priority', function () {
     im.get('filters').order = true;
     am.trigger('app:list:render');
     im.get('menu').triggerSort('priority');
+    localStorage.setItem('sort-order', 'true');
   });
 
   am.action('tags:create', function () {
