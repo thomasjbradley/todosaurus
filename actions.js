@@ -375,7 +375,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:set-title', function () {
-    document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — ' + document.title;
+    document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — Todosaurus';
   });
 
   am.action('tags:create', function () {
@@ -522,7 +522,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('storage:file:new', function () {
     var startupData = [
-      'Welcome to Todoifer! +Todoifer',
+      'Welcome to Todosaurus! +Todosaurus',
       'A app for the Todo.txt format. @todotxt',
       'Press “n” to create a new todo item.'
     ];

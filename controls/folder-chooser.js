@@ -7,6 +7,7 @@ var FolderChooserControl = function (elem, actionManager) {
 
   var handleChangeOnInput = function (e) {
     that.getActionManager().trigger('storage:folder:choose');
+    that.input.value = '';
   };
 
   that.show = function () {

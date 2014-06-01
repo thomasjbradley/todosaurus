@@ -39,5 +39,8 @@ bindings.list = {
   'tags:show:priority'   : ['shift+1', 'shift+2', 'shift+3', 'shift+4', 'shift+5'],
   'tags:clear'           : ['mod+0', 'alt+0', 'shift+0', 'mod+alt+l'],
   'tags:search:projects' : ['mod+p'],
-  'tags:search:contexts' : ['mod+t']
+  'tags:search:contexts' : ['mod+t'],
+
+  'app:switch-directory' : ['mod+r'],
+  'storage:folder:switch': ['mod+o']
 };

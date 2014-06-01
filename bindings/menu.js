@@ -53,6 +53,5 @@ bindings.menu = {
   'view:show-priority:b'      : 'shift+2',
   'view:show-priority:c'      : 'shift+3',
   'view:show-priority:d'      : 'shift+4',
-  'view:show-priority:e'      : 'shift+5',
-
+  'view:show-priority:e'      : 'shift+5'
 };

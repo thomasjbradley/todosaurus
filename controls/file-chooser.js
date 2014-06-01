@@ -8,10 +8,12 @@ var FileChooserControl = function (elem, actionManager) {
 
   var handleClickOnInput = function (e) {
     that.getActionManager().trigger('storage:file:new');
+    that.input.value = '';
   };
 
   var handleClickOnSwitch = function (e) {
     that.getActionManager().trigger('storage:folder:switch');
+    that.input.value = '';
   }
 
   that.show = function (path) {
