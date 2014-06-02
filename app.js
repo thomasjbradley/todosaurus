@@ -22,7 +22,7 @@
     filterer = new Filterer(generics),
     buffer = new Buffer(),
     actions = new Actions(generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer),
-    main = document.getElementsByClassName('main')[0];
+    main = document.getElementsByClassName('main')[0]
   ;
 
   if (!_.isUndefined(FileSystemHelper) && window.isNode) {

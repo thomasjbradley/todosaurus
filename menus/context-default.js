@@ -16,8 +16,6 @@ menuContexts.default = {
     'file:archive',
     'file:reveal-in-finder',
     'file:switch-directory',
-    'edit:undo',
-    'edit:redo',
     'edit:cut',
     'edit:copy',
     'edit:paste',
@@ -43,6 +41,8 @@ menuContexts.default = {
   ],
 
   disabled: [
+    'edit:undo',
+    'edit:redo',
     'edit:select-all'
   ],
 
