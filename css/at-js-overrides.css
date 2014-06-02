@@ -1,0 +1,40 @@
+.atwho-view {
+  font-size: 12px;
+  z-index: 2000;
+}
+
+.atwho-view strong,
+.atwho-view .cur strong {
+  color: #000;
+  font-weight: bold;
+}
+
+.atwho-view ul {
+  overflow: hidden;
+
+  border: 1px solid #999;
+  border-radius: 2px;
+}
+
+.atwho-view ul li {
+  padding: 3px 8px 4px;
+  border-bottom-color: #eee;
+}
+
+.atwho-view ul li:last-child {
+  border: 0;
+}
+
+.atwho-view [data-value^="@"].cur {
+  background-color: #c0dbc9;
+  border-bottom: 0;
+
+  color: #2c663f;
+}
+
+.atwho-view [data-value^="+"].cur {
+  background-color: #cdc0db;
+  border-bottom: 0;
+
+  color: #492c66;
+}
