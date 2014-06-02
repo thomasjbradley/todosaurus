@@ -25,12 +25,15 @@ var NewControl = function (elem, actionManager) {
     }
   };
 
-  that.bindEvents({
-    blur: function (e) {
-      e.preventDefault();
-      commitOrDiscard(isCommittable());
+  that.bindEvents([
+    {
+      event: 'blur',
+      callback: function (e) {
+        e.preventDefault();
+        commitOrDiscard(isCommittable());
+      }
     }
-  });
+  ]);
 
   that.bindKeyEvents([
     {

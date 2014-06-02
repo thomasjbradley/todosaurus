@@ -27,17 +27,23 @@ var TagsSearchControl = function (elem, actionManager) {
     }
   };
 
-  that.bindEvents({
-    keyup: function (e) {
-      if (that.isVisible()) {
-        that.getActionManager().trigger('tags:search:trigger');
+  that.bindEvents([
+    {
+      event: 'keyup',
+      callback: function (e) {
+        if (that.isVisible()) {
+          that.getActionManager().trigger('tags:search:trigger');
+        }
       }
     },
-    blur: function (e) {
-      e.preventDefault();
-      that.getActionManager().trigger('tags:search:hide');
+    {
+      event: 'blur',
+      callback: function (e) {
+        e.preventDefault();
+        that.getActionManager().trigger('tags:search:hide');
+      }
     }
-  });
+  ]);
 
   that.bindKeyEvents([
     {

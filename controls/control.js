@@ -1,13 +1,11 @@
 var Control = function (elem, actionManager) {
   "use strict";
 
-  var
-    that = {
-      keyEvents: []
-    },
-    events = {},
-    eventsBound = false
-  ;
+  var that = {
+    keyEvents: [],
+    events: [],
+    eventsBound: false
+  };
 
   var chainer = function (func) {
     return function () {
@@ -21,31 +19,37 @@ var Control = function (elem, actionManager) {
   };
 
   var bindEvents = function (ev) {
-    if (eventsBound === true) {
-      return false;
-    }
-
-    if (!_.isUndefined(ev)) {
-      events = ev;
-    }
-
-    _.each(events, function (callback, key) {
-      that.elem.addEventListener(key, callback, false);
-    });
-
-    eventsBound = true;
+    that.events = that.events.concat(ev);
   };
 
   var bindKeyEvents = function (events) {
     that.keyEvents = that.keyEvents.concat(events);
   };
 
-  var killEvents = function () {
-    _.each(events, function (callback, key) {
-      that.elem.removeEventListener(key, callback);
+  var playEvents = function () {
+    if (that.eventsBound === true) {
+      return;
+    }
+
+    _.each(that.events, function (item) {
+      that.elem.addEventListener(item.event, item.callback, false);
     });
 
-    eventsBound = false;
+    that.eventsBound = true;
+  };
+
+  var stopEvents = function () {
+    if (that.eventsBound === false) {
+      return;
+    }
+
+    _.each(that.events, function (item) {
+      if (_.isUndefined(item.forever) || item.forever === false ) {
+        that.elem.removeEventListener(item.event, item.callback);
+      }
+    });
+
+    that.eventsBound = false;
   };
 
   if (_.isString(elem)) {
@@ -57,7 +61,8 @@ var Control = function (elem, actionManager) {
     getActionManager: getActionManager,
     bindEvents: chainer(bindEvents),
     bindKeyEvents: chainer(bindKeyEvents),
-    killEvents: chainer(killEvents)
+    playEvents: chainer(playEvents),
+    stopEvents: chainer(stopEvents)
   });
 
   return that;

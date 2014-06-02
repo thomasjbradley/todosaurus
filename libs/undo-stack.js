@@ -10,6 +10,7 @@ var UndoStack = function (maxItems) {
 
   var push = function (item) {
     undoStack.push(_.cloneDeep(item));
+    redoStack = [];
   };
 
   var canUndo = function () {

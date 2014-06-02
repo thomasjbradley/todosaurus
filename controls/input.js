@@ -8,41 +8,37 @@ var InputControl = function (elem, actionManager) {
       {
         keys: ['mod+c'],
         callback: function (e) {
-          clipboard.set(window.getSelection().toString(), 'text');
+          document.execCommand('copy');
         }
       },
       {
         keys: ['mod+v'],
         callback: function (e) {
-          var val = that.elem.value,
-            pos = that.elem.selectionStart,
-            start = val.slice(0, pos),
-            end = val.slice(that.elem.selectionEnd),
-            newText = clipboard.get('text')
-          ;
-
-          that.elem.value = start + newText + end;
-          setCaretPosition(pos + newText.length);
+          document.execCommand('paste');
         }
       },
       {
         keys: ['mod+x'],
         callback: function (e) {
-          var val = that.elem.value,
-            pos = that.elem.selectionStart,
-            start = val.slice(0, pos),
-            end = val.slice(that.elem.selectionEnd)
-          ;
-
-          clipboard.set(window.getSelection().toString(), 'text');
-          that.elem.value = start + end;
-          setCaretPosition(pos);
+          document.execCommand('cut');
         }
       },
       {
         keys: ['mod+a'],
         callback: function (e) {
-          that.elem.setSelectionRange(0, 10000)
+          document.execCommand('selectall');
+        }
+      },
+      {
+        keys: ['mod+z'],
+        callback: function (e) {
+          document.execCommand('undo');
+        }
+      },
+      {
+        keys: ['mod+shift+z'],
+        callback: function (e) {
+          document.execCommand('redo');
         }
       }
     ]);
@@ -71,8 +67,12 @@ var InputControl = function (elem, actionManager) {
     }
   };
 
-  var setCaretPosition = function (caretPos) {
-    that.elem.setSelectionRange(caretPos, caretPos);
+  var setCaretPosition = function (startPos, endPos) {
+    if (_.isUndefined(endPos)) {
+      endPos = startPos;
+    }
+
+    that.elem.setSelectionRange(startPos, endPos);
   };
 
   var setPosition = function (pos) {
@@ -85,14 +85,14 @@ var InputControl = function (elem, actionManager) {
   };
 
   var show = function (pos) {
-    that.bindEvents();
+    that.playEvents();
     actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-state', 'visible');
     setPosition(pos);
   };
 
   var hide = function () {
-    that.killEvents();
+    that.stopEvents();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-state', 'hidden');
   };
@@ -106,12 +106,14 @@ var InputControl = function (elem, actionManager) {
   };
 
   var focus = function () {
+    that.playEvents();
     that.elem.focus();
     actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-focused', 'true');
   };
 
   var blur = function () {
+    that.stopEvents();
     that.elem.blur();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-focused', 'false');
