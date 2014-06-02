@@ -5,6 +5,7 @@
   <title>Todosaurus</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
+  <link href="bower_components/jquery.atwho/dist/css/jquery.atwho.min.css" rel="stylesheet">
   <link href="css/general.css" rel="stylesheet">
   <link href="css/interface.css" rel="stylesheet">
   <link href="css/overlay.css" rel="stylesheet">
@@ -112,7 +113,15 @@
   <script src="bower_components/lodash/dist/lodash.min.js"></script>
   <script src="bower_components/blueimp-md5/js/md5.min.js"></script>
   <script src="bower_components/mousetrap/mousetrap.min.js"></script>
+
+  <!-- jQuery only required for At.js and Caret.js; nothing else in the app uses it -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/caret.js/dist/jquery.caret.min.js"></script>
+  <script src="bower_components/jquery.atwho/dist/js/jquery.atwho.min.js"></script>
+
+  <script src="utils/fuzzy-match.js"></script>
   <script src="bootstrap.js"></script>
+
   <script>
     /* Dynamically load Node only libraries */
     if (window.isNode) {
@@ -127,11 +136,13 @@
       }).join(''));
     }
   </script>
-  <script src="utils/fuzzy-match.js"></script>
+
   <script src="libs/focus-manager.js"></script>
   <script src="libs/action-manager.js"></script>
   <script src="libs/interface-manager.js"></script>
+
   <script src="menus/menu-manager.js"></script>
+
   <script src="controls/control.js"></script>
   <script src="controls/list.js"></script>
   <script src="controls/input.js"></script>
@@ -144,21 +155,28 @@
   <script src="controls/tags.js"></script>
   <script src="controls/folder-chooser.js"></script>
   <script src="controls/file-chooser.js"></script>
+  <script src="controls/input-auto-complete.js"></script>
+
   <script src="libs/orderer.js"></script>
   <script src="libs/grouper.js"></script>
   <script src="libs/filterer.js"></script>
+
   <script src="models/todo.js"></script>
   <script src="models/todos.js"></script>
   <script src="models/buffer.js"></script>
+
   <script src="storage/storage-manager.js"></script>
   <script src="storage/localstorage.js"></script>
   <script src="storage/filesystem.js"></script>
+
   <script src="actions.js"></script>
+
   <script src="bindings/default.js"></script>
   <script src="bindings/input.js"></script>
   <script src="bindings/menu.js"></script>
   <script src="menus/context-default.js"></script>
   <script src="menus/context-input.js"></script>
+
   <script src="app.js"></script>
 </body>
 </html>

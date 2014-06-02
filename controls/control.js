@@ -35,6 +35,10 @@ var Control = function (elem, actionManager) {
       that.elem.addEventListener(item.event, item.callback, false);
     });
 
+    _.each(that.keyEvents, function (item) {
+      Mousetrap.bind(item.keys, item.callback);
+    });
+
     that.eventsBound = true;
   };
 
@@ -47,6 +51,10 @@ var Control = function (elem, actionManager) {
       if (_.isUndefined(item.forever) || item.forever === false ) {
         that.elem.removeEventListener(item.event, item.callback);
       }
+    });
+
+    _.each(that.keyEvents, function (item) {
+      Mousetrap.unbind(item.keys);
     });
 
     that.eventsBound = false;

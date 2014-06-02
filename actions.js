@@ -475,12 +475,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var tags = todos.getAllTags('+');
     grouper.setGroup('+', tags);
     im.get('tags-projects').render(tags);
+    im.get('input-auto-complete').resetData('+', tags);
   });
 
   am.action('tags:create:contexts', function () {
     var tags = todos.getAllTags('@');
     grouper.setGroup('@', tags);
     im.get('tags-contexts').render(tags);
+    im.get('input-auto-complete').resetData('@', tags);
   });
 
   am.action('tags:create:priority', function () {

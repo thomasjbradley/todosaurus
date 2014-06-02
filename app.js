@@ -59,6 +59,9 @@
   im.add('tags-contexts', new TagsControl('tags-contexts', am, {pillClass: 'pill--alt'}));
   im.add('tags-priority', new TagsControl('tags-priority', am, {pillClass: 'tag--priority'}));
   im.add('tags-search', new TagsSearchControl('tags-search', am));
+
+  im.add('input-auto-complete', new InputAutoComplete(jQuery, im));
+
   document.addEventListener('click', im.handleMouseEvents, false);
 
   var renderFocus = function (index) {
