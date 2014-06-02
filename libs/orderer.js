@@ -80,11 +80,20 @@ var Orderer = function () {
     }
   };
 
+  var getIndex = function (id) {
+    var items = _.map(ordered, function (item) {
+      return item.id();
+    });
+
+    return items.indexOf(id);
+  };
+
   methods = {
     subscribe: chainer(subscribe),
     length: length,
     getOrderedItems: getOrderedItems,
-    order: informer(order)
+    order: informer(order),
+    getIndex: getIndex
   };
 
   return methods;

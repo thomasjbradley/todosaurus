@@ -110,6 +110,14 @@ var Grouper = function (generics) {
     }
   };
 
+  var getIndex = function (id) {
+    var items = _.map(grouped, function (item) {
+      return item.id();
+    });
+
+    return items.indexOf(id);
+  };
+
   methods = {
     subscribe: chainer(subscribe),
     length: length,
@@ -117,7 +125,8 @@ var Grouper = function (generics) {
     setGroup: chainer(setGroup),
     matchesGroup: matchesGroup,
     findTagStartingWith: findTagStartingWith,
-    group: informer(group)
+    group: informer(group),
+    getIndex: getIndex
   };
 
   return methods;

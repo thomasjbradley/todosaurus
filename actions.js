@@ -317,7 +317,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var theId = id();
 
     if (theId && !matchesFilters(theId)) {
-      im.get('filters').group = false; // tags:clear without double render
+      im.get('filters').group = false;
       am.trigger('app:search:clear');
       fm.set(filterer.getIndex(theId));
     }
@@ -348,12 +348,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('app:search:clear', function () {
     var
-      item = filterer.getByIndex(fm.get()),
-      fullIndex = 0
+      item,
+      fullIndex = fm.get()
     ;
 
-    if (item) {
-      fullIndex = todos.getIndex(item.id());
+    if (!_.isEmpty(im.get('search').value())) {
+      item = filterer.getByIndex(fm.get());
+
+      if (item) {
+        fullIndex = grouper.getIndex(item.id());
+      }
     }
 
     im.get('search').value('');
@@ -424,7 +428,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('app:clear', function () {
     var possibleInput = document.querySelector('input:focus');
 
-    im.get('filters').group = false; // tags:clear without double render
+    im.get('filters').group = false;
     am.trigger('app:search:clear');
 
     if (possibleInput) {
@@ -513,11 +517,20 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:clear', function () {
+    var
+      item = filterer.getByIndex(fm.get()),
+      fullIndex = fm.get()
+    ;
+
+    if (item) {
+      fullIndex = orderer.getIndex(item.id());
+    }
+
     im.get('filters').group = false;
+    im.get('menu').clearShowPriorityChecks();
     am.trigger('tags:clear-active');
     am.trigger('app:list:render');
-
-    im.get('menu').clearShowPriorityChecks();
+    fm.set(fullIndex);
   });
 
   am.action('tags:highlight-active', function (tag, index) {
