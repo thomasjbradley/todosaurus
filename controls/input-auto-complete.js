@@ -13,7 +13,7 @@ var InputAutoComplete = function ($, interfaceManager) {
       clearTimeout(hiddenTimeouts[input]);
 
       hiddenTimeouts[input] = setTimeout(function () {
-        if ($('.atwho-view:visible').length === 0) {
+        if ($('.atwho-view:visible').length === 0 && interfaceManager.get(input).isVisible()) {
           interfaceManager.get(input).playEvents();
         }
       }, 80);

@@ -95,6 +95,7 @@ var InputControl = function (elem, actionManager) {
     that.stopEvents();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-state', 'hidden');
+    that.elem.blur();
   };
 
   var isVisible = function () {
