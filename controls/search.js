@@ -2,18 +2,12 @@ var SearchControl = function (elem, actionManager) {
   "use strict";
 
   var that = InputControl(elem, actionManager);
-  that.timer = null;
-
-  that.triggerSearch = function () {
-    that.getActionManager().trigger('app:search:trigger');
-  };
 
   that.bindEvents([
     {
       event: 'keyup',
       callback: function (e) {
-        clearInterval(that.timer);
-        that.timer = setInterval(that.triggerSearch, 70);
+        that.getActionManager().trigger('app:search:trigger');
       }
     },
     {
