@@ -23,6 +23,11 @@
 
 .item__text {
   min-height: 19px;
+  overflow: hidden;
+  padding-right: 4px;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .todos--has-priorities .item {

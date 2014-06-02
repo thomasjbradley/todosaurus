@@ -4,7 +4,7 @@ var Filterer = function (generics) {
   var
     methods = {},
     subscriptions = [],
-    filtered
+    filtered = []
   ;
 
   var subscribe = function (callback) {
@@ -82,13 +82,18 @@ var Filterer = function (generics) {
     }
   };
 
+  var getPreviouslyFilteredItems = function () {
+    return filtered;
+  };
+
   methods = {
     subscribe: chainer(subscribe),
     length: length,
     getByIndex: getByIndex,
     getIndex: getIndex,
     matchesFilter: matchesFilter,
-    filter: informer(filter)
+    filter: informer(filter),
+    getPreviouslyFilteredItems: getPreviouslyFilteredItems
   };
 
   return methods;

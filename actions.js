@@ -1,6 +1,17 @@
 var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer) {
   "use strict";
 
+  var isEditableState = function () {
+    var totalItems = filterer.getPreviouslyFilteredItems().length;
+
+    if (totalItems <= 0) {
+      am.trigger('app:clear');
+      return false;
+    }
+
+    return true;
+  };
+
   var id = function () {
     return filterer.getByIndex(fm.get()).id();
   };
@@ -87,11 +98,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('item:toggle', function () {
     todos.get(id()).toggle();
-  });
+  }, isEditableState);
 
   am.action('item:delete', function () {
     todos.remove(id());
-  });
+  }, isEditableState);
 
   am.action('item:cut', function () {
     var text = todos.get(id()).getFullText();
@@ -102,7 +113,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     buffer.push(text);
     todos.remove(id());
-  });
+  }, isEditableState);
 
   am.action('item:copy', function () {
     var text = todos.get(id()).getFullText();
@@ -112,25 +123,25 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
 
     buffer.push(text);
-  });
+  }, isEditableState);
 
   am.action('item:paste:before', function () {
     if (buffer.length() === 0) return;
 
     todos.addBeforeItem(buffer.pull(), id());
-  });
+  }, isEditableState);
 
   am.action('item:paste:after', function () {
     if (buffer.length() === 0) return;
 
     todos.addAfterItem(buffer.pull(), id());
     fm.next();
-  });
+  }, isEditableState);
 
   am.action('item:duplicate', function () {
     am.trigger('item:copy');
     am.trigger('item:paste:after');
-  });
+  }, isEditableState);
 
   am.action('item:move:up', function () {
     if (im.get('filters').order === false) {
@@ -144,14 +155,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
       am.trigger('item:paste:before');
     }
-  });
+  }, isEditableState);
 
   am.action('item:move:down', function () {
     if (im.get('filters').order === false) {
       am.trigger('item:cut');
       am.trigger('item:paste:after');
     }
-  });
+  }, isEditableState);
 
   am.action('item:edit', function (e, combo, input) {
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
@@ -168,7 +179,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       .focus()
       .select()
     ;
-  });
+  }, isEditableState);
 
   am.action('item:edit:start', function (e, combo, input) {
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
@@ -185,7 +196,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       .focus()
       .setCaretPosition(0)
     ;
-  });
+  }, isEditableState);
 
   am.action('item:edit:end', function (e, combo, input) {
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
@@ -202,7 +213,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       .focus()
       .setCaretPosition(1000)
     ;
-  });
+  }, isEditableState);
 
   am.action('item:edit:clear', function (e, combo, input, defaultText) {
     var text = '';
@@ -225,7 +236,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       .focus()
       .setCaretPosition(0)
     ;
-  });
+  }, isEditableState);
 
   am.action('item:edit:after', function (e) {
     var prevFocus = fm.get();
@@ -239,7 +250,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     if (fm.get() !== prevFocus) {
       am.trigger('item:edit');
     }
-  });
+  }, isEditableState);
 
   am.action('item:edit:before', function (e) {
     var prevFocus = fm.get();
@@ -253,7 +264,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     if (fm.get() !== prevFocus) {
       am.trigger('item:edit');
     }
-  });
+  }, isEditableState);
 
   am.action('item:new:edit', function () {
     var group = im.get('filters').group;
@@ -263,7 +274,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     } else {
       am.trigger('item:edit:clear', false, false, 'new');
     }
-  });
+  }, isEditableState);
 
   am.action('item:new:at-top', function (e) {
     var todo = prepareNewTodo();
@@ -275,7 +286,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     todos.prepend(todo);
     fm.set(0);
     am.trigger('item:new:edit');
-  });
+  }, isEditableState);
 
   am.action('item:new:at-bottom', function (e) {
     var todo = prepareNewTodo();
@@ -287,7 +298,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     todos.append(todo);
     fm.set(fm.getMax());
     am.trigger('item:new:edit');
-  });
+  }, isEditableState);
 
   am.action('item:new:after', function (e) {
     var todo = prepareNewTodo();
@@ -299,7 +310,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     buffer.push(todo.getFullText());
     am.trigger('item:paste:after');
     am.trigger('item:new:edit');
-  });
+  }, isEditableState);
 
   am.action('item:new:before', function (e) {
     var todo = prepareNewTodo();
@@ -311,7 +322,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     buffer.push(todo.getFullText());
     am.trigger('item:paste:before');
     am.trigger('item:new:edit');
-  });
+  }, isEditableState);
 
   am.action('item:update', function (text) {
     var theId = id();
@@ -323,16 +334,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     }
 
     todos.get(theId).text(text);
-  });
+  }, isEditableState);
 
   am.action('item:priority-toggle', function (e, combo) {
     var index = getNumberFromKeyCombo(combo);
     todos.get(id()).togglePriority(index);
-  });
+  }, isEditableState);
 
   am.action('item:priority-remove', function (e, combo) {
     todos.get(id()).removePriority();
-  });
+  }, isEditableState);
 
   am.action('app:search:focus', function (e) {
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {

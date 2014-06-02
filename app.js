@@ -116,9 +116,13 @@
   };
 
   todos.subscribe(function (items) {
-    orderer.order(items, im.get('filters').order);
-    am.trigger('storage:save');
-    localStorage.setItem('mtime', new Date());
+    if (items.length === 0) {
+      todos.populate(['All your todos are extinct, so I cloned a new one. +themepark @jurassic']);
+    } else {
+      orderer.order(items, im.get('filters').order);
+      am.trigger('storage:save');
+      localStorage.setItem('mtime', new Date());
+    }
   });
 
   orderer.subscribe(function (items) {

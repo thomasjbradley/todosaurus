@@ -6,12 +6,22 @@ var ActionManager = function () {
     actions = {}
   ;
 
-  var action = function (action, callback) {
-    actions[action] = callback;
+  var action = function (action, cb, t) {
+    actions[action] = {
+      callback: cb,
+      test: t || false
+    };
   };
 
   var trigger = function (action) {
-    actions[action].apply(this, Array.prototype.slice.call(arguments, 1));
+    if (actions[action].test === false) {
+      actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1))
+      return;
+    }
+
+    if (actions[action].test() === true) {
+      actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1))
+    }
   };
 
   methods =  {
