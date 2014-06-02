@@ -117,7 +117,7 @@
 
   todos.subscribe(function (items) {
     if (items.length === 0) {
-      todos.populate(['All your todos are extinct, so I cloned a new one. +themepark @jurassic']);
+      todos.populate(['All your todos are extinct. +cloning @themepark']);
     } else {
       orderer.order(items, im.get('filters').order);
       am.trigger('storage:save');

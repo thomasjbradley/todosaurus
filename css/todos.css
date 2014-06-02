@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   position: relative;
+  z-index: 10;
+
+  background-color: #fff;
 
   counter-reset: todos;
   list-style-type: none;
@@ -178,4 +181,19 @@
   border-color: #bbb;
 
   color: #888;
+}
+
+.item--empty {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+
+  border-color: #fff;
+
+  color: #999;
+}
+
+.item--empty::before {
+  content: "0";
+  z-index: 2;
 }
