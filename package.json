@@ -1,7 +1,7 @@
 {
   "name": "Todosaurus",
   "private": true,
-  "version": "0.9.0",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "A keyboard driven GUI app for the Todo.txt format.",
   "keywords": [],
