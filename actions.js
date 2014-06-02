@@ -441,6 +441,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     im.get('filters').group = false;
     am.trigger('app:search:clear');
+    im.get('menu').clearShowPriorityChecks();
 
     if (possibleInput) {
       possibleInput.blur();
