@@ -632,7 +632,8 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var startupData = [
       'Welcome to Todosaurus! +Todosaurus',
       'A app for the Todo.txt format. @todotxt',
-      'Press “n” to create a new todo item.'
+      'Press “n” to create a new todo item.',
+      'Or press “?” for more keyboard shortcuts.'
     ];
 
     im.get('folder-chooser').hide();
