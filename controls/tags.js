@@ -12,12 +12,25 @@ var TagsControl = function (elem, actionManager, opts) {
 
   options = _.extend(options, opts);
 
-  var populateList = function (items) {
+  var getActiveClass = function (item, active) {
+    if (_.isEmpty(active)) {
+      return '';
+    }
+
+    if (_.indexOf(active, item) > -1) {
+      return '';
+    }
+
+    return ' tag--disabled';
+  };
+
+  var populateList = function (items, active) {
     var output = _.map(items, function (item) {
       var pieces = [
-        '<li><span class="pill ',
+        '<li><span class="pill tag ',
         options.pillClass,
-        ' tag">',
+        getActiveClass(item, active),
+        '">',
         item,
         '</span></li>'
       ];

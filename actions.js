@@ -473,9 +473,22 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:create:priority', function () {
-    var tags = generics.priorities;
-    grouper.setGroup('!', tags);
-    im.get('tags-priority').render(tags);
+    var
+      tags = todos.getAvailablePriorities(),
+      active = []
+    ;
+
+    im.get('filters').activeGroups = [];
+
+    _.each(tags, function (item) {
+      var index = generics.priorityMap[item];
+
+      active.push(generics.priorities[index]);
+      im.get('filters').activeGroups.push(index);
+    });
+
+    grouper.setGroup('!', generics.priorities, active);
+    im.get('tags-priority').render(generics.priorities, active);
   });
 
   am.action('tags:show', function (tag, combo) {
@@ -507,13 +520,20 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:show:priority', function (e, combo) {
-    var pri = ['a', 'b', 'c', 'd', 'e'];
+    var
+      pri = ['a', 'b', 'c', 'd', 'e'],
+      index = getNumberFromKeyCombo(combo)
+    ;
+
+    if (_.indexOf(im.get('filters').activeGroups, index) === -1) {
+      return;
+    }
 
     am.trigger('tags:clear-active');
     am.trigger('tags:show', '!', combo);
 
     im.get('menu').clearShowPriorityChecks();
-    im.get('menu').checkShowPriority(pri[getNumberFromKeyCombo(combo)]);
+    im.get('menu').checkShowPriority(pri[index]);
   });
 
   am.action('tags:clear', function () {

@@ -2,6 +2,7 @@ var
   filters = {
     order: false,
     group: false,
+    activeGroups: false,
     filter: false
   },
   gui,

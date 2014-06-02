@@ -141,7 +141,7 @@ var Todo = function (fullText) {
   };
 
   var hasPriority = function () {
-    return (data.priority !== false);
+    return !(data.priority === false);
   };
 
   var removePriority = function () {

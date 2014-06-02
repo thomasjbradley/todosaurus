@@ -10,7 +10,14 @@
         'C: Tomorrow',
         'D: This Week',
         'E: Next Week'
-      ]
+      ],
+      priorityMap: {
+        'A': 0,
+        'B': 1,
+        'C': 2,
+        'D': 3,
+        'E': 4
+      }
     },
     fm = new FocusManager(),
     am = new ActionManager(),

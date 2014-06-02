@@ -132,6 +132,20 @@ var Todos = function () {
     });
   };
 
+  var getAvailablePriorities = function () {
+    var availableItems, priorities;
+
+    availableItems = _.filter(todos, function (item) {
+      return item.hasPriority();
+    });
+
+    priorities = _.map(availableItems, function (item) {
+      return item.getPriority();
+    })
+
+    return _.unique(priorities).sort();
+  };
+
   var getAllFullText = function () {
     return _.map(todos, function (item) {
       return item.getFullText();
@@ -165,6 +179,7 @@ var Todos = function () {
     getByIndex: getByIndex,
     getAll: getAll,
     getAllTags: getAllTags,
+    getAvailablePriorities: getAvailablePriorities,
     getAllFullText: getAllFullText,
     remove: informer(remove),
     removeByIndex: informer(removeByIndex)

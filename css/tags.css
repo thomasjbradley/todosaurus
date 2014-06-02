@@ -93,3 +93,7 @@
   border-color: rgba(254, 42, 141, 0.3);
   color: #cc196d;
 }
+
+.tag--disabled {
+  display: none;
+}
