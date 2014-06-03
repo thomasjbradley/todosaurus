@@ -42,8 +42,8 @@ bindings.default = {
   'tags:search:projects' : ['mod+p'],
   'tags:search:contexts' : ['mod+t'],
 
-  'app:sort:manually'    : 'mod+alt+,',
-  'app:sort:priority'    : 'mod+alt+.',
+  // 'app:sort:manually'    : 'mod+alt+,',
+  // 'app:sort:priority'    : 'mod+alt+.',
 
   'storage:read'         : ['mod+r'],
   'storage:sort-file'    : ['mod+alt+s'],

@@ -10,7 +10,7 @@ var MenuManager = function () {
       }
     };
   };
-
+/*
   var triggerSort = function (dir) {
     if (dir === 'manually') {
       menu['view:sort-manually'].checked = true;
@@ -24,7 +24,7 @@ var MenuManager = function () {
       menu['edit:move-up'].enabled = false;
     }
   };
-
+*/
   var checkShowPriority = function (pri) {
     menu['view:show-priority:' + pri].checked = true;
   };
@@ -46,7 +46,7 @@ var MenuManager = function () {
   };
 
   methods = {
-    triggerSort: triggerIfMenuExists(triggerSort),
+    // triggerSort: triggerIfMenuExists(triggerSort),
     checkShowPriority: triggerIfMenuExists(checkShowPriority),
     clearShowPriorityChecks: triggerIfMenuExists(clearShowPriorityChecks),
     bindEvents: triggerIfMenuExists(bindEvents)

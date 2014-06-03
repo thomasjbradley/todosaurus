@@ -33,8 +33,8 @@ menuContexts.default = {
     'view:find-project',
     'view:find-context',
     'view:show-priority',
-    'view:sort-manually',
-    'view:sort-priority',
+    // 'view:sort-manually',
+    // 'view:sort-priority',
     'view:clear-search',
     'view:clear-group',
     'view:clear-all'

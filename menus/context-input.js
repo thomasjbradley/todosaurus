@@ -15,8 +15,8 @@ menuContexts.input = {
     'view:find',
     'view:find-project',
     'view:find-context',
-    'view:sort-manually',
-    'view:sort-priority',
+    // 'view:sort-manually',
+    // 'view:sort-priority',
     'view:clear-all'
   ],
 

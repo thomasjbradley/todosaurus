@@ -171,6 +171,9 @@
     });
   }
 
+  am.trigger('storage:read');
+
+/*
   filters.order = localStorage.getItem('sort-order');
 
   if (filters.order === 'true') {
@@ -180,10 +183,11 @@
     filters.order = false;
     im.get('menu').triggerSort('manually');
   }
+*/
 
-  am.trigger('storage:read');
-
-  // buffer.subscribe(function (buffer) {
-  //   console.log(buffer.length(), buffer);
-  // });
+/*
+  buffer.subscribe(function (buffer) {
+    console.log(buffer.length(), buffer);
+  });
+*/
 }());

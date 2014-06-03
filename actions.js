@@ -20,14 +20,18 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     return generics.new;
   };
 
-  var prepareNewTodo = function () {
-    var
-      todo = todos.createNewItem(todos.get(id()).getFullText())
-    ;
+  var prepareNewTodo = function (index) {
+    var todo, getId = id();
 
-    if (im.get('filters').order !== true) {
-      todo.removePriority();
+    if (!_.isUndefined(index)) {
+      getId = filterer.getByIndex(index).id();
     }
+
+    todo = todos.createNewItem(todos.get(getId).getFullText());
+
+    // if (im.get('filters').order !== true) {
+      todo.removePriority();
+    // }
 
     todo.resetCreated();
 
@@ -144,7 +148,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   }, isEditableState);
 
   am.action('item:move:up', function () {
-    if (im.get('filters').order === false) {
+    // if (im.get('filters').order === false) {
       var startFocus = fm.get();
 
       am.trigger('item:cut');
@@ -154,14 +158,14 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       }
 
       am.trigger('item:paste:before');
-    }
+    // }
   }, isEditableState);
 
   am.action('item:move:down', function () {
-    if (im.get('filters').order === false) {
+    // if (im.get('filters').order === false) {
       am.trigger('item:cut');
       am.trigger('item:paste:after');
-    }
+    // }
   }, isEditableState);
 
   am.action('item:edit', function (e, combo, input) {
@@ -277,7 +281,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   }, isEditableState);
 
   am.action('item:new:at-top', function (e) {
-    var todo = prepareNewTodo();
+    var todo = prepareNewTodo(0);
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
@@ -289,7 +293,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   }, isEditableState);
 
   am.action('item:new:at-bottom', function (e) {
-    var todo = prepareNewTodo();
+    var todo = prepareNewTodo(fm.getMax());
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
@@ -452,6 +456,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — Todosaurus';
   });
 
+/*
   am.action('app:sort:manually', function () {
     im.get('filters').order = false;
     am.trigger('app:list:render');
@@ -465,6 +470,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('menu').triggerSort('priority');
     localStorage.setItem('sort-order', 'true');
   });
+*/
 
   am.action('tags:create', function () {
     am.trigger('tags:create:projects');
