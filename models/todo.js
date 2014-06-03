@@ -83,6 +83,10 @@ var Todo = function (fullText) {
     data.created = (new Date()).toISOString().substr(0, 10);
   };
 
+  var getCreatedDate = function () {
+    return data.created;
+  };
+
   var setText = function (t) {
     text = t.trim();
   };
@@ -181,6 +185,7 @@ var Todo = function (fullText) {
     subscribe: chainer(subscribe),
     id: getId,
     resetCreated: chainer(resetCreated),
+    getCreatedDate: getCreatedDate,
     getFullText: getFullText,
     text: manageText,
     mark: informer(mark),

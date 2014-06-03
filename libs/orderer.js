@@ -54,15 +54,24 @@ var Orderer = function () {
     });
 
     orderGroups.start = orderGroups.start.sort(function (a, b) {
-      if (a.getFullText() < b.getFullText()) {
-       return -1;
-      }
+      a = a.getFullText();
+      b = b.getFullText();
 
-      if (a.getFullText() > b.getFullText()) {
-        return 1;
-      }
+      return (a < b) ? -1 : (a > b) ? 1 : 0;
+    });
 
-      return 0;
+    orderGroups.middle = orderGroups.middle.sort(function (a, b) {
+      a = a.getCreatedDate();
+      b = b.getCreatedDate();
+
+      return (a < b) ? -1 : (a > b) ? 1 : 0;
+    });
+
+    orderGroups.end = orderGroups.end.sort(function (a, b) {
+      a = a.getCompletedDate();
+      b = b.getCompletedDate();
+
+      return (a > b) ? -1 : (a < b) ? 1 : 0;
     });
 
     return [].concat(

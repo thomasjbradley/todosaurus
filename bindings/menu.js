@@ -11,7 +11,7 @@ bindings.menu = {
   'file:focus-jump-down'      : 'ctrl+d',
   'file:jump'                 : 'mod+j',
   'file:reload'               : 'mod+r',
-  'file:sort-file'            : 'mod+alt+s',
+  'file:sort-file'            : 'mod+shift+s',
   'file:archive'              : 'mod+s',
   'file:reveal-in-finder'     : 'mod+shift+r',
   'file:switch-directory'     : 'mod+o',

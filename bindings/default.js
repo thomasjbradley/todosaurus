@@ -46,7 +46,7 @@ bindings.default = {
   // 'app:sort:priority'    : 'mod+alt+.',
 
   'storage:read'         : ['mod+r'],
-  'storage:sort-file'    : ['mod+alt+s'],
+  'storage:sort-file'    : ['mod+shift+s'],
   'storage:archive'      : ['mod+s'],
   'storage:reveal-finder': ['mod+shift+r'],
   'storage:folder:change': ['mod+o']

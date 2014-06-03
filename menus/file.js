@@ -56,7 +56,7 @@ menu['file:reload'] = new gui.MenuItem({
 });
 
 menu['file:sort-file'] = new gui.MenuItem({
-  label: 'Sort File Contents                                ⌥⌘S',
+  label: 'Sort File Contents                                ⇧⌘S',
   enabled: false
 });
 
