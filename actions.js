@@ -27,11 +27,12 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
       getId = filterer.getByIndex(index).id();
     }
 
-    todo = todos.createNewItem(todos.get(getId).getFullText());
+    todo = todos.createNewItem(todos.get(getId).getFullText() + ' ' + generics.new);
 
-    // if (im.get('filters').order !== true) {
+    if (im.get('filters').group === false || im.get('filters').group[0] !== '!') {
       todo.removePriority();
-    // }
+      todo.text();
+    }
 
     todo.resetCreated();
 
@@ -274,7 +275,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     var group = im.get('filters').group;
 
     if (group !== false) {
-      am.trigger('item:edit:clear', false, false, 'new', ' ' + grouper.getGroup(group[0])[group[1]]);
+      if (group[0] !== '!') {
+        am.trigger('item:edit:clear', false, false, 'new', ' ' + grouper.getGroup(group[0])[group[1]]);
+      } else {
+        am.trigger('item:edit:clear', false, false, 'new');
+      }
     } else {
       am.trigger('item:edit:clear', false, false, 'new');
     }
