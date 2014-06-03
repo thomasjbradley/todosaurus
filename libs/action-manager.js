@@ -15,12 +15,11 @@ var ActionManager = function () {
 
   var trigger = function (action) {
     if (actions[action].test === false) {
-      actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1))
-      return;
+      return actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1));
     }
 
     if (actions[action].test() === true) {
-      actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1))
+      return actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1));
     }
   };
 
