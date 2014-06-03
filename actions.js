@@ -31,10 +31,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     if (im.get('filters').group === false || im.get('filters').group[0] !== '!') {
       todo.removePriority();
-      todo.text();
     }
 
     todo.resetCreated();
+    todo.unmark();
 
     return todo;
   };
