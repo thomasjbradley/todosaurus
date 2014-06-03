@@ -32,7 +32,7 @@ bindings.default = {
 
   'app:search:focus'     : ['/', 'mod+f'],
   'app:search:clear'     : ['command+l', 'ctrl+l'],
-  'app:jump:show'        : ['mod+g'],
+  'app:jump:show'        : ['mod+j'],
   'app:clear'            : ['mod+shift+l'],
 
   'tags:show:projects'   : ['mod+1', 'mod+2', 'mod+3', 'mod+4', 'mod+5', 'mod+6', 'mod+7', 'mod+8', 'mod+9'],

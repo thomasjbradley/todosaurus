@@ -45,7 +45,7 @@ menu['file:focus-jump-down'] = new gui.MenuItem({
 menu['file:sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:jump'] = new gui.MenuItem({
-  label: 'Jump to Line                                                                           ⌘G'
+  label: 'Jump to Line                                                                           ⌘J'
 });
 
 menu['file:sep-3'] = new gui.MenuItem({ type: 'separator' });

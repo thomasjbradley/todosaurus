@@ -9,7 +9,7 @@ bindings.menu = {
   'file:focus-last'           : 'shift+g',
   'file:focus-jump-up'        : 'ctrl+u',
   'file:focus-jump-down'      : 'ctrl+d',
-  'file:jump'                 : 'mod+g',
+  'file:jump'                 : 'mod+j',
   'file:reload'               : 'mod+r',
   'file:sort-file'            : 'mod+alt+s',
   'file:archive'              : 'mod+s',

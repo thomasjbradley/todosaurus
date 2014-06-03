@@ -3,7 +3,7 @@ bindings.input = {
   'item:new:at-bottom'   : ['mod+shift+n'],
 
   'app:search:focus'     : ['mod+f'],
-  'app:jump:show'        : ['mod+g'],
+  'app:jump:show'        : ['mod+j'],
   'app:clear'            : ['mod+shift+l'],
 
   'tags:clear'           : ['mod+alt+l'],
