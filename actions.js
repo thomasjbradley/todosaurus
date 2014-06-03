@@ -70,11 +70,39 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     return num;
   }
 
-  var matchesFilters = function (id) {
-    return (
-      filterer.matchesFilter(todos.get(id).text(), im.get('filters').filter)
-      && grouper.matchesGroup(todos.get(id).getFullText(), im.get('filters').group)
-    );
+  var matchesFilters = function (newText) {
+    var
+      filter = im.get('filters').filter,
+      group = im.get('filters').group,
+      matchesFilter = false,
+      matchesGroup = false
+    ;
+
+    if (filter !== false) {
+      if (filterer.matchesFilter(newText, filter)) {
+        matchesFilter = true;
+      } else {
+        matchesFilter = false;
+      }
+    } else {
+      matchesFilter = true;
+    }
+
+    if (group !== false) {
+      if (grouper.matchesGroup(newText, group)) {
+        matchesGroup = true;
+      } else {
+        matchesGroup = false;
+      }
+    } else {
+      matchesGroup = true;
+    }
+
+    if (matchesFilter && matchesGroup) {
+      return true;
+    }
+
+    return false;
   };
 
   am.action('item:focus:next', function () {
@@ -334,9 +362,17 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   }, isEditableState);
 
   am.action('item:update', function (text) {
-    var theId = id();
+    var
+      theId = id(),
+      newFullText = text,
+      todo = todos.get(theId)
+    ;
 
-    if (theId && !matchesFilters(theId)) {
+    if (todo.hasPriority()) {
+      newFullText = '(' + todo.getPriority() + ') ' + text;
+    }
+
+    if (!matchesFilters(newFullText)) {
       im.get('filters').group = false;
       am.trigger('app:search:clear');
       fm.set(filterer.getIndex(theId));
