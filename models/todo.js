@@ -4,7 +4,7 @@ var Todo = function (fullText) {
   var
     methods = {},
     subscriptions = [],
-    id = md5(fullText + Date.now()),
+    id = _.uniqueId(),
     text = fullText,
     data = {
       created: (new Date()).toISOString().substr(0, 10),
