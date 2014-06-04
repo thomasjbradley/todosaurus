@@ -42,6 +42,7 @@
   });
 
   im.setContext('input', bindings.input, menuContexts.input);
+  im.setContext('empty', bindings.empty, menuContexts.empty);
 
   im.add('menu', new MenuManager());
   im.get('menu').bindEvents(bindings.menu);
@@ -119,13 +120,10 @@
   };
 
   todos.subscribe(function (items) {
-    if (items.length === 0) {
-      todos.populate(['All your todos are extinct. +cloning @themepark']);
-    } else {
-      orderer.order(items, im.get('filters').order);
-      am.trigger('storage:save');
-      localStorage.setItem('mtime', new Date());
-    }
+    am.trigger('app:context:default');
+    orderer.order(items, im.get('filters').order);
+    am.trigger('storage:save');
+    localStorage.setItem('mtime', new Date());
   });
 
   orderer.subscribe(function (items) {

@@ -365,6 +365,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     am.trigger('item:new:edit');
   }, isEditableState);
 
+  am.action('item:new:when-empty', function (e) {
+    if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
+      e.preventDefault();
+    }
+
+    todos.prepend(generics.new);
+    fm.set(0);
+    am.trigger('item:new:edit');
+  });
+
   am.action('item:update', function (text) {
     var
       theId = id(),
@@ -489,7 +499,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:context:default', function () {
-    im.switchContext('default');
+    if (todos.length() === 0) {
+      im.switchContext('empty');
+      am.trigger('app:clear');
+      document.getElementById('empty-no-todos').style.display = 'block';
+      document.getElementById('empty-no-results').style.display = 'none';
+    } else {
+      im.switchContext('default');
+      document.getElementById('empty-no-todos').style.display = 'none';
+      document.getElementById('empty-no-results').style.display = 'block';
+    }
   });
 
   am.action('app:context:input', function (contextKeys) {
