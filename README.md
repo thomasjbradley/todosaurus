@@ -1,6 +1,8 @@
 # Todosaurus
 
-A keyboard driven GUI app for the Todo.txt format.
+A keyboard driven GUI app for the [Todo.txt](http://todotxt.com/) format.
+
+![](todosaurus-screenshot.png)
 
 ## Why?
 
