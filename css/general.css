@@ -22,6 +22,8 @@ html {
   -webkit-transform: translate3d(0, 0, 0) !important;
 
   font: normal 14px/19px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
