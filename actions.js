@@ -374,11 +374,16 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     if (!matchesFilters(newFullText)) {
       im.get('filters').group = false;
-      am.trigger('app:search:clear');
+      am.trigger('app:search:clear', false);
       fm.set(filterer.getIndex(theId));
+      todos.get(theId).text(text);
+
+      return false;
     }
 
     todos.get(theId).text(text);
+
+    return true;
   }, isEditableState);
 
   am.action('item:priority-toggle', function (e, combo) {
@@ -402,9 +407,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     im.get('search').blur();
   });
 
-  am.action('app:search:clear', function () {
+  am.action('app:search:clear', function (triggerReload) {
     var
       item,
+      reload = triggerReload || true,
       fullIndex = fm.get()
     ;
 
@@ -418,7 +424,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
     im.get('search').value('');
     im.get('filters').filter = false;
-    am.trigger('app:list:render');
+
+    if (reload) {
+      am.trigger('app:list:render');
+    }
+
     fm.set(fullIndex);
   });
 

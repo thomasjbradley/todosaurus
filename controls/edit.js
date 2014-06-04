@@ -9,18 +9,19 @@ var EditControl = function (elem, actionManager) {
 
   var commit = function () {
     that.getActionManager().trigger('app:edit:hide');
-    that.getActionManager().trigger('item:update', that.value());
+
+    return that.getActionManager().trigger('item:update', that.value());
   };
 
   var discard = function () {
-    that.getActionManager().trigger('app:edit:hide');
+    return that.getActionManager().trigger('app:edit:hide');
   };
 
   var commitOrDiscard = function (isCommittable) {
     if (isCommittable) {
-      commit();
+      return commit();
     } else {
-      discard();
+      return discard();
     }
   };
 
@@ -55,17 +56,27 @@ var EditControl = function (elem, actionManager) {
     {
       keys: ['tab'],
       callback: function (e) {
+        var goNext;
+
         e.preventDefault();
-        commitOrDiscard(isCommittable());
-        that.getActionManager().trigger('item:edit:after');
+        goNext = commitOrDiscard(isCommittable());
+
+        if (goNext) {
+          that.getActionManager().trigger('item:edit:after');
+        }
       }
     },
     {
       keys: ['shift+tab'],
       callback: function (e) {
+        var goNext;
+
         e.preventDefault();
-        commitOrDiscard(isCommittable());
-        that.getActionManager().trigger('item:edit:before');
+        goNext = commitOrDiscard(isCommittable());
+
+        if (goNext) {
+          that.getActionManager().trigger('item:edit:before');
+        }
       }
     },
     {

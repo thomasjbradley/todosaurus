@@ -9,7 +9,8 @@ var NewControl = function (elem, actionManager) {
 
   var commit = function () {
     that.getActionManager().trigger('app:new:hide');
-    that.getActionManager().trigger('item:update', that.value());
+
+    return that.getActionManager().trigger('item:update', that.value());
   };
 
   var discard = function () {
@@ -49,22 +50,32 @@ var NewControl = function (elem, actionManager) {
     {
       keys: ['enter', 'tab'],
       callback: function (e) {
+        var goNext;
+
         e.preventDefault();
 
         if (isCommittable()) {
-          commit();
-          that.getActionManager().trigger('item:new:after');
+          goNext = commit();
+
+          if (goNext) {
+            that.getActionManager().trigger('item:new:after');
+          }
         }
       }
     },
     {
       keys: ['shift+tab', 'shift+enter'],
       callback: function (e) {
+        var goNext;
+
         e.preventDefault();
 
         if (isCommittable()) {
-          commit();
-          that.getActionManager().trigger('item:new:before');
+          goNext = commit();
+
+          if (goNext) {
+            that.getActionManager().trigger('item:new:before');
+          }
         }
       }
     },
