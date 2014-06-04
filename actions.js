@@ -2,7 +2,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   "use strict";
 
   var isEditableState = function () {
-    var totalItems = filterer.getPreviouslyFilteredItems().length;
+    var totalItems = filterer.length();
 
     if (totalItems <= 0) {
       am.trigger('app:clear');

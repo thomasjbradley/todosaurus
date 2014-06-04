@@ -82,18 +82,13 @@ var Filterer = function (generics) {
     }
   };
 
-  var getPreviouslyFilteredItems = function () {
-    return filtered;
-  };
-
   methods = {
     subscribe: chainer(subscribe),
     length: length,
     getByIndex: getByIndex,
     getIndex: getIndex,
     matchesFilter: matchesFilter,
-    filter: informer(filter),
-    getPreviouslyFilteredItems: getPreviouslyFilteredItems
+    filter: informer(filter)
   };
 
   return methods;
