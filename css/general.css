@@ -122,9 +122,10 @@ body {
   text-align: center;
 }
 
-.btn:focus
+.btn:focus,
 .btn--file:focus::before {
-  box-shadow: 0 0 3px #000;
+  outline: 2px solid #666;
+  outline-offset: 2px;
 }
 
 .btn--alt,
@@ -152,6 +153,10 @@ body {
   width: 11em;
 
   cursor: pointer;
+}
+
+input[type="file"]:focus {
+  outline: 0;
 }
 
 .btn--file::before {

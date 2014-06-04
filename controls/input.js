@@ -85,6 +85,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var show = function (pos) {
+    that.elem.disabled = false;
     that.playEvents();
     actionManager.trigger('app:context:input', that.keyEvents);
     findWrapper().setAttribute('data-state', 'visible');
@@ -92,6 +93,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var hide = function () {
+    that.elem.disabled = true;
     that.stopEvents();
     actionManager.trigger('app:context:default');
     findWrapper().setAttribute('data-state', 'hidden');
@@ -120,6 +122,14 @@ var InputControl = function (elem, actionManager) {
     findWrapper().setAttribute('data-focused', 'false');
   };
 
+  var enable = function () {
+    that.elem.disabled = false;
+  };
+
+  var disable = function () {
+    that.elem.disabled = true;
+  };
+
   that = _.extend(that, {
     setRawValue: that.chainer(setRawValue),
     value: value,
@@ -129,7 +139,9 @@ var InputControl = function (elem, actionManager) {
     isVisible: isVisible,
     select: that.chainer(select),
     focus: that.chainer(focus),
-    blur: that.chainer(blur)
+    blur: that.chainer(blur),
+    enable: that.chainer(enable),
+    disable: that.chainer(disable)
   });
 
   return that;

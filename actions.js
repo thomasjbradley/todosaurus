@@ -498,16 +498,33 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     orderer.order(todos.getAll(), im.get('filters').order);
   });
 
+  am.action('app:context:no-directory', function (contextKeys) {
+    im.switchContext('no-directory');
+  });
+
+  am.action('app:context:missing-file', function (contextKeys) {
+    im.switchContext('missing-file');
+  });
+
   am.action('app:context:default', function () {
+    var didSwitch;
+
     if (todos.length() === 0) {
-      im.switchContext('empty');
-      am.trigger('app:clear');
-      document.getElementById('empty-no-todos').style.display = 'block';
-      document.getElementById('empty-no-results').style.display = 'none';
+      didSwitch = im.switchContext('empty');
+
+      if (didSwitch) {
+        am.trigger('app:clear');
+        document.getElementById('empty-no-todos').style.display = 'block';
+        document.getElementById('empty-no-results').style.display = 'none';
+      }
     } else {
-      im.switchContext('default');
-      document.getElementById('empty-no-todos').style.display = 'none';
-      document.getElementById('empty-no-results').style.display = 'block';
+      didSwitch = im.switchContext('default');
+
+      if (didSwitch) {
+        document.getElementById('empty-no-todos').style.display = 'none';
+        document.getElementById('empty-no-results').style.display = 'block';
+        im.get('search').enable();
+      }
     }
   });
 
@@ -696,9 +713,9 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:folder:switch', function () {
-    im.reset();
     im.get('file-chooser').hide();
     im.get('folder-chooser').show();
+    am.trigger('app:context:no-directory');
   });
 
   am.action('storage:folder:change', function () {
@@ -734,10 +751,12 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
         if (err.message === storage.errors.NOT_FOUND) {
           im.get('folder-chooser').hide();
           im.get('file-chooser').show(storage.getFolder());
+          am.trigger('app:context:missing-file');
           return;
         }
 
         im.get('folder-chooser').show();
+        am.trigger('app:context:no-directory');
         return;
       }
 

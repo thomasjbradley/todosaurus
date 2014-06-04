@@ -90,9 +90,12 @@ var InterfaceManager = function (focusManager, actionManager) {
       }
 
       sentContextCallbacks(title);
+
+      return true;
     }
 
     currentContext = title;
+    return false;
   };
 
   var add = function (name, elem, events) {

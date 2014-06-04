@@ -33,6 +33,10 @@
     document.getElementById('other-folder-options').style.display = 'none';
   }
 
+  im.setContext('no-directory', bindings.nodirectory, menuContexts.nodirectory);
+  im.setContext('missing-file', bindings.missingfile, menuContexts.missingfile);
+  im.setContext('empty', bindings.empty, menuContexts.empty);
+
   im.setContext('default', bindings.default, menuContexts.default, function (isCurrent) {
     if (isCurrent) {
       am.trigger('app:list:focus');
@@ -42,7 +46,6 @@
   });
 
   im.setContext('input', bindings.input, menuContexts.input);
-  im.setContext('empty', bindings.empty, menuContexts.empty);
 
   im.add('menu', new MenuManager());
   im.get('menu').bindEvents(bindings.menu);
@@ -169,6 +172,7 @@
     });
   }
 
+  im.switchContext('no-directory');
   am.trigger('storage:read');
 
 /*

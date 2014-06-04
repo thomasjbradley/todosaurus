@@ -13,12 +13,14 @@ var FolderChooserControl = function (elem, actionManager) {
     that.input.value = '';
     that.input.addEventListener('change', handleChangeOnInput, false);
     that.elem.setAttribute('data-state', 'visible');
+    that.input.disabled = false;
     that.input.focus();
   };
 
   that.hide = function () {
     that.elem.setAttribute('data-state', 'hidden');
     that.input.removeEventListener('change', handleChangeOnInput);
+    that.input.disabled = true;
   };
 
   that.getFiles = function () {
@@ -27,6 +29,7 @@ var FolderChooserControl = function (elem, actionManager) {
 
   that.showInvisible = function () {
     that.input.value = '';
+    that.input.disabled = false;
     that.input.addEventListener('change', handleChangeOnInput, false);
   };
 

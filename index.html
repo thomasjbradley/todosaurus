@@ -21,19 +21,19 @@
       <div class="input-wrapper input--with-icon input--tools">
         <label class="input__icon icon i--search" for="search">Search</label>
         <div class="input__container input__container--has-icon">
-          <input class="input mousetrap" id="search" autocomplete="off" autocorrect="off">
+          <input class="input mousetrap" id="search" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
       <div class="input-wrapper input--with-icon input--tools input--cover" data-state="hidden">
         <label class="input__icon icon i--jump" for="jump">Jump</label>
         <div class="input__container input__container--has-icon">
-          <input class="input input--has-icon mousetrap" id="jump" autocomplete="off" autocorrect="off">
+          <input class="input input--has-icon mousetrap" id="jump" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
       <div class="input-wrapper input--with-icon input--tools input--cover" data-state="hidden">
         <label class="input__icon icon" id="tags-search-label" for="tags-search">Search Tags</label>
         <div class="input__container input__container--has-icon">
-          <input class="input input--has-icon mousetrap" id="tags-search" autocomplete="off" autocorrect="off">
+          <input class="input input--has-icon mousetrap" id="tags-search" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
     </div>
@@ -71,17 +71,17 @@
     <main class="main">
       <div class="item item--empty">
         <div class="item__text" id="empty-no-todos">Woot! Looks like all your todos are extinct.</div>
-        <div class="item__text" id="empty-no-results">Your excavation came up empty handed.</div>
+        <div class="item__text" id="empty-no-results" style="display:none">Your excavation came up empty handed.</div>
       </div>
 
       <ol class="todos" data-focused="true" id="list"></ol>
 
       <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-        <input class="input input--hidden mousetrap" data-state="hidden" id="edit" autocomplete="off" autocorrect="off">
+        <input class="input input--hidden mousetrap" data-state="hidden" id="edit" disabled autocomplete="off" autocorrect="off">
       </div>
 
       <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-        <input class="input input--hidden mousetrap" data-state="hidden" id="new" autocomplete="off" autocorrect="off">
+        <input class="input input--hidden mousetrap" data-state="hidden" id="new" disabled autocomplete="off" autocorrect="off">
       </div>
     </main>
 
@@ -93,7 +93,7 @@
       <p class="window__text">Whoa! Looks like you’re a first time digger.</p>
       <p class="window__text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
       <div class="window__btn">
-        <input class="btn--file" type="file" id="chosen-folder" nwdirectory>
+        <input class="btn--file" type="file" id="chosen-folder" disabled nwdirectory>
       </div>
     </div>
   </div>
@@ -104,9 +104,9 @@
       <p class="window__text"><strong>Holy t-rex! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
       <p class="window__text window__path"><img class="window__path__icon" src="img/icon-folder.svg" alt=""> <code class="filename window__path__filename" id="folder-path"></code></p>
       <div class="window__btn">
-        <button class="btn btn--alt" type="file" id="new-file">Create New File</button>
+        <button class="btn btn--alt" type="file" id="new-file" disabled>Create New File</button>
         <ul class="window__options" id="other-folder-options">
-          <li><button class="btn btn--text" id="switch-folder">Switch Folder</button></li>
+          <li><button class="btn btn--text" id="switch-folder" disabled>Switch Folder</button></li>
         </ul>
       </div>
     </div>
@@ -172,13 +172,17 @@
 
   <script src="actions.js"></script>
 
+  <script src="bindings/no-directory.js"></script>
+  <script src="bindings/missing-file.js"></script>
+  <script src="bindings/empty.js"></script>
   <script src="bindings/default.js"></script>
   <script src="bindings/input.js"></script>
-  <script src="bindings/empty.js"></script>
   <script src="bindings/menu.js"></script>
+  <script src="menus/context-no-directory.js"></script>
+  <script src="menus/context-missing-file.js"></script>
+  <script src="menus/context-empty.js"></script>
   <script src="menus/context-default.js"></script>
   <script src="menus/context-input.js"></script>
-  <script src="menus/context-empty.js"></script>
 
   <script src="app.js"></script>
 </body>
