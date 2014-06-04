@@ -314,48 +314,52 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   }, isEditableState);
 
   am.action('item:new:at-top', function (e) {
-    var todo = prepareNewTodo(0);
+    var todo;
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
+    todo = prepareNewTodo(0);
     todos.prepend(todo);
     fm.set(0);
     am.trigger('item:new:edit');
   }, isEditableState);
 
   am.action('item:new:at-bottom', function (e) {
-    var todo = prepareNewTodo(fm.getMax());
+    var todo;
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
+    todo = prepareNewTodo(fm.getMax());
     todos.append(todo);
     fm.set(fm.getMax());
     am.trigger('item:new:edit');
   }, isEditableState);
 
   am.action('item:new:after', function (e) {
-    var todo = prepareNewTodo();
+    var todo;
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
+    todo = prepareNewTodo();
     buffer.push(todo.getFullText());
     am.trigger('item:paste:after');
     am.trigger('item:new:edit');
   }, isEditableState);
 
   am.action('item:new:before', function (e) {
-    var todo = prepareNewTodo();
+    var todo;
 
     if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
       e.preventDefault();
     }
 
+    todo = prepareNewTodo();
     buffer.push(todo.getFullText());
     am.trigger('item:paste:before');
     am.trigger('item:new:edit');
@@ -388,6 +392,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('item:priority-toggle', function (e, combo) {
     var index = getNumberFromKeyCombo(combo);
+
     todos.get(id()).togglePriority(index);
   }, isEditableState);
 
@@ -531,6 +536,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('tags:create:projects', function () {
     var tags = todos.getAllTags('+');
+
     grouper.setGroup('+', tags);
     im.get('tags-projects').render(tags);
     im.get('input-auto-complete').resetData('+', tags);
@@ -538,6 +544,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('tags:create:contexts', function () {
     var tags = todos.getAllTags('@');
+
     grouper.setGroup('@', tags);
     im.get('tags-contexts').render(tags);
     im.get('input-auto-complete').resetData('@', tags);
@@ -545,6 +552,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
 
   am.action('tags:create:priority', function () {
     var tags = generics.priorities;
+
     grouper.setGroup('!', tags);
     im.get('tags-priority').render(tags);
   });
@@ -655,9 +663,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('tags:search:trigger', function () {
-    var tag;
-
-    tag = grouper.findTagStartingWith(im.get('tags-search').value(), im.get('tags-search').group());
+    var tag = grouper.findTagStartingWith(im.get('tags-search').value(), im.get('tags-search').group());
 
     if (!tag) {
       am.trigger('tags:clear-active');
