@@ -4,6 +4,12 @@ A keyboard driven GUI app for the [Todo.txt](http://todotxt.com/) format.
 
 ![](todosaurus-screenshot.png)
 
+---
+
+### [⬇ Download (for Mac OS X)](https://github.com/thomasjbradley/todosaurus/releases/download/v1.0.0/Todosaurus-v1.0.0.zip)
+
+---
+
 ## Why?
 
 I’ve struggled to find a todo app that worked for me. Many are too complicated. Many are too closed. Many aren’t keyboard driven enough. Many don’t match my design sensibilities.
