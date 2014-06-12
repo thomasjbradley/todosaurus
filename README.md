@@ -77,7 +77,11 @@ So, I made my own.
 
 ---
 
-## Technology
+## Development
+
+Follow development on Trello: <https://trello.com/b/l1cs0nyA>.
+
+### Technology
 
 Built using web technologies and [node-webkit](https://github.com/rogerwang/node-webkit/).
 Also works perfectly in the browser, storing the todos in LocalStorage.
