@@ -12,11 +12,11 @@ var LocalStorageHelper = function () {
       old = '';
     }
 
-    localStorage.setItem(key, old + '\n' + data.join('\n'));
+    localStorage.setItem(key, old + '\n' + data.join('\n') + '\n');
   };
 
   var save = function (key, data) {
-    localStorage.setItem(key, data.join('\n'));
+    localStorage.setItem(key, data.join('\n') + '\n');
   };
 
   var read = function (key) {

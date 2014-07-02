@@ -8,11 +8,11 @@ var FileSystemHelper = function () {
   ;
 
   var append = function (path, data) {
-    fs.appendFile(path, data.join('\n'));
+    fs.appendFile(path, data.join('\n') + '\n');
   };
 
   var save = function (path, data) {
-    fs.writeFile(path, data.join('\n'));
+    fs.writeFile(path, data.join('\n') + '\n');
   };
 
   var read = function (path) {
