@@ -823,7 +823,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     });
 
     todos.populate(keep);
-    storage.saveArchive(done);
+    storage.saveArchive(done.sort());
   });
 
   am.action('storage:reveal-finder', function () {
