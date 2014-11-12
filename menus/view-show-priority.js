@@ -1,27 +1,37 @@
 menu['view:show-priority'].submenu = new gui.Menu();
 
 menu['view:show-priority:a'] = new gui.MenuItem({
-  label: 'A: Now                                ⇧1',
+  label: 'A: Now',
+  key: '1',
+  modifiers: 'shift',
   type: 'checkbox'
 });
 
 menu['view:show-priority:b'] = new gui.MenuItem({
-  label: 'B:  Today                          ⇧2',
+  label: 'B:  Today',
+  key: '2',
+  modifiers: 'shift',
   type: 'checkbox'
 });
 
 menu['view:show-priority:c'] = new gui.MenuItem({
-  label: 'C: Tomorrow          ⇧3',
+  label: 'C: Tomorrow',
+  key: '3',
+  modifiers: 'shift',
   type: 'checkbox'
 });
 
 menu['view:show-priority:d'] = new gui.MenuItem({
-  label: 'D: This Week          ⇧4',
+  label: 'D: This Week',
+  key: '4',
+  modifiers: 'shift',
   type: 'checkbox'
 });
 
 menu['view:show-priority:e'] = new gui.MenuItem({
-  label: 'E:  Next Week        ⇧5',
+  label: 'E:  Next Week',
+  key: '5',
+  modifiers: 'shift',
   type: 'checkbox'
 });
 
