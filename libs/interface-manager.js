@@ -5,7 +5,8 @@ var InterfaceManager = function (focusManager, actionManager) {
     methods = {},
     elements = {},
     currentContext = false,
-    contexts = {}
+    contexts = {},
+    dialogueOpen = false
   ;
 
   var chainer = function (func) {
@@ -119,7 +120,8 @@ var InterfaceManager = function (focusManager, actionManager) {
     setContext: chainer(setContext),
     switchContext: chainer(switchContext),
     add: chainer(add),
-    get: get
+    get: get,
+    dialogueOpen: dialogueOpen
   };
 
   return methods;

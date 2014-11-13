@@ -163,12 +163,21 @@
 
   if (window.isNode) {
     gui.Window.get().on('focus', function () {
+      if (im.dialogueOpen) {
+        am.trigger('app:context:default');
+        im.dialogueOpen = false;
+      }
+
       document.body.classList.add('window--has-focus');
       am.trigger('storage:read-if-changed');
     });
 
     gui.Window.get().on('blur', function () {
-      document.body.classList.remove('window--has-focus');
+      if (im.dialogueOpen) {
+        am.trigger('app:context:no-directory');
+      } else {
+        document.body.classList.remove('window--has-focus');
+      }
     });
   }
 
