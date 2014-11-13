@@ -1,5 +1,9 @@
 module.exports = (grunt) ->
 
+  pkg = require './package.json'
+  devDeps = Object.keys(pkg.devDependencies).map (item) ->
+    return '!./node_modules/' + item + '/**/*'
+
   grunt.initConfig
 
     svgmin:
@@ -26,12 +30,12 @@ module.exports = (grunt) ->
 
     nodewebkit:
       options:
-        build_dir: './releases'
-        win: false
-        credits: './credits.html'
-        app_name: 'Todosaurus'
-        mac_icns: './todosaurus.icns'
-        version: '0.11.0'
+        buildDir: './releases'
+        platforms: ['osx']
+        macCredits: './credits.html'
+        # appName: 'Todosaurus'
+        macIcns: './todosaurus.icns'
+        macZip: false
       src: [
         './**/*',
         '!./.envrc'
@@ -39,7 +43,8 @@ module.exports = (grunt) ->
         '!./README.md'
         '!./tests/**/*'
         '!./releases/**/*'
-      ]
+        '!./cache/**/*'
+      ].concat(devDeps)
 
     watch:
       options:
