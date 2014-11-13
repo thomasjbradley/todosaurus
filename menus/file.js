@@ -101,14 +101,6 @@ menu['file:reveal-in-finder'] = new gui.MenuItem({
   modifiers: 'ctrl-shift'
 });
 
-menu['file:sep-5'] = new gui.MenuItem({ type: 'separator' });
-
-menu['file:switch-directory'] = new gui.MenuItem({
-  label: 'Switch Directory',
-  key: 'o',
-  modifiers: 'cmd'
-});
-
 menu.file.submenu = new gui.Menu();
 
 _.each(menu, function (item, key) {

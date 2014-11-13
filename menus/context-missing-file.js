@@ -1,6 +1,6 @@
 menuContexts.missingfile = {
   enabled: [
-    'file:switch-directory'
+    'app:switch-directory'
   ],
 
   disabled: [

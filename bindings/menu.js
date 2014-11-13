@@ -1,4 +1,6 @@
 bindings.menu = {
+  'app:switch-directory'      : 'mod+o',
+
   'file:new'                  : 'n',
   'file:new-bottom'           : 'shift+n',
   'file:new-below'            : 'o',
@@ -14,7 +16,6 @@ bindings.menu = {
   'file:sort-file'            : 'mod+shift+s',
   'file:archive'              : 'mod+s',
   'file:reveal-in-finder'     : 'mod+shift+r',
-  'file:switch-directory'     : 'mod+o',
 
   'edit:undo'                 : 'mod+z',
   'edit:redo'                 : 'mod+shift+z',

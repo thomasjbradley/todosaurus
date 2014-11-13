@@ -1,10 +1,10 @@
 menuContexts.empty = {
   enabled: [
+    'app:switch-directory',
     'file:new',
     'file:new-bottom',
     'file:reload',
-    'file:reveal-in-finder',
-    'file:switch-directory'
+    'file:reveal-in-finder'
   ],
 
   disabled: [
