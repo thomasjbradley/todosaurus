@@ -1,5 +1,9 @@
 # Changelog
 
+**1.1.0 (Nov. 13, 2014)**
+
+- Added the “Help” menu and the keyboard shortcut reference.
+
 **1.0.4 (Nov. 13, 2014)**
 
 - Bug fix: Events happening multiple times—fired by proper OS X shortcuts and Mousetrap. [Closes issue #8](https://github.com/thomasjbradley/todosaurus/issues/8)
