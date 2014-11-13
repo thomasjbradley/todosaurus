@@ -6,7 +6,7 @@ A keyboard driven GUI app for the [Todo.txt](http://todotxt.com/) format.
 
 ---
 
-### [⬇ Download (for Mac OS X)](https://github.com/thomasjbradley/todosaurus/releases/download/v1.0.2/Todosaurus-v1.0.2.zip)
+### [⬇ Download (for Mac OS X)](https://github.com/thomasjbradley/todosaurus/releases/download/v1.0.3/Todosaurus-v1.0.3.zip)
 
 ---
 
