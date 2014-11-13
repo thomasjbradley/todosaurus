@@ -32,8 +32,7 @@ if (window.isNode) {
 
   GuiMenu = new gui.Menu({ type: 'menubar' });
   GuiMenu.createMacBuiltin('Todosaurus', {
-    hideEdit: true,
-    hideWindow: true
+    hideEdit: true
   });
   gui.Window.get().menu = GuiMenu;
 
