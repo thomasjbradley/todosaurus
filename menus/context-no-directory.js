@@ -1,6 +1,6 @@
 menuContexts.nodirectory = {
   enabled: [
-    'file:switch-directory'
+    'app:switch-directory'
   ],
 
   disabled: [

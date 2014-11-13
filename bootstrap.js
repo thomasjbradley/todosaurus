@@ -31,7 +31,11 @@ if (window.isNode) {
   }
 
   GuiMenu = new gui.Menu({ type: 'menubar' });
+  GuiMenu.createMacBuiltin('Todosaurus', {
+    hideEdit: true
+  });
   gui.Window.get().menu = GuiMenu;
+
   clipboard = gui.Clipboard.get();
 }
 

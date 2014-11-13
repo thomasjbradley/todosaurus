@@ -1,68 +1,96 @@
 menu.edit = new gui.MenuItem({ label: 'Edit' });
 
 menu['edit:undo'] = new gui.MenuItem({
-  label: 'Undo                                                                                  ⌘Z',
+  label: 'Undo',
+  key: 'z',
+  modifiers: 'cmd',
   enabled: false
 });
 
 menu['edit:redo'] = new gui.MenuItem({
-  label: 'Redo                                                                           ⇧⌘Z',
+  label: 'Redo',
+  key: 'z',
+  modifiers: 'cmd-shift',
   enabled: false
 });
 
 menu['edit:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:cut'] = new gui.MenuItem({
-  label: 'Cut                                                                                         ⌘X'
+  label: 'Cut',
+  key: 'x',
+  modifiers: 'cmd'
 });
 
 menu['edit:copy'] = new gui.MenuItem({
-  label: 'Copy                                                                                   ⌘C'
+  label: 'Copy',
+  key: 'c',
+  modifiers: 'cmd'
 });
 
 menu['edit:paste'] = new gui.MenuItem({
-  label: 'Paste                                                                                  ⌘V'
+  label: 'Paste',
+  key: 'v',
+  modifiers: 'cmd'
 });
 
 menu['edit:paste-before'] = new gui.MenuItem({
-  label: 'Paste Before                                               ⇧⌘V'
+  label: 'Paste Before',
+  key: 'v',
+  modifiers: 'cmd-shift'
 });
 
 menu['edit:delete'] = new gui.MenuItem({
-  label: 'Delete                                                                                ⌫'
+  label: 'Delete',
+  key: '⌫',
+  modifiers: ''
 });
 
 menu['edit:duplicate'] = new gui.MenuItem({
-  label: 'Duplicate                                                          ⇧⌘D'
+  label: 'Duplicate',
+  key: 'd',
+  modifiers: 'cmd-shift'
 });
 
 menu['edit:select-all'] = new gui.MenuItem({
-  label: 'Select All                                                                   ⌘A',
+  label: 'Select All',
+  key: 'a',
+  modifiers: 'cmd',
   enabled: false
 });
 
 menu['edit:new-sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:update'] = new gui.MenuItem({
-  label: 'Update                                                            Return'
+  label: 'Update',
+  key: '↩︎',
+  modifiers: ''
 });
 
 menu['edit:insert-start'] = new gui.MenuItem({
-  label: 'Insert at Start                                                      I'
+  label: 'Insert at Start',
+  key: 'i',
+  modifiers: ''
 });
 
 menu['edit:insert-end'] = new gui.MenuItem({
-  label: 'Insert at End                                                         A'
+  label: 'Insert at End',
+  key: 'a',
+  modifiers: ''
 });
 
 menu['edit:update-clear'] = new gui.MenuItem({
-  label: 'Update & Clear                                       C'
+  label: 'Update & Clear',
+  key: 'c',
+  modifiers: ''
 });
 
 menu['edit:new-sep-3'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:toggle-complete'] = new gui.MenuItem({
-  label: 'Toggle Complete           Space',
+  label: 'Toggle Complete',
+  key: 'x',
+  modifiers: ''
 });
 
 menu['edit:toggle-priority'] = new gui.MenuItem({
@@ -70,17 +98,23 @@ menu['edit:toggle-priority'] = new gui.MenuItem({
 });
 
 menu['edit:remove-priority'] = new gui.MenuItem({
-  label: 'Remove Priority                 ⌘0'
+  label: 'Remove Priority',
+  key: '0',
+  modifiers: 'cmd'
 });
 
 menu['edit:new-sep-5'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:move-up'] = new gui.MenuItem({
-  label: 'Move Up                                                             ⇧⌘↑'
+  label: 'Move Up',
+  key: '↑',
+  modifiers: 'cmd-shift'
 });
 
 menu['edit:move-down'] = new gui.MenuItem({
-  label: 'Move Down                                                  ⇧⌘↓'
+  label: 'Move Down',
+  key: '↓',
+  modifiers: 'cmd-shift'
 });
 
 menu.edit.submenu = new gui.Menu();

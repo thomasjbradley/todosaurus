@@ -1,5 +1,6 @@
 menuContexts.default = {
   enabled: [
+    'app:switch-directory',
     'file:new',
     'file:new-bottom',
     'file:new-below',
@@ -15,7 +16,6 @@ menuContexts.default = {
     'file:sort-file',
     'file:archive',
     'file:reveal-in-finder',
-    'file:switch-directory',
     'edit:cut',
     'edit:copy',
     'edit:paste',

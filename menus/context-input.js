@@ -1,11 +1,11 @@
 menuContexts.input = {
   enabled: [
+    'app:switch-directory',
     'file:jump',
     'file:reload',
     'file:sort-file',
     'file:archive',
     'file:reveal-in-finder',
-    'file:switch-directory',
     'edit:undo',
     'edit:redo',
     'edit:cut',

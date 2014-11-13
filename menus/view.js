@@ -1,15 +1,21 @@
 menu.view = new gui.MenuItem({ label: 'View' });
 
 menu['view:find'] = new gui.MenuItem({
-  label: 'Find                                                               ⌘F'
+  label: 'Find',
+  key: 'f',
+  modifiers: 'cmd'
 });
 
 menu['view:find-project'] = new gui.MenuItem({
-  label: 'Find By Project                      ⌘P'
+  label: 'Find By Project',
+  key: 'p',
+  modifiers: 'cmd'
 });
 
 menu['view:find-context'] = new gui.MenuItem({
-  label: 'Find By Context                  ⌘T'
+  label: 'Find By Context',
+  key: 't',
+  modifiers: 'cmd'
 });
 
 menu['view:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
@@ -36,15 +42,21 @@ menu['view:sort-priority'] = new gui.MenuItem({
 menu['view:new-sep-3'] = new gui.MenuItem({ type: 'separator' });
 */
 menu['view:clear-search'] = new gui.MenuItem({
-  label: 'Clear Search                               ⌘L'
+  label: 'Clear Search',
+  key: 'l',
+  modifiers: 'cmd'
 });
 
 menu['view:clear-group'] = new gui.MenuItem({
-  label: 'Clear Group                         ⌥⌘L'
+  label: 'Clear Group',
+  key: 'l',
+  modifiers: 'cmd-alt'
 });
 
 menu['view:clear-all'] = new gui.MenuItem({
-  label: 'Clear All                                       ⇧⌘L'
+  label: 'Clear All',
+  key: 'l',
+  modifiers: 'cmd-shift'
 });
 
 menu.view.submenu = new gui.Menu();
