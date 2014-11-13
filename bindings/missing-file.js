@@ -1,3 +1,5 @@
 bindings.missingfile = {
-  'storage:folder:change': ['mod+o']
+  'storage:folder:change': ['mod+o'],
+
+  'help:shortcuts'       : ['?']
 };

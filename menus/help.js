@@ -1,7 +1,9 @@
 menu.help = new gui.MenuItem({ label: 'Help' });
 
 menu['help:shortcuts'] = new gui.MenuItem({
-  label: 'Keyboard Shortcuts'
+  label: 'Keyboard Shortcuts',
+  key: '?',
+  modifiers: ''
 });
 
 menu['help:sep-1'] = new gui.MenuItem({ type: 'separator' });
@@ -20,7 +22,21 @@ menu['help:source-code'] = new gui.MenuItem({
   }
 });
 
+menu['help:license'] = new gui.MenuItem({
+  label: 'Todosaurus License',
+  click: function () {
+    gui.Shell.openExternal('https://github.com/thomasjbradley/todosaurus');
+  }
+});
+
 menu['help:sep-2'] = new gui.MenuItem({ type: 'separator' });
+
+menu['help:support'] = new gui.MenuItem({
+  label: 'Todosaurus Support',
+  click: function () {
+    gui.Shell.openExternal('https://github.com/thomasjbradley/todosaurus/issues');
+  }
+});
 
 menu['help:feedback'] = new gui.MenuItem({
   label: 'Send Feedback…',
