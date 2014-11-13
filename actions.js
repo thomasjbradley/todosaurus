@@ -719,6 +719,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:folder:change', function () {
+    im.dialogueOpen = true;
     im.get('folder-chooser').showInvisible();
     im.get('folder-chooser').input.click();
   });
