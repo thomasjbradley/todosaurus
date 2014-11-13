@@ -38,13 +38,13 @@
     "lodash": "^2.4.1"
   },
   "devDependencies": {
-    "chai": "^1.9.1",
+    "chai": "^1.10.0",
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-imageoptim": "^1.4.1",
-    "grunt-node-webkit-builder": "^0.1.21",
-    "grunt-svgmin": "^0.4.0",
+    "grunt-node-webkit-builder": "^0.2.3",
+    "grunt-svgmin": "^2.0.0",
     "load-grunt-tasks": "^0.4.0",
-    "mocha": "^1.19.0"
+    "mocha": "^2.0.1"
   }
 }
