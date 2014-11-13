@@ -1,5 +1,9 @@
 # Changelog
 
+**1.0.3 (Nov. 13, 2014)**
+
+- Bug fix: Yosemite keyboard shortcut alignment in the menu items [Closes issue #5](https://github.com/thomasjbradley/todosaurus/issues/5)
+
 **1.0.2 (Oct. 18, 2014)**
 
 - Bug fix: Yosemite toolbar colour changes. [Closes issue #2](https://github.com/thomasjbradley/todosaurus/issues/2).
