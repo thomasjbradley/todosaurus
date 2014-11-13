@@ -1,7 +1,6 @@
 menu.file = new gui.MenuItem({ label: 'File' });
 
 menu['file:new'] = new gui.MenuItem({
-  // label: 'New Item                                                                                       ⌘N'
   label: 'New Item',
   key: 'n',
   modifiers: 'cmd'
@@ -15,30 +14,40 @@ menu['file:new-bottom'] = new gui.MenuItem({
 
 menu['file:new-below'] = new gui.MenuItem({
   label: 'New Item Below',
-  key: '\u21B5',
+  key: '↩',
   modifiers: 'cmd'
 });
 
 menu['file:new-above'] = new gui.MenuItem({
-  label: 'New Item Above                                                     ⇧⌘↵'
+  label: 'New Item Above',
+  key: '↩︎',
+  modifiers: 'cmd-shift'
 });
 
 menu['file:new-sep-1'] = new gui.MenuItem({ type: 'separator' });
 
 menu['file:focus-up'] = new gui.MenuItem({
-  label: 'Move Focus Up                                                                    ↑'
+  label: 'Move Focus Up',
+  key: '↑',
+  modifiers: ''
 });
 
 menu['file:focus-down'] = new gui.MenuItem({
-  label: 'Move Focus Down                                                         ↓'
+  label: 'Move Focus Down',
+  key: '↓',
+  modifiers: ''
 });
 
 menu['file:focus-first'] = new gui.MenuItem({
-  label: 'Focus First Item                                                              ⌘↑'
+  label: 'Focus First Item',
+  key: '↑',
+  modifiers: 'cmd'
 });
 
 menu['file:focus-last'] = new gui.MenuItem({
-  label: 'Focus Last Item                                                               ⌘↓'
+  label: 'Focus Last Item',
+  key: '↓',
+  modifiers: 'cmd'
 });
 
 menu['file:focus-jump-up'] = new gui.MenuItem({

@@ -41,7 +41,9 @@ menu['edit:paste-before'] = new gui.MenuItem({
 });
 
 menu['edit:delete'] = new gui.MenuItem({
-  label: 'Delete                                                                                ⌫'
+  label: 'Delete',
+  key: '⌫',
+  modifiers: ''
 });
 
 menu['edit:duplicate'] = new gui.MenuItem({
@@ -60,7 +62,9 @@ menu['edit:select-all'] = new gui.MenuItem({
 menu['edit:new-sep-2'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:update'] = new gui.MenuItem({
-  label: 'Update                                                            Return'
+  label: 'Update',
+  key: '↩︎',
+  modifiers: ''
 });
 
 menu['edit:insert-start'] = new gui.MenuItem({
@@ -84,7 +88,9 @@ menu['edit:update-clear'] = new gui.MenuItem({
 menu['edit:new-sep-3'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:toggle-complete'] = new gui.MenuItem({
-  label: 'Toggle Complete           Space'
+  label: 'Toggle Complete',
+  key: 'x',
+  modifiers: ''
 });
 
 menu['edit:toggle-priority'] = new gui.MenuItem({
@@ -100,11 +106,15 @@ menu['edit:remove-priority'] = new gui.MenuItem({
 menu['edit:new-sep-5'] = new gui.MenuItem({ type: 'separator' });
 
 menu['edit:move-up'] = new gui.MenuItem({
-  label: 'Move Up                                                             ⇧⌘↑'
+  label: 'Move Up',
+  key: '↑',
+  modifiers: 'cmd-shift'
 });
 
 menu['edit:move-down'] = new gui.MenuItem({
-  label: 'Move Down                                                  ⇧⌘↓'
+  label: 'Move Down',
+  key: '↓',
+  modifiers: 'cmd-shift'
 });
 
 menu.edit.submenu = new gui.Menu();
