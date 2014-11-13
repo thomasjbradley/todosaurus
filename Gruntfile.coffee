@@ -31,6 +31,7 @@ module.exports = (grunt) ->
         credits: './credits.html'
         app_name: 'Todosaurus'
         mac_icns: './todosaurus.icns'
+        version: '0.11.0'
       src: [
         './**/*',
         '!./.envrc'
