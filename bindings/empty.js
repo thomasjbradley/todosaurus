@@ -3,5 +3,7 @@ bindings.empty = {
 
   'storage:read'         : ['mod+r'],
   'storage:reveal-finder': ['mod+shift+r'],
-  'storage:folder:change': ['mod+o']
+  'storage:folder:change': ['mod+o'],
+
+  'help:shortcuts'       : ['?']
 };
