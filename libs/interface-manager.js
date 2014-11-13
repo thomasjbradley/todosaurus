@@ -39,6 +39,10 @@ var InterfaceManager = function (focusManager, actionManager) {
   var bindKeyActions = function (keys) {
     _.each(keys, function (elem, index) {
       bindKeyEvent(elem, function (e, combo) {
+        if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
+          e.preventDefault();
+        }
+
         actionManager.trigger(index, e, combo);
       });
     });
