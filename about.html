@@ -64,14 +64,16 @@
 
 </main>
 
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
 <script>
   // Node specific code
 
-  var env, fs, pkg, gui, win, license, resizeWindow;
+  var _, env, fs, pkg, gui, win, license, resizeWindow;
 
   window.isNode = !!(typeof require !== 'undefined');
 
   if (window.isNode) {
+    _ = require('lodash');
     fs = require('fs');
     pkg = require('package.json');
     gui = require('nw.gui');
@@ -99,6 +101,13 @@
     resizeWindow = function (hash) {
       win.resizeTo(win.width, document.getElementById(hash.replace(/\#/, '')).getAttribute('data-height'));
     };
+
+    _.each(document.querySelectorAll('[rel="external"]'), function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        gui.Shell.openExternal(item.href);
+      });
+    });
   }
 </script>
 
