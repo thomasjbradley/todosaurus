@@ -15,13 +15,6 @@ menu['help:website'] = new gui.MenuItem({
   }
 });
 
-menu['help:source-code'] = new gui.MenuItem({
-  label: 'Todosaurus Source Code',
-  click: function () {
-    gui.Shell.openExternal('https://github.com/thomasjbradley/todosaurus');
-  }
-});
-
 menu['help:license'] = new gui.MenuItem({
   label: 'Todosaurus License',
   click: function () {
