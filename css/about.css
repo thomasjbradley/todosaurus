@@ -96,8 +96,8 @@ nav a.nav-current:visited span {
 }
 
 .panel-scrollable {
-  max-height: 600px;
-  overflow: auto;
+  max-height: 496px;
+  overflow-y: scroll;
 }
 
 .left {
@@ -224,7 +224,7 @@ figure:hover figcaption {
 .license {
   margin: 0 auto;
   padding: 1.5rem 0;
-  width: 85%;
+  width: 90%;
 
   font-size: 12px;
 }

@@ -7,7 +7,9 @@ menu['app:about'] = new gui.MenuItem({
       width: 658,
       height: 358,
       toolbar: false,
-      focus: true
+      focus: true,
+      resizable: false,
+      show: false
     });
   }
 });
