@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-ca">
+<head>
+  <meta charset="utf-8">
+  <title>About Todosaurus</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
+  <link href="css/general.css" rel="stylesheet">
+  <link href="css/about.css" rel="stylesheet">
+</head>
+<body>
+
+<h1 class="visually-hidden">About Todosaurus</h1>
+
+<nav>
+  <ul>
+    <li><a class="nav-current" href="#about"><span>About</span></a></li>
+    <li><a href="#license"><span>License</span></a></li>
+    <li><a href="#acknowledgements"><span>Acknowledgements</span></a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <div class="panel" id="about" data-height="378">
+    <div class="left">
+      <figure>
+        <img class="logo" src="img/todosaurus.png">
+        <figcaption>No dinosaurs were harmed while making this app.</figcaption>
+      </figure>
+      <p class="intro">A keyboard driven GUI app for the <a href="http://todotxt.com/" rel="external"><span>Todo.txt</span></a>.</p>
+    </div>
+    <div class="right">
+      <h2 class="app-name">Todosaurus</h2>
+      <p class="version">Version <span class="version-number">0.0.0</span></p>
+      <p class="copyright">© 2014 <a href="http://thomasjbradley.ca" rel="external"><span>Thomas J Bradley</span></a></p>
+      <p class="tech">Built using web technologies and <a href="https://github.com/rogerwang/node-webkit/" rel="external"><span>node-webkit</span></a>. Also works in the browser.</p>
+
+      <ul class="links">
+        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-arrow.svg" alt=""><span>Todosaurus website</span></a></li>
+        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-github.svg" alt=""><span>Source code on GitHub</span></a></li>
+        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-trello.svg" alt=""><span>Follow development on Trello</span></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="panel panel-scrollable" id="license" data-height="560">
+    <pre class="license"></pre>
+  </div>
+
+  <div class="panel" id="acknowledgements" data-height="208">
+    <div class="credits">
+      <div class="third">
+        <p class="credit">Uses the <a href="http://todotxt.com/" rel="external"><span>Todo.txt</span></a> format, © 2006-2014 Gina Trapani, licensed under the <a href="http://www.gnu.org/copyleft/gpl.html" rel="external"><span>GPL</span></a>.</p>
+      </div>
+      <div class="third">
+        <p class="credit"><a href="http://thenounproject.com/term/dinosaur/13786/" rel="external"><span>“Dinosaur”</span></a>, © 2013 Jennifer Cozzette, licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/" rel="external"><span>CC BY 3.0</span></a>.</p>
+      </div>
+      <div class="third">
+        <p class="credit">Prioritization system inspired by Michael Descy’s <a href="http://plaintext-productivity.net/1-03-how-i-organize-my-todo-txt-file.html" rel="external"><span>Plain Text Productivity</span></a>.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="bower_components/lodash/dist/lodash.min.js"></script>
+<script>
+  // Node specific code
+
+  var _, env, fs, pkg, gui, win, license, resizeWindow;
+
+  window.isNode = !!(typeof require !== 'undefined');
+
+  if (window.isNode) {
+    _ = require('lodash');
+    fs = require('fs');
+    pkg = require('./package.json');
+    gui = require('nw.gui');
+    win = gui.Window.get();
+    env = process.env.ENV || 'prod';
+
+    if (env === 'dev') {
+      win.showDevTools();
+    }
+
+    win.moveTo(win.x, win.y - 100);
+
+    license = fs.readFileSync('./LICENSE', {encoding: 'utf-8'});
+    license = license
+      .replace(/\&/g, '&amp;')
+      .replace(/\</g, '&lt;')
+      .replace(/\>/g, '&gt;')
+    ;
+
+    document.querySelector('.license').innerHTML = license;
+    document.querySelector('.version-number').innerHTML = pkg.version;
+
+    resizeWindow = function (hash) {
+      win.resizeTo(win.width, document.getElementById(hash.replace(/\#/, '')).getAttribute('data-height'));
+    };
+
+    _.each(document.querySelectorAll('[rel="external"]'), function (item) {
+      item.addEventListener('click', function (e) {
+        e.preventDefault();
+        gui.Shell.openExternal(item.href);
+      });
+    });
+
+    win.show();
+  }
+
+  // Browser specific code
+
+  var closeCurrentPanel = function () {
+    var current = document.querySelector('.nav-current');
+
+    if (current) {
+      current.classList.remove('nav-current');
+    }
+  };
+
+  var updatePanels = function (hash) {
+    closeCurrentPanel();
+
+    if (window.isNode) {
+      resizeWindow(window.location.hash);
+    }
+
+    document
+      .querySelector('a[href="' + hash + '"]')
+      .classList.add('nav-current')
+    ;
+  };
+
+  if (!window.location.hash) {
+    window.location.hash = 'about';
+  } else {
+    updatePanels(window.location.hash);
+  }
+
+  window.addEventListener('hashchange', function () {
+    updatePanels(window.location.hash);
+  });
+</script>
+</body>
+</html>
