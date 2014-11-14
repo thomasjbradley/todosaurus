@@ -1,0 +1,3 @@
+bindings.notfocused = {
+  'help:shortcuts'       : ['?']
+};

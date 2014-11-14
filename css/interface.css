@@ -3,11 +3,12 @@
   padding: 4px;
 
   background-color: #f6f6f6;
-  border-bottom: 1px solid #959495;
+  border-bottom: 1px solid #d1d1d1;
 }
 
 .window--has-focus .tools {
   background-color: #d4d4d4;
+  border-color: #b0aeb0;
 }
 
 .tools__container {
@@ -72,6 +73,10 @@
 }
 
 .input--tools {
+  border-color: #d1d1d1;
+}
+
+.window--has-focus .input--tools {
   border-color: #8c8c8c;
 }
 
