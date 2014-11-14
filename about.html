@@ -75,7 +75,7 @@
   if (window.isNode) {
     _ = require('lodash');
     fs = require('fs');
-    pkg = require('package.json');
+    pkg = require('./package.json');
     gui = require('nw.gui');
     win = gui.Window.get();
     env = process.env.ENV || 'prod';
@@ -86,7 +86,7 @@
 
     win.moveTo(win.x, win.y - 100);
 
-    license = fs.readFileSync('LICENSE', {encoding: 'utf-8'});
+    license = fs.readFileSync('./LICENSE', {encoding: 'utf-8'});
     license = license
       .replace(/\&/g, '&amp;')
       .replace(/\</g, '&lt;')
@@ -109,9 +109,7 @@
 
     win.show();
   }
-</script>
 
-<script>
   // Browser specific code
 
   var closeCurrentPanel = function () {
