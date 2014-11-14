@@ -828,9 +828,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('storage:reveal-finder', function () {
-    var exec = require('child_process').exec;
-
-    exec('open ' + storage.getFolder(), function (error, stdout, stderr) { });
+    gui.Shell.showItemInFolder(storage.getFolder());
   });
 
   am.action('help:shortcuts', function () {
