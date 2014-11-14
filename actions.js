@@ -836,14 +836,7 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('help:shortcuts', function () {
-    var help = gui.Window.open('./help.html', {
-      width: 500,
-      height: 700,
-      toolbar: false,
-      focus: true
-    });
-
-    // help.moveTo(window.screen.availWidth - help.width, 0);
+    wm.open('help');
   });
 
 };
