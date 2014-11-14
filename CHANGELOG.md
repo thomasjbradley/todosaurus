@@ -1,5 +1,9 @@
 # Changelog
 
+**1.2.0 (Nov. 14, 2014)**
+
+- Added a fancy about screen with a in-app readable license.
+
 **1.1.0 (Nov. 13, 2014)**
 
 - Added the “Help” menu and the keyboard shortcut reference.
