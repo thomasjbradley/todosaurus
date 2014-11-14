@@ -32,8 +32,6 @@ module.exports = (grunt) ->
       options:
         buildDir: './releases'
         platforms: ['osx']
-        macCredits: './credits.html'
-        # appName: 'Todosaurus'
         macIcns: './todosaurus.icns'
         macZip: false
       src: [
