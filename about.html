@@ -96,8 +96,6 @@
     document.querySelector('.license').innerHTML = license;
     document.querySelector('.version-number').innerHTML = pkg.version;
 
-    win.show();
-
     resizeWindow = function (hash) {
       win.resizeTo(win.width, document.getElementById(hash.replace(/\#/, '')).getAttribute('data-height'));
     };
@@ -108,6 +106,8 @@
         gui.Shell.openExternal(item.href);
       });
     });
+
+    win.show();
   }
 </script>
 
@@ -115,14 +115,19 @@
   // Browser specific code
 
   var closeCurrentPanel = function () {
-    document
-      .querySelector('.nav-current')
-      .classList.remove('nav-current')
-    ;
+    var current = document.querySelector('.nav-current');
+
+    if (current) {
+      current.classList.remove('nav-current');
+    }
   };
 
   var updatePanels = function (hash) {
     closeCurrentPanel();
+
+    if (window.isNode) {
+      resizeWindow(window.location.hash);
+    }
 
     document
       .querySelector('a[href="' + hash + '"]')
@@ -138,10 +143,6 @@
 
   window.addEventListener('hashchange', function () {
     updatePanels(window.location.hash);
-
-    if (window.isNode) {
-      resizeWindow(window.location.hash);
-    }
   });
 </script>
 </body>

@@ -18,7 +18,7 @@ menu['help:website'] = new gui.MenuItem({
 menu['help:license'] = new gui.MenuItem({
   label: 'Todosaurus License',
   click: function () {
-    gui.Shell.openExternal('https://github.com/thomasjbradley/todosaurus/blob/master/LICENSE');
+    menu['app:about'].click('#license');
   }
 });
 
