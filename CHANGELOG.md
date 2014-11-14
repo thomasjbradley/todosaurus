@@ -3,6 +3,8 @@
 **1.2.0 (Nov. 14, 2014)**
 
 - Added a fancy about screen with a in-app readable license.
+- Fixed a couple focus related bugs. [Closes issue #12](https://github.com/thomasjbradley/todosaurus/issues/12)
+- Added a fix for stopping the same window from opening.
 
 **1.1.0 (Nov. 13, 2014)**
 
