@@ -9,18 +9,6 @@ body {
   border-top: 1px solid #959495;
 }
 
-.visually-hidden {
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
-
-  border: 0;
-  clip: rect(0 0 0 0);
-}
-
 kbd {
   display: inline-block;
   margin: 0 0 0.3em;
