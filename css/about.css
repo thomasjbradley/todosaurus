@@ -1,0 +1,211 @@
+html {
+  /*background-color: #e2e2e2;*/
+}
+
+body {
+  border-top: 1px solid #959495;
+}
+
+a,
+a:link,
+a:visited {
+  color: #8b3bab;
+  text-decoration: none;
+}
+
+a span,
+a:link span,
+a:visited span {
+  border-bottom: 1px solid rgba(139, 59, 171, 0.4);
+}
+
+a:hover span,
+a:focus span,
+a:active span {
+  border-bottom-color: #8b3bab;
+}
+
+nav {
+  background-color: #e2e2e2;
+  border-bottom: 1px solid #bbb;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  text-align: center;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a,
+nav a:link,
+nav a:visited {
+  display: block;
+  padding: 0.75em 1em;
+  position: relative;
+
+  border: 0;
+}
+
+nav a:hover,
+nav a:focus,
+nav a:active,
+nav a.nav-current,
+nav a.nav-current:link,
+nav a.nav-current:visited {
+  background-color: #d8d8d8;
+}
+
+nav a.nav-current span,
+nav a.nav-current:link span,
+nav a.nav-current:visited span {
+  border-bottom-color: #8b3bab;
+}
+
+.nav-current::after {
+  bottom: -6px;
+  content: " ";
+  height: 10px;
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+  width: 10px;
+
+  background-color: #d8d8d8;
+  border-bottom: 1px solid #bbb;
+  border-left: 1px solid #bbb;
+  transform: rotate(-45deg);
+}
+
+.panel {
+  display: none;
+  overflow: hidden;
+}
+
+.panel:target {
+  display: block;
+}
+
+.panel-scrollable {
+  max-height: 600px;
+  overflow-x: scroll;
+}
+
+.left {
+  padding: 24px;
+  float: left;
+  width: 37.5%;
+}
+
+.right {
+  float: left;
+  padding: 24px 48px;
+  width: 62.5%;
+
+  border-left: 1px solid #e2e2e2;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  cursor: help;
+}
+
+figcaption {
+  margin: 0 10px;
+  padding: 1rem;
+  position: absolute;
+  top: 50%;
+
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 10px;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity 200ms linear;
+
+  color: #fff;
+  text-align: center;
+}
+
+figure:hover figcaption {
+  opacity: 1;
+}
+
+.logo {
+  display: block;
+  margin: 1.4rem auto 1.4rem;
+  width: 76%;
+}
+
+.app-name {
+  margin: 1.2rem 0 1.4rem;
+
+  font-size: 24px;
+}
+
+.version {
+  margin: 0;
+
+  color: #999;
+  font-size: 12px;
+}
+
+.intro {
+  font-size: 14px;
+  text-align: center;
+}
+
+.copyright {
+  margin: 0;
+
+  color: #999;
+  font-size: 12px;
+  line-height: 26px;
+}
+
+.fun {
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+}
+
+.tech {
+  margin: 12px 0 18px;
+
+  font-size: 12px;
+}
+
+.links {
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+}
+
+.links li {
+  margin-bottom: 0.4em;
+}
+
+.has-icon {
+  padding-left: 24px;
+  position: relative;
+}
+
+.link-icon {
+  left: 0;
+  position: absolute;
+  top: 0px;
+  width: 18px;
+}
+
+.license {
+  margin: 0 auto;
+  width: 80%;
+}
