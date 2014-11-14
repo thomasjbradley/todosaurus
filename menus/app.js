@@ -20,7 +20,7 @@ menu.app.insert(menu['app:about'], 0);
 GuiMenu.items[0].submenu.removeAt(1);
 
 menu['app:switch-directory'] = new gui.MenuItem({
-  label: 'Switch Directory',
+  label: 'Switch Directory…',
   key: 'o',
   modifiers: 'cmd'
 });
