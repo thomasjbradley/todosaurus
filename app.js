@@ -33,6 +33,7 @@
     document.getElementById('other-folder-options').style.display = 'none';
   }
 
+  im.setContext('not-focused', bindings.notfocused, menuContexts.notfocused);
   im.setContext('no-directory', bindings.nodirectory, menuContexts.nodirectory);
   im.setContext('missing-file', bindings.missingfile, menuContexts.missingfile);
   im.setContext('empty', bindings.empty, menuContexts.empty);
@@ -163,21 +164,31 @@
 
   if (window.isNode) {
     gui.Window.get().on('focus', function () {
-      if (im.dialogueOpen) {
-        am.trigger('app:context:default');
-        im.dialogueOpen = false;
-      }
+      im.dialogueOpen = false;
 
+      am.trigger('app:context:default');
       document.body.classList.add('window--has-focus');
       am.trigger('storage:read-if-changed');
     });
 
     gui.Window.get().on('blur', function () {
-      if (im.dialogueOpen) {
-        am.trigger('app:context:no-directory');
-      } else {
+      if (!im.dialogueOpen) {
         document.body.classList.remove('window--has-focus');
       }
+
+      im.get('search').blur();
+      im.get('jump').hide();
+      im.get('tags-search').hide();
+
+      if (im.get('edit').isVisible()) {
+        im.get('edit').discard();
+      }
+
+      if (im.get('new').isVisible()) {
+        im.get('new').discard();
+      }
+
+      am.trigger('app:context:not-focused');
     });
   }
 

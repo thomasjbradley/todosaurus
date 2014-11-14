@@ -498,6 +498,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
     orderer.order(todos.getAll(), im.get('filters').order);
   });
 
+  am.action('app:context:not-focused', function (contextKeys) {
+    im.switchContext('not-focused');
+  });
+
   am.action('app:context:no-directory', function (contextKeys) {
     im.switchContext('no-directory');
   });

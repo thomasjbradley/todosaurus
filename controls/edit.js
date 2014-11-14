@@ -89,5 +89,9 @@ var EditControl = function (elem, actionManager) {
     },
   ]);
 
+  that = _.extend(that, {
+    discard: that.chainer(discard)
+  });
+
   return that;
 };
