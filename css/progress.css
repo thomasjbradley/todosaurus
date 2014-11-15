@@ -3,8 +3,11 @@ progress {
   height: 3px;
   width: 100%;
 
-  -webkit-appearance: none;
+  background-color: #fff;
   border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 progress::-webkit-progress-bar {
@@ -13,5 +16,10 @@ progress::-webkit-progress-bar {
 
 progress::-webkit-progress-value {
   background-color: #9fd1d5;
-  -webkit-transition: all linear 100ms;
+  transition: all linear 100ms;
+}
+
+progress::-moz-progress-bar {
+  background-color: #9fd1d5;
+  transition: all linear 100ms;
 }

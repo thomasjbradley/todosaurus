@@ -158,13 +158,13 @@
   right: 4px;
   top: -1px;
 
-  background-image: linear-gradient(to right, transparent 0%, #fff 15px, #fff 100%);
+  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, #fff 15px, #fff 100%);
 
   list-style-type: none;
 }
 
 .item[data-focused="true"] .item__metadata {
-  background-image: linear-gradient(to right, transparent 0%, #ececec 15px, #ececec 100%);
+  background-image: linear-gradient(to right, rgba(255,255,255,0) 0%, #ececec 15px, #ececec 100%);
 }
 
 .item__metadata__single {

@@ -551,7 +551,10 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   am.action('app:set-title', function () {
     var simplePath = storage.getFolder().replace(/\/Users\/[^\/]+/, '~');
     document.title = simplePath + ' — Todosaurus';
-    menu['win:main'].label = simplePath;
+
+    if (window.isNode) {
+      menu['win:main'].label = simplePath;
+    }
   });
 
 /*
@@ -838,7 +841,11 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('help:shortcuts', function () {
-    wm.open('help');
+    if (window.isNode) {
+      wm.open('help');
+    } else {
+      window.open('./help.html');
+    }
   });
 
 };
