@@ -11,6 +11,7 @@ var
   GuiMenu,
   menu = {},
   menuContexts = {},
+  wm,
   clipboard,
   _ = window._ || require('lodash')
 ;
