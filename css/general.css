@@ -19,7 +19,8 @@ html {
   position: relative;
 
   background-color: #fff;
-  -webkit-transform: translate3d(0, 0, 0) !important;
+  cursor: default;
+  transform: translate3d(0, 0, 0) !important;
 
   font: normal 14px/19px Menlo,Inconsolata,Consolas,SourceCodePro,monospace;
   letter-spacing: 0.4px;
@@ -35,7 +36,7 @@ body {
   padding: 0;
   position: relative;
 
-  -webkit-transform: translate3d(0, 0, 0) !important;
+  transform: translate3d(0, 0, 0) !important;
 }
 
 [data-state="hidden"] {
