@@ -144,7 +144,7 @@ figcaption {
   border-radius: 10px;
   opacity: 0;
   transform: translateY(-50%);
-  transition: opacity 200ms linear;
+  transition: opacity 200ms 500ms linear;
 
   color: #fff;
   text-align: center;
