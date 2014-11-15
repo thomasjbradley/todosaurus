@@ -1,9 +1,9 @@
-html {
-  /*background-color: #e2e2e2;*/
+body {
+  border-top: 1px solid #d1d1d1;
 }
 
-body {
-  border-top: 1px solid #959495;
+.window--has-focus {
+  border-color: #b0aeb0;
 }
 
 a,

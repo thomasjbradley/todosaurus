@@ -8,7 +8,7 @@
   <link href="css/general.css" rel="stylesheet">
   <link href="css/about.css" rel="stylesheet">
 </head>
-<body>
+<body class="window--has-focus">
 
 <h1 class="visually-hidden">About Todosaurus</h1>
 
@@ -105,6 +105,14 @@
         e.preventDefault();
         gui.Shell.openExternal(item.href);
       });
+    });
+
+    win.on('focus', function () {
+      document.body.classList.add('window--has-focus');
+    });
+
+    win.on('blur', function () {
+      document.body.classList.remove('window--has-focus');
     });
 
     win.show();
