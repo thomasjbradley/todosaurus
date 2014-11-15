@@ -2,9 +2,9 @@
 
 **1.2.1 (Nov. 15, 2014)**
 
-- Fixed title bar bottom border colour when focused and blurred. [Closes issue #15](https://github.com/thomasjbradley/todosaurus/issues/15)
+- Fixed title bar bottom border colour when focused and blurred. [Closes issue #15](https://github.com/thomasjbradley/todosaurus/issues/15).
 - Removed extra border at the bottom of the todo list when last item is focused.
-- Stopped the incorrect cursor from showing, the text highlight cursor, when text wasn't highlightable. [Closes issue #16](https://github.com/thomasjbradley/todosaurus/issues/16)
+- Stopped the incorrect cursor from showing, the text highlight cursor, when text wasn't highlightable. [Closes issue #16](https://github.com/thomasjbradley/todosaurus/issues/16).
 - Changed the main window shortcut because it conflicted with OS defaults.
 - Made the fun about transition not fire so quickly.
 - Fixed a couple issues when running in the web browser.
@@ -12,7 +12,7 @@
 **1.2.0 (Nov. 14, 2014)**
 
 - Added a fancy about screen with a in-app readable license.
-- Fixed a couple focus related bugs. [Closes issue #12](https://github.com/thomasjbradley/todosaurus/issues/12)
+- Fixed a couple focus related bugs. [Closes issue #12](https://github.com/thomasjbradley/todosaurus/issues/12).
 - Added a fix for stopping the same window from opening.
 - Added proper window management in the “Window” menu.
 - Added the ability for the app to stay open in the main window is closed.
@@ -23,12 +23,12 @@
 
 **1.0.4 (Nov. 13, 2014)**
 
-- Bug fix: Events happening multiple times—fired by proper OS X shortcuts and Mousetrap. [Closes issue #8](https://github.com/thomasjbradley/todosaurus/issues/8)
-- Bug fix: Menu items still active when open dialogue visible. [Closes issue #7](https://github.com/thomasjbradley/todosaurus/issues/7)
+- Bug fix: Events happening multiple times—fired by proper OS X shortcuts and Mousetrap. [Closes issue #8](https://github.com/thomasjbradley/todosaurus/issues/8).
+- Bug fix: Menu items still active when open dialogue visible. [Closes issue #7](https://github.com/thomasjbradley/todosaurus/issues/7).
 
 **1.0.3 (Nov. 13, 2014)**
 
-- Bug fix: Yosemite keyboard shortcut alignment in the menu items [Closes issue #5](https://github.com/thomasjbradley/todosaurus/issues/5)
+- Bug fix: Yosemite keyboard shortcut alignment in the menu items [Closes issue #5](https://github.com/thomasjbradley/todosaurus/issues/5).
 
 **1.0.2 (Oct. 18, 2014)**
 
@@ -37,8 +37,8 @@
 
 **1.0.1 (Jul. 2, 2014)**
 
-- Bug fix: when archiving the new items were added at the end of the previous line; fixed with a \n
+- Bug fix: when archiving the new items were added at the end of the previous line; fixed with a \n.
 
 **1.0.0 (Jun. 4, 2014)**
 
-- Initial Release
+- Initial Release.
