@@ -1,5 +1,10 @@
 # Changelog
 
+**1.2.1 (Nov. 15, 2014)**
+
+- Fixed title bar bottom border colour when focused and blurred. [Closes issue #15](https://github.com/thomasjbradley/todosaurus/issues/15)
+- Removed extra border at the bottom of the todo list when last item is focused.
+
 **1.2.0 (Nov. 14, 2014)**
 
 - Added a fancy about screen with a in-app readable license.
