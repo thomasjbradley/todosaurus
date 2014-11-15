@@ -7,7 +7,7 @@ menu['win:main'] = new gui.MenuItem({
   type: 'checkbox',
   checked: true,
   key: '`',
-  modifiers: 'cmd-shift',
+  modifiers: 'cmd-alt',
   click: function () {
     wm.open('main');
   }
