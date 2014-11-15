@@ -8,7 +8,7 @@
   <link href="css/general.css" rel="stylesheet">
   <link href="css/help.css" rel="stylesheet">
 </head>
-<body>
+<body class="window--has-focus">
 
 <h1 class="visually-hidden">Keyboard Shortcuts</h1>
 
@@ -187,6 +187,26 @@
     <td>Switch to another directory</td>
   </tr>
 </table>
+
+<script>
+  var env, gui, win;
+
+  window.isNode = !!(typeof require !== 'undefined');
+
+  if (window.isNode) {
+    gui = require('nw.gui');
+    win = gui.Window.get();
+    env = process.env.ENV || 'prod';
+
+    win.on('focus', function () {
+      document.body.classList.add('window--has-focus');
+    });
+
+    win.on('blur', function () {
+      document.body.classList.remove('window--has-focus');
+    });
+  }
+</script>
 
 </body>
 </html>

@@ -6,7 +6,11 @@ body {
   padding: 1em;
   overflow: scroll;
 
-  border-top: 1px solid #959495;
+  border-top: 1px solid #d1d1d1;
+}
+
+.window--has-focus {
+  border-color: #b0aeb0;
 }
 
 kbd {
