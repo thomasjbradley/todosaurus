@@ -8,7 +8,7 @@ menu['app:about'] = new gui.MenuItem({
 });
 
 menu.app.insert(menu['app:about'], 0);
-GuiMenu.items[0].submenu.removeAt(1);
+menu.app.removeAt(1);
 
 menu['app:switch-directory'] = new gui.MenuItem({
   label: 'Switch Directory…',
@@ -18,4 +18,15 @@ menu['app:switch-directory'] = new gui.MenuItem({
 
 menu.app.insert(menu['app:switch-directory'], 2);
 
-GuiMenu.items[0].submenu.insert(new gui.MenuItem({ type: 'separator' }), 3);
+menu.app.insert(new gui.MenuItem({ type: 'separator' }), 3);
+
+menu.app.removeAt(8);
+menu['app:quit'] = new gui.MenuItem({
+  label: 'Quit Todosaurus',
+  key: 'q',
+  modifiers: 'cmd',
+  click: function () {
+    gui.App.quit();
+  }
+});
+menu.app.append(menu['app:quit']);

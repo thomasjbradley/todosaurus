@@ -549,7 +549,9 @@ var Actions = function (generics, am, fm, im, storage, todos, orderer, grouper, 
   });
 
   am.action('app:set-title', function () {
-    document.title = storage.getFolder().replace(/\/Users\/[^\/]+/, '~') + ' — Todosaurus';
+    var simplePath = storage.getFolder().replace(/\/Users\/[^\/]+/, '~');
+    document.title = simplePath + ' — Todosaurus';
+    menu['win:main'].label = simplePath;
   });
 
 /*
