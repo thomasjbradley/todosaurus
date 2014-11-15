@@ -5,6 +5,7 @@
 - Fixed title bar bottom border colour when focused and blurred. [Closes issue #15](https://github.com/thomasjbradley/todosaurus/issues/15)
 - Removed extra border at the bottom of the todo list when last item is focused.
 - Stopped the incorrect cursor from showing, the text highlight cursor, when text wasn't highlightable. [Closes issue #16](https://github.com/thomasjbradley/todosaurus/issues/16)
+- Changed the main window shortcut because it conflicted with OS defaults.
 
 **1.2.0 (Nov. 14, 2014)**
 
