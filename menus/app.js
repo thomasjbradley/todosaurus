@@ -20,6 +20,11 @@ menu.app.insert(menu['app:switch-directory'], 2);
 
 menu.app.insert(new gui.MenuItem({ type: 'separator' }), 3);
 
+/**
+ * Had to remove and recreate the quit menu.
+ * There was a weird bug where is the main window was hidden,
+ *   calling quit wouldn't actually quit the application.
+ */
 menu.app.removeAt(8);
 menu['app:quit'] = new gui.MenuItem({
   label: 'Quit Todosaurus',
