@@ -28,10 +28,10 @@ module.exports = (grunt) ->
           './img'
         ]
 
-    nodewebkit:
+    nwjs:
       options:
         buildDir: './releases'
-        platforms: ['osx']
+        platforms: ['osx64']
         macIcns: './todosaurus.icns'
         macZip: false
       src: [
@@ -68,7 +68,7 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask 'build', [
-    'nodewebkit'
+    'nwjs'
   ]
 
   grunt.registerTask 'default', [

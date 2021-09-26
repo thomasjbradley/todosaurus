@@ -124,10 +124,10 @@ var Todos = function () {
     ;
 
     metas = _.map(todos, function (item) {
-      return _.unique(findMetadata(item.text(), re));
+      return _.uniq(findMetadata(item.text(), re));
     });
 
-    return _.unique(_.flatten(metas)).sort(function (a, b) {
+    return _.uniq(_.flatten(metas)).sort(function (a, b) {
       return a.toLowerCase().localeCompare(b.toLowerCase());
     });
   };

@@ -1,14 +1,11 @@
 var InterfaceManager = function (focusManager, actionManager) {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     elements = {},
     currentContext = false,
     contexts = {},
-    dialogueOpen = false
-  ;
-
+    dialogueOpen = false;
   var chainer = function (func) {
     return function () {
       func.apply(this, arguments);
@@ -28,7 +25,18 @@ var InterfaceManager = function (focusManager, actionManager) {
   };
 
   var bindKeyEvent = function (keys, callback) {
-    Mousetrap.bind(keys, callback);
+    // Mousetrap.bind(keys, callback);
+    Mousetrap.bind(keys, function (e, combo) {
+      try {
+        e.stopPropagation();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      } catch (ex) {
+        // Not browser event object
+      }
+      callback(e, combo);
+      return false;
+    });
   };
 
   var bindKeyEvents = function (keys) {
@@ -40,7 +48,7 @@ var InterfaceManager = function (focusManager, actionManager) {
   var bindKeyActions = function (keys) {
     _.each(keys, function (elem, index) {
       bindKeyEvent(elem, function (e, combo) {
-        if (!_.isUndefined(e) && _.has(e, 'bubbles')) {
+        if (!_.isUndefined(e) && _.has(e, "bubbles")) {
           e.preventDefault();
         }
 
@@ -59,7 +67,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     });
 
     _.each(menuStates.test, function (item, key) {
-      menu[key].enabled = item()
+      menu[key].enabled = item();
     });
   };
 
@@ -67,7 +75,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     contexts[title] = {
       keyActions: ka,
       menuStates: ms,
-      callback: cb
+      callback: cb,
     };
   };
 
@@ -111,7 +119,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     return elements[name];
   };
 
-  methods =  {
+  methods = {
     reset: chainer(reset),
     handleMouseEvents: handleMouseEvents,
     bindKeyEvent: chainer(bindKeyEvent),
@@ -121,7 +129,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     switchContext: chainer(switchContext),
     add: chainer(add),
     get: get,
-    dialogueOpen: dialogueOpen
+    dialogueOpen: dialogueOpen,
   };
 
   return methods;
