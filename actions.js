@@ -143,9 +143,7 @@ const Actions = function (
     "item:cut",
     () => {
       const text = todos.get(id()).getFullText();
-      if (window.isNode) {
-        clipboard.set(text, "text");
-      }
+      navigator.clipboard.writeText(text);
       buffer.push(text);
       todos.remove(id());
     },
@@ -156,9 +154,7 @@ const Actions = function (
     "item:copy",
     () => {
       const text = todos.get(id()).getFullText();
-      if (window.isNode) {
-        clipboard.set(text, "text");
-      }
+      navigator.clipboard.writeText(text);
       buffer.push(text);
     },
     isEditableState,

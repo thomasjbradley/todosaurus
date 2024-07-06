@@ -26,25 +26,20 @@
     document.getElementById("other-folder-options").style.display = "none";
   }
 
-  im.setContext("not-focused", bindings.notfocused, menuContexts.notfocused);
-  im.setContext("no-directory", bindings.nodirectory, menuContexts.nodirectory);
-  im.setContext("missing-file", bindings.missingfile, menuContexts.missingfile);
-  im.setContext("empty", bindings.empty, menuContexts.empty);
+  im.setContext("not-focused", bindings.notfocused);
+  im.setContext("no-directory", bindings.nodirectory);
+  im.setContext("missing-file", bindings.missingfile);
+  im.setContext("empty", bindings.empty);
 
-  im.setContext(
-    "default",
-    bindings.default,
-    menuContexts.default,
-    function (isCurrent) {
-      if (isCurrent) {
-        am.trigger("app:list:focus");
-      } else {
-        am.trigger("app:list:blur");
-      }
-    },
-  );
+  im.setContext("default", bindings.default, function (isCurrent) {
+    if (isCurrent) {
+      am.trigger("app:list:focus");
+    } else {
+      am.trigger("app:list:blur");
+    }
+  });
 
-  im.setContext("input", bindings.input, menuContexts.input);
+  im.setContext("input", bindings.input);
 
   im.add("filters", filters);
   im.add("list", new ListControl("list", am));

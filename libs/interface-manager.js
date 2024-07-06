@@ -56,10 +56,9 @@ const InterfaceManager = function (focusManager, actionManager) {
     });
   };
 
-  const setContext = (title, ka, ms, cb) => {
+  const setContext = (title, ka, cb) => {
     contexts[title] = {
       keyActions: ka,
-      menuStates: ms,
       callback: cb,
     };
   };
