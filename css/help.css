@@ -5,7 +5,6 @@ html {
 body {
   padding: 1em;
   overflow: scroll;
-
   border-top: 1px solid #d1d1d1;
 }
 
@@ -13,11 +12,9 @@ kbd {
   display: inline-block;
   margin: 0 0 0.3em;
   padding: 0.1em 0.5em 0.04em;
-
   background-image: linear-gradient(to bottom, #fefefe, #e7e7e7);
   border-radius: 3px;
   border: 1px solid #cfcfcf;
-
   font-weight: bold;
 }
 
@@ -29,11 +26,9 @@ table {
   margin: 0 0 24px;
   padding: 0;
   width: 100%;
-
   background-color: #fff;
   border-collapse: collapse;
   border: 1px solid #cfcfcf;
-
   font-size: 13px;
 }
 
@@ -43,7 +38,6 @@ table:last-child {
 
 td {
   padding: 0.5em;
-
   border-bottom: 1px solid #cfcfcf;
 }
 
@@ -54,7 +48,6 @@ td:first-child {
 .tags-title {
   margin: 9px 0 8px;
   padding: 0;
-
   background-image: linear-gradient(
     to bottom,
     #e2e2e2 0%,
@@ -64,7 +57,6 @@ td:first-child {
     #e2e2e2 55%,
     #e2e2e2 100%
   );
-
   color: #777;
   font-size: 14px;
   line-height: 12px;
@@ -74,6 +66,5 @@ td:first-child {
 .tags-title-wrap {
   display: inline-block;
   padding-right: 6px;
-
   background-color: #e2e2e2;
 }

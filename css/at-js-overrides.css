@@ -11,7 +11,6 @@
 
 .atwho-view ul {
   overflow: hidden;
-
   border: 1px solid #999;
   border-radius: 2px;
 }
@@ -35,6 +34,5 @@
 .atwho-view [data-value^="+"].cur {
   background-color: #cdc0db;
   border-bottom: 0;
-
   color: #492c66;
 }

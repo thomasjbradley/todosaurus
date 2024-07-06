@@ -26,8 +26,8 @@
     "lodash": "4.17.15"
   },
   "devDependencies": {
+    "eslint": "^9.6.0",
     "prettier": "^3.3.2",
-    "chai": "1.10.0",
-    "mocha": "2.0.1"
+    "stylelint": "^16.6.1"
   }
 }

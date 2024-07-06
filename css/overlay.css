@@ -10,7 +10,6 @@
   right: 0;
   top: 0;
   z-index: 2000;
-
   background-color: rgba(41, 29, 52, 0.8);
 }
 
@@ -22,16 +21,13 @@
   top: 4em;
   width: 20em;
   z-index: 2001;
-
   background-color: #fff;
   border-radius: 3px;
-
   text-align: center;
 }
 
 .window-title {
   margin: 0 0 16px;
-
   font-size: 24px;
 }
 
@@ -55,7 +51,6 @@
 .window-path-icon {
   display: inline-block;
   width: 18px;
-
   vertical-align: middle;
 }
 
@@ -66,7 +61,6 @@
 .window-options {
   margin: 28px 0 0;
   padding: 0;
-
   list-style-type: none;
 }
 

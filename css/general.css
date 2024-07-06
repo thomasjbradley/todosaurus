@@ -1,16 +1,8 @@
-@-moz-viewport {
-  width: device-width;
-  scale: 1;
-}
 @-ms-viewport {
   width: device-width;
   scale: 1;
 }
 @-o-viewport {
-  width: device-width;
-  scale: 1;
-}
-@-webkit-viewport {
   width: device-width;
   scale: 1;
 }
@@ -32,12 +24,16 @@ html {
   overflow: hidden;
   padding: 0;
   position: relative;
-
   background-color: #fff;
   cursor: default;
   transform: translate3d(0, 0, 0) !important;
 
-  font: normal 14px/19px Menlo, Inconsolata, Consolas, SourceCodePro, monospace;
+  font:
+    normal 14px/19px Menlo,
+    Inconsolata,
+    Consolas,
+    SourceCodePro,
+    monospace;
   letter-spacing: 0.4px;
   -webkit-user-select: none;
   user-select: none;
@@ -50,7 +46,6 @@ body {
   overflow: hidden;
   padding: 0;
   position: relative;
-
   transform: translate3d(0, 0, 0) !important;
 }
 
@@ -69,7 +64,6 @@ body {
   padding: 0;
   position: absolute;
   width: 1px;
-
   border: 0;
   clip: rect(0 0 0 0);
 }
@@ -79,10 +73,8 @@ body {
   height: 18px;
   overflow: hidden;
   width: 18px;
-
   background: transparent none no-repeat center center;
   background-size: contain;
-
   text-indent: 100%;
   white-space: nowrap;
 }
@@ -106,11 +98,9 @@ body {
 .pill {
   display: inline-block;
   padding: 4px 8px 3px;
-
   background-color: #cdc0db;
   border: 1px solid #b4a2c5;
   border-radius: 12px;
-
   color: #492c66;
   font-size: 11px;
   line-height: 11px;
@@ -120,14 +110,12 @@ body {
 .pill-alt {
   background-color: #c0dbc9;
   border-color: #a1c4ad;
-
   color: #2c663f;
 }
 
 .pill-dull {
   background-color: #ccc;
   border-color: #999;
-
   color: #666;
 }
 
@@ -141,12 +129,10 @@ body {
 .btn-file::before {
   display: inline-block;
   padding: 11px 16px 12px;
-
   background-color: #492c66;
   border: 1px solid #291d34;
   border-radius: 4px;
   cursor: pointer;
-
   color: #fff;
   text-align: center;
 }
@@ -168,10 +154,8 @@ body {
 .btn-text:link,
 .btn-text:visited {
   padding: 0;
-
   background-color: transparent;
   border: 0;
-
   color: #b4a2c5;
   text-decoration: underline;
 }
@@ -180,7 +164,6 @@ body {
   height: 39px;
   position: relative;
   width: 11em;
-
   cursor: pointer;
 }
 

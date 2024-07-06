@@ -1,7 +1,6 @@
 .tools {
   margin: 0;
   padding: 4px;
-
   background-color: #d4d4d4;
   border-bottom: 1px solid #b0aeb0;
 }
@@ -12,7 +11,6 @@
 
 .input-wrapper {
   padding: 4px;
-
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -23,12 +21,15 @@
   margin: 0;
   padding: 0;
   width: 100%;
-
   background-color: white;
   border: 0;
   outline: 0;
-
-  font: normal 14px/19px Menlo, Inconsolata, Consolas, SourceCodePro, monospace;
+  font:
+    normal 14px/19px Menlo,
+    Inconsolata,
+    Consolas,
+    SourceCodePro,
+    monospace;
 }
 
 .input:focus {
@@ -48,15 +49,11 @@
   padding-left: 22px;
 }
 
-.input-has-label {
-}
-
 .input-label {
   left: 0;
   position: absolute;
   top: 3px;
   width: 3.4em;
-
   text-align: right;
 }
 
@@ -108,7 +105,6 @@
   height: calc(100% - 37px);
   position: relative;
   width: 180px;
-
   background-color: #e2e2e2;
   border-right: 1px solid #bbb;
 }

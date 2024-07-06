@@ -1,44 +1,35 @@
-var LocalStorageHelper = function () {
+const LocalStorageHelper = function () {
   "use strict";
 
-  var
-    methods = {}
-  ;
+  let methods = {};
 
-  var append = function (key, data) {
-    var old = localStorage.getItem(key);
-
+  const append = (key, data) => {
+    let old = localStorage.getItem(key);
     if (_.isEmpty(old)) {
-      old = '';
+      old = "";
     }
-
-    localStorage.setItem(key, old + '\n' + data.join('\n') + '\n');
+    localStorage.setItem(key, old + "\n" + data.join("\n") + "\n");
   };
 
-  var save = function (key, data) {
-    localStorage.setItem(key, data.join('\n') + '\n');
+  const save = (key, data) => {
+    localStorage.setItem(key, data.join("\n") + "\n");
   };
 
-  var read = function (key) {
-    var items = [];
-
+  const read = (key) => {
+    let items = [];
     if (!localStorage.getItem(key)) {
-      throw new Error('Not found.');
+      throw new Error("Not found.");
     }
-
-    items = _.map(localStorage.getItem(key).split('\n'), function (item) {
+    items = _.map(localStorage.getItem(key).split("\n"), function (item) {
       return item.trim();
     });
-
     return _.compact(items);
   };
 
-  methods =  {
+  methods = {
     append: append,
     save: save,
-    read: read
+    read: read,
   };
-
   return methods;
-
 };

@@ -1,7 +1,6 @@
 .tags-title {
   margin: 9px 0 8px;
   padding: 0;
-
   background-image: linear-gradient(
     to bottom,
     #e2e2e2 0%,
@@ -11,7 +10,6 @@
     #e2e2e2 55%,
     #e2e2e2 100%
   );
-
   color: #777;
   font-size: 12px;
   line-height: 12px;
@@ -21,7 +19,6 @@
 .tags-title-wrap {
   display: inline-block;
   padding-right: 6px;
-
   background-color: #e2e2e2;
 }
 
@@ -32,15 +29,12 @@
 .tags-list {
   margin: 0 0 24px;
   padding: 0;
-
   counter-reset: tags;
-
   list-style-type: none;
 }
 
 .tags-list > li {
   margin-bottom: 4px;
-
   counter-increment: tags;
 }
 
@@ -53,7 +47,6 @@
   content: counter(tags);
   display: none;
   margin-right: 4px;
-
   font-weight: bold;
 }
 
@@ -91,7 +84,6 @@
   right: -3px;
   position: relative;
   top: -2px;
-
   opacity: 0.7;
   transform: scale(0.9, 1.3);
 }

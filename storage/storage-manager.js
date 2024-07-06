@@ -1,46 +1,44 @@
-var StorageManager = function () {
+const StorageManager = function () {
   "use strict";
 
-  var
-    todos = 'todo.txt',
-    done = 'done.txt',
-    folder = '',
-    methods = {},
-    subscriptions = [],
-    storage
-  ;
+  const todos = "todo.txt";
+  const done = "done.txt";
+  let folder = "";
+  let methods = {};
+  const subscriptions = [];
+  let storage;
 
-  var errors = {
-    NO_FOLDER: '1',
-    NOT_FOUND: '2'
+  const errors = {
+    NO_FOLDER: "1",
+    NOT_FOUND: "2",
   };
 
-  var getPath = function () {
-    return folder + '/' + todos;
+  const getPath = () => {
+    return folder + "/" + todos;
   };
 
-  var getArchivePath = function () {
-    return folder + '/' + done;
+  const getArchivePath = () => {
+    return folder + "/" + done;
   };
 
-  var subscribe = function (callback) {
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(filtered);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -48,9 +46,8 @@ var StorageManager = function () {
     };
   };
 
-  var isFolderSaved = function () {
-    var savedFolder = localStorage.getItem('folder');
-
+  const isFolderSaved = () => {
+    const savedFolder = localStorage.getItem("folder");
     if (!savedFolder || _.isEmpty(savedFolder)) {
       return false;
     } else {
@@ -59,46 +56,43 @@ var StorageManager = function () {
     }
   };
 
-  var set = function (s) {
+  const set = (s) => {
     storage = s;
   };
 
-  var getFolder = function (f) {
+  const getFolder = (f) => {
     return folder;
-  }
+  };
 
-  var setFolder = function (f) {
-    localStorage.setItem('folder', f);
+  const setFolder = (f) => {
+    localStorage.setItem("folder", f);
     folder = f;
-  }
+  };
 
-  var save = function (data) {
+  const save = (data) => {
     storage.save(getPath(), data);
   };
 
-  var saveArchive = function (data) {
+  const saveArchive = (data) => {
     storage.append(getArchivePath(), data);
   };
 
-  var read = function (callback) {
-    var data;
-
+  const read = (callback) => {
+    let data;
     if (!isFolderSaved()) {
       callback(new Error(errors.NO_FOLDER));
       return;
     }
-
     try {
       data = storage.read(getPath());
     } catch (e) {
       callback(new Error(errors.NOT_FOUND));
       return;
     }
-
     callback(null, data);
   };
 
-  methods =  {
+  methods = {
     errors: errors,
     subscribe: chainer(subscribe),
     set: chainer(set),
@@ -107,9 +101,7 @@ var StorageManager = function () {
     getPath: getPath,
     save: chainer(save),
     saveArchive: chainer(saveArchive),
-    read: read
+    read: read,
   };
-
   return methods;
-
 };
