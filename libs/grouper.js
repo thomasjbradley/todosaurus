@@ -1,34 +1,34 @@
-var Grouper = function (generics) {
+const Grouper = function (generics) {
   "use strict";
 
-  var methods = {},
-    subscriptions = [],
-    matchers = {
-      "+": "\\{{tag}}(?:$|\\s)",
-      "@": "\\{{tag}}(?:$|\\s)",
-      "!": "^(?:x\\s)?\\({{tag}}\\)",
-    },
-    groups = {},
-    grouped;
+  let methods = {};
+  const subscriptions = [];
+  const matchers = {
+    "+": "\\{{tag}}(?:$|\\s)",
+    "@": "\\{{tag}}(?:$|\\s)",
+    "!": "^(?:x\\s)?\\({{tag}}\\)",
+  };
+  let groups = {};
+  let grouped;
 
-  var subscribe = function (callback) {
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(grouped);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -36,68 +36,62 @@ var Grouper = function (generics) {
     };
   };
 
-  var length = function () {
+  const length = () => {
     return grouped.length;
   };
 
-  var setGroup = function (name, g) {
+  const setGroup = (name, g) => {
     groups[name] = g;
   };
 
-  var getGroup = function (name) {
+  const getGroup = (name) => {
     return groups[name];
   };
 
-  var getFilter = function (tag) {
-    var rawTag = groups[tag[0]][tag[1]],
-      fullTag = tag[0] == "!" ? rawTag.substr(0, 1) : rawTag,
-      re = new RegExp(matchers[tag[0]].replace("{{tag}}", fullTag), "ig");
+  const getFilter = (tag) => {
+    const rawTag = groups[tag[0]][tag[1]];
+    const fullTag = tag[0] == "!" ? rawTag.substr(0, 1) : rawTag;
+    const re = new RegExp(matchers[tag[0]].replace("{{tag}}", fullTag), "ig");
     return re;
   };
 
-  var matchesGeneric = function (text) {
-    return _.every(generics, function (gen) {
+  const matchesGeneric = (text) => {
+    return _.every(generics, (gen) => {
       return !!(text.indexOf(gen) > -1);
     });
   };
 
-  var matchesGroup = function (text, tag) {
+  const matchesGroup = (text, tag) => {
     if (!tag || !_.isArray(tag)) {
       return true;
     }
-
     if (getFilter(tag).test(text)) {
       return true;
     }
-
     return matchesGeneric(text);
   };
 
-  var findTagStartingWith = function (text, groupStart) {
-    var match;
-
+  const findTagStartingWith = (text, groupStart) => {
+    let match;
     if (!text) {
       return false;
     }
-
     match = _.find(groups[groupStart], function (item) {
       return FuzzyMatch.startsWith(item, text, groupStart);
     });
-
     if (!match) {
       return false;
     }
-
     return [groupStart, _.indexOf(groups[groupStart], match)];
   };
 
-  var getGroupedItems = function (todos, tag) {
-    return _.filter(todos, function (item) {
+  const getGroupedItems = (todos, tag) => {
+    return _.filter(todos, (item) => {
       return matchesGroup(item.getFullText(), tag);
     });
   };
 
-  var group = function (todos, tag) {
+  const group = (todos, tag) => {
     if (tag === undefined || _.isEmpty(tag) || !_.isArray(tag)) {
       grouped = todos;
     } else {
@@ -105,11 +99,10 @@ var Grouper = function (generics) {
     }
   };
 
-  var getIndex = function (id) {
-    var items = _.map(grouped, function (item) {
+  const getIndex = (id) => {
+    const items = _.map(grouped, (item) => {
       return item.id();
     });
-
     return items.indexOf(id);
   };
 
@@ -123,6 +116,5 @@ var Grouper = function (generics) {
     group: informer(group),
     getIndex: getIndex,
   };
-
   return methods;
 };

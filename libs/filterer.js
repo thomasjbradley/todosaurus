@@ -1,30 +1,28 @@
-var Filterer = function (generics) {
+const Filterer = function (generics) {
   "use strict";
 
-  var
-    methods = {},
-    subscriptions = [],
-    filtered = []
-  ;
+  let methods = {};
+  const subscriptions = [];
+  let filtered = [];
 
-  var subscribe = function (callback) {
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(filtered);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -32,49 +30,45 @@ var Filterer = function (generics) {
     };
   };
 
-  var length = function () {
+  const length = () => {
     return filtered.length;
   };
 
-  var getByIndex = function (index) {
+  const getByIndex = (index) => {
     return filtered[index];
   };
 
-  var getIndex = function (id) {
-    var items = _.map(filtered, function (item) {
+  const getIndex = (id) => {
+    const items = _.map(filtered, (item) => {
       return item.id();
     });
-
     return _.indexOf(items, id);
   };
 
-  var matchesGeneric = function (text) {
-    var match = false;
-
-    _.each(generics, function (gen) {
+  const matchesGeneric = (text) => {
+    let match = false;
+    _.each(generics, (gen) => {
       if (text.indexOf(gen) > -1) {
         match = true;
       }
     });
-
     return match;
   };
 
-  var matchesFilter = function (text, data) {
+  const matchesFilter = (text, data) => {
     if (!data || FuzzyMatch.contains(text, data)) {
       return true;
     }
-
     return matchesGeneric(text);
-  }
+  };
 
-  var getFilteredItems = function (todos, data) {
-    return _.filter(todos, function (item) {
+  const getFilteredItems = (todos, data) => {
+    return _.filter(todos, (item) => {
       return matchesFilter(item.text(), data);
     });
   };
 
-  var filter = function (todos, data) {
+  const filter = (todos, data) => {
     if (!data) {
       filtered = todos;
     } else {
@@ -88,8 +82,7 @@ var Filterer = function (generics) {
     getByIndex: getByIndex,
     getIndex: getIndex,
     matchesFilter: matchesFilter,
-    filter: informer(filter)
+    filter: informer(filter),
   };
-
   return methods;
 };

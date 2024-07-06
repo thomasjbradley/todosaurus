@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <title>Todosaurus</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
   <link href="bower_components/jquery.atwho/dist/css/jquery.atwho.min.css" rel="stylesheet">
   <link href="css/general.css" rel="stylesheet">
   <link href="css/interface.css" rel="stylesheet">
@@ -70,7 +69,7 @@
 
     <main class="main">
       <div class="item item-empty">
-        <div class="item-text" id="empty-no-todos">Woot! Looks like all your todos are extinct.</div>
+        <div class="item-text" id="empty-no-todos">Woot! Looks like all your todos are extinct. Press “n” to create a new todo!</div>
         <div class="item-text" id="empty-no-results" style="display:none">Your excavation came up empty handed.</div>
       </div>
 
@@ -112,8 +111,8 @@
     </div>
   </div>
 
-  <script src="bower_components/lodash/dist/lodash.min.js"></script>
-  <script src="bower_components/mousetrap/mousetrap.min.js"></script>
+  <script src="vendor/lodash/lodash.min.js"></script>
+  <script src="vendor/mousetrap/mousetrap.min.js"></script>
 
   <!-- jQuery only required for At.js and Caret.js; nothing else in the app uses it -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

@@ -1,24 +1,23 @@
-var NewControl = function (elem, actionManager) {
+const NewControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem, actionManager);
+  let that = InputControl(elem, actionManager);
 
-  var isCommittable = function () {
+  let isCommittable = () => {
     return that.value();
   };
 
-  var commit = function () {
-    that.getActionManager().trigger('app:new:hide');
-
-    return that.getActionManager().trigger('item:update', that.value());
+  const commit = () => {
+    that.getActionManager().trigger("app:new:hide");
+    return that.getActionManager().trigger("item:update", that.value());
   };
 
-  var discard = function () {
-    that.getActionManager().trigger('app:new:hide');
-    that.getActionManager().trigger('item:delete');
+  const discard = () => {
+    that.getActionManager().trigger("app:new:hide");
+    that.getActionManager().trigger("item:delete");
   };
 
-  var commitOrDiscard = function (isCommittable) {
+  const commitOrDiscard = (isCommittable) => {
     if (isCommittable) {
       commit();
     } else {
@@ -28,68 +27,61 @@ var NewControl = function (elem, actionManager) {
 
   that.bindEvents([
     {
-      event: 'blur',
+      event: "blur",
       callback: function (e) {
         e.preventDefault();
         commitOrDiscard(isCommittable());
-      }
-    }
+      },
+    },
   ]);
 
   that.bindKeyEvents([
     {
-      keys: ['mod+enter'],
+      keys: ["mod+enter"],
       callback: function (e) {
         e.preventDefault();
-
         if (isCommittable()) {
           commit();
         }
-      }
+      },
     },
     {
-      keys: ['enter', 'tab'],
+      keys: ["enter", "tab"],
       callback: function (e) {
         var goNext;
-
         e.preventDefault();
-
         if (isCommittable()) {
           goNext = commit();
-
           if (goNext) {
-            that.getActionManager().trigger('item:new:after');
+            that.getActionManager().trigger("item:new:after");
           }
         }
-      }
+      },
     },
     {
-      keys: ['shift+tab', 'shift+enter'],
+      keys: ["shift+tab", "shift+enter"],
       callback: function (e) {
         var goNext;
-
         e.preventDefault();
-
         if (isCommittable()) {
           goNext = commit();
-
           if (goNext) {
-            that.getActionManager().trigger('item:new:before');
+            that.getActionManager().trigger("item:new:before");
           }
         }
-      }
+      },
     },
     {
-      keys: ['esc', 'mod+del', 'mod+backspace'],
+      keys: ["esc", "mod+del", "mod+backspace"],
       callback: function (e) {
         e.preventDefault();
         discard();
-      }
-    }
+      },
+    },
   ]);
 
   that = _.extend(that, {
-    discard: that.chainer(discard)
+    discard: that.chainer(discard),
   });
 
   return that;

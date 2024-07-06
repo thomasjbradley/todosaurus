@@ -1,31 +1,32 @@
-var InterfaceManager = function (focusManager, actionManager) {
+const InterfaceManager = function (focusManager, actionManager) {
   "use strict";
 
-  var methods = {},
-    elements = {},
-    currentContext = false,
-    contexts = {},
-    dialogueOpen = false;
-  var chainer = function (func) {
+  let methods = {};
+  let elements = {};
+  let currentContext = false;
+  let contexts = {};
+  let dialogueOpen = false;
+
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var reset = function () {
+  const reset = () => {
     Mousetrap.reset();
   };
 
-  var handleMouseEvents = function (e) {
+  const handleMouseEvents = (e) => {
     // e.stopPropagation();
     // e.preventDefault();
     // e.stopImmediatePropagation();
     // return false;
   };
 
-  var bindKeyEvent = function (keys, callback) {
-    Mousetrap.bind(keys, function (e, combo) {
+  const bindKeyEvent = (keys, callback) => {
+    Mousetrap.bind(keys, (e, combo) => {
       try {
         e.stopPropagation();
         e.preventDefault();
@@ -38,25 +39,24 @@ var InterfaceManager = function (focusManager, actionManager) {
     });
   };
 
-  var bindKeyEvents = function (keys) {
+  const bindKeyEvents = (keys) => {
     _.each(keys, function (elem) {
       bindKeyEvent(elem.keys, elem.callback);
     });
   };
 
-  var bindKeyActions = function (keys) {
+  const bindKeyActions = (keys) => {
     _.each(keys, function (elem, index) {
       bindKeyEvent(elem, function (e, combo) {
         if (e !== undefined && Object.hasOwn(e, "bubbles")) {
           e.preventDefault();
         }
-
         actionManager.trigger(index, e, combo);
       });
     });
   };
 
-  var setContext = function (title, ka, ms, cb) {
+  const setContext = (title, ka, ms, cb) => {
     contexts[title] = {
       keyActions: ka,
       menuStates: ms,
@@ -64,12 +64,11 @@ var InterfaceManager = function (focusManager, actionManager) {
     };
   };
 
-  var sentContextCallbacks = function (title) {
-    _.each(contexts, function (item, key) {
+  const sentContextCallbacks = (title) => {
+    _.each(contexts, (item, key) => {
       if (item.callback === undefined) {
         return;
       }
-
       if (key === title) {
         item.callback(true);
       } else {
@@ -78,23 +77,22 @@ var InterfaceManager = function (focusManager, actionManager) {
     });
   };
 
-  var switchContext = function (title) {
+  const switchContext = (title) => {
     if (title !== currentContext) {
       reset();
       bindKeyActions(contexts[title].keyActions);
       sentContextCallbacks(title);
       return true;
     }
-
     currentContext = title;
     return false;
   };
 
-  var add = function (name, elem, events) {
+  const add = (name, elem, events) => {
     elements[name] = elem;
   };
 
-  var get = function (name) {
+  const get = (name) => {
     return elements[name];
   };
 
@@ -110,6 +108,5 @@ var InterfaceManager = function (focusManager, actionManager) {
     get: get,
     dialogueOpen: dialogueOpen,
   };
-
   return methods;
 };

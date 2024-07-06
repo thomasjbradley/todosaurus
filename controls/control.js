@@ -1,62 +1,56 @@
-var Control = function (elem, actionManager) {
+const Control = function (elem, actionManager) {
   "use strict";
 
-  var that = {
+  let that = {
     keyEvents: [],
     events: [],
     eventsBound: false,
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return that;
     };
   };
 
-  var getActionManager = function () {
+  const getActionManager = () => {
     return actionManager;
   };
 
-  var bindEvents = function (ev) {
+  const bindEvents = (ev) => {
     that.events = that.events.concat(ev);
   };
 
-  var bindKeyEvents = function (events) {
+  const bindKeyEvents = (events) => {
     that.keyEvents = that.keyEvents.concat(events);
   };
 
-  var playEvents = function () {
+  const playEvents = () => {
     if (that.eventsBound === true) {
       return;
     }
-
-    _.each(that.events, function (item) {
+    _.each(that.events, (item) => {
       that.elem.addEventListener(item.event, item.callback, false);
     });
-
-    _.each(that.keyEvents, function (item) {
+    _.each(that.keyEvents, (item) => {
       Mousetrap.bind(item.keys, item.callback);
     });
-
     that.eventsBound = true;
   };
 
-  var stopEvents = function () {
+  const stopEvents = () => {
     if (that.eventsBound === false) {
       return;
     }
-
-    _.each(that.events, function (item) {
+    _.each(that.events, (item) => {
       if (item.forever === undefined || item.forever === false) {
         that.elem.removeEventListener(item.event, item.callback);
       }
     });
-
-    _.each(that.keyEvents, function (item) {
+    _.each(that.keyEvents, (item) => {
       Mousetrap.unbind(item.keys);
     });
-
     that.eventsBound = false;
   };
 

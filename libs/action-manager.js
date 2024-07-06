@@ -1,32 +1,34 @@
-var ActionManager = function () {
+const ActionManager = function () {
   "use strict";
 
-  var
-    methods = {},
-    actions = {}
-  ;
+  let methods = {};
+  const actions = {};
 
-  var action = function (action, cb, t) {
+  const action = (action, cb, t) => {
     actions[action] = {
       callback: cb,
-      test: t || false
+      test: t || false,
     };
   };
 
-  var trigger = function (action) {
+  const trigger = function (action) {
     if (actions[action].test === false) {
-      return actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1));
+      return actions[action].callback.apply(
+        this,
+        Array.prototype.slice.call(arguments, 1),
+      );
     }
-
     if (actions[action].test() === true) {
-      return actions[action].callback.apply(this, Array.prototype.slice.call(arguments, 1));
+      return actions[action].callback.apply(
+        this,
+        Array.prototype.slice.call(arguments, 1),
+      );
     }
   };
 
-  methods =  {
+  methods = {
     action: action,
-    trigger: trigger
+    trigger: trigger,
   };
-
   return methods;
 };

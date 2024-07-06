@@ -26,6 +26,7 @@
     "lodash": "4.17.15"
   },
   "devDependencies": {
+    "prettier": "^3.3.2",
     "chai": "1.10.0",
     "mocha": "2.0.1"
   }

@@ -1,17 +1,17 @@
-var ListControl = function (elem, actionManager) {
+const ListControl = function (elem, actionManager) {
   "use strict";
 
-  var that = Control(elem, actionManager);
+  let that = Control(elem, actionManager);
 
-  var getMarkedClass = function (item) {
+  const getMarkedClass = (item) => {
     return item.isMarked() ? " item-complete" : "";
   };
 
-  var hasPriorities = function () {
+  const hasPriorities = () => {
     that.elem.classList.add("todos-has-priorities");
   };
 
-  var getPriorityClass = function (item) {
+  const getPriorityClass = (item) => {
     if (item.hasPriority()) {
       hasPriorities();
       return " item-has-priority priority-" + item.getPriority().toLowerCase();
@@ -20,26 +20,23 @@ var ListControl = function (elem, actionManager) {
     }
   };
 
-  var getClasses = function (item) {
+  const getClasses = (item) => {
     return [getMarkedClass(item), getPriorityClass(item)].join("");
   };
 
-  var findMetadata = function (text, tag) {
+  const findMetadata = (text, tag) => {
     var re = new RegExp("\\s\\" + tag + "[^\\s]+", "ig");
-
     return _.map(text.match(re), function (item) {
       return item.trim();
     });
   };
 
-  var formatMetadata = function (metadata, cssClass) {
-    var pillCssClass = "";
-
+  const formatMetadata = (metadata, cssClass) => {
+    let pillCssClass = "";
     if (cssClass == "context") {
       pillCssClass = " pill-alt";
     }
-
-    return _.map(metadata, function (item) {
+    return _.map(metadata, (item) => {
       return [
         '<li class="item-metadata-single item-metadata-single-',
         cssClass,
@@ -52,22 +49,19 @@ var ListControl = function (elem, actionManager) {
     }).join("");
   };
 
-  var removeMetaData = function (text, tags) {
-    var allMeta = _.flatten(
+  const removeMetaData = (text, tags) => {
+    const allMeta = _.flatten(
       _.map(tags, function (tag) {
         return findMetadata(text, tag);
-      })
+      }),
     );
-
-    // Will strip out all metadata that's in the middle of the text
     _.each(allMeta, function (tag) {
       text = text.replace(tag, "");
     });
-
     return text;
   };
 
-  var getCompletedDate = function (item) {
+  const getCompletedDate = (item) => {
     if (item.isMarked()) {
       return (
         '<li class="item-metadata-single item-metadata-single-date pill pill-dull pill-clear">' +
@@ -75,21 +69,17 @@ var ListControl = function (elem, actionManager) {
         "</li>"
       );
     }
-
     return "";
   };
 
-  var formatText = function (item) {
-    var text = item.text(),
-      projects = findMetadata(text, "+"),
-      contexts = findMetadata(text, "@"),
-      textElem,
-      meta;
-
+  const formatText = (item) => {
+    let text = item.text();
+    const projects = findMetadata(text, "+");
+    const contexts = findMetadata(text, "@");
+    let textElem;
+    let meta;
     text = removeMetaData(text, ["+", "@"]);
-
     textElem = ['<div class="item-text">', text, "</div>"].join("");
-
     meta = [
       '<ul class="item-metadata">',
       getCompletedDate(item),
@@ -97,51 +87,46 @@ var ListControl = function (elem, actionManager) {
       formatMetadata(contexts, "context"),
       "</ul>",
     ].join("");
-
     return textElem + meta;
   };
 
-  var render = function (items) {
-    var output;
-
+  const render = (items) => {
+    let output;
     that.elem.classList.remove("todos-has-priorities");
-
-    output = _.map(items, function (item) {
-      var pieces = [
+    output = _.map(items, (item) => {
+      const pieces = [
         '<li class="item',
         getClasses(item),
         '">',
         formatText(item),
         "</li>",
       ];
-
       return pieces.join("");
     });
-
     that.elem.innerHTML = output.join("");
   };
 
-  var length = function () {
+  const length = () => {
     return that.elem.querySelectorAll(".item").length;
   };
 
-  var focus = function () {
+  const focus = () => {
     that.elem.setAttribute("data-focused", "true");
   };
 
-  var blur = function () {
+  const blur = () => {
     that.elem.setAttribute("data-focused", "false");
   };
 
-  var getAllItemElements = function () {
+  const getAllItemElements = () => {
     return that.elem.querySelectorAll(".item");
   };
 
-  var getAllItemElementsWith = function (sel) {
+  const getAllItemElementsWith = (sel) => {
     return that.elem.querySelectorAll(".item" + sel);
   };
 
-  var getItemElement = function (index) {
+  const getItemElement = (index) => {
     return that.elem.querySelectorAll(".item")[index];
   };
 

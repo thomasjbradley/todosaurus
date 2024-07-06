@@ -1,49 +1,49 @@
-var SearchControl = function (elem, actionManager) {
+const SearchControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem, actionManager);
+  let that = InputControl(elem, actionManager);
 
   that.bindEvents([
     {
-      event: 'keyup',
+      event: "keyup",
       callback: function (e) {
-        that.getActionManager().trigger('app:search:trigger');
-      }
+        that.getActionManager().trigger("app:search:trigger");
+      },
     },
     {
-      event: 'focus',
+      event: "focus",
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:search:focus');
+        that.getActionManager().trigger("app:search:focus");
       },
-      forever: true
+      forever: true,
     },
     {
-      event: 'blur',
+      event: "blur",
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:search:blur');
+        that.getActionManager().trigger("app:search:blur");
       },
-      forever: true
-    }
+      forever: true,
+    },
   ]);
 
   that.bindKeyEvents([
     {
-      keys: ['enter', 'tab', 'shift+tab'],
+      keys: ["enter", "tab", "shift+tab"],
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:search:blur');
-      }
+        that.getActionManager().trigger("app:search:blur");
+      },
     },
     {
-      keys: ['esc', 'ctrl+l', 'command+l'],
+      keys: ["esc", "ctrl+l", "command+l"],
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:search:blur');
-        that.getActionManager().trigger('app:search:clear');
-      }
-    }
+        that.getActionManager().trigger("app:search:blur");
+        that.getActionManager().trigger("app:search:clear");
+      },
+    },
   ]);
 
   that.playEvents();

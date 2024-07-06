@@ -1,10 +1,11 @@
-var TagsSearchControl = function (elem, actionManager) {
+const TagsSearchControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem, actionManager),
-    label = document.getElementById("tags-search-label"),
-    activeGroup = false;
-  var changeLabel = function () {
+  let that = InputControl(elem, actionManager);
+  let label = document.getElementById("tags-search-label");
+  let activeGroup = false;
+
+  const changeLabel = () => {
     if (activeGroup == "+") {
       label.classList.add("i-project");
       label.classList.remove("i-context");
@@ -14,7 +15,7 @@ var TagsSearchControl = function (elem, actionManager) {
     }
   };
 
-  var group = function (g) {
+  const group = (g) => {
     if (g === undefined) {
       return activeGroup;
     } else {

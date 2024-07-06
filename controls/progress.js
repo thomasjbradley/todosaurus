@@ -1,12 +1,10 @@
-var ProgressControl = function (elem, actionManager) {
+const ProgressControl = function (elem, actionManager) {
   "use strict";
 
-  var that = Control(elem, actionManager);
+  let that = Control(elem, actionManager);
 
   that.set = function (val, max) {
-    var percent = Math.round(val / max * 100) || 0;
-
-    that.elem.value = percent;
+    that.elem.value = Math.round((val / max) * 100) || 0;
   };
 
   return that;

@@ -1,54 +1,50 @@
-var TagsControl = function (elem, actionManager, opts) {
+const TagsControl = function (elem, actionManager, opts) {
   "use strict";
 
-  var
-    that = Control(elem, actionManager),
-    tags = that.elem.querySelector('.tags'),
-    noTags = that.elem.querySelector('.no-tags'),
-    options = {
-      pillClass: ''
-    }
-  ;
+  let that = Control(elem, actionManager);
+  const tags = that.elem.querySelector(".tags");
+  const noTags = that.elem.querySelector(".no-tags");
+  let options = {
+    pillClass: "",
+  };
 
   options = _.extend(options, opts);
 
-  var populateList = function (items) {
-    var output = _.map(items, function (item) {
+  const populateList = (items) => {
+    var output = _.map(items, (item) => {
       var pieces = [
         '<li><span class="pill ',
         options.pillClass,
         ' tag">',
         item,
-        '</span></li>'
+        "</span></li>",
       ];
-
-      return pieces.join('');
+      return pieces.join("");
     });
-
-    tags.innerHTML = output.join('');
+    tags.innerHTML = output.join("");
   };
 
-  var deactivateAll = function () {
+  const deactivateAll = () => {
     _.each(tags.querySelectorAll('[data-state="active"]'), function (item) {
-      item.setAttribute('data-state', 'inactive');
+      item.setAttribute("data-state", "inactive");
     });
-  }
-
-  var activate = function (id) {
-    tags.querySelectorAll('li')[id].setAttribute('data-state', 'active');
   };
 
-  var show = function () {
-    tags.setAttribute('data-state', 'visible');
-    noTags.setAttribute('data-state', 'hidden');
+  const activate = (id) => {
+    tags.querySelectorAll("li")[id].setAttribute("data-state", "active");
   };
 
-  var hide = function () {
-    tags.setAttribute('data-state', 'hidden');
-    noTags.setAttribute('data-state', 'visible');
+  const show = () => {
+    tags.setAttribute("data-state", "visible");
+    noTags.setAttribute("data-state", "hidden");
   };
 
-  var render = function (items, active) {
+  const hide = () => {
+    tags.setAttribute("data-state", "hidden");
+    noTags.setAttribute("data-state", "visible");
+  };
+
+  const render = (items, active) => {
     if (_.isEmpty(items)) {
       hide();
     } else {
@@ -62,7 +58,7 @@ var TagsControl = function (elem, actionManager, opts) {
     activate: that.chainer(activate),
     show: that.chainer(show),
     hide: that.chainer(hide),
-    render: that.chainer(render)
+    render: that.chainer(render),
   });
 
   return that;

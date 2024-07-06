@@ -1,32 +1,23 @@
 (function () {
   "use strict";
 
-  var generics = {
-      new: "%%NEW%%",
-      priorities: ["A: Now", "B: Today", "C: Tomorrow", "D: This Week", "E: Next Week"],
-    },
-    fm = new FocusManager(),
-    am = new ActionManager(),
-    im = new InterfaceManager(fm, am),
-    storage = new StorageManager(),
-    todos = new Todos(),
-    orderer = new Orderer(),
-    grouper = new Grouper(generics),
-    filterer = new Filterer(generics),
-    buffer = new Buffer(),
-    actions = new Actions(
-      generics,
-      am,
-      fm,
-      im,
-      storage,
-      todos,
-      orderer,
-      grouper,
-      filterer,
-      buffer
-    ),
-    main = document.getElementsByClassName("main")[0];
+  const generics = {
+    new: "%%NEW%%",
+    priorities: ["A: Now", "B: Today", "C: Tomorrow", "D: This Week", "E: Next Week"],
+  };
+  const fm = new FocusManager();
+  const am = new ActionManager();
+  const im = new InterfaceManager(fm, am);
+  const storage = new StorageManager();
+  const todos = new Todos();
+  const orderer = new Orderer();
+  const grouper = new Grouper(generics);
+  const filterer = new Filterer(generics);
+  const buffer = new Buffer();
+  const main = document.getElementsByClassName("main")[0];
+
+  new Actions(generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer);
+
   if (FileSystemHelper !== undefined && window.isNode) {
     storage.set(new FileSystemHelper());
   } else {
@@ -50,7 +41,7 @@
       } else {
         am.trigger("app:list:blur");
       }
-    }
+    },
   );
 
   im.setContext("input", bindings.input, menuContexts.input);
@@ -67,11 +58,11 @@
   im.add("tags-projects", new TagsControl("tags-projects", am));
   im.add(
     "tags-contexts",
-    new TagsControl("tags-contexts", am, { pillClass: "pill-alt" })
+    new TagsControl("tags-contexts", am, { pillClass: "pill-alt" }),
   );
   im.add(
     "tags-priority",
-    new TagsControl("tags-priority", am, { pillClass: "tag-priority" })
+    new TagsControl("tags-priority", am, { pillClass: "tag-priority" }),
   );
   im.add("tags-search", new TagsSearchControl("tags-search", am));
 
@@ -79,21 +70,19 @@
 
   document.addEventListener("click", im.handleMouseEvents, false);
 
-  var renderFocus = function (index) {
-    var items = im.get("list").getAllItemElements(),
-      current = im.get("list").getAllItemElementsWith('[data-focused="true"]');
+  const renderFocus = (index) => {
+    const items = im.get("list").getAllItemElements();
+    const current = im.get("list").getAllItemElementsWith('[data-focused="true"]');
     if (current && current.length > 0) {
       current[0].setAttribute("data-focused", "false");
     }
-
     if (items && items.length > 0) {
       items[index].setAttribute("data-focused", "true");
     }
   };
 
-  var getPosition = function () {
-    var elem = im.get("list").getItemElement(fm.get());
-
+  const getPosition = () => {
+    const elem = im.get("list").getItemElement(fm.get());
     return {
       left: elem.offsetLeft,
       top: elem.offsetTop,
@@ -101,48 +90,43 @@
     };
   };
 
-  var scrollList = function (index) {
-    var pos = getPosition(),
-      newTop;
-
+  const scrollList = (index) => {
+    var pos = getPosition();
+    let newTop;
     if (pos.top + pos.height > main.offsetHeight + main.scrollTop) {
       newTop = pos.top + pos.height - main.offsetHeight;
       main.scrollTop = newTop;
     }
-
     if (pos.top < main.scrollTop) {
       newTop = pos.top;
       main.scrollTop = newTop;
     }
   };
 
-  var getNumberCompleteItems = function (items) {
-    var sum = 0;
-
-    _.forEach(items, function (item) {
+  const getNumberCompleteItems = (items) => {
+    let sum = 0;
+    _.forEach(items, (item) => {
       if (item.isMarked()) {
         sum++;
       }
     });
-
     return sum;
   };
 
-  todos.subscribe(function (items) {
+  todos.subscribe((items) => {
     am.trigger("app:context:default");
     orderer.order(items, im.get("filters").order);
     am.trigger("storage:save");
     localStorage.setItem("mtime", new Date());
   });
 
-  orderer.subscribe(function (items) {
-    var group = im.get("filters").group;
-
+  orderer.subscribe((items) => {
+    const group = im.get("filters").group;
     grouper.group(items, im.get("filters").group);
     am.trigger("tags:highlight-active", group[0], group[1]);
   });
 
-  grouper.subscribe(function (items) {
+  grouper.subscribe((items) => {
     if (
       _.isEmpty(items) &&
       _.isArray(im.get("filters").group) &&
@@ -156,7 +140,7 @@
     }
   });
 
-  filterer.subscribe(function (items) {
+  filterer.subscribe((items) => {
     im.get("list").render(items);
     fm.setMax(items.length - 1);
     im.get("progress").set(getNumberCompleteItems(items), items.length);

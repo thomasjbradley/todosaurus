@@ -1,23 +1,21 @@
-var InputControl = function (elem, actionManager) {
+const InputControl = function (elem, actionManager) {
   "use strict";
 
-  var that = Control(elem, actionManager);
+  let that = Control(elem, actionManager);
 
-  var findWrapper = function () {
-    var current = that.elem.parentNode;
-
+  const findWrapper = () => {
+    let current = that.elem.parentNode;
     while (current.className.indexOf("input-wrapper") < 0) {
       current = current.parentNode;
     }
-
     return current;
   };
 
-  var setRawValue = function (val) {
+  const setRawValue = (val) => {
     that.elem.value = val;
   };
 
-  var value = function (val) {
+  const value = (val) => {
     if (val === undefined) {
       return that.elem.value;
     } else {
@@ -26,24 +24,23 @@ var InputControl = function (elem, actionManager) {
     }
   };
 
-  var setCaretPosition = function (startPos, endPos) {
+  const setCaretPosition = (startPos, endPos) => {
     if (endPos === undefined) {
       endPos = startPos;
     }
-
     that.elem.setSelectionRange(startPos, endPos);
   };
 
-  var setPosition = function (pos) {
+  const setPosition = (pos) => {
     if (pos === undefined) {
       return;
     }
-
     findWrapper().style.left = pos.left + "px";
     findWrapper().style.top = pos.top + "px";
   };
 
-  var show = function (pos) {
+  const show = (pos) => {
+    console.log("SHOW!!", that.elem, pos);
     that.elem.disabled = false;
     that.playEvents();
     actionManager.trigger("app:context:input", that.keyEvents);
@@ -51,7 +48,7 @@ var InputControl = function (elem, actionManager) {
     setPosition(pos);
   };
 
-  var hide = function () {
+  const hide = () => {
     that.elem.disabled = true;
     that.stopEvents();
     actionManager.trigger("app:context:default");
@@ -59,33 +56,33 @@ var InputControl = function (elem, actionManager) {
     that.elem.blur();
   };
 
-  var isVisible = function () {
+  const isVisible = () => {
     return findWrapper().getAttribute("data-state") === "visible";
   };
 
-  var select = function () {
+  const select = () => {
     that.elem.select();
   };
 
-  var focus = function () {
+  const focus = () => {
     that.playEvents();
     that.elem.focus();
     actionManager.trigger("app:context:input", that.keyEvents);
     findWrapper().setAttribute("data-focused", "true");
   };
 
-  var blur = function () {
+  const blur = () => {
     that.stopEvents();
     that.elem.blur();
     actionManager.trigger("app:context:default");
     findWrapper().setAttribute("data-focused", "false");
   };
 
-  var enable = function () {
+  const enable = () => {
     that.elem.disabled = false;
   };
 
-  var disable = function () {
+  const disable = () => {
     that.elem.disabled = true;
   };
 

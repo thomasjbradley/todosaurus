@@ -1,41 +1,41 @@
-var JumpControl = function (elem, actionManager) {
+const JumpControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem, actionManager);
+  let that = InputControl(elem, actionManager);
 
   that.bindEvents([
     {
-      event: 'keyup',
+      event: "keyup",
       callback: function (e) {
         if (that.isVisible()) {
-          that.getActionManager().trigger('app:jump:trigger');
+          that.getActionManager().trigger("app:jump:trigger");
         }
-      }
+      },
     },
     {
-      event: 'blur',
+      event: "blur",
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:jump:hide');
-      }
-    }
+        that.getActionManager().trigger("app:jump:hide");
+      },
+    },
   ]);
 
   that.bindKeyEvents([
     {
-      keys: ['enter', 'tab', 'shift+tab'],
+      keys: ["enter", "tab", "shift+tab"],
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:jump:hide');
-      }
+        that.getActionManager().trigger("app:jump:hide");
+      },
     },
     {
-      keys: ['esc'],
+      keys: ["esc"],
       callback: function (e) {
         e.preventDefault();
-        that.getActionManager().trigger('app:jump:hide');
-      }
-    }
+        that.getActionManager().trigger("app:jump:hide");
+      },
+    },
   ]);
 
   return that;

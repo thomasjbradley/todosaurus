@@ -1,23 +1,22 @@
-var EditControl = function (elem, actionManager) {
+const EditControl = function (elem, actionManager) {
   "use strict";
 
-  var that = InputControl(elem, actionManager);
+  let that = InputControl(elem, actionManager);
 
-  var isCommittable = function () {
+  const isCommittable = () => {
     return that.value();
   };
 
-  var commit = function () {
-    that.getActionManager().trigger('app:edit:hide');
-
-    return that.getActionManager().trigger('item:update', that.value());
+  const commit = () => {
+    that.getActionManager().trigger("app:edit:hide");
+    return that.getActionManager().trigger("item:update", that.value());
   };
 
-  var discard = function () {
-    return that.getActionManager().trigger('app:edit:hide');
+  const discard = () => {
+    return that.getActionManager().trigger("app:edit:hide");
   };
 
-  var commitOrDiscard = function (isCommittable) {
+  const commitOrDiscard = (isCommittable) => {
     if (isCommittable) {
       return commit();
     } else {
@@ -27,70 +26,66 @@ var EditControl = function (elem, actionManager) {
 
   that.bindEvents([
     {
-      event: 'blur',
-      callback: function (e) {
+      event: "blur",
+      callback: (e) => {
         e.preventDefault();
         commitOrDiscard(isCommittable());
-      }
-    }
+      },
+    },
   ]);
 
   that.bindKeyEvents([
     {
-      keys: ['enter', 'mod+enter'],
-      callback: function (e) {
+      keys: ["enter", "mod+enter"],
+      callback: (e) => {
         e.preventDefault();
-
         if (isCommittable()) {
           commit();
         }
-      }
+      },
     },
     {
-      keys: ['esc'],
-      callback: function (e) {
+      keys: ["esc"],
+      callback: (e) => {
+        console.log("ESC!");
         e.preventDefault();
         discard();
-      }
+      },
     },
     {
-      keys: ['tab'],
-      callback: function (e) {
-        var goNext;
-
+      keys: ["tab"],
+      callback: (e) => {
+        let goNext;
         e.preventDefault();
         goNext = commitOrDiscard(isCommittable());
-
         if (goNext) {
-          that.getActionManager().trigger('item:edit:after');
+          that.getActionManager().trigger("item:edit:after");
         }
-      }
+      },
     },
     {
-      keys: ['shift+tab'],
-      callback: function (e) {
-        var goNext;
-
+      keys: ["shift+tab"],
+      callback: (e) => {
+        let goNext;
         e.preventDefault();
         goNext = commitOrDiscard(isCommittable());
-
         if (goNext) {
-          that.getActionManager().trigger('item:edit:before');
+          that.getActionManager().trigger("item:edit:before");
         }
-      }
+      },
     },
     {
-      keys: ['mod+del', 'mod+backspace'],
-      callback: function (e) {
+      keys: ["mod+del", "mod+backspace"],
+      callback: (e) => {
         e.preventDefault();
         discard();
-        that.getActionManager().trigger('item:delete');
-      }
+        that.getActionManager().trigger("item:delete");
+      },
     },
   ]);
 
   that = _.extend(that, {
-    discard: that.chainer(discard)
+    discard: that.chainer(discard),
   });
 
   return that;

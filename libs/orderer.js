@@ -1,28 +1,28 @@
-var Orderer = function () {
+const Orderer = function () {
   "use strict";
 
-  var methods = {},
-    subscriptions = [],
-    ordered;
+  let methods = {};
+  const subscriptions = [];
+  let ordered;
 
-  var subscribe = function (callback) {
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(ordered);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -30,14 +30,13 @@ var Orderer = function () {
     };
   };
 
-  var length = function () {
+  const length = () => {
     return ordered.length;
   };
 
-  var getOrderedItems = function (todos) {
-    var orderGroups = { start: [], middle: [], end: [] };
-
-    _.each(todos, function (item) {
+  const getOrderedItems = (todos) => {
+    let orderGroups = { start: [], middle: [], end: [] };
+    _.each(todos, (item) => {
       if (item.hasPriority()) {
         orderGroups.start.push(item);
         return;
@@ -50,32 +49,25 @@ var Orderer = function () {
         orderGroups.middle.push(item);
       }
     });
-
-    orderGroups.start = orderGroups.start.sort(function (a, b) {
+    orderGroups.start = orderGroups.start.sort((a, b) => {
       a = a.getFullText();
       b = b.getFullText();
-
       return a < b ? -1 : a > b ? 1 : 0;
     });
-
-    orderGroups.middle = orderGroups.middle.sort(function (a, b) {
+    orderGroups.middle = orderGroups.middle.sort((a, b) => {
       a = a.getCreatedDate();
       b = b.getCreatedDate();
-
       return a < b ? -1 : a > b ? 1 : 0;
     });
-
-    orderGroups.end = orderGroups.end.sort(function (a, b) {
+    orderGroups.end = orderGroups.end.sort((a, b) => {
       a = a.getCompletedDate();
       b = b.getCompletedDate();
-
       return a > b ? -1 : a < b ? 1 : 0;
     });
-
     return [].concat(orderGroups.start, orderGroups.middle, orderGroups.end);
   };
 
-  var order = function (todos, isOrdered) {
+  const order = (todos, isOrdered) => {
     if (isOrdered === undefined || isOrdered === false) {
       ordered = todos;
     } else {
@@ -83,11 +75,10 @@ var Orderer = function () {
     }
   };
 
-  var getIndex = function (id) {
-    var items = _.map(ordered, function (item) {
+  const getIndex = (id) => {
+    var items = _.map(ordered, (item) => {
       return item.id();
     });
-
     return items.indexOf(id);
   };
 
@@ -98,6 +89,5 @@ var Orderer = function () {
     order: informer(order),
     getIndex: getIndex,
   };
-
   return methods;
 };

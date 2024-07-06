@@ -1,28 +1,29 @@
-var FocusManager = function () {
+const FocusManager = function () {
   "use strict";
 
-  var methods = {},
-    subscriptions = [],
-    focus = 0,
-    max = 1;
-  var subscribe = function (callback) {
+  let methods = {};
+  const subscriptions = [];
+  let focus = 0;
+  let max = 1;
+
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(focus);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -30,49 +31,43 @@ var FocusManager = function () {
     };
   };
 
-  var get = function () {
+  const get = () => {
     return focus;
   };
 
-  var set = function (f) {
+  const set = (f) => {
     focus = f;
-
     if (f > max) {
       focus = max;
     }
-
     if (f < 0) {
       focus = 0;
     }
   };
 
-  var setMax = function (m) {
+  const setMax = (m) => {
     max = m;
-
     if (focus > max) {
       focus = max;
     }
-
     if (max < 0) {
       focus = max = 0;
     }
   };
 
-  var getMax = function () {
+  const getMax = () => {
     return max;
   };
 
-  var next = function () {
+  const next = () => {
     focus++;
-
     if (focus > max) {
       focus = max;
     }
   };
 
-  var prev = function () {
+  const prev = () => {
     focus--;
-
     if (focus < 0) {
       focus = 0;
     }
@@ -87,6 +82,5 @@ var FocusManager = function () {
     next: informer(next),
     prev: informer(prev),
   };
-
   return methods;
 };

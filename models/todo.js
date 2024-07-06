@@ -1,35 +1,35 @@
-var Todo = function (fullText) {
+const Todo = function (fullText) {
   "use strict";
 
-  var methods = {},
-    subscriptions = [],
-    id = _.uniqueId(),
-    text = fullText,
-    data = {
-      created: new Date().toISOString().substr(0, 10),
-      completed: false,
-      priority: false,
-    },
-    priorities = ["A", "B", "C", "D", "E"],
-    priorityMatcher = /^(x\s)?\([a-z]\)\s/i;
-  var subscribe = function (callback) {
+  let methods = {};
+  const subscriptions = [];
+  const id = _.uniqueId();
+  const priorities = ["A", "B", "C", "D", "E"];
+  let text = fullText;
+  let data = {
+    created: new Date().toISOString().substring(0, 10),
+    completed: false,
+    priority: false,
+  };
+
+  const subscribe = (callback) => {
     subscriptions.push(callback);
   };
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  const inform = () => {
+    subscriptions.forEach((callback) => {
       callback(methods);
     });
   };
 
-  var chainer = function (func) {
+  const chainer = (func) => {
     return function () {
       func.apply(this, arguments);
       return methods;
     };
   };
 
-  var informer = function (func) {
+  const informer = (func) => {
     return function () {
       func.apply(this, arguments);
       inform();
@@ -37,58 +37,51 @@ var Todo = function (fullText) {
     };
   };
 
-  var parseFullText = function () {
+  const parseFullText = () => {
     var tmpText = fullText.trim();
-
     if (fullText.substr(0, 2) === "x ") {
       mark(fullText.substr(2, 10));
       tmpText = fullText.slice(12).trim();
     }
-
     if (tmpText.match(/^\([A-Z]\)\s/)) {
       addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/g, ""));
       tmpText = tmpText.slice(3).trim();
     }
-
     if (tmpText.match(/^\d{4}-\d{2}-\d{2}/)) {
       data.created = tmpText.slice(0, 10);
       tmpText = tmpText.slice(11).trim();
     }
-
     setText(tmpText);
   };
 
-  var getFullText = function () {
+  const getFullText = () => {
     var finalText = data.created + " " + text;
-
     if (hasPriority()) {
       finalText = "(" + getPriority() + ") " + finalText;
     }
-
     if (isMarked()) {
       finalText = "x " + data.completed + " " + finalText;
     }
-
     return finalText;
   };
 
-  var getId = function () {
+  const getId = () => {
     return id;
   };
 
-  var resetCreated = function () {
-    data.created = new Date().toISOString().substr(0, 10);
+  const resetCreated = () => {
+    data.created = new Date().toISOString().substring(0, 10);
   };
 
-  var getCreatedDate = function () {
+  const getCreatedDate = () => {
     return data.created;
   };
 
-  var setText = function (t) {
+  const setText = (t) => {
     text = t.trim();
   };
 
-  var manageText = function (t) {
+  const manageText = (t) => {
     if (t === undefined) {
       return text;
     } else {
@@ -98,30 +91,29 @@ var Todo = function (fullText) {
     }
   };
 
-  var mark = function (date) {
+  const mark = (date) => {
     if (date !== undefined) {
       data.completed = date;
     } else {
-      data.completed = new Date().toISOString().substr(0, 10);
+      data.completed = new Date().toISOString().substring(0, 10);
     }
-
     data.priority = false;
   };
 
-  var unmark = function () {
+  const unmark = () => {
     data.marked = false;
     data.completed = false;
   };
 
-  var isMarked = function () {
+  const isMarked = () => {
     return !!data.completed;
   };
 
-  var getCompletedDate = function () {
+  const getCompletedDate = () => {
     return data.completed;
   };
 
-  var toggle = function () {
+  const toggle = () => {
     if (isMarked()) {
       unmark();
     } else {
@@ -129,7 +121,7 @@ var Todo = function (fullText) {
     }
   };
 
-  var findPriority = function (pri) {
+  const findPriority = (pri) => {
     if (isFinite(pri)) {
       if (pri > priorities.length - 1) {
         return _.last(priorities);
@@ -137,40 +129,35 @@ var Todo = function (fullText) {
         return priorities[pri];
       }
     }
-
     return pri;
   };
 
-  var hasPriority = function () {
+  const hasPriority = () => {
     return data.priority !== false;
   };
 
-  var removePriority = function () {
+  const removePriority = () => {
     data.priority = false;
   };
 
-  var getPriority = function () {
+  const getPriority = () => {
     return data.priority;
   };
 
-  var addPriority = function (pri) {
+  const addPriority = (pri) => {
     if (isMarked()) {
       unmark();
     }
-
     data.priority = findPriority(pri);
   };
 
-  var togglePriority = function (pri) {
+  const togglePriority = (pri) => {
     var priority;
-
     if (!hasPriority()) {
       addPriority(pri);
       return;
     }
-
     priority = findPriority(pri);
-
     if (priority === data.priority) {
       removePriority();
     } else {
@@ -196,8 +183,6 @@ var Todo = function (fullText) {
     addPriority: informer(addPriority),
     togglePriority: informer(togglePriority),
   };
-
   parseFullText();
-
   return methods;
 };

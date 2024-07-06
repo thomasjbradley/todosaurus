@@ -1,4 +1,4 @@
-var Actions = function (
+const Actions = function (
   generics,
   am,
   fm,
@@ -8,85 +8,73 @@ var Actions = function (
   orderer,
   grouper,
   filterer,
-  buffer
+  buffer,
 ) {
   "use strict";
 
-  var isEditableState = function () {
-    var totalItems = filterer.length();
-
+  const isEditableState = () => {
+    const totalItems = filterer.length();
     if (totalItems <= 0) {
       am.trigger("app:clear");
       return false;
     }
-
     return true;
   };
 
-  var id = function () {
+  const id = () => {
     return filterer.getByIndex(fm.get()).id();
   };
 
-  var getNewText = function () {
+  const getNewText = () => {
     return generics.new;
   };
 
-  var prepareNewTodo = function (index) {
-    var todo,
-      getId = id();
-
+  const prepareNewTodo = (index) => {
+    let todo;
+    let getId = id();
     if (index !== undefined) {
       getId = filterer.getByIndex(index).id();
     }
-
     todo = todos.createNewItem(todos.get(getId).getFullText() + " " + generics.new);
-
     if (im.get("filters").group === false || im.get("filters").group[0] !== "!") {
       todo.removePriority();
     }
-
     todo.resetCreated();
     todo.unmark();
-
     return todo;
   };
 
-  var isFieldEmpty = function (id) {
-    var text = todos.get(id).text().replace(getNewText(), "").trim();
-
+  const isFieldEmpty = (id) => {
+    const text = todos.get(id).text().replace(getNewText(), "").trim();
     return _.isEmpty(text);
   };
 
-  var getPosition = function () {
-    var elem = im.get("list").getItemElement(fm.get());
-
+  const getPosition = () => {
+    const elem = im.get("list").getItemElement(fm.get());
     return {
       left: elem.offsetLeft,
       top: elem.offsetTop,
     };
   };
 
-  var getNumberFromKeyCombo = function (combo) {
-    var num = 0;
-
+  const getNumberFromKeyCombo = (combo) => {
+    let num = 0;
     if (combo !== undefined) {
       num = parseInt(combo.replace(/[^\d]*/gi, ""), 10);
     }
-
     if (isNaN(num)) {
       num = 0;
     } else {
       num--;
     }
-
     return num;
   };
 
-  var matchesFilters = function (newText) {
-    var filter = im.get("filters").filter,
-      group = im.get("filters").group,
-      matchesFilter = false,
-      matchesGroup = false;
+  const matchesFilters = (newText) => {
+    const filter = im.get("filters").filter;
+    const group = im.get("filters").group;
+    let matchesFilter = false;
+    let matchesGroup = false;
     if (filter !== false) {
       if (filterer.matchesFilter(newText, filter)) {
         matchesFilter = true;
@@ -96,7 +84,6 @@ var Actions = function (
     } else {
       matchesFilter = true;
     }
-
     if (group !== false) {
       if (grouper.matchesGroup(newText, group)) {
         matchesGroup = true;
@@ -106,261 +93,229 @@ var Actions = function (
     } else {
       matchesGroup = true;
     }
-
     if (matchesFilter && matchesGroup) {
       return true;
     }
-
     return false;
   };
 
-  am.action("item:focus:next", function () {
+  am.action("item:focus:next", () => {
     fm.next();
   });
 
-  am.action("item:focus:prev", function () {
+  am.action("item:focus:prev", () => {
     fm.prev();
   });
 
-  am.action("item:focus:next:jump", function () {
+  am.action("item:focus:next:jump", () => {
     fm.set(fm.get() + 5);
   });
 
-  am.action("item:focus:prev:jump", function () {
+  am.action("item:focus:prev:jump", () => {
     fm.set(fm.get() - 5);
   });
 
-  am.action("item:focus:first", function () {
+  am.action("item:focus:first", () => {
     fm.set(0);
   });
 
-  am.action("item:focus:last", function () {
+  am.action("item:focus:last", () => {
     fm.set(filterer.length() - 1);
   });
 
   am.action(
     "item:toggle",
-    function () {
+    () => {
       todos.get(id()).toggle();
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:delete",
-    function () {
+    () => {
       todos.remove(id());
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:cut",
-    function () {
-      var text = todos.get(id()).getFullText();
-
+    () => {
+      const text = todos.get(id()).getFullText();
       if (window.isNode) {
         clipboard.set(text, "text");
       }
-
       buffer.push(text);
       todos.remove(id());
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:copy",
-    function () {
-      var text = todos.get(id()).getFullText();
-
+    () => {
+      const text = todos.get(id()).getFullText();
       if (window.isNode) {
         clipboard.set(text, "text");
       }
-
       buffer.push(text);
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:paste:before",
-    function () {
+    () => {
       if (buffer.length() === 0) return;
-
       todos.addBeforeItem(buffer.pull(), id());
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:paste:after",
-    function () {
+    () => {
       if (buffer.length() === 0) return;
-
       todos.addAfterItem(buffer.pull(), id());
       fm.next();
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:duplicate",
-    function () {
+    () => {
       am.trigger("item:copy");
       am.trigger("item:paste:after");
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:move:up",
-    function () {
-      // if (im.get('filters').order === false) {
-      var startFocus = fm.get();
-
+    () => {
+      const startFocus = fm.get();
       am.trigger("item:cut");
-
       if (startFocus <= fm.getMax()) {
         am.trigger("item:focus:prev");
       }
-
       am.trigger("item:paste:before");
-      // }
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:move:down",
-    function () {
-      // if (im.get('filters').order === false) {
+    () => {
       am.trigger("item:cut");
       am.trigger("item:paste:after");
-      // }
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit",
-    function (e, combo, input) {
+    (e, combo, input) => {
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       if (input === undefined) {
         input = "edit";
       }
-
       im.get(input).value(todos.get(id()).text()).show(getPosition()).focus().select();
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit:start",
-    function (e, combo, input) {
+    (e, combo, input) => {
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       if (input === undefined) {
         input = "edit";
       }
-
       im.get(input)
         .value(todos.get(id()).text())
         .show(getPosition())
         .focus()
         .setCaretPosition(0);
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit:end",
-    function (e, combo, input) {
+    (e, combo, input) => {
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       if (input === undefined) {
         input = "edit";
       }
-
       im.get(input)
         .value(todos.get(id()).text())
         .show(getPosition())
         .focus()
         .setCaretPosition(1000);
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit:clear",
-    function (e, combo, input, defaultText) {
-      var text = "";
-
+    (e, combo, input, defaultText) => {
+      let text = "";
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       if (input === undefined) {
         input = "edit";
       }
-
       if (defaultText !== undefined) {
         text = defaultText;
       }
-
       im.get(input).setRawValue(text).show(getPosition()).focus().setCaretPosition(0);
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit:after",
-    function (e) {
-      var prevFocus = fm.get();
-
+    (e) => {
+      const prevFocus = fm.get();
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       fm.next();
-
       if (fm.get() !== prevFocus) {
         am.trigger("item:edit");
       }
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:edit:before",
-    function (e) {
-      var prevFocus = fm.get();
-
+    (e) => {
+      const prevFocus = fm.get();
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       fm.prev();
-
       if (fm.get() !== prevFocus) {
         am.trigger("item:edit");
       }
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:new:edit",
-    function () {
-      var group = im.get("filters").group;
-
+    () => {
+      const group = im.get("filters").group;
       if (group !== false) {
         if (group[0] !== "!") {
           am.trigger(
@@ -368,7 +323,7 @@ var Actions = function (
             false,
             false,
             "new",
-            " " + grouper.getGroup(group[0])[group[1]]
+            " " + grouper.getGroup(group[0])[group[1]],
           );
         } else {
           am.trigger("item:edit:clear", false, false, "new");
@@ -377,82 +332,73 @@ var Actions = function (
         am.trigger("item:edit:clear", false, false, "new");
       }
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:new:at-top",
-    function (e) {
-      var todo;
-
+    (e) => {
+      let todo;
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       todo = prepareNewTodo(0);
       todos.prepend(todo);
       fm.set(0);
       am.trigger("item:new:edit");
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:new:at-bottom",
-    function (e) {
-      var todo;
-
+    (e) => {
+      let todo;
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       todo = prepareNewTodo(fm.getMax());
       todos.append(todo);
       fm.set(fm.getMax());
       am.trigger("item:new:edit");
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:new:after",
-    function (e) {
-      var todo;
-
+    (e) => {
+      let todo;
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       todo = prepareNewTodo();
       buffer.push(todo.getFullText());
       am.trigger("item:paste:after");
       am.trigger("item:new:edit");
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:new:before",
-    function (e) {
-      var todo;
-
+    (e) => {
+      let todo;
       if (e !== undefined && Object.hasOwn(e, "bubbles")) {
         e.preventDefault();
       }
-
       todo = prepareNewTodo();
       buffer.push(todo.getFullText());
       am.trigger("item:paste:before");
       am.trigger("item:new:edit");
     },
-    isEditableState
+    isEditableState,
   );
 
-  am.action("item:new:when-empty", function (e) {
+  am.action("item:new:when-empty", (e) => {
     if (e !== undefined && Object.hasOwn(e, "bubbles")) {
       e.preventDefault();
     }
-
     todos.prepend(generics.new);
     fm.set(0);
     am.trigger("item:new:edit");
@@ -460,147 +406,132 @@ var Actions = function (
 
   am.action(
     "item:update",
-    function (text) {
-      var theId = id(),
-        newFullText = text,
-        todo = todos.get(theId);
+    (text) => {
+      const theId = id();
+      let newFullText = text;
+      let todo = todos.get(theId);
       if (todo.hasPriority()) {
         newFullText = "(" + todo.getPriority() + ") " + text;
       }
-
       if (!matchesFilters(newFullText)) {
         im.get("filters").group = false;
         am.trigger("app:search:clear", false);
         fm.set(filterer.getIndex(theId));
         todos.get(theId).text(text);
-
         return false;
       }
-
       todos.get(theId).text(text);
-
       return true;
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:priority-toggle",
-    function (e, combo) {
-      var index = getNumberFromKeyCombo(combo);
-
+    (e, combo) => {
+      const index = getNumberFromKeyCombo(combo);
       todos.get(id()).togglePriority(index);
     },
-    isEditableState
+    isEditableState,
   );
 
   am.action(
     "item:priority-remove",
-    function (e, combo) {
+    (e, combo) => {
       todos.get(id()).removePriority();
     },
-    isEditableState
+    isEditableState,
   );
 
-  am.action("app:search:focus", function (e) {
+  am.action("app:search:focus", (e) => {
     if (e !== undefined && Object.hasOwn(e, "bubbles")) {
       e.preventDefault();
     }
-
     im.get("search").focus().select();
   });
 
-  am.action("app:search:blur", function () {
+  am.action("app:search:blur", () => {
     im.get("search").blur();
   });
 
-  am.action("app:search:clear", function (triggerReload) {
-    var item,
-      reload = triggerReload || true,
-      fullIndex = fm.get();
+  am.action("app:search:clear", (triggerReload) => {
+    const reload = triggerReload || true;
+    let item;
+    let fullIndex = fm.get();
     if (!_.isEmpty(im.get("search").value())) {
       item = filterer.getByIndex(fm.get());
-
       if (item) {
         fullIndex = grouper.getIndex(item.id());
       }
     }
-
     im.get("search").value("");
     im.get("filters").filter = false;
-
     if (reload) {
       am.trigger("app:list:render");
     }
-
     fm.set(fullIndex);
   });
 
-  am.action("app:search:trigger", function () {
+  am.action("app:search:trigger", () => {
     im.get("filters").filter = im.get("search").value();
     am.trigger("app:list:render");
   });
 
-  am.action("app:jump:show", function (e) {
+  am.action("app:jump:show", (e) => {
     if (e !== undefined && Object.hasOwn(e, "bubbles")) {
       e.preventDefault();
     }
-
     im.get("jump").show().value("").focus();
   });
 
-  am.action("app:jump:hide", function () {
+  am.action("app:jump:hide", () => {
     im.get("jump").hide();
   });
 
-  am.action("app:jump:trigger", function () {
-    var line = parseInt(im.get("jump").value().replace(/[^\d]/g, ""), 10);
-
+  am.action("app:jump:trigger", () => {
+    let line = parseInt(im.get("jump").value().replace(/[^\d]/g, ""), 10);
     if (!isFinite(line) || isNaN(line)) {
       line = 0;
     }
-
     fm.set(line - 1);
   });
 
-  am.action("app:edit:hide", function () {
+  am.action("app:edit:hide", () => {
     im.get("edit").hide();
   });
 
-  am.action("app:new:hide", function () {
+  am.action("app:new:hide", () => {
     im.get("new").hide();
   });
 
-  am.action("app:list:focus", function () {
+  am.action("app:list:focus", () => {
     im.get("list").focus();
   });
 
-  am.action("app:list:blur", function () {
+  am.action("app:list:blur", () => {
     im.get("list").blur();
   });
 
-  am.action("app:list:render", function () {
+  am.action("app:list:render", () => {
     orderer.order(todos.getAll(), im.get("filters").order);
   });
 
-  am.action("app:context:not-focused", function (contextKeys) {
+  am.action("app:context:not-focused", (contextKeys) => {
     im.switchContext("not-focused");
   });
 
-  am.action("app:context:no-directory", function (contextKeys) {
+  am.action("app:context:no-directory", (contextKeys) => {
     im.switchContext("no-directory");
   });
 
-  am.action("app:context:missing-file", function (contextKeys) {
+  am.action("app:context:missing-file", (contextKeys) => {
     im.switchContext("missing-file");
   });
 
-  am.action("app:context:default", function () {
-    var didSwitch;
-
+  am.action("app:context:default", () => {
+    let didSwitch;
     if (todos.length() === 0) {
       didSwitch = im.switchContext("empty");
-
       if (didSwitch) {
         am.trigger("app:clear");
         document.getElementById("empty-no-todos").style.display = "block";
@@ -608,7 +539,6 @@ var Actions = function (
       }
     } else {
       didSwitch = im.switchContext("default");
-
       if (didSwitch) {
         document.getElementById("empty-no-todos").style.display = "none";
         document.getElementById("empty-no-results").style.display = "block";
@@ -617,65 +547,57 @@ var Actions = function (
     }
   });
 
-  am.action("app:context:input", function (contextKeys) {
+  am.action("app:context:input", (contextKeys) => {
     im.switchContext("input").bindKeyEvents(contextKeys);
   });
 
-  am.action("app:clear", function () {
-    var possibleInput = document.querySelector("input:focus");
-
+  am.action("app:clear", () => {
+    let possibleInput = document.querySelector("input:focus");
     im.get("filters").group = false;
     am.trigger("app:search:clear");
-    im.get("menu").clearShowPriorityChecks();
-
     if (possibleInput) {
       possibleInput.blur();
     }
   });
 
-  am.action("app:set-title", function () {
-    var simplePath = storage.getFolder().replace(/\/Users\/[^\/]+/, "~");
+  am.action("app:set-title", () => {
+    const simplePath = storage.getFolder().replace(/\/Users\/[^\/]+/, "~");
     document.title = simplePath + " — Todosaurus";
   });
 
-  am.action("tags:create", function () {
+  am.action("tags:create", () => {
     am.trigger("tags:create:projects");
     am.trigger("tags:create:contexts");
     am.trigger("tags:create:priority");
   });
 
-  am.action("tags:create:projects", function () {
-    var tags = todos.getAllTags("+");
-
+  am.action("tags:create:projects", () => {
+    const tags = todos.getAllTags("+");
     grouper.setGroup("+", tags);
     im.get("tags-projects").render(tags);
     im.get("input-auto-complete").resetData("+", tags);
   });
 
-  am.action("tags:create:contexts", function () {
-    var tags = todos.getAllTags("@");
-
+  am.action("tags:create:contexts", () => {
+    const tags = todos.getAllTags("@");
     grouper.setGroup("@", tags);
     im.get("tags-contexts").render(tags);
     im.get("input-auto-complete").resetData("@", tags);
   });
 
-  am.action("tags:create:priority", function () {
-    var tags = generics.priorities;
-
+  am.action("tags:create:priority", () => {
+    const tags = generics.priorities;
     grouper.setGroup("!", tags);
     im.get("tags-priority").render(tags);
   });
 
-  am.action("tags:show", function (tag, combo) {
-    var id;
-
+  am.action("tags:show", (tag, combo) => {
+    let id;
     if (_.isArray(combo)) {
       id = combo[1];
     } else {
       id = getNumberFromKeyCombo(combo);
     }
-
     if (id > grouper.getGroup(tag).length - 1) {
       am.trigger("tags:clear");
     } else {
@@ -685,86 +607,74 @@ var Actions = function (
     }
   });
 
-  am.action("tags:show:projects", function (e, combo) {
+  am.action("tags:show:projects", (e, combo) => {
     am.trigger("tags:clear-active");
     am.trigger("tags:show", "+", combo);
   });
 
-  am.action("tags:show:contexts", function (e, combo) {
+  am.action("tags:show:contexts", (e, combo) => {
     am.trigger("tags:clear-active");
     am.trigger("tags:show", "@", combo);
   });
 
-  am.action("tags:show:priority", function (e, combo) {
-    var pri = ["a", "b", "c", "d", "e"];
-
+  am.action("tags:show:priority", (e, combo) => {
     am.trigger("tags:clear-active");
     am.trigger("tags:show", "!", combo);
-
-    im.get("menu").clearShowPriorityChecks();
-    im.get("menu").checkShowPriority(pri[getNumberFromKeyCombo(combo)]);
   });
 
-  am.action("tags:clear", function () {
-    var item = filterer.getByIndex(fm.get()),
-      fullIndex = fm.get();
+  am.action("tags:clear", () => {
+    const item = filterer.getByIndex(fm.get());
+    let fullIndex = fm.get();
     if (item) {
       fullIndex = orderer.getIndex(item.id());
     }
-
     im.get("filters").group = false;
-    im.get("menu").clearShowPriorityChecks();
     am.trigger("tags:clear-active");
     am.trigger("app:list:render");
     fm.set(fullIndex);
   });
 
-  am.action("tags:highlight-active", function (tag, index) {
+  am.action("tags:highlight-active", (tag, index) => {
     if (tag === "+") {
       im.get("tags-projects").activate(index);
     }
-
     if (tag === "@") {
       im.get("tags-contexts").activate(index);
     }
-
     if (tag === "!") {
       im.get("tags-priority").activate(index);
     }
   });
 
-  am.action("tags:clear-active", function () {
+  am.action("tags:clear-active", () => {
     im.get("tags-projects").deactivateAll();
     im.get("tags-contexts").deactivateAll();
     im.get("tags-priority").deactivateAll();
   });
 
-  am.action("tags:search:projects", function (e) {
+  am.action("tags:search:projects", (e) => {
     if (e !== undefined && Object.hasOwn(e, "bubbles")) {
       e.preventDefault();
     }
-
     im.get("tags-search").group("+").show().value("").focus();
   });
 
-  am.action("tags:search:contexts", function (e) {
+  am.action("tags:search:contexts", (e) => {
     if (e !== undefined && Object.hasOwn(e, "bubbles")) {
       e.preventDefault();
     }
-
     im.get("tags-search").group("@").show().value("").focus();
   });
 
-  am.action("tags:search:hide", function () {
+  am.action("tags:search:hide", () => {
     im.get("tags-search").hide();
   });
 
-  am.action("tags:search:trigger", function () {
-    var tag = grouper.findTagStartingWith(
+  am.action("tags:search:trigger", () => {
+    const tag = grouper.findTagStartingWith(
       im.get("tags-search").value(),
-      im.get("tags-search").group()
+      im.get("tags-search").group(),
     );
-
     if (!tag) {
       am.trigger("tags:clear-active");
     } else {
@@ -776,33 +686,31 @@ var Actions = function (
     }
   });
 
-  am.action("storage:folder:switch", function () {
+  am.action("storage:folder:switch", () => {
     im.get("file-chooser").hide();
     im.get("folder-chooser").show();
     am.trigger("app:context:no-directory");
   });
 
-  am.action("storage:folder:change", function () {
+  am.action("storage:folder:change", () => {
     im.dialogueOpen = true;
     im.get("folder-chooser").showInvisible();
     im.get("folder-chooser").input.click();
   });
 
-  am.action("storage:folder:choose", function () {
-    var folder = im.get("folder-chooser").getFiles()[0];
-
+  am.action("storage:folder:choose", () => {
+    const folder = im.get("folder-chooser").getFiles()[0];
     storage.setFolder(folder.path);
     am.trigger("storage:read-or-new");
   });
 
-  am.action("storage:file:new", function () {
+  am.action("storage:file:new", () => {
     var startupData = [
       "Welcome to Todosaurus! +Todosaurus",
-      "A app for the Todo.txt format. @todotxt",
+      "An app for the Todo.txt format. @todotxt",
       "Press “n” to create a new todo item.",
       "Or press “?” for more keyboard shortcuts.",
     ];
-
     im.get("folder-chooser").hide();
     im.get("file-chooser").hide();
     am.trigger("app:set-title");
@@ -810,8 +718,8 @@ var Actions = function (
     am.trigger("app:context:default");
   });
 
-  am.action("storage:read", function () {
-    storage.read(function (err, data) {
+  am.action("storage:read", () => {
+    storage.read((err, data) => {
       if (err) {
         if (err.message === storage.errors.NOT_FOUND) {
           im.get("folder-chooser").hide();
@@ -819,24 +727,22 @@ var Actions = function (
           am.trigger("app:context:missing-file");
           return;
         }
-
         im.get("folder-chooser").show();
         am.trigger("app:context:no-directory");
         return;
       }
-
       im.get("folder-chooser").hide();
       im.get("file-chooser").hide();
-
       am.trigger("app:set-title");
       todos.populate(data);
       am.trigger("app:context:default");
     });
   });
 
-  am.action("storage:read-if-changed", function () {
-    var stats, file, local;
-
+  am.action("storage:read-if-changed", () => {
+    let stats;
+    let file;
+    let local;
     if (window.isNode) {
       try {
         stats = require("fs").statSync(storage.getPath());
@@ -844,20 +750,17 @@ var Actions = function (
       } catch (e) {
         file = new Date();
       }
-
       local = new Date(localStorage.getItem("mtime"));
-
       if (file > local) {
         am.trigger("storage:read");
       }
     }
   });
 
-  am.action("storage:read-or-new", function () {
+  am.action("storage:read-or-new", () => {
     im.get("folder-chooser").hide();
     im.get("file-chooser").hide();
-
-    storage.read(function (err, data) {
+    storage.read((err, data) => {
       if (err) {
         am.trigger("storage:file:new");
       } else {
@@ -868,36 +771,34 @@ var Actions = function (
     });
   });
 
-  am.action("storage:save", function () {
+  am.action("storage:save", () => {
     storage.save(todos.getAllFullText());
   });
 
-  am.action("storage:sort-file", function () {
+  am.action("storage:sort-file", () => {
     todos.populate(orderer.getOrderedItems(todos.getAll()));
   });
 
-  am.action("storage:archive", function () {
-    var keep = [],
-      done = [],
-      all = _.cloneDeep(todos.getAll());
-
-    _.each(all, function (item) {
+  am.action("storage:archive", () => {
+    const keep = [];
+    const done = [];
+    const all = _.cloneDeep(todos.getAll());
+    _.each(all, (item) => {
       if (item.isMarked()) {
         done.push(item.getFullText());
       } else {
         keep.push(item);
       }
     });
-
     todos.populate(keep);
     storage.saveArchive(done.sort());
   });
 
-  am.action("storage:reveal-finder", function () {
+  am.action("storage:reveal-finder", () => {
     gui.Shell.showItemInFolder(storage.getFolder());
   });
 
-  am.action("help:shortcuts", function () {
+  am.action("help:shortcuts", () => {
     window.open("/help.html");
   });
 };
