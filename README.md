@@ -1,12 +1,8 @@
 # Todosaurus
 
-A keyboard driven GUI app for the [Todo.txt](http://todotxt.com/) format.
+A keyboard driven GUI app for the [Todo.txt](http://todotxt.org/) format.
 
 ![](todosaurus-screenshot.png)
-
----
-
-### [⬇ Download (for Mac OS X)](https://github.com/thomasjbradley/todosaurus/releases/download/v1.2.1/Todosaurus-v1.2.1.zip)
 
 ---
 
@@ -26,22 +22,11 @@ So, I made my own.
 
 ---
 
-## Development
-
-Follow development on Trello: <https://trello.com/b/l1cs0nyA>.
-
-### Technology
-
-Built using web technologies and [node-webkit](https://github.com/rogerwang/node-webkit/).
-Also works perfectly in the browser, storing the todos in LocalStorage.
-
----
-
 ## Licenses & copyright
 
-**© 2014 Thomas J Bradley. Licensed under the [GPL](LICENSE).**
+**© 2024 Thomas J Bradley. Licensed under the [GPL](LICENSE).**
 
-Uses the [Todo.txt](http://todotxt.com/) format, © 2006-2014 Gina Trapani, licensed under the [GPL](http://www.gnu.org/copyleft/gpl.html).
+Uses the [Todo.txt](http://todotxt.org/) format, © 2006-2020 Gina Trapani, licensed under the [GPL](http://www.gnu.org/copyleft/gpl.html).
 
 [“Dinosaur”](http://thenounproject.com/term/dinosaur/13786/), © 2013 Jennifer Cozzette, licensed under the [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/us/).
 

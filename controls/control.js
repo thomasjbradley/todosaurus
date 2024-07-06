@@ -4,7 +4,7 @@ var Control = function (elem, actionManager) {
   var that = {
     keyEvents: [],
     events: [],
-    eventsBound: false
+    eventsBound: false,
   };
 
   var chainer = function (func) {
@@ -48,7 +48,7 @@ var Control = function (elem, actionManager) {
     }
 
     _.each(that.events, function (item) {
-      if (_.isUndefined(item.forever) || item.forever === false ) {
+      if (item.forever === undefined || item.forever === false) {
         that.elem.removeEventListener(item.event, item.callback);
       }
     });
@@ -62,7 +62,7 @@ var Control = function (elem, actionManager) {
 
   if (_.isString(elem)) {
     that.elem = document.getElementById(elem);
-  };
+  }
 
   that = _.extend(that, {
     chainer: chainer,
@@ -70,7 +70,7 @@ var Control = function (elem, actionManager) {
     bindEvents: chainer(bindEvents),
     bindKeyEvents: chainer(bindKeyEvents),
     playEvents: chainer(playEvents),
-    stopEvents: chainer(stopEvents)
+    stopEvents: chainer(stopEvents),
   });
 
   return that;

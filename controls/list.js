@@ -4,31 +4,28 @@ var ListControl = function (elem, actionManager) {
   var that = Control(elem, actionManager);
 
   var getMarkedClass = function (item) {
-    return (item.isMarked()) ? ' item--complete' : '';
+    return item.isMarked() ? " item-complete" : "";
   };
 
   var hasPriorities = function () {
-    that.elem.classList.add('todos--has-priorities');
+    that.elem.classList.add("todos-has-priorities");
   };
 
   var getPriorityClass = function (item) {
     if (item.hasPriority()) {
       hasPriorities();
-      return ' item--has-priority priority--' + item.getPriority().toLowerCase();
+      return " item-has-priority priority-" + item.getPriority().toLowerCase();
     } else {
-      return '';
+      return "";
     }
   };
 
   var getClasses = function (item) {
-    return [
-      getMarkedClass(item),
-      getPriorityClass(item)
-    ].join('');
+    return [getMarkedClass(item), getPriorityClass(item)].join("");
   };
 
   var findMetadata = function (text, tag) {
-    var re = new RegExp('\\s\\' + tag + '[^\\s]+', 'ig');
+    var re = new RegExp("\\s\\" + tag + "[^\\s]+", "ig");
 
     return _.map(text.match(re), function (item) {
       return item.trim();
@@ -36,33 +33,35 @@ var ListControl = function (elem, actionManager) {
   };
 
   var formatMetadata = function (metadata, cssClass) {
-    var pillCssClass = '';
+    var pillCssClass = "";
 
-    if (cssClass == 'context') {
-      pillCssClass = ' pill--alt';
+    if (cssClass == "context") {
+      pillCssClass = " pill-alt";
     }
 
     return _.map(metadata, function (item) {
       return [
-        '<li class="item__metadata__single item__metadata__single--',
+        '<li class="item-metadata-single item-metadata-single-',
         cssClass,
-        ' pill',
+        " pill",
         pillCssClass,
         '">',
         item,
-        '</li>'
-      ].join('');
-    }).join('');
+        "</li>",
+      ].join("");
+    }).join("");
   };
 
   var removeMetaData = function (text, tags) {
-    var allMeta = _.flatten(_.map(tags, function (tag) {
-      return findMetadata(text, tag);
-    }));
+    var allMeta = _.flatten(
+      _.map(tags, function (tag) {
+        return findMetadata(text, tag);
+      })
+    );
 
     // Will strip out all metadata that's in the middle of the text
     _.each(allMeta, function (tag) {
-      text = text.replace(tag, '');
+      text = text.replace(tag, "");
     });
 
     return text;
@@ -70,36 +69,34 @@ var ListControl = function (elem, actionManager) {
 
   var getCompletedDate = function (item) {
     if (item.isMarked()) {
-      return '<li class="item__metadata__single item__metadata__single--date pill pill--dull pill--clear">' + item.getCompletedDate() + '</li>';
+      return (
+        '<li class="item-metadata-single item-metadata-single-date pill pill-dull pill-clear">' +
+        item.getCompletedDate() +
+        "</li>"
+      );
     }
 
-    return '';
+    return "";
   };
 
   var formatText = function (item) {
-    var
-      text = item.text(),
-      projects = findMetadata(text, '+'),
-      contexts = findMetadata(text, '@'),
+    var text = item.text(),
+      projects = findMetadata(text, "+"),
+      contexts = findMetadata(text, "@"),
       textElem,
-      meta
-    ;
+      meta;
 
-    text = removeMetaData(text, ['+', '@']);
+    text = removeMetaData(text, ["+", "@"]);
 
-    textElem = [
-      '<div class="item__text">',
-      text,
-      '</div>'
-    ].join('');
+    textElem = ['<div class="item-text">', text, "</div>"].join("");
 
     meta = [
-      '<ul class="item__metadata">',
+      '<ul class="item-metadata">',
       getCompletedDate(item),
-      formatMetadata(projects, 'project'),
-      formatMetadata(contexts, 'context'),
-      '</ul>'
-    ].join('');
+      formatMetadata(projects, "project"),
+      formatMetadata(contexts, "context"),
+      "</ul>",
+    ].join("");
 
     return textElem + meta;
   };
@@ -107,7 +104,7 @@ var ListControl = function (elem, actionManager) {
   var render = function (items) {
     var output;
 
-    that.elem.classList.remove('todos--has-priorities');
+    that.elem.classList.remove("todos-has-priorities");
 
     output = _.map(items, function (item) {
       var pieces = [
@@ -115,38 +112,38 @@ var ListControl = function (elem, actionManager) {
         getClasses(item),
         '">',
         formatText(item),
-        '</li>'
+        "</li>",
       ];
 
-      return pieces.join('');
+      return pieces.join("");
     });
 
-    that.elem.innerHTML = output.join('');
+    that.elem.innerHTML = output.join("");
   };
 
   var length = function () {
-    return that.elem.querySelectorAll('.item').length;
+    return that.elem.querySelectorAll(".item").length;
   };
 
   var focus = function () {
-    that.elem.setAttribute('data-focused', 'true');
+    that.elem.setAttribute("data-focused", "true");
   };
 
   var blur = function () {
-    that.elem.setAttribute('data-focused', 'false');
+    that.elem.setAttribute("data-focused", "false");
   };
 
   var getAllItemElements = function () {
-    return that.elem.querySelectorAll('.item');
+    return that.elem.querySelectorAll(".item");
   };
 
   var getAllItemElementsWith = function (sel) {
-    return that.elem.querySelectorAll('.item' + sel);
+    return that.elem.querySelectorAll(".item" + sel);
   };
 
   var getItemElement = function (index) {
-    return that.elem.querySelectorAll('.item')[index];
-  }
+    return that.elem.querySelectorAll(".item")[index];
+  };
 
   that = _.extend(that, {
     render: that.chainer(render),
@@ -155,7 +152,7 @@ var ListControl = function (elem, actionManager) {
     blur: that.chainer(blur),
     getAllItemElements: getAllItemElements,
     getAllItemElementsWith: getAllItemElementsWith,
-    getItemElement: getItemElement
+    getItemElement: getItemElement,
   });
 
   return that;

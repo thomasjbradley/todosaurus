@@ -2,10 +2,6 @@ body {
   border-top: 1px solid #d1d1d1;
 }
 
-.window--has-focus {
-  border-color: #b0aeb0;
-}
-
 a,
 a:link,
 a:visited {
@@ -140,7 +136,7 @@ figcaption {
   position: absolute;
   top: 50%;
 
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   opacity: 0;
   transform: translateY(-50%);

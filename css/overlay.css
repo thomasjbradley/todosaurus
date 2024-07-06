@@ -29,13 +29,13 @@
   text-align: center;
 }
 
-.window__title {
+.window-title {
   margin: 0 0 16px;
 
   font-size: 24px;
 }
 
-.window__text {
+.window-text {
   margin: 0 0 12px;
 }
 
@@ -44,32 +44,32 @@
   color: #492c66;
 }
 
-.window__btn {
+.window-btn {
   margin-top: 24px;
 }
 
-.window__path {
+.window-path {
   overflow: hidden;
 }
 
-.window__path__icon {
+.window-path-icon {
   display: inline-block;
   width: 18px;
 
   vertical-align: middle;
 }
 
-.window__path__filename {
+.window-path-filename {
   vertical-align: middle;
 }
 
-.window__options {
+.window-options {
   margin: 28px 0 0;
   padding: 0;
 
   list-style-type: none;
 }
 
-.window__options > li {
+.window-options > li {
   display: inline-block;
 }

@@ -25,7 +25,6 @@ var InterfaceManager = function (focusManager, actionManager) {
   };
 
   var bindKeyEvent = function (keys, callback) {
-    // Mousetrap.bind(keys, callback);
     Mousetrap.bind(keys, function (e, combo) {
       try {
         e.stopPropagation();
@@ -48,26 +47,12 @@ var InterfaceManager = function (focusManager, actionManager) {
   var bindKeyActions = function (keys) {
     _.each(keys, function (elem, index) {
       bindKeyEvent(elem, function (e, combo) {
-        if (!_.isUndefined(e) && _.has(e, "bubbles")) {
+        if (e !== undefined && Object.hasOwn(e, "bubbles")) {
           e.preventDefault();
         }
 
         actionManager.trigger(index, e, combo);
       });
-    });
-  };
-
-  var toggleMenuStates = function (menuStates) {
-    _.each(menuStates.enabled, function (item) {
-      menu[item].enabled = true;
-    });
-
-    _.each(menuStates.disabled, function (item) {
-      menu[item].enabled = false;
-    });
-
-    _.each(menuStates.test, function (item, key) {
-      menu[key].enabled = item();
     });
   };
 
@@ -81,7 +66,7 @@ var InterfaceManager = function (focusManager, actionManager) {
 
   var sentContextCallbacks = function (title) {
     _.each(contexts, function (item, key) {
-      if (_.isUndefined(item.callback)) {
+      if (item.callback === undefined) {
         return;
       }
 
@@ -97,13 +82,7 @@ var InterfaceManager = function (focusManager, actionManager) {
     if (title !== currentContext) {
       reset();
       bindKeyActions(contexts[title].keyActions);
-
-      if (window.isNode) {
-        toggleMenuStates(contexts[title].menuStates);
-      }
-
       sentContextCallbacks(title);
-
       return true;
     }
 

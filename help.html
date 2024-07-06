@@ -8,11 +8,11 @@
   <link href="css/general.css" rel="stylesheet">
   <link href="css/help.css" rel="stylesheet">
 </head>
-<body class="window--has-focus">
+<body>
 
 <h1 class="visually-hidden">Keyboard Shortcuts</h1>
 
-<h2 class="tags-title"><span class="tags-title__wrap">Movement</span></h2>
+<h2 class="tags-title"><span class="tags-title-wrap">Movement</span></h2>
 
 <table>
   <tr>
@@ -45,7 +45,7 @@
   </tr>
 </table>
 
-<h2 class="tags-title"><span class="tags-title__wrap">Editing</span></h2>
+<h2 class="tags-title"><span class="tags-title-wrap">Editing</span></h2>
 
 <table>
   <tr>
@@ -122,7 +122,7 @@
   </tr>
 </table>
 
-<h2 class="tags-title"><span class="tags-title__wrap">Manipulating the view</span></h2>
+<h2 class="tags-title"><span class="tags-title-wrap">Manipulating the view</span></h2>
 
 <table>
   <tr>
@@ -163,7 +163,7 @@
   </tr>
 </table>
 
-<h2 class="tags-title"><span class="tags-title__wrap">Manipulating the file</span></h2>
+<h2 class="tags-title"><span class="tags-title-wrap">Manipulating the file</span></h2>
 
 <table>
   <tr>
@@ -187,26 +187,6 @@
     <td>Switch to another directory</td>
   </tr>
 </table>
-
-<script>
-  var env, gui, win;
-
-  window.isNode = !!(typeof require !== 'undefined');
-
-  if (window.isNode) {
-    gui = require('nw.gui');
-    win = gui.Window.get();
-    env = process.env.ENV || 'prod';
-
-    win.on('focus', function () {
-      document.body.classList.add('window--has-focus');
-    });
-
-    win.on('blur', function () {
-      document.body.classList.remove('window--has-focus');
-    });
-  }
-</script>
 
 </body>
 </html>

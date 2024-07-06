@@ -1,17 +1,15 @@
 var Grouper = function (generics) {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     subscriptions = [],
     matchers = {
-      '+': '\\{{tag}}(?:$|\\s)',
-      '@': '\\{{tag}}(?:$|\\s)',
-      '!': '^(?:x\\s)?\\({{tag}}\\)'
+      "+": "\\{{tag}}(?:$|\\s)",
+      "@": "\\{{tag}}(?:$|\\s)",
+      "!": "^(?:x\\s)?\\({{tag}}\\)",
     },
     groups = {},
-    grouped
-  ;
+    grouped;
 
   var subscribe = function (callback) {
     subscriptions.push(callback);
@@ -48,17 +46,14 @@ var Grouper = function (generics) {
 
   var getGroup = function (name) {
     return groups[name];
-  }
+  };
 
   var getFilter = function (tag) {
-    var
-      rawTag = groups[tag[0]][tag[1]],
-      fullTag = (tag[0] == '!') ? rawTag.substr(0, 1) : rawTag,
-      re = new RegExp(matchers[tag[0]].replace('{{tag}}', fullTag), 'ig')
-    ;
-
+    var rawTag = groups[tag[0]][tag[1]],
+      fullTag = tag[0] == "!" ? rawTag.substr(0, 1) : rawTag,
+      re = new RegExp(matchers[tag[0]].replace("{{tag}}", fullTag), "ig");
     return re;
-  }
+  };
 
   var matchesGeneric = function (text) {
     return _.every(generics, function (gen) {
@@ -103,7 +98,7 @@ var Grouper = function (generics) {
   };
 
   var group = function (todos, tag) {
-    if (_.isUndefined(tag) || _.isEmpty(tag) || !_.isArray(tag)) {
+    if (tag === undefined || _.isEmpty(tag) || !_.isArray(tag)) {
       grouped = todos;
     } else {
       grouped = getGroupedItems(todos, tag);
@@ -126,7 +121,7 @@ var Grouper = function (generics) {
     matchesGroup: matchesGroup,
     findTagStartingWith: findTagStartingWith,
     group: informer(group),
-    getIndex: getIndex
+    getIndex: getIndex,
   };
 
   return methods;

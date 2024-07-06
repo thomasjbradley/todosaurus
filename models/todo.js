@@ -1,20 +1,17 @@
 var Todo = function (fullText) {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     subscriptions = [],
     id = _.uniqueId(),
     text = fullText,
     data = {
-      created: (new Date()).toISOString().substr(0, 10),
+      created: new Date().toISOString().substr(0, 10),
       completed: false,
-      priority: false
+      priority: false,
     },
-    priorities = ['A', 'B', 'C', 'D', 'E'],
-    priorityMatcher = /^(x\s)?\([a-z]\)\s/i
-  ;
-
+    priorities = ["A", "B", "C", "D", "E"],
+    priorityMatcher = /^(x\s)?\([a-z]\)\s/i;
   var subscribe = function (callback) {
     subscriptions.push(callback);
   };
@@ -43,13 +40,13 @@ var Todo = function (fullText) {
   var parseFullText = function () {
     var tmpText = fullText.trim();
 
-    if (fullText.substr(0, 2) === 'x ') {
+    if (fullText.substr(0, 2) === "x ") {
       mark(fullText.substr(2, 10));
       tmpText = fullText.slice(12).trim();
     }
 
     if (tmpText.match(/^\([A-Z]\)\s/)) {
-      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/g, ''));
+      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/g, ""));
       tmpText = tmpText.slice(3).trim();
     }
 
@@ -62,14 +59,14 @@ var Todo = function (fullText) {
   };
 
   var getFullText = function () {
-    var finalText = data.created + ' ' + text;
+    var finalText = data.created + " " + text;
 
     if (hasPriority()) {
-      finalText = '(' + getPriority() + ') ' + finalText;
+      finalText = "(" + getPriority() + ") " + finalText;
     }
 
     if (isMarked()) {
-      finalText = 'x ' + data.completed + ' ' + finalText;
+      finalText = "x " + data.completed + " " + finalText;
     }
 
     return finalText;
@@ -80,7 +77,7 @@ var Todo = function (fullText) {
   };
 
   var resetCreated = function () {
-    data.created = (new Date()).toISOString().substr(0, 10);
+    data.created = new Date().toISOString().substr(0, 10);
   };
 
   var getCreatedDate = function () {
@@ -92,7 +89,7 @@ var Todo = function (fullText) {
   };
 
   var manageText = function (t) {
-    if (_.isUndefined(t)) {
+    if (t === undefined) {
       return text;
     } else {
       setText(t);
@@ -102,10 +99,10 @@ var Todo = function (fullText) {
   };
 
   var mark = function (date) {
-    if (!_.isUndefined(date)) {
+    if (date !== undefined) {
       data.completed = date;
     } else {
-      data.completed = (new Date()).toISOString().substr(0, 10);
+      data.completed = new Date().toISOString().substr(0, 10);
     }
 
     data.priority = false;
@@ -133,7 +130,7 @@ var Todo = function (fullText) {
   };
 
   var findPriority = function (pri) {
-    if (_.isNumber(pri)) {
+    if (isFinite(pri)) {
       if (pri > priorities.length - 1) {
         return _.last(priorities);
       } else {
@@ -145,7 +142,7 @@ var Todo = function (fullText) {
   };
 
   var hasPriority = function () {
-    return (data.priority !== false);
+    return data.priority !== false;
   };
 
   var removePriority = function () {
@@ -197,11 +194,10 @@ var Todo = function (fullText) {
     getPriority: getPriority,
     removePriority: informer(removePriority),
     addPriority: informer(addPriority),
-    togglePriority: informer(togglePriority)
+    togglePriority: informer(togglePriority),
   };
 
   parseFullText();
 
   return methods;
-
 };

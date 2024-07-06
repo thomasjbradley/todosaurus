@@ -1,13 +1,10 @@
 var FocusManager = function () {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     subscriptions = [],
     focus = 0,
-    max = 1
-  ;
-
+    max = 1;
   var subscribe = function (callback) {
     subscriptions.push(callback);
   };
@@ -88,7 +85,7 @@ var FocusManager = function () {
     setMax: chainer(setMax),
     getMax: getMax,
     next: informer(next),
-    prev: informer(prev)
+    prev: informer(prev),
   };
 
   return methods;

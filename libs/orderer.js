@@ -1,11 +1,9 @@
 var Orderer = function () {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     subscriptions = [],
-    ordered
-  ;
+    ordered;
 
   var subscribe = function (callback) {
     subscriptions.push(callback);
@@ -57,32 +55,28 @@ var Orderer = function () {
       a = a.getFullText();
       b = b.getFullText();
 
-      return (a < b) ? -1 : (a > b) ? 1 : 0;
+      return a < b ? -1 : a > b ? 1 : 0;
     });
 
     orderGroups.middle = orderGroups.middle.sort(function (a, b) {
       a = a.getCreatedDate();
       b = b.getCreatedDate();
 
-      return (a < b) ? -1 : (a > b) ? 1 : 0;
+      return a < b ? -1 : a > b ? 1 : 0;
     });
 
     orderGroups.end = orderGroups.end.sort(function (a, b) {
       a = a.getCompletedDate();
       b = b.getCompletedDate();
 
-      return (a > b) ? -1 : (a < b) ? 1 : 0;
+      return a > b ? -1 : a < b ? 1 : 0;
     });
 
-    return [].concat(
-      orderGroups.start,
-      orderGroups.middle,
-      orderGroups.end
-    );
+    return [].concat(orderGroups.start, orderGroups.middle, orderGroups.end);
   };
 
   var order = function (todos, isOrdered) {
-    if (_.isUndefined(isOrdered) || isOrdered === false) {
+    if (isOrdered === undefined || isOrdered === false) {
       ordered = todos;
     } else {
       ordered = getOrderedItems(todos, isOrdered);
@@ -102,7 +96,7 @@ var Orderer = function () {
     length: length,
     getOrderedItems: getOrderedItems,
     order: informer(order),
-    getIndex: getIndex
+    getIndex: getIndex,
   };
 
   return methods;

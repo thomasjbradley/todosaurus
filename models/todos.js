@@ -1,12 +1,9 @@
 var Todos = function () {
   "use strict";
 
-  var
-    methods = {},
+  var methods = {},
     subscriptions = [],
-    todos = []
-  ;
-
+    todos = [];
   var subscribe = function (callback) {
     subscriptions.push(callback);
   };
@@ -43,7 +40,7 @@ var Todos = function () {
     todos = [];
 
     _.each(items, function (item) {
-      todos.push((_.isString(item)) ? createNewItem(item) : item);
+      todos.push(_.isString(item) ? createNewItem(item) : item);
     });
   };
 
@@ -52,9 +49,9 @@ var Todos = function () {
   };
 
   var addItemAt = function (item, index) {
-    var todo = (_.isString(item)) ? createNewItem(item) : item;
+    var todo = _.isString(item) ? createNewItem(item) : item;
 
-    if (_.isUndefined(index) || index === 0) {
+    if (index === undefined || index === 0) {
       return todos.unshift(todo);
     }
 
@@ -63,7 +60,7 @@ var Todos = function () {
     }
 
     if (index < -1) {
-      throw new Error('Index argument must be greater than or equal to -1.');
+      throw new Error("Index argument must be greater than or equal to -1.");
     }
 
     return todos.splice(index, 0, todo);
@@ -118,11 +115,8 @@ var Todos = function () {
   };
 
   var getAllTags = function (tag) {
-    var
-      re = new RegExp('\\s\\' + tag + '[^\\s]+', 'ig'),
+    var re = new RegExp("\\s\\" + tag + "[^\\s]+", "ig"),
       metas = [];
-    ;
-
     metas = _.map(todos, function (item) {
       return _.uniq(findMetadata(item.text(), re));
     });
@@ -150,7 +144,7 @@ var Todos = function () {
     todos.splice(index, 1);
   };
 
-  methods =  {
+  methods = {
     subscribe: chainer(subscribe),
     populate: informer(populate),
     createNewItem: createNewItem,
@@ -167,7 +161,7 @@ var Todos = function () {
     getAllTags: getAllTags,
     getAllFullText: getAllFullText,
     remove: informer(remove),
-    removeByIndex: informer(removeByIndex)
+    removeByIndex: informer(removeByIndex),
   };
 
   return methods;

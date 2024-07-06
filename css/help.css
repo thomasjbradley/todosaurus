@@ -9,10 +9,6 @@ body {
   border-top: 1px solid #d1d1d1;
 }
 
-.window--has-focus {
-  border-color: #b0aeb0;
-}
-
 kbd {
   display: inline-block;
   margin: 0 0 0.3em;
@@ -59,7 +55,15 @@ td:first-child {
   margin: 9px 0 8px;
   padding: 0;
 
-  background-image: linear-gradient(to bottom, #e2e2e2 0%, #e2e2e2 47%, #bbb 46%, #bbb 54%, #e2e2e2 55%, #e2e2e2 100%);
+  background-image: linear-gradient(
+    to bottom,
+    #e2e2e2 0%,
+    #e2e2e2 47%,
+    #bbb 46%,
+    #bbb 54%,
+    #e2e2e2 55%,
+    #e2e2e2 100%
+  );
 
   color: #777;
   font-size: 14px;
@@ -67,7 +71,7 @@ td:first-child {
   text-transform: uppercase;
 }
 
-.tags-title__wrap {
+.tags-title-wrap {
   display: inline-block;
   padding-right: 6px;
 

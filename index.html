@@ -14,26 +14,26 @@
   <link href="css/progress.css" rel="stylesheet">
   <link href="css/at-js-overrides.css" rel="stylesheet">
 </head>
-<body class="window--has-focus">
+<body>
 
   <header class="tools">
-    <div class="tools__container">
-      <div class="input-wrapper input--with-icon input--tools">
-        <label class="input__icon icon i--search" for="search">Search</label>
-        <div class="input__container input__container--has-icon">
+    <div class="tools-container">
+      <div class="input-wrapper input-with-icon input-tools">
+        <label class="input-icon icon i-search" for="search">Search</label>
+        <div class="input-container input-container-has-icon">
           <input class="input mousetrap" id="search" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
-      <div class="input-wrapper input--with-icon input--tools input--cover" data-state="hidden">
-        <label class="input__icon icon i--jump" for="jump">Jump</label>
-        <div class="input__container input__container--has-icon">
-          <input class="input input--has-icon mousetrap" id="jump" disabled autocomplete="off" autocorrect="off">
+      <div class="input-wrapper input-with-icon input-tools input-cover" data-state="hidden">
+        <label class="input-icon icon i-jump" for="jump">Jump</label>
+        <div class="input-container input-container-has-icon">
+          <input class="input input-has-icon mousetrap" id="jump" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
-      <div class="input-wrapper input--with-icon input--tools input--cover" data-state="hidden">
-        <label class="input__icon icon" id="tags-search-label" for="tags-search">Search Tags</label>
-        <div class="input__container input__container--has-icon">
-          <input class="input input--has-icon mousetrap" id="tags-search" disabled autocomplete="off" autocorrect="off">
+      <div class="input-wrapper input-with-icon input-tools input-cover" data-state="hidden">
+        <label class="input-icon icon" id="tags-search-label" for="tags-search">Search Tags</label>
+        <div class="input-container input-container-has-icon">
+          <input class="input input-has-icon mousetrap" id="tags-search" disabled autocomplete="off" autocorrect="off">
         </div>
       </div>
     </div>
@@ -42,23 +42,23 @@
   <div class="sidebar-wrapper">
     <aside class="sidebar">
       <div id="tags-projects">
-        <h2 class="tags-title"><span class="tags-title__wrap">Projects</span></h2>
+        <h2 class="tags-title"><span class="tags-title-wrap">Projects</span></h2>
         <ol class="tags-list no-tags">
-          <li><span class="pill pill--dull">No projects</span></li>
+          <li><span class="pill pill-dull">No projects</span></li>
         </ol>
         <ol class="tags-list tags" data-state="hidden"></ol>
       </div>
       <div id="tags-contexts">
-        <h2 class="tags-title"><span class="tags-title__wrap">Contexts</span></h2>
+        <h2 class="tags-title"><span class="tags-title-wrap">Contexts</span></h2>
         <ol class="tags-list no-tags">
-          <li><span class="pill pill--dull">No contexts</span></li>
+          <li><span class="pill pill-dull">No contexts</span></li>
         </ol>
         <ol class="tags-list tags" data-state="hidden"></ol>
       </div>
       <div id="tags-priority">
-        <h2 class="tags-title"><span class="tags-title__wrap">Priority</span></h2>
+        <h2 class="tags-title"><span class="tags-title-wrap">Priority</span></h2>
         <ol class="tags-list no-tags">
-          <li><span class="pill pill--dull">No priorities</span></li>
+          <li><span class="pill pill-dull">No priorities</span></li>
         </ol>
         <ol class="tags-list tags"></ol>
       </div>
@@ -69,19 +69,19 @@
     <progress class="progress" id="progress" value="0" max="100"></progress>
 
     <main class="main">
-      <div class="item item--empty">
-        <div class="item__text" id="empty-no-todos">Woot! Looks like all your todos are extinct.</div>
-        <div class="item__text" id="empty-no-results" style="display:none">Your excavation came up empty handed.</div>
+      <div class="item item-empty">
+        <div class="item-text" id="empty-no-todos">Woot! Looks like all your todos are extinct.</div>
+        <div class="item-text" id="empty-no-results" style="display:none">Your excavation came up empty handed.</div>
       </div>
 
       <ol class="todos" data-focused="true" id="list"></ol>
 
-      <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-        <input class="input input--hidden mousetrap" data-state="hidden" id="edit" disabled autocomplete="off" autocorrect="off">
+      <div class="input-wrapper input-cover" data-state="hidden" data-focused="false">
+        <input class="input input-hidden mousetrap" data-state="hidden" id="edit" disabled autocomplete="off" autocorrect="off">
       </div>
 
-      <div class="input-wrapper input--cover" data-state="hidden" data-focused="false">
-        <input class="input input--hidden mousetrap" data-state="hidden" id="new" disabled autocomplete="off" autocorrect="off">
+      <div class="input-wrapper input-cover" data-state="hidden" data-focused="false">
+        <input class="input input-hidden mousetrap" data-state="hidden" id="new" disabled autocomplete="off" autocorrect="off">
       </div>
     </main>
 
@@ -90,10 +90,10 @@
   <div class="overlay" id="folder-chooser" data-state="hidden">
     <div class="window">
       <img class="app-icon" src="img/todosaurus.png">
-      <p class="window__text">Whoa! Looks like you’re a first time digger.</p>
-      <p class="window__text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
-      <div class="window__btn">
-        <input class="btn--file" type="file" id="chosen-folder" disabled nwdirectory>
+      <p class="window-text">Whoa! Looks like you’re a first time digger.</p>
+      <p class="window-text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
+      <div class="window-btn">
+        <input class="btn-file" type="file" id="chosen-folder" disabled nwdirectory>
       </div>
     </div>
   </div>
@@ -101,12 +101,12 @@
   <div class="overlay" id="file-chooser" data-state="hidden">
     <div class="window">
       <img class="app-icon" src="img/todosaurus.png">
-      <p class="window__text"><strong>Holy t-rex! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
-      <p class="window__text window__path"><img class="window__path__icon" src="img/icon-folder.svg" alt=""> <code class="filename window__path__filename" id="folder-path"></code></p>
-      <div class="window__btn">
-        <button class="btn btn--alt" type="file" id="new-file" disabled>Create New File</button>
-        <ul class="window__options" id="other-folder-options">
-          <li><button class="btn btn--text" id="switch-folder" disabled>Switch Folder</button></li>
+      <p class="window-text"><strong>Holy t-rex! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
+      <p class="window-text window-path"><img class="window-path-icon" src="img/icon-folder.svg" alt=""> <code class="filename window-path-filename" id="folder-path"></code></p>
+      <div class="window-btn">
+        <button class="btn btn-alt" type="file" id="new-file" disabled>Create New File</button>
+        <ul class="window-options" id="other-folder-options">
+          <li><button class="btn btn-text" id="switch-folder" disabled>Switch Folder</button></li>
         </ul>
       </div>
     </div>
@@ -123,32 +123,9 @@
   <script src="utils/fuzzy-match.js"></script>
   <script src="bootstrap.js"></script>
 
-  <script>
-    /* Dynamically load Node only libraries */
-    if (window.isNode) {
-      document.write(_.map([
-        'libs/window-manager.js',
-        'windows/about.js',
-        'windows/help.js',
-        'menus/app.js',
-        'menus/file.js',
-        'menus/edit.js',
-        'menus/edit-toggle-priority.js',
-        'menus/view.js',
-        'menus/view-show-priority.js',
-        'menus/window.js',
-        'menus/help.js'
-      ], function (item) {
-        return '<script src="' + item + '"><\/script>';
-      }).join(''));
-    }
-  </script>
-
   <script src="libs/focus-manager.js"></script>
   <script src="libs/action-manager.js"></script>
   <script src="libs/interface-manager.js"></script>
-
-  <script src="menus/menu-manager.js"></script>
 
   <script src="controls/control.js"></script>
   <script src="controls/list.js"></script>
@@ -185,12 +162,6 @@
   <script src="bindings/default.js"></script>
   <script src="bindings/input.js"></script>
   <script src="bindings/menu.js"></script>
-  <script src="menus/context-not-focused.js"></script>
-  <script src="menus/context-no-directory.js"></script>
-  <script src="menus/context-missing-file.js"></script>
-  <script src="menus/context-empty.js"></script>
-  <script src="menus/context-default.js"></script>
-  <script src="menus/context-input.js"></script>
 
   <script src="app.js"></script>
 </body>

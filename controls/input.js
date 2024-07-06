@@ -3,51 +3,10 @@ var InputControl = function (elem, actionManager) {
 
   var that = Control(elem, actionManager);
 
-  if (window.isNode) {
-    that.bindKeyEvents([
-      {
-        keys: ['mod+c'],
-        callback: function (e) {
-          document.execCommand('copy');
-        }
-      },
-      {
-        keys: ['mod+v'],
-        callback: function (e) {
-          document.execCommand('paste');
-        }
-      },
-      {
-        keys: ['mod+x'],
-        callback: function (e) {
-          document.execCommand('cut');
-        }
-      },
-      {
-        keys: ['mod+a'],
-        callback: function (e) {
-          document.execCommand('selectall');
-        }
-      },
-      {
-        keys: ['mod+z'],
-        callback: function (e) {
-          document.execCommand('undo');
-        }
-      },
-      {
-        keys: ['mod+shift+z'],
-        callback: function (e) {
-          document.execCommand('redo');
-        }
-      }
-    ]);
-  }
-
   var findWrapper = function () {
     var current = that.elem.parentNode;
 
-    while (current.className.indexOf('input-wrapper') < 0) {
+    while (current.className.indexOf("input-wrapper") < 0) {
       current = current.parentNode;
     }
 
@@ -59,7 +18,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var value = function (val) {
-    if (_.isUndefined(val)) {
+    if (val === undefined) {
       return that.elem.value;
     } else {
       that.elem.value = val.trim();
@@ -68,7 +27,7 @@ var InputControl = function (elem, actionManager) {
   };
 
   var setCaretPosition = function (startPos, endPos) {
-    if (_.isUndefined(endPos)) {
+    if (endPos === undefined) {
       endPos = startPos;
     }
 
@@ -76,32 +35,32 @@ var InputControl = function (elem, actionManager) {
   };
 
   var setPosition = function (pos) {
-    if (_.isUndefined(pos)) {
+    if (pos === undefined) {
       return;
     }
 
-    findWrapper().style.left = pos.left + 'px';
-    findWrapper().style.top = pos.top + 'px';
+    findWrapper().style.left = pos.left + "px";
+    findWrapper().style.top = pos.top + "px";
   };
 
   var show = function (pos) {
     that.elem.disabled = false;
     that.playEvents();
-    actionManager.trigger('app:context:input', that.keyEvents);
-    findWrapper().setAttribute('data-state', 'visible');
+    actionManager.trigger("app:context:input", that.keyEvents);
+    findWrapper().setAttribute("data-state", "visible");
     setPosition(pos);
   };
 
   var hide = function () {
     that.elem.disabled = true;
     that.stopEvents();
-    actionManager.trigger('app:context:default');
-    findWrapper().setAttribute('data-state', 'hidden');
+    actionManager.trigger("app:context:default");
+    findWrapper().setAttribute("data-state", "hidden");
     that.elem.blur();
   };
 
   var isVisible = function () {
-    return (findWrapper().getAttribute('data-state') === 'visible');
+    return findWrapper().getAttribute("data-state") === "visible";
   };
 
   var select = function () {
@@ -111,15 +70,15 @@ var InputControl = function (elem, actionManager) {
   var focus = function () {
     that.playEvents();
     that.elem.focus();
-    actionManager.trigger('app:context:input', that.keyEvents);
-    findWrapper().setAttribute('data-focused', 'true');
+    actionManager.trigger("app:context:input", that.keyEvents);
+    findWrapper().setAttribute("data-focused", "true");
   };
 
   var blur = function () {
     that.stopEvents();
     that.elem.blur();
-    actionManager.trigger('app:context:default');
-    findWrapper().setAttribute('data-focused', 'false');
+    actionManager.trigger("app:context:default");
+    findWrapper().setAttribute("data-focused", "false");
   };
 
   var enable = function () {
@@ -141,7 +100,7 @@ var InputControl = function (elem, actionManager) {
     focus: that.chainer(focus),
     blur: that.chainer(blur),
     enable: that.chainer(enable),
-    disable: that.chainer(disable)
+    disable: that.chainer(disable),
   });
 
   return that;

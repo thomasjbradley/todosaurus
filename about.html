@@ -8,7 +8,7 @@
   <link href="css/general.css" rel="stylesheet">
   <link href="css/about.css" rel="stylesheet">
 </head>
-<body class="window--has-focus">
+<body>
 
 <h1 class="visually-hidden">About Todosaurus</h1>
 
@@ -28,7 +28,7 @@
         <img class="logo" src="img/todosaurus.png">
         <figcaption>No dinosaurs were harmed while making this app.</figcaption>
       </figure>
-      <p class="intro">A keyboard driven GUI app for the <a href="http://todotxt.com/" rel="external"><span>Todo.txt</span></a>.</p>
+      <p class="intro">A keyboard driven GUI app for the <a href="http://todotxt.org/" rel="external"><span>Todo.txt</span></a>.</p>
     </div>
     <div class="right">
       <h2 class="app-name">Todosaurus</h2>
@@ -51,7 +51,7 @@
   <div class="panel" id="acknowledgements" data-height="208">
     <div class="credits">
       <div class="third">
-        <p class="credit">Uses the <a href="http://todotxt.com/" rel="external"><span>Todo.txt</span></a> format, © 2006-2014 Gina Trapani, licensed under the <a href="http://www.gnu.org/copyleft/gpl.html" rel="external"><span>GPL</span></a>.</p>
+        <p class="credit">Uses the <a href="http://todotxt.org/" rel="external"><span>Todo.txt</span></a> format, © 2006-2014 Gina Trapani, licensed under the <a href="http://www.gnu.org/copyleft/gpl.html" rel="external"><span>GPL</span></a>.</p>
       </div>
       <div class="third">
         <p class="credit"><a href="http://thenounproject.com/term/dinosaur/13786/" rel="external"><span>“Dinosaur”</span></a>, © 2013 Jennifer Cozzette, licensed under the <a href="http://creativecommons.org/licenses/by/3.0/us/" rel="external"><span>CC BY 3.0</span></a>.</p>
@@ -108,11 +108,11 @@
     });
 
     win.on('focus', function () {
-      document.body.classList.add('window--has-focus');
+      document.body.classList.add('window-has-focus');
     });
 
     win.on('blur', function () {
-      document.body.classList.remove('window--has-focus');
+      document.body.classList.remove('window-has-focus');
     });
 
     win.show();

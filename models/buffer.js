@@ -1,64 +1,36 @@
-var Buffer = function () {
-  var
-    methods = {},
-    subscriptions = [],
-    max = 10,
-    items = []
-  ;
+class Buffer {
+  subscriptions = [];
+  max = 10;
+  items = [];
 
-  var subscribe = function (callback) {
+  subscribe(callback) {
     subscriptions.push(callback);
-  };
+  }
 
-  var inform = function () {
-    subscriptions.forEach(function (callback) {
+  inform() {
+    subscriptions.forEach((callback) => {
       callback(methods);
     });
-  };
+  }
 
-  var chainer = function (func) {
-    return function () {
-      func.apply(this, arguments);
-      return methods;
-    };
-  };
+  length() {
+    return this.items.length;
+  }
 
-  var informer = function (func) {
-    return function () {
-      func.apply(this, arguments);
-      inform();
-      return methods;
-    };
-  };
+  itemExists(item) {
+    return this.items.at(-1) === item;
+  }
 
-  var length = function () {
-    return items.length;
-  };
-
-  var itemExists = function (item) {
-    return _.last(items) === item;
-  };
-
-  var push = function (item) {
-    if (!itemExists(item)) {
-      items.push(item);
+  push(item) {
+    if (!this.itemExists(item)) {
+      this.items.push(item);
     }
-
-    if (items.length > max) {
-      items.shift();
+    if (this.items.length > this.max) {
+      this.items.shift();
     }
-  };
+  }
 
-  var pull = function () {
-    return _.last(items);
-  };
-
-  methods = {
-    subscribe: chainer(subscribe),
-    length: length,
-    push: informer(push),
-    pull: pull
-  };
-
-  return methods;
-};
+  pull() {
+    return this.items.at(-1);
+  }
+}
