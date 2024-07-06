@@ -173,22 +173,4 @@
 
   im.switchContext("no-directory");
   am.trigger("storage:read");
-
-  /*
-  filters.order = localStorage.getItem('sort-order');
-
-  if (filters.order === 'true') {
-    filters.order = true;
-    im.get('menu').triggerSort('priority');
-  } else {
-    filters.order = false;
-    im.get('menu').triggerSort('manually');
-  }
-*/
-
-  /*
-  buffer.subscribe(function (buffer) {
-    console.log(buffer.length(), buffer);
-  });
-*/
 })();

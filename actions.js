@@ -638,22 +638,6 @@ var Actions = function (
     document.title = simplePath + " — Todosaurus";
   });
 
-  /*
-  am.action('app:sort:manually', function () {
-    im.get('filters').order = false;
-    am.trigger('app:list:render');
-    im.get('menu').triggerSort('manually');
-    localStorage.setItem('sort-order', 'false');
-  });
-
-  am.action('app:sort:priority', function () {
-    im.get('filters').order = true;
-    am.trigger('app:list:render');
-    im.get('menu').triggerSort('priority');
-    localStorage.setItem('sort-order', 'true');
-  });
-*/
-
   am.action("tags:create", function () {
     am.trigger("tags:create:projects");
     am.trigger("tags:create:contexts");
