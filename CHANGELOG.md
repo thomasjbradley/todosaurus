@@ -1,5 +1,11 @@
 # Changelog
 
+**2.0.2 (Jul. 6, 2024)**
+
+- Remove all the NW.js dependencies and & switch to a PWA that uses Chrome’s FileSystem API
+- Updated & modernized all the code
+- Change to a browser accessible hosted app
+
 **1.2.1 (Nov. 15, 2014)**
 
 - Fixed title bar bottom border colour when focused and blurred. [Closes issue #15](https://github.com/thomasjbradley/todosaurus/issues/15).
