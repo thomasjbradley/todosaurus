@@ -1,5 +1,6 @@
 bindings.nodirectory = {
-  'storage:folder:change': ['enter', 'mod+o'],
+  "storage:folder:switch": ["enter", "mod+o"],
 
-  'help:shortcuts'       : ['?']
+  "help:window": ["?"],
+  "about:window": ["alt+shift+/"],
 };

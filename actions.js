@@ -520,10 +520,6 @@ const Actions = function (
     im.switchContext("no-directory");
   });
 
-  am.action("app:context:missing-file", (contextKeys) => {
-    im.switchContext("missing-file");
-  });
-
   am.action("app:context:default", () => {
     let didSwitch;
     if (todos.length() === 0) {
@@ -554,11 +550,6 @@ const Actions = function (
     if (possibleInput) {
       possibleInput.blur();
     }
-  });
-
-  am.action("app:set-title", () => {
-    const simplePath = storage.getFolder().replace(/\/Users\/[^\/]+/, "~");
-    document.title = simplePath + " — Todosaurus";
   });
 
   am.action("tags:create", () => {
@@ -683,20 +674,21 @@ const Actions = function (
   });
 
   am.action("storage:folder:switch", () => {
-    im.get("file-chooser").hide();
-    im.get("folder-chooser").show();
+    im.get("storage-chooser").show();
     am.trigger("app:context:no-directory");
   });
 
-  am.action("storage:folder:change", () => {
-    im.dialogueOpen = true;
-    im.get("folder-chooser").showInvisible();
-    im.get("folder-chooser").input.click();
-  });
-
-  am.action("storage:folder:choose", () => {
-    const folder = im.get("folder-chooser").getFiles()[0];
-    storage.setFolder(folder.path);
+  am.action("storage:folder:choose", async (storageType, dir = false) => {
+    if (storageType === "local-storage") {
+      storage.set(new LocalStorageHelper());
+      storage.setFolder("todosaurus:browser:localstorage");
+    }
+    if (storageType === "file-storage") {
+      const fs = new FileSystemHelper(dir);
+      await fs.setup(dir);
+      storage.set(fs);
+      storage.setFolder(dir.name);
+    }
     am.trigger("storage:read-or-new");
   });
 
@@ -706,76 +698,56 @@ const Actions = function (
       "An app for the Todo.txt format. @todotxt",
       "Press “n” to create a new todo item.",
       "Or press “?” for more keyboard shortcuts.",
+      "Or press “alt+?” for the about screen.",
     ];
-    im.get("folder-chooser").hide();
-    im.get("file-chooser").hide();
-    am.trigger("app:set-title");
+    im.get("storage-chooser").hide();
     todos.populate(startupData);
     am.trigger("app:context:default");
   });
 
-  am.action("storage:read", () => {
-    storage.read((err, data) => {
+  am.action("storage:read", async () => {
+    await storage.read((err, data) => {
       if (err) {
-        if (err.message === storage.errors.NOT_FOUND) {
-          im.get("folder-chooser").hide();
-          im.get("file-chooser").show(storage.getFolder());
-          am.trigger("app:context:missing-file");
-          return;
-        }
-        im.get("folder-chooser").show();
+        im.get("storage-chooser").show();
         am.trigger("app:context:no-directory");
         return;
       }
-      im.get("folder-chooser").hide();
-      im.get("file-chooser").hide();
-      am.trigger("app:set-title");
+      im.get("storage-chooser").hide();
       todos.populate(data);
       am.trigger("app:context:default");
     });
   });
 
-  am.action("storage:read-if-changed", () => {
-    let stats;
-    let file;
-    let local;
-    if (window.isNode) {
-      try {
-        stats = require("fs").statSync(storage.getPath());
-        file = stats.mtime;
-      } catch (e) {
-        file = new Date();
-      }
-      local = new Date(localStorage.getItem("mtime"));
-      if (file > local) {
-        am.trigger("storage:read");
-      }
+  am.action("storage:read-if-changed", async () => {
+    let file = await storage.getMTime();
+    let local = new Date(localStorage.getItem("mtime"));
+    if (file > local) {
+      await am.trigger("storage:read");
     }
   });
 
-  am.action("storage:read-or-new", () => {
-    im.get("folder-chooser").hide();
-    im.get("file-chooser").hide();
-    storage.read((err, data) => {
+  am.action("storage:read-or-new", async () => {
+    im.get("storage-chooser").hide();
+    await storage.read((err, data) => {
       if (err) {
         am.trigger("storage:file:new");
       } else {
-        am.trigger("app:set-title");
         todos.populate(data);
         am.trigger("app:context:default");
       }
     });
   });
 
-  am.action("storage:save", () => {
-    storage.save(todos.getAllFullText());
+  am.action("storage:save", async () => {
+    await storage.save(todos.getAllFullText());
+    localStorage.setItem("mtime", new Date());
   });
 
   am.action("storage:sort-file", () => {
     todos.populate(orderer.getOrderedItems(todos.getAll()));
   });
 
-  am.action("storage:archive", () => {
+  am.action("storage:archive", async () => {
     const keep = [];
     const done = [];
     const all = _.cloneDeep(todos.getAll());
@@ -787,14 +759,30 @@ const Actions = function (
       }
     });
     todos.populate(keep);
-    storage.saveArchive(done.sort());
+    await storage.saveArchive(done.sort());
   });
 
-  am.action("storage:reveal-finder", () => {
-    gui.Shell.showItemInFolder(storage.getFolder());
+  am.action("help:window", () => {
+    const width = 500;
+    const height = 650;
+    const left = screen.width / 2 - width / 2;
+    const top = screen.height / 2 - height / 2;
+    window.open(
+      "/help.html",
+      "_blank",
+      `width=${width},height=${height},top=${top},left=${left},popup=1`,
+    );
   });
 
-  am.action("help:shortcuts", () => {
-    window.open("/help.html");
+  am.action("about:window", () => {
+    const width = 658;
+    const height = 358;
+    const left = screen.width / 2 - width / 2;
+    const top = screen.height / 2 - height / 2;
+    window.open(
+      "/about.html",
+      "_blank",
+      `width=${width},height=${height},top=${top},left=${left},popup=1`,
+    );
   });
 };

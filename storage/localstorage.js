@@ -3,7 +3,11 @@ const LocalStorageHelper = function () {
 
   let methods = {};
 
-  const append = (key, data) => {
+  const getMTime = async () => {
+    return new Date(localStorage.getItem("mtime"));
+  };
+
+  const append = async (key, data) => {
     let old = localStorage.getItem(key);
     if (_.isEmpty(old)) {
       old = "";
@@ -11,11 +15,11 @@ const LocalStorageHelper = function () {
     localStorage.setItem(key, old + "\n" + data.join("\n") + "\n");
   };
 
-  const save = (key, data) => {
+  const save = async (key, data) => {
     localStorage.setItem(key, data.join("\n") + "\n");
   };
 
-  const read = (key) => {
+  const read = async (key) => {
     let items = [];
     if (!localStorage.getItem(key)) {
       throw new Error("Not found.");
@@ -27,6 +31,7 @@ const LocalStorageHelper = function () {
   };
 
   methods = {
+    getMTime: getMTime,
     append: append,
     save: save,
     read: read,

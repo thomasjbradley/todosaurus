@@ -1,3 +1,4 @@
 bindings.notfocused = {
-  'help:shortcuts'       : ['?']
+  "help:window": ["?"],
+  "about:window": ["alt+shift+/"],
 };

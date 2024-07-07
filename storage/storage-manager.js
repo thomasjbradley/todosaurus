@@ -69,22 +69,29 @@ const StorageManager = function () {
     folder = f;
   };
 
-  const save = (data) => {
+  const getMTime = async () => {
+    if (storage) {
+      return await storage.getMTime();
+    }
+    return new Date();
+  };
+
+  const save = async (data) => {
     storage.save(getPath(), data);
   };
 
-  const saveArchive = (data) => {
+  const saveArchive = async (data) => {
     storage.append(getArchivePath(), data);
   };
 
-  const read = (callback) => {
+  const read = async (callback) => {
     let data;
     if (!isFolderSaved()) {
       callback(new Error(errors.NO_FOLDER));
       return;
     }
     try {
-      data = storage.read(getPath());
+      data = await storage.read(getPath());
     } catch (e) {
       callback(new Error(errors.NOT_FOUND));
       return;
@@ -99,8 +106,9 @@ const StorageManager = function () {
     getFolder: getFolder,
     setFolder: chainer(setFolder),
     getPath: getPath,
-    save: chainer(save),
-    saveArchive: chainer(saveArchive),
+    getMTime: getMTime,
+    save: save,
+    saveArchive: saveArchive,
     read: read,
   };
   return methods;

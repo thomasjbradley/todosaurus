@@ -15,14 +15,14 @@
 
 .window {
   left: 50%;
-  margin-left: -10em;
   padding: 32px;
   position: absolute;
   top: 4em;
-  width: 20em;
+  width: 28em;
   z-index: 2001;
   background-color: #fff;
   border-radius: 3px;
+  transform: translateX(-50%);
   text-align: center;
 }
 
@@ -41,6 +41,9 @@
 }
 
 .window-btn {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
   margin-top: 24px;
 }
 

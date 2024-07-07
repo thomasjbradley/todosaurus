@@ -1,15 +1,14 @@
 bindings.input = {
-  'item:new:at-top'      : ['mod+n'],
-  'item:new:at-bottom'   : ['mod+shift+n'],
+  "item:new:at-top": ["mod+n"],
+  "item:new:at-bottom": ["mod+shift+n"],
 
-  'app:search:focus'     : ['mod+f'],
-  'app:jump:show'        : ['mod+j'],
-  'app:clear'            : ['mod+shift+l'],
+  "app:search:focus": ["mod+f"],
+  "app:jump:show": ["mod+j"],
+  "app:clear": ["mod+shift+l"],
 
-  'tags:clear'           : ['mod+alt+l'],
-  'tags:search:projects' : ['mod+p'],
-  'tags:search:contexts' : ['mod+t'],
+  "tags:clear": ["mod+alt+l"],
+  "tags:search:projects": ["mod+p", "alt+p"],
+  "tags:search:contexts": ["alt+t"],
 
-  'storage:reveal-finder': ['mod+shift+r'],
-  'storage:folder:change': ['mod+o']
+  "storage:folder:switch": ["mod+o"],
 };

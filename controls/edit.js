@@ -47,7 +47,6 @@ const EditControl = function (elem, actionManager) {
     {
       keys: ["esc"],
       callback: (e) => {
-        console.log("ESC!");
         e.preventDefault();
         discard();
       },

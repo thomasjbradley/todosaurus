@@ -18,17 +18,8 @@
 
   new Actions(generics, am, fm, im, storage, todos, orderer, grouper, filterer, buffer);
 
-  if (FileSystemHelper !== undefined && window.isNode) {
-    storage.set(new FileSystemHelper());
-  } else {
-    storage.set(new LocalStorageHelper());
-    storage.setFolder("LocalStorage");
-    document.getElementById("other-folder-options").style.display = "none";
-  }
-
   im.setContext("not-focused", bindings.notfocused);
   im.setContext("no-directory", bindings.nodirectory);
-  im.setContext("missing-file", bindings.missingfile);
   im.setContext("empty", bindings.empty);
 
   im.setContext("default", bindings.default, function (isCurrent) {
@@ -48,8 +39,7 @@
   im.add("jump", new JumpControl("jump", am));
   im.add("edit", new EditControl("edit", am));
   im.add("new", new NewControl("new", am));
-  im.add("folder-chooser", new FolderChooserControl("folder-chooser", am));
-  im.add("file-chooser", new FileChooserControl("file-chooser", am));
+  im.add("storage-chooser", new StorageChooserControl("storage-chooser", am));
   im.add("tags-projects", new TagsControl("tags-projects", am));
   im.add(
     "tags-contexts",
@@ -112,7 +102,6 @@
     am.trigger("app:context:default");
     orderer.order(items, im.get("filters").order);
     am.trigger("storage:save");
-    localStorage.setItem("mtime", new Date());
   });
 
   orderer.subscribe((items) => {
@@ -148,6 +137,29 @@
       renderFocus(index);
       scrollList(index);
     }
+  });
+
+  window.addEventListener("focus", () => {
+    im.dialogueOpen = false;
+    am.trigger("app:context:default");
+    document.body.classList.add("window-has-focus");
+    am.trigger("storage:read-if-changed");
+  });
+
+  window.addEventListener("blur", () => {
+    if (!im.dialogueOpen) {
+      document.body.classList.remove("window-has-focus");
+    }
+    im.get("search").blur();
+    im.get("jump").hide();
+    im.get("tags-search").hide();
+    if (im.get("edit").isVisible()) {
+      im.get("edit").discard();
+    }
+    if (im.get("new").isVisible()) {
+      im.get("new").discard();
+    }
+    am.trigger("app:context:not-focused");
   });
 
   im.switchContext("no-directory");

@@ -30,7 +30,6 @@ nav ul {
   margin: 0;
   padding: 0;
   list-style-type: none;
-
   text-align: center;
 }
 
@@ -44,7 +43,6 @@ nav a:visited {
   display: block;
   padding: 0.75em 1em;
   position: relative;
-
   border: 0;
 }
 
@@ -74,7 +72,6 @@ nav a.nav-current:visited span {
   margin-left: -5px;
   position: absolute;
   width: 10px;
-
   background-color: #d8d8d8;
   border-bottom: 1px solid #bbb;
   border-left: 1px solid #bbb;
@@ -106,7 +103,6 @@ nav a.nav-current:visited span {
   float: left;
   padding: 24px 48px;
   width: 62.5%;
-
   border-left: 1px solid #e2e2e2;
 }
 
@@ -114,7 +110,6 @@ nav a.nav-current:visited span {
   float: left;
   padding: 10px 24px;
   width: 33.3333%;
-
   border-left: 1px solid #e2e2e2;
 }
 
@@ -126,22 +121,21 @@ figure {
   margin: 0;
   padding: 0;
   position: relative;
-
   cursor: help;
 }
 
 figcaption {
-  margin: 0 10px;
+  margin: 0;
   padding: 1rem;
   position: absolute;
+  left: 50%;
   top: 50%;
-
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
   opacity: 0;
-  transform: translateY(-50%);
+  transform: translate(-50%, -50%);
   transition: opacity 200ms 500ms linear;
-
   color: #fff;
   text-align: center;
 }
@@ -158,13 +152,11 @@ figure:hover figcaption {
 
 .app-name {
   margin: 1.2rem 0 1.4rem;
-
   font-size: 24px;
 }
 
 .version {
   margin: 0;
-
   color: #999;
   font-size: 12px;
 }
@@ -190,14 +182,12 @@ figure:hover figcaption {
 
 .tech {
   margin: 12px 0 18px;
-
   font-size: 12px;
 }
 
 .links {
   margin: 0;
   padding: 0;
-
   list-style-type: none;
 }
 
@@ -215,14 +205,6 @@ figure:hover figcaption {
   position: absolute;
   top: 0px;
   width: 18px;
-}
-
-.license {
-  margin: 0 auto;
-  padding: 1.5rem 0;
-  width: 90%;
-
-  font-size: 12px;
 }
 
 .credits {

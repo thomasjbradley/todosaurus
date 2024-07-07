@@ -4,16 +4,18 @@
   <meta charset="utf-8">
   <title>Todosaurus</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="vendor/atwho/jquery.atwho.min.css" rel="stylesheet">
-  <link href="css/general.css" rel="stylesheet">
-  <link href="css/interface.css" rel="stylesheet">
-  <link href="css/overlay.css" rel="stylesheet">
-  <link href="css/tags.css" rel="stylesheet">
-  <link href="css/todos.css" rel="stylesheet">
-  <link href="css/progress.css" rel="stylesheet">
-  <link href="css/at-js-overrides.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="icon" type="image/png" href="/favicon-196.png">
+  <link href="/vendor/atwho/jquery.atwho.min.css" rel="stylesheet">
+  <link href="/css/general.css" rel="stylesheet">
+  <link href="/css/interface.css" rel="stylesheet">
+  <link href="/css/overlay.css" rel="stylesheet">
+  <link href="/css/tags.css" rel="stylesheet">
+  <link href="/css/todos.css" rel="stylesheet">
+  <link href="/css/progress.css" rel="stylesheet">
+  <link href="/css/at-js-overrides.css" rel="stylesheet">
 </head>
-<body>
+<body class="window-has-focus">
 
   <header class="tools">
     <div class="tools-container">
@@ -86,81 +88,65 @@
 
   </div>
 
-  <div class="overlay" id="folder-chooser" data-state="hidden">
+  <div class="overlay" id="storage-chooser" data-state="hidden">
     <div class="window">
-      <img class="app-icon" src="img/todosaurus.png">
-      <p class="window-text">Whoa! Looks like you’re a first time digger.</p>
-      <p class="window-text"><strong>Where do you want to store your <code class="filename">todo.txt</code>?</strong>
+      <img class="app-icon" src="img/todosaurus.svg">
+      <p class="window-text"><strong>Holy t-rex!<br>Your <code class="filename">todo.txt</code> can’t be found!</strong></p>
       <div class="window-btn">
-        <input class="btn-file" type="file" id="chosen-folder" disabled>
+        <button class="btn btn-alt" id="local-storage" disabled>Use Browser</button>
+        <button class="btn btn-alt" id="folder-storage" disabled>Use Local Folder</button>
       </div>
     </div>
   </div>
 
-  <div class="overlay" id="file-chooser" data-state="hidden">
-    <div class="window">
-      <img class="app-icon" src="img/todosaurus.png">
-      <p class="window-text"><strong>Holy t-rex! Your <code class="filename">todo.txt</code> can’t be found here:</strong></p>
-      <p class="window-text window-path"><img class="window-path-icon" src="img/icon-folder.svg" alt=""> <code class="filename window-path-filename" id="folder-path"></code></p>
-      <div class="window-btn">
-        <button class="btn btn-alt" type="file" id="new-file" disabled>Create New File</button>
-        <ul class="window-options" id="other-folder-options">
-          <li><button class="btn btn-text" id="switch-folder" disabled>Switch Folder</button></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <script src="vendor/lodash/lodash.min.js"></script>
-  <script src="vendor/mousetrap/mousetrap.min.js"></script>
+  <script src="/vendor/lodash/lodash.min.js"></script>
+  <script src="/vendor/mousetrap/mousetrap.min.js"></script>
 
   <!-- jQuery only required for At.js and Caret.js; nothing else in the app uses it -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/caret/jquery.caret.min.js"></script>
-  <script src="vendor/atwho/jquery.atwho.min.js"></script>
+  <script src="/vendor/jquery/jquery.min.js"></script>
+  <script src="/vendor/caret/jquery.caret.min.js"></script>
+  <script src="/vendor/atwho/jquery.atwho.min.js"></script>
 
-  <script src="utils/fuzzy-match.js"></script>
-  <script src="bootstrap.js"></script>
+  <script src="/utils/fuzzy-match.js"></script>
+  <script src="/bootstrap.js"></script>
 
-  <script src="libs/focus-manager.js"></script>
-  <script src="libs/action-manager.js"></script>
-  <script src="libs/interface-manager.js"></script>
+  <script src="/libs/focus-manager.js"></script>
+  <script src="/libs/action-manager.js"></script>
+  <script src="/libs/interface-manager.js"></script>
 
-  <script src="controls/control.js"></script>
-  <script src="controls/list.js"></script>
-  <script src="controls/input.js"></script>
-  <script src="controls/progress.js"></script>
-  <script src="controls/search.js"></script>
-  <script src="controls/jump.js"></script>
-  <script src="controls/tags-search.js"></script>
-  <script src="controls/edit.js"></script>
-  <script src="controls/new.js"></script>
-  <script src="controls/tags.js"></script>
-  <script src="controls/folder-chooser.js"></script>
-  <script src="controls/file-chooser.js"></script>
-  <script src="controls/input-auto-complete.js"></script>
+  <script src="/controls/control.js"></script>
+  <script src="/controls/list.js"></script>
+  <script src="/controls/input.js"></script>
+  <script src="/controls/progress.js"></script>
+  <script src="/controls/search.js"></script>
+  <script src="/controls/jump.js"></script>
+  <script src="/controls/tags-search.js"></script>
+  <script src="/controls/edit.js"></script>
+  <script src="/controls/new.js"></script>
+  <script src="/controls/tags.js"></script>
+  <script src="/controls/storage-chooser.js"></script>
+  <script src="/controls/input-auto-complete.js"></script>
 
-  <script src="libs/orderer.js"></script>
-  <script src="libs/grouper.js"></script>
-  <script src="libs/filterer.js"></script>
+  <script src="/libs/orderer.js"></script>
+  <script src="/libs/grouper.js"></script>
+  <script src="/libs/filterer.js"></script>
 
-  <script src="models/todo.js"></script>
-  <script src="models/todos.js"></script>
-  <script src="models/buffer.js"></script>
+  <script src="/models/todo.js"></script>
+  <script src="/models/todos.js"></script>
+  <script src="/models/buffer.js"></script>
 
-  <script src="storage/storage-manager.js"></script>
-  <script src="storage/localstorage.js"></script>
-  <script src="storage/filesystem.js"></script>
+  <script src="/storage/storage-manager.js"></script>
+  <script src="/storage/localstorage.js"></script>
+  <script src="/storage/filesystem.js"></script>
 
-  <script src="actions.js"></script>
+  <script src="/actions.js"></script>
 
-  <script src="bindings/not-focused.js"></script>
-  <script src="bindings/no-directory.js"></script>
-  <script src="bindings/missing-file.js"></script>
-  <script src="bindings/empty.js"></script>
-  <script src="bindings/default.js"></script>
-  <script src="bindings/input.js"></script>
+  <script src="/bindings/not-focused.js"></script>
+  <script src="/bindings/no-directory.js"></script>
+  <script src="/bindings/empty.js"></script>
+  <script src="/bindings/default.js"></script>
+  <script src="/bindings/input.js"></script>
 
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>

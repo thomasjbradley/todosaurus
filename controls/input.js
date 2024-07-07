@@ -40,7 +40,6 @@ const InputControl = function (elem, actionManager) {
   };
 
   const show = (pos) => {
-    console.log("SHOW!!", that.elem, pos);
     that.elem.disabled = false;
     that.playEvents();
     actionManager.trigger("app:context:input", that.keyEvents);

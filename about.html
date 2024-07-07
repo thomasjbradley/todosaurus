@@ -2,20 +2,20 @@
 <html lang="en-ca">
 <head>
   <meta charset="utf-8">
-  <title>About Todosaurus</title>
+  <title>About · Todosaurus</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link href="bower_components/normalize-css/normalize.css" rel="stylesheet">
-  <link href="css/general.css" rel="stylesheet">
-  <link href="css/about.css" rel="stylesheet">
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="icon" type="image/png" href="/favicon-196.png">
+  <link href="/css/general.css" rel="stylesheet">
+  <link href="/css/about.css" rel="stylesheet">
 </head>
-<body>
+<body class="window-has-focus">
 
-<h1 class="visually-hidden">About Todosaurus</h1>
+<h1 class="visually-hidden">About</h1>
 
 <nav>
   <ul>
     <li><a class="nav-current" href="#about"><span>About</span></a></li>
-    <li><a href="#license"><span>License</span></a></li>
     <li><a href="#acknowledgements"><span>Acknowledgements</span></a></li>
   </ul>
 </nav>
@@ -25,7 +25,7 @@
   <div class="panel" id="about" data-height="378">
     <div class="left">
       <figure>
-        <img class="logo" src="img/todosaurus.png">
+        <img class="logo" src="img/todosaurus.svg">
         <figcaption>No dinosaurs were harmed while making this app.</figcaption>
       </figure>
       <p class="intro">A keyboard driven GUI app for the <a href="http://todotxt.org/" rel="external"><span>Todo.txt</span></a>.</p>
@@ -33,19 +33,15 @@
     <div class="right">
       <h2 class="app-name">Todosaurus</h2>
       <p class="version">Version <span class="version-number">0.0.0</span></p>
-      <p class="copyright">© 2014 <a href="http://thomasjbradley.ca" rel="external"><span>Thomas J Bradley</span></a></p>
-      <p class="tech">Built using web technologies and <a href="https://github.com/rogerwang/node-webkit/" rel="external"><span>node-webkit</span></a>. Also works in the browser.</p>
+      <p class="copyright">© 2024 <a href="https://thomasjbradley.ca" rel="external"><span>Thomas J Bradley</span></a></p>
+      <p class="tech">Built using web technologies.</p>
 
       <ul class="links">
-        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-arrow.svg" alt=""><span>Todosaurus website</span></a></li>
-        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-github.svg" alt=""><span>Source code on GitHub</span></a></li>
-        <li><a class="has-icon" href="#" rel="external"><img class="link-icon" src="img/i-trello.svg" alt=""><span>Follow development on Trello</span></a></li>
+        <li><a class="has-icon" href="https://todosaurus.app/" rel="external"><img class="link-icon" src="img/i-arrow.svg" alt=""><span>Todosaurus website</span></a></li>
+        <li><a class="has-icon" href="https://github.com/thomasjbradley/todosaurus" rel="external"><img class="link-icon" src="img/i-github.svg" alt=""><span>Source code on GitHub</span></a></li>
+        <li><a class="has-icon" href="https://github.com/thomasjbradley/todosaurus/blob/master/LICENSE" rel="external"><img class="link-icon" src="img/i-github.svg" alt=""><span>License on GitHub</span></a></li>
       </ul>
     </div>
-  </div>
-
-  <div class="panel panel-scrollable" id="license" data-height="560">
-    <pre class="license"></pre>
   </div>
 
   <div class="panel" id="acknowledgements" data-height="208">
@@ -86,14 +82,6 @@
 
     win.moveTo(win.x, win.y - 100);
 
-    license = fs.readFileSync('./LICENSE', {encoding: 'utf-8'});
-    license = license
-      .replace(/\&/g, '&amp;')
-      .replace(/\</g, '&lt;')
-      .replace(/\>/g, '&gt;')
-    ;
-
-    document.querySelector('.license').innerHTML = license;
     document.querySelector('.version-number').innerHTML = pkg.version;
 
     resizeWindow = function (hash) {
