@@ -1,5 +1,10 @@
 # Changelog
 
+**2.0.5 (Jul. 7, 2024)**
+
+- Fix a parsing error in the todos when there is no completion date
+- Add a test suite for the todo text parsing
+
 **2.0.4 (Jul. 7, 2024)**
 
 - Fix a double blurring event firing that was causing todos to be deleted unintentionally
