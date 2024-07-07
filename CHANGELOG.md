@@ -3,6 +3,7 @@
 **2.0.3 (Jul. 7, 2024)**
 
 - Add a check for the File System API
+- Add a little constant on-screen reminder of how to access the help key command window
 
 **2.0.2 (Jul. 6, 2024)**
 

@@ -116,6 +116,16 @@
   overflow: scroll;
   padding: 0 8px;
   position: absolute;
+  display: flex;
+  flex-direction: column;
   right: 0;
   top: 0;
+}
+
+#keyboard-reminder {
+  margin-top: auto;
+  color: #777;
+  font-size: 12px;
+  line-height: 12px;
+  text-transform: uppercase;
 }
