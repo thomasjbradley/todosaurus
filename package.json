@@ -22,9 +22,6 @@
     "type": "git",
     "url": "git@github.com:thomasjbradley/todosaurus.git"
   },
-  "dependencies": {
-    "lodash": "4.17.15"
-  },
   "devDependencies": {
     "eslint": "^9.6.0",
     "prettier": "^3.3.2",
