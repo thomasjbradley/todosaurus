@@ -18,9 +18,21 @@ So, I made my own.
 
 ---
 
-## Keyboard shortcuts
+## Keyboard access only
 
 **The app is completely keyboard driven—with key movements and shortcuts based on VIM.**
+
+Press `?` in the app to get a full keyboard command list.
+
+---
+
+## Progressive web app
+
+The app is designed as a Progressive Web App that you can add to your desktop using a browser. Or just us in the browser with LocalStorage.
+
+It was previously an NW.js application but the maintenance was too much of a hurdle, with constant operating system changes and dependencies. This is a simpler version, but hopefully better maintained.
+
+Currently only Chromium-based browsers support the [File System API](https://developer.mozilla.org/en-US/docs/Web/API/File_System_API), specifically `showDirectoryPicker()` — but hopefully it will be supported in newer browsers soon.
 
 ---
 

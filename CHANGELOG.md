@@ -1,8 +1,12 @@
 # Changelog
 
+**2.0.3 (Jul. 7, 2024)**
+
+- Add a check for the File System API
+
 **2.0.2 (Jul. 6, 2024)**
 
-- Remove all the NW.js dependencies and & switch to a PWA that uses Chrome’s FileSystem API
+- Remove all the NW.js dependencies and & switch to a PWA that uses Chrome’s File System API
 - Updated & modernized all the code
 - Change to a browser accessible hosted app
 
