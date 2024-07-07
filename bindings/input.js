@@ -8,7 +8,7 @@ bindings.input = {
 
   "tags:clear": ["mod+alt+l"],
   "tags:search:projects": ["mod+p", "alt+p"],
-  "tags:search:contexts": ["alt+t"],
+  "tags:search:contexts": ["mod+t", "alt+t"],
 
   "storage:folder:switch": ["mod+o"],
 };

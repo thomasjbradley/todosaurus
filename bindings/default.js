@@ -60,7 +60,7 @@ bindings.default = {
   "tags:show:priority": ["shift+1", "shift+2", "shift+3", "shift+4", "shift+5"],
   "tags:clear": ["mod+0", "alt+0", "shift+0", "mod+alt+l"],
   "tags:search:projects": ["mod+p", "alt+p"],
-  "tags:search:contexts": ["alt+t"],
+  "tags:search:contexts": ["mod+t", "alt+t"],
 
   "storage:read": ["mod+r"],
   "storage:sort-file": ["mod+shift+s"],
