@@ -4,6 +4,7 @@
 
 - Add a check for the File System API
 - Add a little constant on-screen reminder of how to access the help key command window
+- Add a manifest.json scope to get links to open outside of the PWA
 
 **2.0.2 (Jul. 6, 2024)**
 
