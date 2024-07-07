@@ -58,7 +58,7 @@ const ListControl = function (elem, actionManager) {
     _.each(allMeta, function (tag) {
       text = text.replace(tag, "");
     });
-    return text;
+    return text.trim().replace(/\s+/g, " ");
   };
 
   const getCompletedDate = (item) => {

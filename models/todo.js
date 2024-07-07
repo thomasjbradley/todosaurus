@@ -38,14 +38,29 @@ const Todo = function (fullText) {
   };
 
   const parseFullText = () => {
-    var tmpText = fullText.trim();
-    if (fullText.substr(0, 2) === "x ") {
-      mark(fullText.substr(2, 10));
-      tmpText = fullText.slice(12).trim();
+    let tmpText = fullText
+      .trim()
+      .replace(/[\s\n\r\t]/g, " ")
+      .replace(/\s+/g, " ");
+    let isComplete = false;
+    if (tmpText.substr(0, 2) === "x ") {
+      isComplete = true;
+      tmpText = tmpText.slice(1).trim();
     }
-    if (tmpText.match(/^\([A-Z]\)\s/)) {
-      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/g, ""));
+    if (tmpText.match(/^\([A-Z]\)\s+/i)) {
+      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/gi, ""));
       tmpText = tmpText.slice(3).trim();
+    }
+    if (tmpText.match(/^\d{4}-\d{2}-\d{2}\s+\d{4}-\d{2}-\d{2}/)) {
+      if (isComplete) {
+        mark(tmpText.substr(0, 10));
+      }
+      tmpText = tmpText.slice(10).trim();
+    } else {
+      if (isComplete) {
+        mark();
+      }
+      tmpText = tmpText.trim();
     }
     if (tmpText.match(/^\d{4}-\d{2}-\d{2}/)) {
       data.created = tmpText.slice(0, 10);
@@ -123,6 +138,7 @@ const Todo = function (fullText) {
 
   const findPriority = (pri) => {
     if (isFinite(pri)) {
+      pri = pri.toUpperCase();
       if (pri > priorities.length - 1) {
         return _.last(priorities);
       } else {
