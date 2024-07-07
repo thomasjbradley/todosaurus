@@ -1,5 +1,9 @@
 # Changelog
 
+**2.0.4 (Jul. 7, 2024)**
+
+- Fix a double blurring event firing that was causing todos to be deleted unintentionally
+
 **2.0.3 (Jul. 7, 2024)**
 
 - Add a check for the File System API

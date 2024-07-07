@@ -17,23 +17,13 @@ const NewControl = function (elem, actionManager) {
     that.getActionManager().trigger("item:delete");
   };
 
-  const commitOrDiscard = (isCommittable) => {
-    if (isCommittable) {
+  const commitOrDiscard = () => {
+    if (isCommittable()) {
       commit();
     } else {
       discard();
     }
   };
-
-  that.bindEvents([
-    {
-      event: "blur",
-      callback: function (e) {
-        e.preventDefault();
-        commitOrDiscard(isCommittable());
-      },
-    },
-  ]);
 
   that.bindKeyEvents([
     {

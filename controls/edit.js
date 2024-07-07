@@ -16,23 +16,13 @@ const EditControl = function (elem, actionManager) {
     return that.getActionManager().trigger("app:edit:hide");
   };
 
-  const commitOrDiscard = (isCommittable) => {
-    if (isCommittable) {
+  const commitOrDiscard = () => {
+    if (isCommittable()) {
       return commit();
     } else {
       return discard();
     }
   };
-
-  that.bindEvents([
-    {
-      event: "blur",
-      callback: (e) => {
-        e.preventDefault();
-        commitOrDiscard(isCommittable());
-      },
-    },
-  ]);
 
   that.bindKeyEvents([
     {
@@ -56,7 +46,7 @@ const EditControl = function (elem, actionManager) {
       callback: (e) => {
         let goNext;
         e.preventDefault();
-        goNext = commitOrDiscard(isCommittable());
+        goNext = commitOrDiscard();
         if (goNext) {
           that.getActionManager().trigger("item:edit:after");
         }
@@ -67,7 +57,7 @@ const EditControl = function (elem, actionManager) {
       callback: (e) => {
         let goNext;
         e.preventDefault();
-        goNext = commitOrDiscard(isCommittable());
+        goNext = commitOrDiscard();
         if (goNext) {
           that.getActionManager().trigger("item:edit:before");
         }
