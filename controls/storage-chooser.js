@@ -24,7 +24,15 @@ const StorageChooserControl = function (elem, actionManager) {
     that.browserElem.addEventListener("click", handleStorageClick, false);
     that.folderElem.addEventListener("click", handleFolderClick, false);
     that.browserElem.disabled = false;
-    that.folderElem.disabled = false;
+    if (!Object.hasOwn(window, "showDirectoryPicker")) {
+      that.folderElem.disabled = true;
+      that.folderElem.setAttribute(
+        "title",
+        "This browser does not support the File System API",
+      );
+    } else {
+      that.folderElem.disabled = false;
+    }
   };
 
   that.hide = function () {

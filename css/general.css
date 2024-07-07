@@ -137,6 +137,11 @@ body {
   text-align: center;
 }
 
+.btn[disabled] {
+  pointer-events: none;
+  opacity: 50%;
+}
+
 .btn:focus,
 .btn-file:focus::before {
   outline: 2px solid #666;
