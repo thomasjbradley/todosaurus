@@ -48,7 +48,12 @@ const Todo = function (fullText) {
       tmpText = tmpText.slice(1).trim();
     }
     if (tmpText.match(/^\([A-Z]\)\s+/i)) {
-      addPriority(tmpText.substr(0, 3).replace(/[^[A-Z]/gi, ""));
+      addPriority(
+        tmpText
+          .substr(0, 3)
+          .replace(/[^[A-Z]/gi, "")
+          .toUpperCase(),
+      );
       tmpText = tmpText.slice(3).trim();
     }
     if (tmpText.match(/^\d{4}-\d{2}-\d{2}\s+\d{4}-\d{2}-\d{2}/)) {
@@ -138,7 +143,6 @@ const Todo = function (fullText) {
 
   const findPriority = (pri) => {
     if (isFinite(pri)) {
-      pri = pri.toUpperCase();
       if (pri > priorities.length - 1) {
         return _.last(priorities);
       } else {

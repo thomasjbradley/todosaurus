@@ -1,5 +1,9 @@
 # Changelog
 
+**2.0.6 (Jul. 8, 2024)**
+
+- Fix a bug assigning priorities via numeric keys
+
 **2.0.5 (Jul. 7, 2024)**
 
 - Fix a parsing error in the todos when there is no completion date
