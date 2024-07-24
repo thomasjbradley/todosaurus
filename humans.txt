@@ -1,4 +1,13 @@
-# Thanks
+# TEAM
+
+Designer & Developer: Thomas J Bradley <hey@thomasjbradley.ca>
+Site: https://thomasjbradley.ca
+GitHub: https://github.com/thomasjbradley
+Location: Ottawa, Canada
+
+---
+
+# THANKS
 
 “Dinosaur” icon
 © 2013 Jennifer Cozzette

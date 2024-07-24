@@ -28,7 +28,7 @@ Press `?` in the app to get a full keyboard command list.
 
 ## Progressive web app
 
-The app is designed as a Progressive Web App that you can add to your desktop using a browser. Or just us in the browser with LocalStorage.
+The app is designed as a Progressive Web App that you can add to your desktop using a browser. Or just use it in the browser with LocalStorage.
 
 It was previously an NW.js application but the maintenance was too much of a hurdle, with constant operating system changes and dependencies. This is a simpler version, but hopefully better maintained.
 
